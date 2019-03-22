@@ -23,7 +23,7 @@ USE_L10N=False
 SECRET_KEY = '7nn-$!t8r$eedv5xuwb79z=$k#$o@68fvoppr47ukxj$%$d^v$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -105,16 +105,27 @@ WSGI_APPLICATION = 'centro.wsgi.application'
 
 
 # PRODUCTION
-DATABASES = {
+if DEBUG == True:
+    DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbprod01pb',
-        'USER': 'pbuserdb01',
-        'PASSWORD': 'PS2BBB98FkJUs&%',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+     }
     }
-}
+
+
+elif DEBUG == False:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'dbprod01pb',
+            'USER': 'pbuserdb01',
+            'PASSWORD': 'PS2BBB98FkJUs&%',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 
 
 
@@ -156,6 +167,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 #STATIC_URL = '/media/'
 
