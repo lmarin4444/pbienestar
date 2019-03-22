@@ -1,0 +1,168 @@
+{% extends 'base/base_dupla.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap3 %}
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Establecientos</a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}"data-toggle="tooltip" title="Volver listado anterior!">Volver lista </a></li>
+  
+  
+  
+
+  <li class="active">Modificar una derivación y/o egreso  </li> 
+</ul>
+
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+
+
+<h4> MODIFICAR DERIVACIÓN A OTRA INSTITUCIÓN Y/O EGRESO</h4>	
+Estudiante: <strong>{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}</strong> 	
+
+	
+<table  class="table table-bordered" fontsize =10px>
+
+	<tbody>	
+		<tr>
+		
+			<td><div class="col-md-8 col-md-offset-2">
+			<div >
+				<label for="{{formulario.motivo_termino.name}}">{{formulario.motivo_termino.label}} 
+				
+				{{formulario.motivo_termino}}
+				
+			</div>
+		</div></td>
+			<td><label for="{{formulario.observacion_termino.name}}">{{formulario.observacion_termino.label}}</label>
+				{{formulario.observacion_termino}}</td>
+
+			<tr><td>
+				<div class="col-md-8 col-md-offset-2">
+					<div class="form-group">
+						<label for="{{formulario.Red_apoyo.name}}">{{formulario.Red_apoyo.label}}</label>
+						{{formulario.Red_apoyo}}
+					</div>
+				</div>
+		
+			</td>
+			<td></td>
+			</tr>	
+			 
+			
+		
+	</tbody>
+</table> 
+
+
+
+
+
+		<div class="row">
+	 	<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<h3>Subida de archivos (Fichas - cartas - etc. ) para el proceso de derivación o el proceso de egreso.</h3>
+			</div>
+		</div>
+
+
+		
+		
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{formulario.Ficha_derivacion.name}}">{{formulario.Ficha_derivacion.label}}</label>
+				{{formulario.Ficha_derivacion}}
+			</div>
+		</div>
+		
+		
+
+
+<div class="row">
+
+
+  <div class="col-xs-3 col-md-offset-1">
+  <strong>Para el archivo Nª1</strong>
+    <label for="{{formulario.opcion1.name}}">{{formulario.opcion1.label}}</label>
+				{{formulario.opcion1}}
+  </div>
+
+  
+  <div class="col-xs-3 col-md-offset-1">
+    <label for="{{formulario.filename1.name}}">{{formulario.filename1.label}}</label>
+				{{formulario.filename1 }}
+  </div>
+  <div class="col-xs-3 col-md-offset-1">
+    <label for="{{formulario.docfile1.name}}">{{formulario.docfile1.label}}</label>
+				{{formulario.docfile1}}
+  </div>
+</div>
+		
+<div class="row">
+
+
+  <div class="col-xs-3 col-md-offset-1">
+  <strong>Para el archivo Nª2: </strong>
+    <label for="{{formulario.opcion2.name}}">{{formulario.opcion2.label}}</label>
+				{{formulario.opcion2}}
+  </div>
+
+  
+  <div class="col-xs-3 col-md-offset-1">
+    <label for="{{formulario.filename2.name}}">{{formulario.filename2.label}}</label>
+				{{formulario.filename2 }}
+  </div>
+  <div class="col-xs-3 col-md-offset-1">
+    <label for="{{formulario.docfile2.name}}">{{formulario.docfile2.label}}</label>
+				{{formulario.docfile2}}<br>
+  </div>
+</div>	
+
+
+<div class="col-xs-3 col-md-offset-1">
+  <strong>Para el archivo Nª3: </strong>
+    <label for="{{formulario.opcion3.name}}">{{formulario.opcion3.label}}</label>
+				{{formulario.opcion3}}
+  </div>
+
+  
+  <div class="col-xs-3 col-md-offset-1">
+    <label for="{{formulario.filename3.name}}">{{formulario.filename3.label}}</label>
+				{{formulario.filename3 }}
+  </div>
+  <div class="col-xs-3 col-md-offset-1">
+    <label for="{{formulario.docfile3.name}}">{{formulario.docfile3.label}}</label>
+				{{formulario.docfile3}}<br>
+  </div>
+</div>	
+
+
+<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<h3> {{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}</h3>	
+				Ya cuenta con una derivacion vigente 
+			</div>
+		</div>
+
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<h3>¿Modificar una derivación de egreso de {{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}?</h3>	
+				<button style="background-color: #453447" type="submit" class="btn btn-primary dark">Modificar una derivación a otra institución</button>
+			</div>
+		</div>
+
+
+	</div>
+	
+</form>
+
+  </div>
+</div>
+
+
+</form>
+
+{% endblock %}

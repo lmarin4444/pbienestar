@@ -1,0 +1,76 @@
+{% extends 'base/base_secre.html' %}
+{% block content %}
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_secretaria' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu Secretaria</a></li>
+  
+  
+
+  <li class="active">Listado de confirmaciones</li> 
+</ul>
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td>Estudiante</td>
+			<td>Fecha </td>
+			<td>Confirmación 3 llamados</td>
+
+			<td>Observación </td>
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for estudio in object_list %}
+		<tr>
+			
+			<td>{{ estudio.Estudiante.nombres|upper }} {{ estudio.Estudiante.firs_name |upper }} {{ estudio.Estudiante.last_name|upper  }}  </td>
+			
+			<td>{{ estudio.fecha|date:"d-m-Y "}}</td> 
+			<td>
+				 
+		<div class="btn-toolbar" role="toolbar">
+    		<dd>1 <span class="glyphicon glyphicon-earphone"></span> {{ estudio.get_estado1}}</dd>
+  			<dd>2 <span class="glyphicon glyphicon-earphone"></span> {{ estudio.get_estado2}}</dd>
+  			<dd>3 <span class="glyphicon glyphicon-earphone"></span> {{ estudio.get_estado3}}</dd>
+  			</div> 
+					
+				
+			</td> 
+
+			 <td>{{ estudio.obs }}</td>  
+
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}
+

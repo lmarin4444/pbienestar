@@ -1,0 +1,58 @@
+
+{% extends 'base.html' %}
+{% load static%}
+{% block title%} Programas de Bienestar{% endblock%}
+{{ titulo}}
+{% block content %}
+
+        
+            
+          
+               
+
+                
+                 
+                    
+                      {% if user.is_authenticated %}
+                      <h2>Sistema de Gestíon de información</h2>
+                      <h4>SYSTEMPSICO</h4> 
+
+                      <h3><strong> Le damos la bienvenida a {{user.first_name|capfirst}} {{user.last_name|capfirst}}</strong></h3>
+                        
+                        <strong>
+                          {{user.lastname|capfirst}}
+                        </strong>
+                         <a href="{% url 'usuario:cerrar' %}"><h4>Salir del sistema</a></h4>
+                         <h3><strong> DEM Departamento de Educación </strong></h3>
+                         <h3><strong> Cabildo </strong></h3>
+                        {{perns}}
+
+                        
+                      
+            
+                    {% else %}
+                   <h2>Sitio web y Plataforma de Gestión </h2>
+                   <h2>Departamento de educación </h2>
+
+                      <h4>SYSTEMPSICO</h4>
+
+
+                      <h3><strong> Departamento de Educación </strong></h3>
+                      <h3><strong> Cabildo </strong></h3>
+                       
+
+                        
+                        <strong>
+                          
+                        </strong>
+                        
+
+                        
+           
+                   
+                    {% endif %}  
+          
+           
+        
+
+{% endblock %}

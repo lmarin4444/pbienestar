@@ -1,0 +1,63 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			
+			<td>Estudiante</td>
+			<td>Hermano</td>
+			<td>Parentesco</td>
+			<td>Escolaridad</td>
+			<td>Establecimiento</td>
+			
+			<td>Opciones</td>
+
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		<tr>
+		{% for mascota in object_list %}<td>
+			{% for estudiante in dato %}
+			{% if mascota.Familia == estudiante.Familia %}
+				<ul>
+					{{ estudiante.nombres|capfirst}} {{ estudiante.firs_name|capfirst}} {{ estudiante.last_name|capfirst }}
+				</ul>  
+			{% endif %}	
+			{% endfor%}
+		</td>	
+			
+			
+			<td>{{ mascota.nombre }} {{ mascota.nombre }} {{ mascota.nombre }}  </td>
+			<td>{{ mascota.parentesco }}</td>
+			<td>{{ mascota.get_escolaridad }}</td>
+			<td>{{ mascota.establecimiento }}</td>  
+			
+
+			
+		
+			
+			<td>
+			<div class="btn-group-vertical">
+				<a class="btn btn-info btn-sm" href="{% url 'alumno:hermano_editar' mascota.id %}">Editar</a>
+				<a  class="btn btn-primary btn-sm" href="{% url 'alumno:hermano_eliminar' mascota.id %}">Eliminar</a>
+			</div>	
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de apoderado</h1>
+		{% endif %}
+	</tbody>
+</table> 
+
+
+
+{% endblock%}

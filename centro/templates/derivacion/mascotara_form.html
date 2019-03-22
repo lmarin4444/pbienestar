@@ -1,0 +1,42 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Estudiantes intervenidos </a></li>
+  <li><a href="{% url 'derivacion:retorno' %}"data-toggle="tooltip" title="Ir listado de Fichas retornadas desde el centro de Bienestar">Listado de Fichas Retornadas </a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Volver a la lista</a></li>
+  
+  
+
+  <li class="active">Listado familiares</li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success">Ingresar Ficha de derivación</div>
+{% endif %}
+<h4> Ficha de derivación de  {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}  del  {{escuela.nombre}} cursando {{dato.curso.get_numero}} {{dato.curso.get_letra}}.</h4>
+
+
+
+<h3 style="text-align:center;" > Ingresar Ficha de derivación.</h3>
+<div class="col-md-8 col-md-offset-2">
+<form method="post" enctype="multipart/form-data">
+	
+	{% csrf_token %}
+
+	{{ form|crispy }}
+	 
+	<button type="submit" class="btn btn-info">Registrar</button>
+	<a class= "btn btn-danger" href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}">Cancelar</a>
+
+
+</form>
+</div>
+
+{% endblock %}

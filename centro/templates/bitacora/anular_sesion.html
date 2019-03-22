@@ -1,0 +1,30 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+
+
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver Establecimientos</a></li>
+  
+ <li class="active">Registar sesión del {{sesion_lista.fecha}} a las {{sesion_lista.get_horario}} </li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success"><h4>Anular sesión de: {{sesion_lista.sesion.intervencion_casos.estudiante.nombres|capfirst}} {{sesion_lista.sesion.intervencion_casos.estudiante.firs_name|capfirst}} {{sesion_lista.sesion.intervencion_casos.estudiante.last_name|capfirst}} Curso :{{sesion_lista.sesion.intervencion_casos.estudiante.curso.get_numero|capfirst}} {{sesion_lista.sesion.intervencion_casos.estudiante.curso.get_letra|capfirst}}</h4></div>
+{% endif %}
+	<form method="post">
+  
+	{% csrf_token %}
+	{{ form.as_p }}
+	
+
+	<button class="btn btn-info " type="submit">Registrar</button>
+
+</form>
+ 
+{% endblock %}

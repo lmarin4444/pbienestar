@@ -1,0 +1,146 @@
+{% extends 'base/base_datos.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<form method="post">
+	{% csrf_token %}
+	
+	<form method="get">
+	{% csrf_token %}
+		<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div >
+				<label for="{{form2.rut.name}}">{{form2.rut.label}} Con digito verificador sin puntos(ej: 11222333-1)</label>
+				
+				{{form2.rut}}
+				
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form2.nombres.nombres}}">{{form2.nombres.label}}</label>
+				{{form2.nombres}}
+			</div>
+		</div>
+	 	<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form2.firs_name.name}}">{{form2.firs_name.label}}</label>
+				{{form2.firs_name}}
+			</div>
+		</div>
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form2.last_name.name}}">{{form2.last_name.label}}</label>
+				{{form2.last_name}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form2.fecha_nacimiento.name}}">{{form2.fecha_nacimiento.label}}</label>
+				{{form2.fecha_nacimiento}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form2.edad.name}}">{{form2.edad.label}}</label>
+				{{form2.edad}}
+			</div>
+		</div>	
+
+		
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form2.domicilio_estudiante.name}}">{{form2.domicilio_estudiante.label}}</label>
+				{{form2.domicilio_estudiante}}
+			</div>
+		</div>
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form2.curso.name}}">{{form2.curso.label}}</label>
+				{{form2.curso}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				
+				<h3>Escolaridad del Estudiante,</h3> <h4>si ingresa un año completo o si ingresa por un período de tiempo</h4>
+			</div>
+		</div>
+
+				<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.anno.name}}">{{form.anno.label}}</label>
+				{{form.anno}}
+			</div>
+		</div>
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.fecha_inicio.name}}">{{form.fecha_inicio.label}}</label>
+				{{form.fecha_inicio}}
+			</div>
+		</div>
+		
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.fecha_termino.name}}">{{form.fecha_termino.label}}</label>
+				{{form.fecha_termino}}
+			</div>
+		</div>
+
+
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.rendimiento.name}}">{{form.rendimiento.label}}</label>
+				{{form.rendimiento}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.conducta.name}}">{{form.conducta.label}}</label>
+				{{form.conducta}}
+			</div>
+		</div>
+
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.curso.name}}">{{form.curso.label}}</label>
+				{{form.curso}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.Letra.name}}">{{form.Letra.label}}</label>
+				{{form.Letra}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.establecimiento.name}}">{{form.establecimiento.label}}</label>
+				{{form.establecimiento}}
+			</div>
+		</div>
+
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				
+				<button type="submit" class="btn btn-info">Registrar</button>
+			</div>
+		</div>
+
+
+	</div>
+	
+</form>
+
+
+{% endblock %}

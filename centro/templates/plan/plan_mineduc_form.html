@@ -1,0 +1,42 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+
+
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver lista</a></li>
+  {% if mensaje %}
+  <li><a href="{% url 'plan:PlanListView' escuela.id %}"data-toggle="tooltip" title="Listado de plan">Ver Plan</a></li>
+  {% endif%}
+  
+
+  <li class="active">Plan</li> 
+</ul>
+
+{% if object %}
+  <div class="alert alert-success"><h4>Ingresar o modificar Plan de formación y de Convivencia: {{object.establecimiento.nombre}} Año {{object.annio}} </h4></div>
+{% else %}
+{% if mensaje %}
+<div class="alert alert-danger">{{escuela.nombre}} {{mensaje}}</div>
+ {% endif %}
+  
+<div class="alert alert-success"><h4>Ingresar o modificar Plan de Formación Convivencia Escolar:{{escuela.nombre}} {{plan.annio}}</h4></div>
+{% endif %}
+
+
+
+
+
+	<form method="post">
+  
+	{% csrf_token %}
+	{{ form.as_p }}
+	
+
+	<button class="btn btn-info " type="submit">Registrar</button>
+</form>
+ 
+{% endblock %}

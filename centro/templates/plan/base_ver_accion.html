@@ -1,0 +1,92 @@
+{% extends 'base/base_datos.html' %}
+
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver Lista</a></li>
+  <li><a href="{% url 'plan:PlanListView' base.plan.establecimiento.id %}"data-toggle="tooltip" title="Volver plan">Ver Plan</a></li>
+  
+  
+
+  <li class="active">Listado de acciones</li> 
+</ul>
+<div class="alert alert-success"><h4>Listado de acciones de la base  :{{base.nombre}} / {{base.plan.establecimiento.nombre}} </h4></div>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td>Nombre</td>
+			<td>Estrategia</td>
+			<td>Descripción</td>
+			<td>Desde</td>
+			<td>Hasta</td>
+			
+			<td>Responsables</td>
+			<td>Recursos</td>
+			<td>Verificadores</td>
+			<td>Acciones</td>
+			
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if indicadores %}
+		
+		{% for indicador in indicadores %}
+		<tr>
+			<td>{{ indicador.nombre|capfirst }} </td>
+			<td>{{ indicador.objetivo_estrategico }} </td>
+			<td>{{ indicador.descripcion}}</td>
+			 <td>{{indicador.fecha_inicio|date:"d-m-Y"}}</td>  
+		 	 <td>{{indicador.fecha_termino|date:"d-m-Y"}}</td> 
+		 	  
+		 	 <td>{{indicador.responsables}}</td>  
+			<td>{{indicador.recursos}}</td> 
+
+			<td>
+			 <ul>{% for motivo in indicador.medios_verificacion.all %}
+				<li>
+					{{motivo.nombre}}
+				</li>
+				{% endfor %}
+			</ul>
+			</td>
+			 
+			<td>
+			<div class="btn-group-vertical">
+				<a class="btn btn-info btn-sm" href="{% url 'plan:modificar_accion' indicador.id %}">Modificar</a>
+				<a  class="btn btn-danger btn-sm" href="{% url 'plan:eliminar_accion' indicador.id %}">Eliminar</a>
+				<a  class="btn btn-success btn-sm" href="{% url 'plan:ver_plancillo' indicador.id base.id %}">Plan-Actividades</a>
+			</div>
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros</h1>
+		{% endif %}
+	</
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}
+

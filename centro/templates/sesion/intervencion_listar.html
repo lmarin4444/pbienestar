@@ -1,0 +1,84 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+
+
+
+<!-- Used to open the Modal -->
+
+<h3><strong>Listado de intervenciones</strong>
+ <span class="label label-danger">Al {% now "SHORT_DATE_FORMAT" %} a las {% now "TIME_FORMAT"  %} </span></h3>
+
+Listado de todos los estudiantes en proceso de intervención del Centro de Bienestar DEM Cabildo.
+</ul>
+
+
+
+<table id="example" class="table table-bordered" fontsize =10px>
+	<thead>
+		<tr>
+		
+			<td>Derivacion el:</td>
+			<td>Estudiante</td>
+			<td>Curso Establecimiento</td>
+
+			<td>Profesional</td>
+			<td>Opciones</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+					
+			<td>{{ mascota.fecha_derivacion|date:"d-m-Y "}}</td>
+			<td>{{ mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name}} </td>
+			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}}  {{ mascota.Estudiante.curso.establecimiento.nombre}}</td>
+			
+			 <td>{{ mascota.usuario}}</td>
+			
+			<td>
+
+			
+			<a class="btn btn-primary btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Editar</a>
+			<a class="btn btn-success btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Der. otra inst</a>
+			<a class="btn btn-danger btn-xs" href="{% url 'derivacion:derivacion_pasada_retorno' mascota.id %}">Retorno</a>
+			<a class="btn btn-info btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Historia</a>
+			
+			
+			
+			
+			</td>
+			
+					
+		</td>
+			
+
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de intervenciones </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+{% endblock%}
+

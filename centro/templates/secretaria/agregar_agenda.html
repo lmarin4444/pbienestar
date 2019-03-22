@@ -1,0 +1,35 @@
+{% extends 'base/base_encuestas.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap3 %}
+{% block extra-head %}
+    {{ form.media }} hola
+{% endblock%}
+
+{% block contenido %}
+
+<h3> Para el estudiante</h3>
+<div class="row">
+  <div class="col-md-9">
+    
+    <div class="row">
+      <div class="col-md-6">
+        <form action="{% url 'secretaria:agendar' %}" method="post">
+		      {% csrf_token %}
+          {{ form|crispy}}
+			    {% buttons %}
+			    
+			    <button type="submit" class="btn btn-info">
+			        {% bootstrap_icon "floppy-disk" %} Asignar una hora
+			    </button>
+			    {% endbuttons %}
+			</form>
+      </div>
+      <div class="col-md-6">
+       Calendario Para el dia:
+        {{qs.fecha }}
+        {{qs.hora}}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock contenido %}

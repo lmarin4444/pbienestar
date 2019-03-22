@@ -1,0 +1,73 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Estudiantes intervenidos </a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' estudiante.curso.establecimiento.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Volver a la lista</a></li>
+  
+  
+
+  <li class="active">Listado familiares</li> 
+
+<h3>Asignar familia al estudiante :{{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}}</h3>
+Escoger a cualquier integrante de la familia para la asignación.
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			
+			<td>Estudiante</td>
+			<td>Familiar</td>
+			<td>Parentesco</td>
+			<td>Escolaridad</td>
+			<td>Asignar Familia</td>
+			
+		
+			
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		<tr>
+		{% for mascota in object_list %}<td>
+			{% for escolar in dato %}
+			{% if mascota.Familia == escolar.Familia %}
+				<ul>
+					{{ escolar.nombres|capfirst }} {{ escolar.firs_name|capfirst}} {{ escolar.last_name|capfirst }}
+				</ul>  
+			{% endif %}	
+			{% endfor%}
+		</td>	
+				{% if mascota.apoderado.telefono %}
+				
+				<td>{{ mascota.nombre|capfirst }} {{ mascota.apellido_p|capfirst }} {{ mascota.apellido_m|capfirst }}  </td>
+				<td>{{ mascota.parentesco }} <span class="btn-danger pull-right"> {{mascota.apoderado.telefono}} </span> 
+				<p><small>Apoderado.</small></p></td>
+				<td>{{ mascota.get_escolaridad }}</td>
+
+				{% else %}
+
+				<td>{{ mascota.nombre|capfirst }} {{ mascota.apellido_p|capfirst }} {{ mascota.apellido_m|capfirst }}  </td>
+				<td>{{ mascota.parentesco }} </td>
+				<td>{{ mascota.get_escolaridad }}</td>
+
+
+				{% endif %}
+				
+				<td><a class= "btn btn-info" href="{% url 'alumno:agregar_familia' estudiante.id mascota.Familia.id %}">Asignar</a></td>				
+
+				</tr>
+			
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de apoderado</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<td><a class= "btn btn-danger" href="">Cancelar</a></td>				
+{% endblock%}

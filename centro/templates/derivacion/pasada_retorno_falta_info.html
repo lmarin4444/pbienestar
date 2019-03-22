@@ -1,0 +1,45 @@
+{% extends 'base/base_centro.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap3 %}
+
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+
+	
+	<h4> Retorno de Ficha de derivación por falta de información</h4>
+	<h3>¿Desea realizar el egreso de {{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}?</h3>	
+
+	
+
+
+
+	<table  class="table table-bordered" fontsize =10px>
+
+	<tbody>
+		
+		<tr>
+		
+			<td><div class="col-md-8 col-md-offset-2">
+			
+				<label for="{{formulario.observacion_termino.name}}">{{formulario.observacion_termino.label}}:</label>
+				</td><td>
+				{{formulario.observacion_termino}}</td>
+
+
+			
+		</div></td>
+			
+			</tr>	
+			 
+			
+		
+	</tbody>
+</table> 
+
+	<button class="btn btn-danger" type="submit">Sí, enviar</button>
+	<a class= "btn btn-info" href="{% url 'derivacion:centro_listar' %}">Cancelar</a>
+
+</form>
+{% endblock %}

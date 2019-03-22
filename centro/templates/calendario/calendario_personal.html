@@ -1,0 +1,135 @@
+{% extends "base/base_centro.html" %}
+{% load staticfiles %}
+{% load calendario_tags %}
+
+{% block extrahead %}
+
+ <!-- Used to open the Modal -->
+<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">Resumen Ficha</button>
+
+
+<link rel="stylesheet" href="{% static 'css/calendario.css' %}" type="text/css" media="screen">  
+    <style>
+        .clear { /* generic container (i.e. div) for floating buttons */
+        overflow: hidden;
+        width: 200%;
+        }
+        a.button {
+        color: #444;
+        display: block;
+        float: right;
+        height: 12px;
+        margin: 6px;
+        padding: 5px; /* sliding doors padding */
+        text-decoration: none;
+        }
+        a.button span {
+        display: block;
+        line-height: 14px;
+        }
+        a.button:active {
+        background-position: bottom right;
+        color: #000;
+        outline: none; /* hide dotted outline in Firefox */
+        }
+        a.button:active span {
+        background-position: bottom left;
+        }
+    </style>
+    <script>
+        function configurar(){
+            var s = document.getElementById("anos");
+            var m = document.getElementById("mes");
+            for(var i=2011;i<=(Number({{ hoy.year }})+1);i++){
+                var option=document.createElement("option");
+                option.value=i;
+                option.text=i;
+                if(i=={{ hoy.year }})
+                    option.selected = true;
+                s.appendChild(option);
+                }
+                for(var j=0;j<m.length;j++){
+                    if(Number(m[j].value)=={{ hoy.month }})
+                        m[j].selected = true;
+                }
+            }
+        function change(){
+            var mes = document.getElementById('mes');
+            var ano = document.getElementById('anos');
+            window.location.href = "{% url 'calendario:calendar2' %}";
+        }
+        window.onload = configurar;
+    </script>
+
+{% endblock %}
+
+{% block title %}Agenda de atenciones{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <h2>Calendario Mes de :{{ hoy|date:"F" }} del {{hoy.year}} {{user.first_name}} {{user.last_name}} </h2>
+    <div>
+      
+    
+    {% get_calendar for hoy.month hoy.year as calendar %} 
+        <div class='navegar'>
+            <a href="{% url 'calendario:personal' ano=ant.year  mes=ant.month %}">{{ ant|date:"F" }}</a> | 
+            <a href="{% url 'calendario:personal' ano=sig.year  mes=sig.month %}">{{ sig|date:"F" }}</a>
+        </div>
+    </div>
+
+    <table id="example" class="table table-bordered" style="font-size:12px">
+    <tr>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miercoles</th>
+            <th>Jueves</th>
+            <th>Vienes</th>
+            <th>Sábado</th>
+            <th>Domingo</th>        
+        </tr>           
+
+                
+
+
+            {% for week in calendar %}
+
+                <tr>
+                {% for day in week %}
+                    <td {% if day.month != hoy.month %}class='nomes'{% endif %}>
+                        <a href=""> {{ day.day }} </a>
+                        {% if peticiones and day.month == hoy.month %}
+                     
+                            {% for peticion in peticiones|get_peticiones:day.day %}
+                                
+                                         
+                                            <span>
+                                                <dd><strong> </strong>({{ peticion.get_horario_i }}){{ peticion.Estudiante.nombres|title|truncatewords:'1'}} {{peticion.Estudiante.firs_name|upper}}  {{ peticion.participantes}} 
+                                                </dd>
+                                                
+                                                 
+   
+                                           
+                                        </a>
+                              
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+    </table>
+</div>
+<div>
+<table>
+    <tr>
+           <strong> Fin de Calendario de sesiones centro de bienestar</strong>     
+            
+    </tr>
+
+</table>    
+
+
+</div>
+{% endblock %}
+

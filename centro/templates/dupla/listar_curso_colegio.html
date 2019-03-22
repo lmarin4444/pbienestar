@@ -1,0 +1,96 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<a  class="btn btn-success btn-xs" ><small>Volver listado</small></a>
+
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  
+  <li><a href="{% url 'dupla:listar_convivencia_escolar' colegio.id %}" data-toggle="tooltip" title="Listado de eventos convivencia escolar ">Volver a la lista</a></li>
+  
+  
+
+  <li class="active">Asignacion de estudiantes a evento de convivencia escolar</li> 
+</ul>
+
+<h4> Listado de estudiantes  {{colegio.nombre}}</h4>
+
+Listado de acciones :
+ 
+<samp  class="glyphicon glyphicon-download-alt text-danger"></samp> Seleccionar estudiantes que participaron en el evento de convivencia escolar ) del curso : {{Curso.get_numero}} {{Curso.get_letra}}
+
+
+
+
+
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td>Curso</td>
+			
+			<td>Nombre</td>
+			
+			<td>Opciones</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+
+		{% if  estudiantes_curso %}
+			<tr>		 
+			
+				
+				{% for estudio in estudiantes_curso %}
+				<td>{{ estudio.curso.get_numero }} {{ estudio.curso.get_letra|capfirst }}  </td>
+				<td>{{ estudio.nombres|capfirst}} {{ estudio.firs_name|capfirst}} {{ estudio.last_name|capfirst}} </td> 
+				
+ 
+
+				<td>
+					
+				    
+				    <a title="Ingresar estudiante" class="glyphicon glyphicon-copy" href=""></a> Asignar al evento
+				
+						
+						
+				
+			</td>
+
+	
+
+
+		
+		</tr>
+		{% endfor %}
+		
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}
+

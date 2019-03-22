@@ -1,0 +1,293 @@
+{% extends 'base/base_datos.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Estudiantes intervenidos </a></li>
+  
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Volver a la lista</a></li>
+ 
+ </ul> 
+
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}{{estudiante}}</div>
+
+{% endif %}
+
+<div class="container">
+    
+   
+<div class="row">
+<form method="post" action="/alumno/buscar_estudiantes/{{escuela.id}}/" class="form-group">
+{% csrf_token %}  
+<table class="table table-bordered"  border=15px fontsize =14px>
+
+</table> 
+
+ 
+ {% if estudiante.curso %} 
+ <h4><strong> Estudiante actualmente en el establecimiento: {{estudiante.curso.establecimiento.nombre}}</strong> </h4>
+ 
+ {% endif %} 
+<div class="row">
+
+
+<table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  <TR class="headt" >
+    <h4>Búsqueda de estudiantes por el rut</h4>
+    
+    <div class="col-1"></div>
+    <div class="col-md-4 col-sm-8">
+
+		<div style.display = 'inline' class="form-group has-success">
+		  <label disabled for="{{form2.rut.name}}  placeholder="Ingrese RUT" > </label>
+		  
+		  {{form2.rut}} 
+		  <input type="submit" class="btn btn-success btn-sm" value="Buscar Rut">
+		
+		</div>
+	
+	</div>	 
+    </TH>
+
+</TR>		
+
+
+  
+    
+  </thead>
+  
+
+	
+</form>
+<tbody>
+
+
+<center>
+  <table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  <TR>
+   <TH COLSPAN=4  bgcolor="#E1F8FA" style="text-align:center;" >IDENTIFICACION DEL ESTUDIANTE</TH>
+    
+  </TR>
+  <TR>
+    <TD COLSPAN=1>{{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}}</TD>
+    <TD COLSPAN=1>{{ estudiante.curso.establecimiento.nombre|capfirst}}</TD>
+    <TD COLSPAN=1>{{ estudiante.curso.get_numero}}  {{ estudiante.curso.get_letra}}</TD>
+    <TD COLSPAN=1>Edad:{{ estudiante.edad}} años</TD>
+  </TR>
+<TR>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >FICHA DE DERIVACION</TH>
+    
+  </TR>
+  <TR>
+    <TD COLSPAN=1>FECHA DE LA DERIVACION</TD>
+    <TD COLSPAN=1>FECHA DE LA LISTA DE ESPERA</TD>
+    <TD COLSPAN=1>FECHA DE INCIO DE LA INTERVENCION</TD>
+    <TD COLSPAN=1>RETORNO</TD>
+  </TR>
+  <TR>
+    <TD COLSPAN=1>{{ficha.fecha_derivacion }} </TD>
+    <TD COLSPAN=1>
+   {% if ficha.fecha_espera %} 
+    {{ficha.fecha_espera}} </TD>
+    {% else %}
+    No ha pasado por la lista de espera
+    {% endif %}
+    <TD COLSPAN=1>{{intervenido.fecha_intervencion}}</TD>
+    <TD COLSPAN=1>
+    {% if ficha.pasada == 5 or ficha.pasada == 4 %} 
+    Estudiante Retornado </TD>
+    {% else %}
+    Actualmente activo
+    {% endif %}
+
+      </TD>
+  </TR>  
+    
+
+<TR>
+    <TD COLSPAN=2>OBJETIVO INTERVENCION </TD>
+    
+    <TD COLSPAN=1>ESTADO</TD>
+    <TD COLSPAN=1>NUMERO DE SESIONES</TD>
+  </TR>
+  <TR>
+    <TD COLSPAN=2>
+
+  
+    
+       
+  {{modelito.objetivo_particular}}
+     </TD>
+    
+    <TD COLSPAN=1>
+    {% if ficha.pasada == 1 %}
+    En bandeja de entrada
+    {% elif ficha.pasada == 2 %}
+    En lista de espera
+    {% elif ficha.pasada == 3 %}
+    En Intervención
+    {% elif ficha.pasada == 4 %}
+    Derivado a otra institución
+    {% elif ficha.pasada == 5 %}
+    Falta información Ficha
+    {% elif ficha.pasada == 6 %}
+    Estudiante dado de alta
+    {% elif ficha.pasada == 7 %}
+    Estudiante en lista de egreso
+    {% endif %}</TD>
+
+    <TD COLSPAN=1>
+    {% with total=sesiones.count %} 
+              
+                
+    <ul class = "nav nav-pills">
+    <li class = "active" ><a>TOTAL <span class ="badge">{{total}}</span></a></li>
+    </ul>
+                {% endwith %}
+
+      </TD>
+  </TR>  
+
+<TR>
+    
+    <TH COLSPAN=4 bgcolor="#E5F3CF" style="text-align:center;" >SESIONES </TH>
+  </TR>
+<TR>
+    <TD COLSPAN=2>FECHA</TD>
+    <TD COLSPAN=2>SESION</TD>
+    
+  </TR>
+  
+{% for sesion in sesiones.all %}
+
+  <TR>
+    <TD COLSPAN=2>{{sesion.fecha }} </TD>
+    <TD COLSPAN=2>
+    <li>{{sesion.publico }}</li>
+    
+
+   </TD>
+    
+  </TR> 
+ {% endfor %}  
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >RESUMEN DE SESIONES</TH>
+    
+  </TR>
+<TR>
+    <TD COLSPAN=1>FECHA y HORARIO AGENDADO </TD>
+    <TD COLSPAN=1>FECHA REGISTRO</TD>
+    <TD COLSPAN=1>SITUACIÓN</TD>
+    
+
+    
+    <TD COLSPAN=1>OBSERVACIONES </TD>
+  </TR>
+  
+{% for registro in asiste.all %}
+
+  <TR>
+    <TD COLSPAN=1>{{registro.agenda.fecha |date:"d-m-Y" }} a las {{registro.agenda.horario_i}} </TD>
+    <TD COLSPAN=1>{{registro.fecha |date:"d-m-Y" }}</TD>
+
+    <TD COLSPAN=1>
+    {{ registro.get_situacion }}
+    
+    
+   </TD>
+    <TD COLSPAN=1>
+    <li> {{registro.obs }} </li>
+    {% if registro.otros %}
+      <li>{{registro.otros }}</li>
+     {% else%} 
+     Sin registro
+     {% endif %}
+
+      
+    </TD>
+    
+    
+
+    
+  </TR>  
+
+{% endfor %}
+
+
+
+  <TR>
+    <TH COLSPAN=4 bgcolor="#F7E0E9" style="text-align:center;" >INFORMACIÓN DE EGRESO</TH>
+    
+  </TR>
+{% if retorno  %}
+
+<TR>
+    <TD COLSPAN=1>SITUACIÓN DE EGRESO</TD>
+    <TD COLSPAN=3>DOCUMENTACIÓN ADJUNTA AL EGRESO</TD>
+  </TR>
+  
+  <TR>
+    <TD COLSPAN=1><dd>Fecha egresado  : {{retorno.fecha_retorno  |date:"d-m-Y"}}</dd>
+                  <dd>Motivo término  :{{retorno.get_motivo_termino }}</dd>
+                    <dd>Observación   :{{retorno.observacion_termino }} </dd></TD>
+
+    </TD>
+    <TD COLSPAN=3>
+    {% if retorno.docfile1.url !=  None %}
+       <li><a href="{{ retorno.docfile1.url }}"><span class="glyphicon glyphicon-floppy-save"></span> </a>{{ retorno.filename1 }} 
+       {% if retorno.opcion1 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span>
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span></li>
+        {% endif %} 
+    {% endif %} 
+    {% if retorno.docfile2.url !=  None %}  
+       <li><a href="{{ retorno.docfile2.url }}"><span class="glyphicon glyphicon-floppy-save"></span>  </a> {{ retorno.filename2 }}
+       {% if retorno.opcion2 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span>
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span></li>
+        {% endif %} 
+    {% endif %}
+    {% if retorno.docfile3.url !=  None %}      
+       <li><a href="{{ retorno.docfile3.url }}"> <span class="glyphicon glyphicon-floppy-save"></span>  </a> {{ retorno.filename3 }}
+       {% if retorno.opcion3 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span>
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span></li>
+        {% endif %} 
+      {% endif %}
+
+            
+      </TD>
+  </TR>  
+{% endif %}
+
+
+    <tr>
+    
+      <td><ul><strong>NOMBRE/PSICOLOGO </strong></ul>
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul></td>
+   
+  <td></td>
+  <td></td>
+  <td></td>
+    </tr>
+    
+    
+  </thead>
+  <tbody>
+
+
+
+
+{% endblock %}

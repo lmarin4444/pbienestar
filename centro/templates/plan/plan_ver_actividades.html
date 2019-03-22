@@ -1,0 +1,157 @@
+{% extends 'base/base_datos.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'plan:PlanListView' plan.establecimiento.id %}"data-toggle="tooltip" title="Ir menu inicial centro!">Volver a la lista </a></li>
+ 
+
+  <li class="active"> Deglose de plan</li> 
+  </ul>
+<form method="post">
+  {% csrf_token %}
+
+<center>
+  <table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  <h4>Deglose de plan de trabajo de :{{plan.establecimiento.nombre}}</h4>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;"> Plan Gestión y Convivencia Escolar </TH>
+ 
+</TR>
+
+<TR>
+    <TD COLSPAN=4> Fecha creación plan :{{plan.fecha}}
+    <dd>Objetivo general  :{{plan.objetivo_general}}</dd>
+    <dd>Objetivo especifico  :{{plan.objetivo_especificos}}</dd>
+
+   
+	
+    <dd><span class="glyphicon glyphicon-briefcase"></span>. RESPONSABLES :{{plan.responsable }} </dd>
+</TD>
+</TR>
+ 
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >BASES</TH>
+    
+  </TR>
+  
+
+
+  <TR>
+    
+{% for sesion in base.all %}
+    
+   </TR>
+ <TR  bgcolor="#E5F3CF">
+   <TD COLSPAN=1>Nombre: {{sesion.nombre}}  </TD>
+    <TD COLSPAN=1>Indicador: {{sesion.dimension}} </TD>
+    <TD COLSPAN=1>Objetivo: {{sesion.objetivo }}</TD>
+    <TD COLSPAN=1>Acciones:{{sesion.cantidad_acciones }} Indicadores {{sesion.cantidad_indicadores }}</TD>
+  </TR>  
+<TD COLSPAN=4>
+{% for accion_activa in accion.all %}
+    {% if accion_activa.base == sesion %}
+    <dd><span class="glyphicon glyphicon-list-alt"></span> Acción : {{accion_activa.nombre }}</dd>
+    <dd><span class="glyphicon glyphicon-eye-open"></span> Descripcion :{{accion_activa.descripcion }}</dd>
+    <dd><span class="glyphicon glyphicon-lock"></span>Estrategia:{{accion_activa.objetivo_estrategico }}</dd>
+    
+    
+    
+    {% endif %}
+{% endfor %}
+
+
+
+   
+   
+   
+{% endfor %}
+<TR>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >Plan de Gestión de Convivencia Escolar</TH>
+    
+  </TR>
+<TR>
+    <TD COLSPAN=4>
+
+<ul>
+{% for sesion in base %}
+    <li class="store_item">{{ sesion.nombre }}</li>
+        <ul>
+          
+            {% for accion_activa in accion %}
+                    {% if accion_activa.base == sesion %}
+                    <li class="store_item">{{ accion_activa.nombre }}</li>
+                    <ul>
+                     {% for plancillo_activo in plancillo %}
+                          {% if plancillo_activo.accion == accion_activa %}
+                             <li class="store_item">PLAN DE ACTIVIDADES: {{plancillo_activo.nombre}}  </li>
+                            <ul>  
+                            {% for actividad_activa in actividades %}
+                              {% if actividad_activa.plancillo == plancillo_activo %}
+                            <li class="store_item">Actividad: {{actividad_activa.nombre}}  </li>
+                               {% endif%}
+                            {% endfor %}      
+                           </ul>  
+                           {% endif %}
+                      {% endfor %}          
+                  </ul>
+                  {% endif %}  
+              {% endfor %}
+           </ul>   
+        {% endfor %}    
+</ul>
+
+
+
+
+  </TR>
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#F7E0E9" style="text-align:center;" >Establecimiento {{plan.establecimiento.nombre}}</TH>
+    
+  </TR>
+
+      
+      <TD COLSPAN=4>  
+      
+      <ul><strong>NOMBRE/PSICÓLOGO PSICÓLOGA </strong></ul>
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
+      </TD>
+   
+  
+    </tr>
+    
+    
+  </thead>
+  <tbody>
+
+    
+    
+    
+    
+  </tbody>
+</table> 
+</center>
+  
+  
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

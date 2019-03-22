@@ -1,0 +1,28 @@
+{% extends 'base/base_datos.html' %}
+{% block cabezera %} Familia de {{ dato.nombres }}
+
+{% endblock %}
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Estudiantes intervenidos </a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Volver a la lista</a></li>
+  
+  
+
+  <li class="active">Listado familiares</li> 
+<form method="post">
+	{% csrf_token %}
+	<h4>Integrante de la familia de {{ dato.nombres|capfirst }} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h4>
+	Del establecimiento {{dato.curso.establecimiento.nombre}} cursando {{dato.curso.get_numero}} {{dato.curso.get_letra}}
+    <div class="input-field col s4">
+    
+    {{ form.as_p }}
+    
+	<button class="btn btn-info " type="submit">Registrar</button>
+	<a class= "btn btn-danger" href="{% url 'alumno:familia'  dato.id %}">Cancelar</a>
+</div>
+</form>
+{% endblock %}

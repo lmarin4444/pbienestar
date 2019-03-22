@@ -1,0 +1,15 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<h3>Cambio de asignacion   {{ object.Estudiante}} </h3>	
+	<button class="btn btn-dark" type="submit"></button>
+	<form  action = "/ your-name /"  method = "post" > 
+    <label  for = "your_name" > Ingrese motivo de derivacion interna </ label > 
+    <input  id = "observacion"  type = "textarea"  name = "your_name"  value = " {{  current_name  }} " > 
+  
+</form >
+	<a class= "btn btn-default" href="{% url 'derivacion:centro_listar' %}">Aceptar</a>
+</form>
+{% endblock %}

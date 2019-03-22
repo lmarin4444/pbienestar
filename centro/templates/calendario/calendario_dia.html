@@ -1,0 +1,132 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Used to open the Modal -->
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'sesion:intervenido' %}"data-toggle="tooltip" title="Ir menu personal !">Menu Personal</a></li>
+  <li><i class="fa fa-calendar" style="font-size:12px;color:black"></i><a href="{% url 'calendario:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">  Calendario </a></li>
+
+
+
+  <li class="active">Registro de sesiones</li> 
+
+</ul>
+<h3><strong>Listado de sesiones </strong>
+ <span class="label label-danger">Al {% now "SHORT_DATE_FORMAT" %} a las {% now "TIME_FORMAT"  %} </span></h3>
+
+
+</ul>
+
+<table id="example" class="table table-bordered" fontsize =10px>
+	<thead>
+		<tr>
+		
+			<td>Fecha:</td>
+			<td>Horario</td>
+			<td>Estudiante</td>
+			<td>Participantes</td>
+			<td>Tipo Sesión</td>
+			<td>Acciones</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if agenda %}
+		{% for mascota in agenda %}
+		<tr>
+			
+	{% with numero=mascota.numero %} 
+     {% if numero == 1 %}
+   		<span >
+      		 <td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+			 <td> {{ mascota.get_horario_i}}</td>
+			<td>{{ mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name}} </td>
+			 <td> {{ mascota.participantes}}</td>
+			
+			 <td>{{ mascota.tipo_actividad}}</td>
+			
+			<td>
+
+			<ul class="fa-ul">
+			
+			  <li><i class="fa-li fa fa-spinner fa-spin"></i>Sesión aun no se registra
+			 <a class="btn btn-primary btn-xs" href="{% url 'sesion:crear_sesion' mascota.id mascota.Estudiante.id %}">Ir a sesión </a>
+			<a class="btn btn-success btn-xs" href="{% url 'sesion:crear_registro' mascota.id mascota.Estudiante.id %}">Ir a registro asistencia</a>
+			</li>
+			</ul>
+			
+
+   			</td>
+          </span>
+
+               {% elif numero == 2 %}
+			<span class="fa fa-check color-green" ">
+                                                
+   			<td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+			 <td> {{ mascota.get_horario_i}}</td>
+			<td>{{ mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name}} </td>
+			 <td> {{ mascota.participantes}}</td>
+			
+			 <td>{{ mascota.tipo_actividad}}</td>
+			
+			<td>
+
+			<i class="fa fa-check-square-o " style="font-size:28px;color: #04B431;"></i>Sesión realizada: Estudiante asistio
+			
+			
+   			</td>
+			</span>
+
+			{% else%}
+			<span style="color: red;">
+             <td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+			 <td> {{ mascota.get_horario_i}}</td>
+			<td>{{ mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name}} </td>
+			 <td> {{ mascota.participantes}}</td>
+			
+			 <td>{{ mascota.tipo_actividad}}</td>
+			
+			<td>
+
+			<i class="fa fa-close" style="font-size:28px;color:red"></i>Sesión Realizada :Estudiante No asistio
+			<a class="btn btn-success btn-xs" href="{% url 'sesion:ver_registro' mascota.id  mascota.Estudiante.id %}">Ir registro asistencia</a>
+   			</td>                                  
+   
+ 			 </span>
+			 {% endif %}
+			{% endwith %}		
+
+
+
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de intervenciones </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+{% endblock%}
+

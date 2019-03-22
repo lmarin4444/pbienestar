@@ -1,0 +1,161 @@
+{% load static%}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="es">
+ 
+    <head>
+    <title>{{ titulo | default:"Agenda centro" }}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet"> 
+     <link rel="icon" href='{% static "img/logo.png" %}'>
+
+    <!-- boostrap datapiker -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Centro Bienestar</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+$(function() {
+$( ".datepicker" ).datepicker();  
+$( ".datepicker" ).datepicker("option", "dateFormat","yy-mm-dd");
+});
+</script>
+
+
+</head>
+    {% block extra-head %}{% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Mostrar/ocultar navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'comienza:entrar_secretaria' %}">Inicio</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                {% block navegacion %}
+                <ul class="nav navbar-nav">
+                    {% block navegacion-elementos %}{% endblock %}
+                    
+                    <li>
+                        
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_anonymous %}
+                    <li><a href="">
+                        {% bootstrap_icon 'log-in' %} Iniciar sesión</a></li>
+                    {% else %}
+                    <li><a href="#">{% bootstrap_icon 'user' %} Hola, {{ user }}</a></li>
+                    <li><a href="{% url 'usuario:cerrar' %}">
+                        {% bootstrap_icon 'log-out' %} Salir</a></li>
+                    {% endif %}
+                </ul>
+                {% endblock %}
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="jumbotron">
+            
+            {% block encabezado %}
+            
+            <h1>Agenda</h1>
+            <p>Sistema toma de horas de atención </p>
+            {% endblock %}
+        </div>
+
+        <section id="contenido">
+            {% bootstrap_messages %}
+
+            {% block contenido %}{% endblock %}
+        </section>
+        <section id="contacto" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+                        <h2 class="modal-title">Contacto</h2>
+                    </div>
+                    <div class="modal-body">
+                    {% include 'secretaria/direccion.html' %}
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-primary" href="">Enviar mensaje</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted text-center">Control de visitas centro de bienestar DEM</p>
+        </div>
+    </footer>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<script>
+ $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '< Ant',
+ nextText: 'Sig >',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ $.datepicker.setDefaults($.datepicker.regional['es']);
+$(function () {
+$("#fecha").datepicker();
+});
+</script>
+ <script>
+        $(function() {
+            $( "#id_fecha_derivacion" ).datepicker();
+            $( "#id_fecha_nacimiento" ).datepicker();
+
+        });
+        </script>
+
+
+    <script type="text/javascript">
+        
+    $(document).ready(function() {
+    $('#example').DataTable();
+
+    $('#id_fecha_derivacion').datepicker(format: 'dd/mm/yyyy',
+    
+           language: 'es'); 
+} );
+
+    
+</script>
+
+  </body>
+</html>

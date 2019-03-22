@@ -1,0 +1,87 @@
+{% extends "base/base_secre_simple.html" %}
+{% load static%}
+{% block title%} Listado de documentos{% endblock%}
+
+
+{% block encabezado%}Listado de formatos{% endblock%}
+{% block subencabezado%}Comuna de Cabildo{% endblock%}
+
+
+{% block content %}
+    
+     
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir al menu del centro!">Volver /</a></li>
+    <!-- Opcion para subir un informe se desabilita porque solo se suben el administrador
+  <a href="{% url 'informe:upload_file' %}" type="button" class="glyphicon glyphicon-paperclip" ></a> Agregar formato
+  -->
+  </button>
+  
+    
+
+</ul>
+
+
+<h3>Listado de formatos </h3>
+<table id="example" class="table table-bordered" fontsize =10px>
+  <thead>
+    <tr>
+      <td>#</td>
+      <td>Fecha subida</td>
+      <td>Nombre</td>
+      <td>Descarga</td>
+ 
+
+    </tr>
+    
+  </thead>
+  <tbody>
+    {% if object_list %}
+    {% for mascota in object_list %}
+    <tr>
+      <td>{{ mascota.id }}</td>   
+      <td>{{ mascota.fecha_subida|date:"d-m-Y "}}</td>
+      <td>{{ mascota.nombre|capfirst}}  </td>
+       <td><a href="{{ mascota.docfile1.url }}"> <span class="glyphicon glyphicon-floppy-save"></span> </a></td>
+      
+
+       
+     
+        
+     
+   
+   
+      </td>
+      
+
+    </tr>
+    {% endfor %}
+    
+    {% else %}
+    <h2>No hay registros  </h2>
+    {% endif %}
+  </tbody>
+</table> 
+<ul class="pager">
+  <li>
+    {% if page_obj.has_previous %}
+         <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+    {% endif %}
+        </li>
+  <li>
+    {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+      {% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+
+                 
+   {% endblock %}              
+                 

@@ -1,0 +1,87 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+{% block content %}
+
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver Lista</a></li>
+  <li><a href="{% url 'plan:ver_plancillo' accion.id base.id %}"data-toggle="tooltip" title="Plan cronológico">Volver Planificación</a></li>
+  
+  
+{% if plan.get_numero %}
+  <li class="active">Cronograma de actividades para el plan: {{plan.nombre}} Curso: {{plan.get_numero}}ª {{plan.get_letra}}</li> 
+{% else %}
+<li class="active">Cronograma de actividades para el plan: {{plan.nombre}} </li> 
+{% endif %}
+</ul>
+
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			
+			
+			
+			<td>Mes</td>
+			<td>Fecha</td>
+			<td>Nombre</td>
+			<td>Estado</td>
+			<td>Responsable</td>
+			<td>Plan externo</td>
+
+			<td>Acciones</td>
+
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if actividades %}
+
+	<tr>
+		
+		{% for plancillo in actividades %}
+		<td>{{ plancillo.get_mes }} </td>
+		{% if plancillo.fecha %}
+		<td>{{ plancillo.fecha |date:"d-m-Y" }} - [{{plancillo.get_horario }}] </td>
+		{% else %}
+		<td>"Sin fecha asignada"</td>
+		{% endif %}
+
+		
+		<td>{{ plancillo.nombre}} </td>
+		<td>{{ plancillo.get_estado}} </td>
+		<td>{{ plancillo.responsable}} </td>
+		{% if plancillo.planes_externos %}
+		<td>{{ plancillo.planes_externos}} </td>
+		{% else %}
+		<td>"Sin plan externo asignado"</td>
+		{% endif %}
+		
+		
+		<td>
+		
+			
+		{% if plancillo.fecha %}		
+		<a class="btn btn-success btn-sm" href="{% url 'plan:ingresar_Actividad' plancillo.id %}"><small>Modificar</small></a>
+		<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
+		{% else %}
+		<a class="btn btn-success btn-sm" href="{% url 'plan:ingresar_Actividad_plan' plancillo.plancillo.id %}"><small>Modificar</small></a>
+		<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.plancillo.id %}"><small>Duplicar actividad</small></a>
+		{% endif %}
+				
+			
+	</td>
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros relacionados</h1>
+		{% endif %}
+	</tbody>
+</table> 
+{% endblock%}

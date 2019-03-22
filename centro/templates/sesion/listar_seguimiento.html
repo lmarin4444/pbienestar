@@ -1,0 +1,85 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu Psicosocial</a></li>
+  <li><a href="{% url 'derivacion:inst_retorno' %}"data-toggle="tooltip" title="Ir menu inicial !">Volver lista</a></li>
+  
+
+  <li class="active">Listado seguimiento</li> 
+</ul>
+<h3>Para el estudiante {{object_list.Estudiante}} {{ object.firs_name }} {{ object_list.last_name }}</h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Nª </td>
+			<td>Estudiante </td>
+			<td>Fecha </td>
+			<td>Observación</td>
+			<td>Actividad</td>
+			<td>Acción</td>
+
+			
+		</tr>
+	</thead>
+	
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog">     
+	<tbody>
+		
+		{% if object_list %}
+		{% for mascota in object_list %}
+		
+		{% if forloop.counter == 1 %}
+		<tr>
+			<td>{{ forloop.counter }}</td>
+			<td>{{ mascota.Estudiante.nombres|capfirst }} {{ mascota.Estudiante.firs_name|capfirst }} {{ mascota.Estudiante.last_name|capfirst }} </td>
+			<td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+			<td>{{ mascota.observacion}}</td>
+			<td>{{ mascota.get_tipo_seg}}</td>
+		
+		{% else %}
+			<td>{{ forloop.counter }}</td>
+			<td> -- </td>
+			<td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+			<td>{{ mascota.observacion}}</td>
+			<td>{{ mascota.get_tipo_seg}}</td>
+
+		{% endif %}	
+
+			<td>
+				
+				<a class="btn-sm btn-info" href="{% url 'sesion:seguimiento_modificar' mascota.id %}">Editar</a>
+				<a class="btn-sm btn-danger" href="{% url 'sesion:seguimiento_eliminar' mascota.id %}">Eliminar</a>
+				
+				
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}
+
+
+
+{% endblock%}

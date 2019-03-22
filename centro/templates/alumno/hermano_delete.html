@@ -1,0 +1,20 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_secretaria' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú</a></li>
+  
+  
+
+  <li class="active">Eliminar a un familiar (Hermano)</li> 
+</ul>
+<form method="post">
+
+	{% csrf_token %}
+	<h3>¿Desea eliminar el registro de {{ object.nombre|capfirst }} {{ object.apellido_p|capfirst }} {{ object.apellido_m|capfirst }} ?</h3>	
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info" href="{% url 'alumno:apoderado_listar' %}">Cancelar</a>
+</form>
+{% endblock %}

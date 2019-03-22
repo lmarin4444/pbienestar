@@ -1,0 +1,78 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  
+  <li><a href="{% url 'comienza:entrar_secretaria' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú centro</a></li>
+  <li><a href="{% url 'sesion:intervenido' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú personal</a></li>	
+  <li><a href="{% url 'sesion:intervencion_listar' dato.id %}" data-toggle="tooltip" title="Ir pagina Principal!">Volver a la lista</a></li>
+  
+  
+
+  <li class="active">Registro de asistencia </li> 
+  </ul>
+Para el estudiante <strong>{{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</strong>
+<h3>Registro de asistencia para la hora y fecha señalada.</h3>
+<table  class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<strong> <td>Fecha</td></strong>
+			<td>Horario</td>
+			<td>Participantes</td>
+			<td>Registro</td>
+			<td>Observaciones</td></p>
+			<td>Más observaciones</td></p>
+			<td>Opciones</td></p>
+
+
+
+			
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if hoy %}
+		
+		<tr>
+			<td>{{ hoy.fecha|date:"d-m-Y " }}</td>
+			<td>{{ agenda.horario_i }}</td>
+			<td>{{ agenda.participantes }}</td>
+			<td>{{ hoy.get_situacion }} </td>
+			{% if hoy.obs %}
+			<td>{{ hoy.obs }} </td>
+			{% else %}
+			<td> No hay información</td>
+			{% endif %}
+
+			{% if hoy.otros %}
+			<td>{{ hoy.otros }} </td>
+			{% else %}
+			<td>No hay información</td>
+			{% endif %}
+			
+			
+			<td>  <a class="btn btn-info btn-xs" href="{% url 'sesion:modificar_registro' hoy.id %}">Editar</a> </td>
+
+			
+
+			
+			
+			</td>
+		</tr>
+	
+		
+		
+		{% endif %}
+	</tbody>
+</table> 
+
+
+
+{{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}
+
+
+
+{% endblock%}

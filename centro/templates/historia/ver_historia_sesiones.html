@@ -1,0 +1,188 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'historia:registro_historico' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Volver a la lista </a></li>
+ 
+
+  <li class="active"> Listado</li> 
+  </ul>
+<form method="post">
+  {% csrf_token %}
+
+<center>
+  <table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  <h4>Registro Histórico de :{{dato.nombres}} {{dato.firs_name}} {{dato.last_name}}</h4>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;"> REGISTRO HISTÓRICO </TH>
+ 
+</TR>
+
+<TR>
+    <TD COLSPAN=4> Fecha de etiqueta en historia :{{objetivos.fecha_creacion}}
+    <dd>Objetivo de la intervención  :{{objetivos.objetivo_particular}}</dd>
+
+   
+	Temáticas :
+	{% for temas in Historia.objetivo_intervencion.Tematicas.all %}
+
+		<dd> <li>{{temas.nombre}}</li></dd>
+	{% endfor %}
+    <dd><span class="glyphicon glyphicon-briefcase"></span>. PROFESIONAL :(user {{objetivos.usuario.username }}) -- {{objetivos.usuario.first_name }} {{objetivos.usuario.last_name }} </dd>
+</TD>
+</TR>
+ 
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >SESIONES</TH>
+    
+  </TR>
+  
+
+
+  <TR>
+    
+{% for sesion in sesiones.all %}
+    
+   </TR>
+ <TR  bgcolor="#E5F3CF">
+   <TD COLSPAN=1>FECHA: {{sesion.fecha |date:"d-m-Y" }}  </TD>
+    <TD COLSPAN=1>HORA: {{sesion.horario_i}} hrs. </TD>
+    <TD COLSPAN=1>PARTICIPANTES: {{sesion.participantes }}</TD>
+    <TD COLSPAN=1>TIPO SESIÓN:{{sesion.tipo_sesion }}</TD>
+  </TR>  
+<TD COLSPAN=4>
+
+
+    <dd><span class="glyphicon glyphicon-list-alt"></span> OBJETIVO : {{sesion.observacion }}</dd>
+    <dd><span class="glyphicon glyphicon-eye-open"></span> PÚBLICO :{{sesion.publico }}</dd>
+    <dd><span class="glyphicon glyphicon-lock"></span>PRIVADO :{{sesion.privado }}</dd>
+    
+    <dd><span class="glyphicon glyphicon-briefcase"></span>PROFESIONAL :user {{sesion.usuario }} -- {{sesion.usuario. }} {{sesion.usuario.last_name }} </dd>
+    <dd><span class="glyphicon glyphicon-pushpin"></span>PRUEBAS :{{sesion.pruebas }}  </dd>
+    {% if sesion.numero == None %}
+    <dd><span class="glyphicon glyphicon-user"></span>Estudiante Nª sesión :0  </dd>
+    {% else%}
+    <dd><span class="glyphicon glyphicon-user"></span>Estudiante Nª sesión :{{sesion.numero }}  </dd>
+    {% endif %}
+    <h4>INFORMACIÓN DEL REGISTRO DE SESIÓN</h4>
+    {% if sesion.situacion == 0 %}
+    <dd>Sesión no se realizó</dd>
+    
+    {% else %}
+    <dd>Situación :{{sesion.situacion }}  </dd>
+    {% endif %}
+    <dd>Observación :{{sesion.obs }}  </dd>
+    <dd>Otros(Infromación adicional) :{{sesion.otros }}  </dd>
+    <h4>INFORMACIÓN DEL REGISTRO DE CONFIRMACIÓN</h4>
+    <dd>Observación realizada por la secretaria en el momento de confirmar asistencia :{{sesion.obs_confirma }}  </dd>
+   </TD>
+{% endfor %}
+<TR>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >RESUMEN DE SESIONES</TH>
+    
+  </TR>
+<TR>
+    <TD COLSPAN=2>NÚMERO TOTAL DE SESIONES RELIZADAS</TD>
+    {% if total == None %}
+  <TD COLSPAN=2>No se relizaron sesiones </TD>
+  {% else %}
+    <TD COLSPAN=2>{{total}} </TD>
+  {% endif %}
+
+  </TR>
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#F7E0E9" style="text-align:center;" >INFORMACIÓN DE EGRESO</TH>
+    
+  </TR>
+{% if retorno  %}
+
+<TR>
+    <TD COLSPAN=1>FECHA EGRESO</TD>
+    <TD COLSPAN=1>MOTIVO TÉRMINO</TD>
+    <TD COLSPAN=2>OBSERVACIÓN</TD>
+    
+  </TR>
+  
+ 
+
+{% if retorno  %}
+
+<TR>
+    <TD COLSPAN=1>{{retorno.fecha_retorno  |date:"d-m-Y"}}</TD>
+    <TD COLSPAN=1>{{retorno.motivo_termino }}</TD>
+    <TD COLSPAN=2>{{retorno.observacion_termino }}</TD>
+
+    
+  </TR>
+  <TD COLSPAN=4>DOCUMENTACIÓN QUE FUE ADJUNTA AL MOMENTO DE DERIVAR A OTRA INSTITUCIÓN </TD>
+  <TR>
+    
+    <TD COLSPAN=4>
+    {% if retorno.docfile1.url !=  None %}
+       <li><a href="{{ retorno.docfile1.url }}"><span class="glyphicon glyphicon-floppy-save"></span> </a>{{ retorno.filename1 }} 
+       {% if retorno.opcion1 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span> Visualizado 
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span>No Visualizado </li> 
+        {% endif %} 
+    {% endif %} 
+    {% if retorno.docfile2.url !=  None %}  
+       <li><a href="{{ retorno.docfile2.url }}"><span class="glyphicon glyphicon-floppy-save"></span>  </a> {{ retorno.filename2 }}
+       {% if retorno.opcion2 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span>Visualizado 
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span>No Visualizado </li> 
+        {% endif %} 
+    {% endif %}
+    {% if retorno.docfile3.url !=  None %}      
+       <li><a href="{{ retorno.docfile3.url }}"> <span class="glyphicon glyphicon-floppy-save"></span>  </a> {{ retorno.filename3 }}
+       {% if retorno.opcion3 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span>Visualizado 
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span>No Visualizado </li>
+        {% endif %} 
+      {% endif %}
+
+            
+      </TD>
+  </TR>  
+{% endif %}
+
+    <tr>
+
+
+{% endif %}
+
+    <tr>
+    
+      
+      <TD COLSPAN=4>  
+      
+      <ul><strong>NOMBRE/PSICÓLOGO PSICÓLOGA </strong></ul>
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
+      </TD>
+   
+  
+    </tr>
+    
+    
+  </thead>
+  <tbody>
+
+    
+    
+    
+    
+  </tbody>
+</table> 
+</center>
+  
+  
+</form>
+{% endblock %}

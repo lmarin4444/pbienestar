@@ -1,0 +1,85 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+{% block content %}
+
+<h3>Listado de acciones de : <strong> {{ user.first_name}} {{ user.last_name}}</strong></h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td>Establecimiento </td>
+			<td>Cargo</td>
+			<td>Opciones</td>
+			<td>Planificación</td>
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if profesional %}
+
+		<tr>
+		
+		
+		{% for escuela in profesional %}
+			
+		<td>{{ escuela.escuela.nombre }} </td>
+		<td>{{ escuela.get_profesional |title|truncatewords:'2'}} </td>
+		
+			<td>
+			<div class="btn-group">
+				  
+
+				  <div class="btn-group">
+				    
+				    <button class="btn btn-success btn-xs dropdown-toggle"
+				            data-toggle="dropdown">
+				      Despliegue 
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu">
+				    	
+					      <li><a href="{% url 'dupla:EntradasDerivadas' escuela.escuela.id %}">Centro de Bienestar</a></li>
+					      <li><a href="{% url 'dupla:EntradasDerivadasIntitucion' escuela.escuela.id %}">Derivados Instituciones externas</a></li>
+					    
+					    	<li><a href="{% url 'alumno:EstudianteListEstablecimiento' escuela.escuela.id %}">Derivados establecimiento</a></li>
+
+				    </ul>
+				  </div>
+				</div>
+				
+
+				<a class="btn btn-primary btn-xs" href="{% url 'plan:ActividadesDuplaListView' escuela.escuela.id %}"><small>Plan GFCE dupla</small></a>
+				
+			
+			{% if escuela.tipo_profesional == 6 or escuela.tipo_profesional == 7 or escuela.tipo_profesional == 8 or escuela.tipo_profesional == 9 %}
+				<a class="btn btn-warning btn-xs" href="{% url 'plan:ActividadesConvivenciaListView' escuela.escuela.id %}"><small>Plan GFCE Encargado</small></a>
+				
+
+			{% endif %}
+			</td>
+			<div class="btn-group-vertical">
+				<td>
+				<a class="btn btn-primary btn-xs" href="{% url 'plan:PlanificacionListView' escuela.escuela.id  %}"><small>Planificar PsicoSocial</small></a>
+
+				{% if escuela.tipo_profesional == 6 or escuela.tipo_profesional == 7 or escuela.tipo_profesional == 8 or escuela.tipo_profesional == 9 %}
+				<a class="btn btn-warning btn-xs" href="{% url 'plan:PlanificacionEncargadoListView' escuela.escuela.id  %}"><small>Planificar Encargado C</small></a>
+				
+
+			{% endif %}
+			
+			<li><a href="{% url 'bitacora:Planes_externosEstablecimientoList' escuela.escuela.id  %}">Planes externos </a></li>
+
+			</td>
+			</div>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros. </h1>
+		{% endif %}
+	</tbody>
+</table> 
+
+
+
+{% endblock%}

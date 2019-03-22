@@ -1,0 +1,102 @@
+{% extends 'base/base_secre.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  
+  <li><a href="{% url 'comienza:entrar_secretaria' %}"data-toggle="tooltip" title="Ir al menu">Menu </a></li>
+  <li><a href="{% url 'secretaria:secretaria_listar' %}"data-toggle="tooltip" title="Ir a la lista de origen!">Volver lista</a></li>
+  
+
+  <li class="active">Listado agenda</li> 
+  </ul>
+Listado de atenciones para el estudiante <strong>{{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</strong>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td>Fecha</td>
+			<td>Horario</td>
+			<td>Participantes</td>
+			<td>Tipo actividad</td>
+			<td>Profesional</td>
+			<td>Opciones</td>
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if agenda %}
+		{% for mascota in agenda %}
+			
+	
+				<tr>
+					<td>{{ mascota.fecha }}</td>
+					
+					<td>{{ mascota.get_horario_i }}</td>
+					<td>{{ mascota.participantes }}</td>
+					<td>{{ mascota.tipo_actividad }} </td>
+					<td>{{ mascota.usuario.first_name|capfirst }} {{ mascota.usuario.last_name|capfirst }} </td>  
+					<td>
+					{% if mascota.numero == 1 %}
+						{% if mascota.estado == 1%}	
+							
+							<a class="btn-xs btn-success" href="{% url 'secretaria:confirmacion_crear' dato.id mascota.id %}"> Confirmar asistencia </a>
+						{% else %}	
+						
+							<span class="glyphicon glyphicon-saved"></span>Ya se llamo por teléfono
+							<a class="btn-xs btn-success" href="{% url 'secretaria:confirmacion_modificar' dato.id mascota.id %}"> Modificar </a>
+
+							
+										
+
+						{% endif %}	
+					{% else %}
+					{% if mascota.numero == 2%}
+					Sesión Realizada
+
+					<a class="btn-xs btn-info" href="{% url 'secretaria:Confirmacion_eliminar' dato.id mascota.id  %}"> Ver </a>
+					{% else %}
+					Estudiante falto a la sesión
+
+					<a class="btn-xs btn-info" href="{% url 'secretaria:Confirmacion_eliminar' dato.id mascota.id  %}"> Ver </a>
+					{% endif %}
+
+
+
+
+					{% endif %}		
+					</td>
+				</tr>
+			
+			
+			
+			
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}
+
+
+
+{% endblock%}
+
+

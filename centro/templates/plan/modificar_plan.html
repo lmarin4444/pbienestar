@@ -1,0 +1,40 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+{% block content %}
+
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu centro</a></li>
+  <li><a href="{% url 'calendario:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">Calendario </a></li>
+  <li><a href="{% url 'sesion:intervenido' %}"data-toggle="tooltip" title="Ir menu personal!">Menu personal</a></li>
+  
+
+  <li class="active">Modificar cita</li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success">Modificar una cita de la agenda</div>
+{% endif %}
+<h3>Estudiante:{{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}} La fecha:{{cita.fecha|date:"d-m-Y"}}</h3>
+
+<form method="post">
+	{% csrf_token %}
+	{{ form.as_p}}
+		
+<div class="container-fluid">
+<div class="row">
+<button style="background-color: #FF9900" type="submit" class="btn btn-primary dark">Modificar una cita</button>
+
+
+
+  </div>
+</div>
+
+
+</form>
+
+
+{% endblock contenido %}

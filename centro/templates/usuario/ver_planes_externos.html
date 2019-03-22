@@ -1,0 +1,150 @@
+{% extends 'base/base_usuario.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  
+ 
+
+  <li class="active"> Planificación  de plan</li> 
+  </ul>
+<form method="post">
+  {% csrf_token %}
+
+<center>
+  <table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  <h4>Planificación  plan comunal</h4>
+    <TH COLSPAN=4 bgcolor="#CEFCBB" style="text-align:center;">  {{plan_externo.nombre}} </TH>
+ 
+</TR>
+
+<TR>
+    <TD COLSPAN=2> 
+    <dd><span class="glyphicon glyphicon-asterisk"></span><strong> Descripción :</strong> {{plan_externo.descripcion}}</dd>
+    <dd><span class="glyphicon glyphicon-asterisk"></span> <strong> Objetivo general  :</strong>{{plan_externo.objetivo_general}}</dd>
+    <dd><span class="glyphicon glyphicon-cog"></span> <strong>Objetivo especifico  :</strong>{{plan_externo.objetivo_especifico}}</dd>
+
+   
+  
+    <dd><span class="glyphicon glyphicon-briefcase"></span><strong> Acciones :</strong> {{plan_externo.acciones }} </dd>
+</TD>
+</TR>
+ 
+
+<TR>
+
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >Listado de actividades por establecimiento y actividad
+     {% if mes_actual == "2" %} Marzo {% endif %}
+     {% if mes_actual == "3" %} Abril {% endif %}
+     {% if mes_actual == "4" %} Mayo {% endif %}
+     {% if mes_actual == "5" %} Junio {% endif %}
+     {% if mes_actual == "6" %} Julio {% endif %}
+     {% if mes_actual == "7" %} Agosto {% endif %}
+     {% if mes_actual == "8" %} Septiembre {% endif %}
+     {% if mes_actual == "9" %} Octubre {% endif %}
+     {% if mes_actual == "10" %} Noviembre {% endif %}
+     {% if mes_actual == "11" %} Diciembre {% endif %}
+
+    
+  </TH>
+   
+  </TR>
+<TR>
+    <TD COLSPAN=4>
+
+<ul>
+
+{% for sesion in base|slice:":10" %}
+    <li class="store_item"><strong>{{ sesion.nombre }} {{ sesion.plan.establecimiento}}</strong></li>
+        <ul>
+          
+            {% for accion_activa in accion|slice:":10" %}
+                    {% if accion_activa.base == sesion %}
+                    
+                    <ul>
+                     {% for plancillo_activo in plancillo|slice:":10" %}
+                          {% if plancillo_activo.accion == accion_activa %}
+                             <li class="store_item">PLAN DE ACTIVIDADES: {{plancillo_activo.nombre}}  </li>
+                            <ul>  
+                            {% for actividad_activa in actividades|slice:":10" %}
+                              {% if actividad_activa.plancillo == plancillo_activo %}
+                                
+                                   <li class="store_item">Actividad: 
+                                   <p style="color:rgb(239,114,17);">Actividad en donde se participa</p><strong> {{actividad_activa.nombre}} / </strong>
+                                   {% if actividad_activa.fecha  %}
+                                        {{actividad_activa.fecha|date:"d-m-Y "}}  / {{actividad_activa.get_horario}}
+                                    {% else %} 
+                                     Sin fecha - sin horario definido
+                                    {% endif %}  
+                                        /Responsables {{actividad_activa.responsable}} </small></a> </li>
+                                
+                                  
+                                    
+                                
+
+                               {% endif%}
+                            {% endfor %}      
+                           </ul>  
+                           {% endif %}
+                      {% endfor %}          
+                  </ul>
+                  {% endif %}  
+              {% endfor %}
+           </ul>   
+        {% endfor %}    
+</ul>
+
+
+
+
+  </TR>
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#F7E0E9" style="text-align:center;" >Establecimiento {{plan.establecimiento.nombre}}</TH>
+    
+  </TR>
+
+      
+      <TD COLSPAN=4>  
+      
+      <ul><strong>NOMBRE/EQUIPO DE FORMACIÓN Y CONVIVENCIA ESCOLAR </strong></ul>
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
+      </TD>
+   
+  
+    </tr>
+    
+    
+  </thead>
+  <tbody>
+
+    
+    
+    
+    
+  </tbody>
+</table> 
+</center>
+  
+  
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

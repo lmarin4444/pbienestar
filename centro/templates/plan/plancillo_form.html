@@ -1,0 +1,32 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+
+
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Listado establecimientos</a></li>
+
+  
+  
+
+  <li class="active">Ingresar Planificación de actividades</li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-danger">{{accion.nombre}} {{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success"><h4>Plan de actividades de la acción: <SPAN style="color:#FB3205";>{{accion.nombre}}</span> /Base : <STRONG>{{base.nombre}}</STRONG> / {{base.plan.establecimiento.nombre}}</h4></div>
+{% endif %}
+	<form method="post">
+  
+	{% csrf_token %}
+	{{ form.as_p }}
+	
+
+	<button class="btn btn-info " type="submit">Registrar</button>
+</form>
+ 
+{% endblock %}

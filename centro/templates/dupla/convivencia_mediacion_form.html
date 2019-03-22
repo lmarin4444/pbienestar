@@ -1,0 +1,35 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Lista establecimiento</a></li>
+   <li><a href="{% url 'dupla:listar_convivencia_escolar' colegio.id %}"data-toggle="tooltip" title="Listado encargado de convivencia">Volver lista Convivencia </a></li>
+  <li><i class="fa fa-calendar" style="font-size:12px;color:black"></i><a href="{% url 'bitacora:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">  Calendario </a></li>
+  
+
+  <li class="active">Convivencia escolar </li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-danger">{{colegio.nombre}} {{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success"><h4>Ingresar acción de medición de convivencia escolar :{{colegio.nombre}} </h4></div>
+{% endif %}
+  <form method="post">
+  
+  {% csrf_token %}
+  {{ form|crispy}}
+  
+
+  <button class="btn btn-info " type="submit">Registrar</button>
+  
+  
+</form>
+ 
+{% endblock %}
+

@@ -1,0 +1,195 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+{% block content %}
+
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver Lista</a></li>
+  <li><a href="{% url 'plan:PlanListView' base.plan.establecimiento.id %}"data-toggle="tooltip" title="Listado de establecimientos">Volver </a></li>
+  
+  
+{% if plan.get_numero %}
+  <li class="active">Llistado de bases e indicadores para el plan: {{base.plan.nombre}} Curso: {{base.plan.get_numero}}ª {{base.plan.get_letra}}</li> 
+{% else %}
+<li class="active">Listado de cada: {{base.plan.nombre}} </li> 
+{% endif %}
+</ul>
+
+
+Para la base <strong>{{base.nombre}} </strong>
+<ul>
+{% for acciones in base.accion_set.all %}
+<li>{{acciones.nombre }}</li>
+	
+{% endfor %}
+</ul>
+<h5>Listado de acciones</h5>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			
+			
+			
+			<td>Nombre</td>
+			<td>Estrategia</td>
+			<td>Descrpcion</td>
+			<td>Incio</td>
+			<td>Término</td>
+			<td>Responsables</td>
+			<td>Recursos</td>
+			<td>Verificadores</td>
+
+			<td>Acciones</td>
+
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if accion %}
+
+		<tr>
+		
+		
+		{% for plancillo in accion %}
+
+
+		<td>{{ plancillo.nombre}} </td>
+		<td>{{ plancillo.objetivo_estrategico}} </td>
+		<td>{{ plancillo.descripcion}} </td>
+		<td>{{ plancillo.fecha_inicio}} </td>
+		<td>{{ plancillo.fecha_termino}} </td>
+		<td>{{ plancillo.responsables}} </td>
+		<td>{{ plancillo.recursos}} </td>
+		<td>
+			 <ul>{% for motivo in plancillo.medios_verificacion.all %}
+				<li>
+					{{motivo.nombre}}
+				</li>
+				{% endfor %}
+			</ul>
+			</td>
+
+
+		
+		
+		
+			<td>
+		
+			
+
+				
+				
+		<a class="btn btn-success btn-sm" href="{% url 'plan:ingresar_Actividad' plancillo.id %}"><small>Modificar</small></a>
+		<a class="btn btn-info btn-sm" href=""><small>Eliminar</small></a>
+				
+			
+			
+			</td>
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros relacionados</h1>
+		{% endif %}
+	</tbody>
+</table> 
+
+
+<ul>
+{% for indicadores in base.indicador_base_set.all %}
+<li>{{indicadores.nombre }}</li>
+	
+		
+
+{% endfor %}
+</ul>
+<h5>Listado de indicadores</h5>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			
+			
+			
+			<td>Nombre</td>
+			<td>Descrpcion</td>
+			<td>Objetivo</td>
+			<td>Alcance</td>
+			<td>% de Logro</td>
+			<td>Justificación</td>
+
+			<td>Acciones</td>
+
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if indicador_base %}
+
+		<tr>
+		
+		
+		{% for plancillo in indicador_base %}
+
+
+		<td>{{ plancillo.nombre}} </td>
+		
+		<td>{{ plancillo.descripcion}} </td>
+		<td>{{ plancillo.objetivo}} </td>
+		<td>{{ plancillo.alcance}} </td>
+		<td>{{ plancillo.nivel_logro}} </td>
+		<td>{{ plancillo.justificacion_logro}} </td>
+
+		
+		
+		
+			<td>
+		
+			
+
+				
+				
+		<a class="btn btn-success btn-sm" href="{% url 'plan:ingresar_Actividad' plancillo.id %}"><small>Modificar</small></a>
+		<a class="btn btn-info btn-sm" href=""><small>Eliminar</small></a>
+
+				
+			
+			
+			</td>
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros relacionados</h1>
+		{% endif %}
+	</tbody>
+</table> 
+
+
+
+
+<h3>Esquema de Plan Formación y Convivencia Escolar</h3>
+
+<ul>
+  
+  <li>Bases
+    <ul>
+      <li>Acciones</li>
+      <ul><li>Plan Cronológico</li>
+
+      <ul>Actividades</ul></ul>
+      <li>Indicadores</li>
+      
+      
+    </ul>
+  </li>
+  
+</ul>
+{% endblock%}

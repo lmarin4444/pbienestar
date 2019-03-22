@@ -1,0 +1,222 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+
+	{% block extrastatic %}
+	{% endblock %}
+
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+	
+	<title>{% block title %}Centro Bienestar {% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Centro Bienestar</title>
+  
+  <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet"> 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="jquery.js"></script> 
+   <link rel="icon" href='{% static "img/logo.png" %}'>
+  <script>
+$(function() {
+$( ".datepicker" ).datepicker();  
+$( ".datepicker" ).datepicker("option", "dateFormat","yy-mm-dd");
+});
+</script>
+
+</head>
+
+
+<body>
+
+
+<h3 class="text-center" > {% block encabezado %} Área centro{% endblock %} <small>{% block encabezadop %} Intervenciones {% endblock %}</small></h1>
+<div class="container">
+
+	{% block navbar %}
+		<div class="bs-docs-section clearfix">
+		    <div class="row">
+		        <div class="col-lg-12">
+		            <div class="bs-component">
+		            	<nav class="navbar navbar-default">
+		                	<div class="container-fluid">
+		                	<!--
+		                  		<div class="navbar-header">
+		                    		<a class="navbar-brand" href="{% url 'comienza:entrar_centro'%}">Volver Centro</a>
+									-->
+		                  		    </div>
+					                  	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					                    	<ul class="nav navbar-nav">
+					                      		<li class="dropdown">
+					                        		<a href="{% url 'sesion:sesion_listar' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Registros e ingresos <span class="caret"></span></a>
+							                        <ul class="dropdown-menu" role="menu">
+							                        	
+							                        	<li><a href="{% url 'sesion:tipo_sesion_crear' %}">Registrar un nuevo tipo de sesión.</a></li>
+							                        	<!-- Comentario en una página HTML 
+							                        	la comento para borrarla despues
+							                        	<li><a href="{% url 'sesion:sesion_crear' %}">Registrar nueva intervencion</a></li>
+	
+							                        	-->
+							                        	
+							                        	
+
+							                        	<li><a href="{% url 'sesion:sesion_listar' %}">Listar intervenciones.</a></li>
+							                        	
+							                        	
+
+
+							                        	<li><a href="{% url 'informe:pdf_certificado' %}">Listado de estudiantes intervenidos.</a></li>
+	
+				                        			
+				                        	
+
+				                    </ul>
+		                      		</li>
+			                        <li>
+			                        	<a href="{% url 'sesion:intervenido' %}">Menu Personal<span class="caret"></span></a>
+			                        	
+			                         </li>
+			                         <li class="dropdown">
+			                        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Temáticas - Objetivos<span class="caret"></span></a>
+			                        	<ul class="dropdown-menu" role="menu">
+				                          	
+				                          	<li><a href="{% url 'sesion:tematica_crear' %}">Registrar una nueva Temática.</a></li>
+				                          	<li><a href="{% url 'sesion:tematica_listar' %}">Listar Temáticas.</a></li>
+
+				                       
+							                <li><a href="{% url 'sesion:tematica_listar' %}">Listado de Temáticas tratadas en el centro. </a></li>
+							                <li><a href="{% url 'sesion:listado_cambio_objetivo' %}">Cambiar el objetivo de un estudiante. </a></li>
+
+							                <li><a href="{% url 'sesion:Motivo_egreso_crear' %}">Ingresar Motivos de egreso. </a></li>
+							                <li><a href="{% url 'sesion:Motivo_egreso_list' %}">Listar motivos de egreso.  </a></li>
+
+							                
+
+			                        	</ul>
+
+			                         </li>
+			                        <ul>
+			                     </ul>
+
+			                   
+			                    </li>
+		                    	</ul>
+		                    	<div class="container-fluid">
+									    <div class="row">
+
+
+
+									         <div class="col-sm-4">
+												 <button type="button" class="btn btn-default" title="descripción o información" value="Imprime esta pagina" onclick="window.print()">
+												  <span class="glyphicon glyphicon-print"></span>
+												  <div class="btn-toolbar" role="toolbar">
+									           			
+									                </p>
+									              <div class="col-sm-4">    
+									        </div>
+									      </div>            
+									    </div>
+		                    	<ul class="nav navbar-nav navbar-right">
+		                        	
+		                        	<li class="dropdown">
+		                        		
+		                        		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Opciones<span class="caret"></span></a>
+		                        		<ul class="dropdown-menu" role="menu">
+		                          			<li><a href="{% url 'usuario:cerrar' %}">Salir</a></li>
+		                        		</ul>
+		                      		</li>
+
+		                    	</ul>
+		                    </div>
+		                </div>
+		            </nav>
+		        </div>
+           	</div>
+        </div>
+    </div>    
+
+
+
+
+
+
+	{% endblock %}
+	
+	{% block content %}
+	<h4>	Bloque de contenido		</h4>
+	{% endblock %}
+
+
+	{% block footer %}
+	{% endblock%}
+</div>
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript">
+		
+	$(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+	</script>
+	<script>
+ $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '< Ant',
+ nextText: 'Sig >',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ $.datepicker.setDefaults($.datepicker.regional['es']);
+$(function () {
+$("#fecha").datepicker();
+});
+</script>
+ <script>
+        $(function() {
+            $( "#id_fecha_derivacion" ).datepicker();
+            $( "#id_fecha_nacimiento" ).datepicker();
+            $( "#id_fecha" ).datepicker();
+            $( "#id_fecha_inicio" ).datepicker();
+            $( "#id_fecha_termino" ).datepicker();
+            $( "#id_fecha_diagnostico" ).datepicker();
+            $( "#id_fecha_retorno" ).datepicker();
+
+        });
+        </script>
+
+
+	<script type="text/javascript">
+		
+	$(document).ready(function() {
+    $('#example').DataTable();
+
+    $('#id_fecha_derivacion').datepicker(format: 'dd/mm/yyyy',
+    
+           language: 'es');	
+} );
+
+	
+</script>
+	{% block extrajs %}
+	{% endblock %}
+
+
+</body>
+</html>

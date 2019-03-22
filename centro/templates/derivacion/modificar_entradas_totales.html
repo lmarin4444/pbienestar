@@ -1,0 +1,128 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+
+
+
+<!-- Used to open the Modal -->
+
+<h3><strong>Listado de fichas para la modificación de informes </strong>
+ <span class="label label-danger">Al {% now "SHORT_DATE_FORMAT" %} a las {% now "TIME_FORMAT"  %} </span></h3>
+
+<p>Listado de todos los estudiantes derivados  al centro de bienestar --
+
+	<strong> Informes : 1 Evaluación - 2 Seguimiento - 3 Egreso</strong>
+	Modificar Informes--><a title="Ingresar informes Informes" class="glyphicon glyphicon-list-alt" href="{% url 'derivacion:intervencion_listar' %}"></a>/
+</p>
+</ul>
+
+
+
+<table id="example" class="table table-bordered" fontsize =10px>
+	<thead>
+		<tr>
+		
+			<td>Derivado el:</td>
+			<td>Estado</td>
+			<td>Estudiante</td>
+			<td>Curso Establecimiento</td>
+			<td>Informes</td>
+			
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+					
+			<td>{{ mascota.fecha_derivacion|date:"d-m-Y "}}</td>
+			
+			<td>
+			{% with estado=mascota.pasada %} 
+			{% if estado == 1 %}
+
+			Ficha en bandega de entrada
+			
+			{% elif estado == 2 %}
+	 		
+			
+			 Espera desde {{ mascota.fecha_espera|date:"d-m-Y "}}
+			
+			{% elif estado == 3 %}
+			
+			<a class="btn btn-info btn-xs" href="{% url 'sesion:historia' mascota.id mascota.Estudiante.id  %}">Historia</a>
+
+			En intervención
+			
+			{% elif estado == 4 %}
+			<strong>Otra institucion</strong>
+			
+			{% elif estado == 5 %}
+			<strong>Retorno</strong>
+			
+			
+			{% elif estado == 6 %}
+			<strong>Estudiante dado de alta</strong>
+			{% elif estado == 7 %}
+			<strong>Estudiante en listado de egreso </strong>
+			{% endif %}
+
+		{% endwith %}
+			</td>
+			
+			
+			<td>{{ mascota.Estudiante.nombres|title|truncatewords:'1'}} {{ mascota.Estudiante.firs_name|title|truncatewords:'1'}} </td>
+			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}}  - {{ mascota.Estudiante.curso.establecimiento.nombre}}</td>
+			
+			 
+			<td>
+
+			
+			<a class="btn btn-info btn-xs" href="{% url 'alumno:reporte_caso_modificar' mascota.Estudiante.id %}">1</a> 
+			 <!-- Dropdown menu-->
+			
+			
+			<a class="btn btn-success btn-xs"  href="{% url 'derivacion:intervencion_listar'  %}">Listado 2</a>
+			 <!-- Dropdown menu
+			<a title="Informe en pdf - imprimir" style="color: green " class="glyphicon glyphicon-print" href="{% url 'alumno:ver_escolaridad_centro' mascota.Estudiante.id %}"></a>/
+			-->
+			<a class="btn btn-danger btn-xs" href="{% url 'sesion:Ficha_egreso_modificar' mascota.Estudiante.id %}">3</a>
+			 <!-- Dropdown menu
+			<a title="Informe en pdf - imprimir" style="color:red " class="glyphicon glyphicon-print" href="{% url 'alumno:ver_escolaridad_centro' mascota.Estudiante.id %}"></a>/
+			-->
+			
+			</td>
+			
+			
+		
+		</td>
+			
+
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de intervenciones </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+{% endblock%}
+

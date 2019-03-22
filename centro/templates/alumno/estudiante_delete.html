@@ -1,0 +1,25 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' object.curso.establecimiento.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Listado de estudiantes</a></li>
+  <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Listado estudiantes intervenidos </a></li>
+  
+
+  <li class="active">Eliminar un estudiante</li> 
+  
+
+</ul>
+<form method="post">
+	{% csrf_token %}
+  Estudiante rut: {{ object.rut}}<br>
+  Establecimiento: {{ object.curso.establecimiento.nombre}}
+  
+	<h3>¿Desea definitivamente eliminar la informción de  {{ object.nombres|capfirst}} {{ object.firs_name|capfirst}} {{ object.last_name|capfirst}}?</h3>	
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info" href="{% url 'alumno:listar_estudiantes_establecimiento' object.curso.establecimiento.id %}">Cancelar</a>
+</form>
+{% endblock %}

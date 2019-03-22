@@ -1,0 +1,26 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial PsicoSocial!">Menu </a></li>
+  
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' object.Estudiante.curso.establecimiento.id %}"data-toggle="tooltip" title="Ir listado de Fichas estudiantes !">Listado de  estudiantes </a></li>
+  
+  
+
+  <li class="active"> Listado </li> 
+</ul>
+<h2> Enviar ficha de derivación al Centro de Bienestar</h2>
+<p> Establecimiento: {{object.Estudiante.curso.establecimiento.nombre}}
+	<p> Curso: {{object.Estudiante.curso.get_numero}} {{object.Estudiante.curso.get_letra}}<br>
+
+<form method="post">
+	{% csrf_token %}
+	<h3>¿Desea enviar al centro al Centro de Bienestar la ficha de  {{ object.Estudiante.nombres|capfirst}} {{ object.Estudiante.firs_name|capfirst}} {{ object.Estudiante.last_name|capfirst}}?</h3>	
+	
+	<button class="btn btn-info" type="submit">Sí, enviar</button>
+	<a class= "btn btn-danger" href="{% url 'derivacion:derivacion_listar' %}">Cancelar</a>
+</form>
+{% endblock %}

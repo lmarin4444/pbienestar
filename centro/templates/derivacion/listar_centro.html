@@ -1,0 +1,92 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<h3>Listado de estudiantes derivados </h3>
+<table id="example" class="table table-bordered" fontsize =10px>
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Fecha</td>
+			<td>Estudiante</td>
+			<td>Curso Establecimiento</td>
+			<td>Profesional</td>
+			<td>Opciones</td>
+			
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+			<td>{{ mascota.id }}</td>		
+			<td>{{ mascota.fecha_derivacion|date:"d-m-Y "}}</td>
+			<td>{{ mascota.Estudiante.nombres|capfirst}} {{ mascota.Estudiante.firs_name|capfirst }} </td>
+			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}} {{ mascota.Estudiante.curso.establecimiento.nombre}} </td>
+			
+			 <td>{{ mascota.usuario.first_name|title|truncatewords:'1'}} {{ mascota.usuario.last_name|capfirst}}</td>
+			<td>
+			{% with estado=mascota.pasada %} 
+			{% if estado == 1 %}
+
+			<a class="btn btn-info btn-xs" href="{% url 'derivacion:derivacion_editar_centro' mascota.id %}">Editar</a>
+			<a class="btn btn-warning btn-xs" href="{% url 'derivacion:derivacion_pasada_lista_espera' mascota.id %}">Espera</a>
+			<a class="btn btn-danger btn-xs" href="{% url 'derivacion:sesion' mascota.id %}">Intervencion</a>
+			
+			<a class="btn btn-default btn-xs" href="{% url 'alumno:Ficha' mascota.Estudiante.id %}">Ver</a>
+			<a class="btn btn btn-primary btn-xs" href="{% url 'derivacion:derivacion_pasada_retorno' mascota.Estudiante.id %}">Retorno Falta Info</a>
+			{% elif estado == 2 %}
+	 		
+			<a class="btn btn-primary btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Editar</a>
+			 Enviado a  Lista de espera
+			
+			{% elif estado == 3 %}
+			
+			<a class="btn btn-info btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Editar</a>
+			<a class="btn btn-danger btn-xs" href="{% url 'derivacion:derivacion_pasada_retorno' mascota.id %}">Retorno</a>
+			<a class="btn btn-info btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Historia</a>
+
+			Estudiante en intervencion
+			
+			{% elif estado == 4 %}
+			<strong>Estudiante enviado a otra institucion</strong>
+			
+			{% elif estado == 5 %}
+			<strong>Estudiante enviado de retorno a dupla</strong>
+			
+			{% elif estado == 6 %}
+			<strong>Estudiante dado de alta</strong>
+			{% endif %}
+		{% endwith %}
+			</td>
+			
+
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h2>No hay registros  </h2>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}
+
+
+
+{% endblock%}
+

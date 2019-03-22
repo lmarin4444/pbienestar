@@ -1,0 +1,85 @@
+{% extends 'base/base_datos.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+	
+	<form method="post">
+	{% csrf_token %}
+		<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div >
+				<label for="{{formulario.rut.name}}">{{formulario.rut.label}} Con digito verificador sin puntos(ej: 11222333-1)</label>
+				
+				{{formulario.rut}}
+				
+			</div>
+		</div>
+	<button type="submit" class="btn btn-info">Ver</button>
+	</form>
+<form method="post">
+	{% csrf_token %}
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{formulario_rut.nombres.nombres}}">{{formulario_rut.nombres.label}}</label>
+				{{formulario_rut.nombres}}
+			</div>
+		</div>
+	 	<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{formulario_rut.firs_name.name}}">{{formulario_rut.firs_name.label}}</label>
+				{{formulario_rut.firs_name}}
+			</div>
+		</div>
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{formulario_rut.last_name.name}}">{{formulario_rut.last_name.label}}</label>
+				{{formulario_rut.last_name}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{formulario_rut.fecha_nacimiento.name}}">{{formulario_rut.fecha_nacimiento.label}}</label>
+				{{formulario_rut.fecha_nacimiento}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{formulario_rut.edad.name}}">{{formulario_rut.edad.label}}</label>
+				{{formulario_rut.edad}}
+			</div>
+		</div>	
+
+		
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{formulario_rut.domicilio_estudiante.name}}">{{formulario_rut.domicilio_estudiante.label}}</label>
+				{{formulario_rut.domicilio_estudiante}}
+			</div>
+		</div>
+		
+		
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{formulario_rut.curso.name}}">{{formulario_rut.curso.label}}</label>
+				{{formulario_rut.curso}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				
+				<button type="submit" class="btn btn-info">Registrar</button>
+			</div>
+		</div>
+
+
+	</div>
+	
+</form>
+
+
+
+{% endblock %}

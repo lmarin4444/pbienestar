@@ -1,0 +1,11 @@
+{% extends 'base/base_datos.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<h3>Para el estudiante {{ dato.nombres|capfirst }} {{ dato.firs_name|capfirst }} {{ dato.last_name|capfirst }} </h3>	
+	{{ form.as_p }}
+	<button class="btn btn-info" type="submit">Sí Registrar</button>
+	<a class= "btn btn-danger" href="{% url 'sesion:seguimiento_listar' dato.id %}">Cancelar</a>
+</form>
+{% endblock %}

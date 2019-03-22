@@ -1,0 +1,14 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<h3>¿Desea eliminar la acción  {{ object.descripcion |capfirst}} ?</h3>	
+	Tipo                :{{ object.get_tipo_accion |capfirst}} 
+	Cantidad registrada :{{object.get_cantidad}}<br>
+	Observación         :{{object.descripcion}}<br>
+	
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info" href="{% url 'profesional:AccionesProfesionalList'  %}">Cancelar</a>
+</form>
+{% endblock %}

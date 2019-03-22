@@ -1,0 +1,16 @@
+{% extends 'base_encuestas.html' %}
+{% extends 'blog/base.html' %}
+{% block cabezera %}Entradas por dia|{{ day|date }}{% endblock %}
+
+{% block contenido %}
+    <h3> Entradas del día:
+{% for entrada in entradas %}
+
+    {% ifchanged %}{{entrada.fecha|date:"d  M  Y"}}</h3>{% endifchanged %}
+
+    <li> {{ forloop.counter }}<a href="{{entrada.get_absolute_url }}">
+{{ entrada }}</a></li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{{% extends 'base/base_centro.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu centro</a></li>
+  <li><a href="{% url 'historia:registro_historico' %}"data-toggle="tooltip" title="Ir historia">Volver lista registro histórico </a></li>
+  {{fase2}}
+
+  <li class="active">Informe de Continuidad Historico</li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success">Informe de continuidad </div>
+{% endif %}
+<h3>Reporte de continuidad de: {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h3>
+<h4>Objetivo de intervención: {{objetivo.objetivo_particular|capfirst}}</h4>
+<form method="post">
+  {% csrf_token %}
+  {{ formulario|crispy }}
+   
+  <button type="submit" class="btn btn-info">Volver</button>
+ 
+  
+  
+</form>
+
+{% endblock %}

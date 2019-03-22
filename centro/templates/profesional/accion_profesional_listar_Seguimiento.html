@@ -1,0 +1,81 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial dupla!">Menu Psicosocial</a></li>
+  <li><a href="{% url 'bitacora:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">Calendario </a></li>
+  
+
+  <li class="active">Listado  seguimientos </li> 
+</ul>
+<h3> Listado de {{user.first_name|capfirst}} {{user.last_name|capfirst}} cargo : {{profesional.get_profesional}}</h3> 
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Nª </td>
+			<td>Fecha</td>
+			<td>Estudiante</td>
+			<td>Tipo </td>
+			<td>Origen </td>
+			<td>Observación  </td>
+			<td>Acciones </td>
+
+
+		
+		</tr>
+	</thead>
+	
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog"> 
+   
+	<tbody>
+		
+		{% if seguimiento %}
+		{% for mascota in seguimiento %}
+		
+		<tr>
+			<td>{{ forloop.counter }}</td>
+			<td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+			<td>{{ mascota.Estudiante.nombres}}</td>
+			<td>{{ mascota.get_tipo_seg}}</td>
+			<td>{{ mascota.get_tipo_s}}</td>
+			<td>{{ mascota.observacion }}</td>
+			
+			<td>
+			<div class="btn-group-vertical">
+				
+				<a class="btn btn btn-success btn-xs" href="{% url 'profesional:ListarSeguimiento' mascota.id  %}">Ver</a>
+				
+				
+			</div>	
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}

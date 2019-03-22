@@ -1,0 +1,197 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet"> 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="jquery.js"></script> 
+
+
+
+<!-- Used to open the Modal -->
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  
+  <li><a href="{% url 'derivacion:intervencion_listar' %}"data-toggle="tooltip" title="Ir listado de Fichas estudiantes !">Listado de fichas estudiantes </a></li>
+  <li><a href="{% url 'derivacion:intervencion_retorno' %}"data-toggle="tooltip" title="Ir listado de estudiantes a ser egresados!">Listado estudiantes a ser egresados </a></li>
+  
+
+  <li class="active"> Listado </li> 
+</ul>
+<h3><strong>Listado de estudiantes intervenidos</strong>
+ <span class="label label-danger">Al {% now "SHORT_DATE_FORMAT" %} a las {% now "TIME_FORMAT"  %} </span></h3>
+
+
+</ul>
+
+
+
+
+
+
+<table id="example" class="table table-bordered" fontsize =10px width=2200px>
+	<thead>
+		<tr>
+		
+			<td>Nª:</td>
+			<td>Estudiante</td>
+			<td>Edad</td>
+			<td>Derivante</td>
+			<td>Fecha Derivación</td>
+			<td>Estado:</td>
+			<td>Sesiones:</td>
+
+			
+			<td>Establecimiento</td>
+			<td>Curso</td>
+			<td>Motivo derivación</td>
+			<td>Sesión Nº</td>
+			<td>Apoderados</td>
+			<td>Pie</td>
+			<td>Profesores</td>
+
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+			{% if mascota.estado != 1%}
+				<td>Nª {{mascota.id}} Ficha antigua</td>
+			{% else %}
+				<td>Nª {{mascota.id}} Ficha actual</td>
+			{% endif %}
+			<td>{{ mascota.Estudiante.nombres|title|truncatewords:'1'}} {{ mascota.Estudiante.firs_name|title|truncatewords:'1'}} </td>		
+			<td>{{ mascota.Estudiante.edad }} </td>		
+			<td>{{ mascota.usuario.first_name }} {{ mascota.usuario.last_name }} </td>		
+			
+			<td><dd><small>{{ mascota.fecha_derivacion|date:"d-m-Y "}}</small></dd>
+			{% with estado=mascota.pasada %} 
+			<td>{% if estado == 1 %} <strong>Ficha en bandega de entrada</strong>
+			{% elif estado == 2 %}<strong>Espera desde {{ mascota.fecha_espera|date:"d-m-Y "}}</strong>
+			{% elif estado == 3 %}<strong>En intervención</strong>
+			{% elif estado == 4 %}<strong>Derivado otra institución</strong>
+			{% elif estado == 5 %}<<strong>Retorno Por falta de información</strong>
+			{% elif estado == 6 %}<strong>Estudiante dado de alta</strong>
+			{% elif estado == 7 %}<strong>Estudiante en lista de egreso</strong>
+			{% endif %}
+
+		
+			</td>
+			<td>
+				{% for intervenido_actual in intervenido %}
+				{% if mascota.Estudiante == intervenido_actual.Estudiante %}
+					{{intervenido_actual.estado}}
+					
+				{% endif %}
+				{% endfor %}
+			</td>
+			
+			<td>{{ mascota.Estudiante.curso.establecimiento.nombre}}</td>
+			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}} </td>
+			{% endwith %}	
+			<td>
+			  <ul>{% for motivo in mascota.Motivo_derivacion.all %}
+		        <li>
+		          {{motivo.nombre}}
+		        </li>
+		        {% endfor %}
+			</ul>
+			</td>
+			
+			<td>
+				{% for tupla in diccionario %}
+					{% if mascota.Estudiante == tupla.estudiante %}
+						{{tupla.ultimo}}
+					{% endif %}	
+				{% endfor %}
+						
+			</td>
+			<td>
+				{% for tupla in diccionario %}
+					{% if mascota.Estudiante == tupla.estudiante %}
+						{{tupla.apoderado}}
+					{% endif %}	
+				{% endfor %}
+						
+			</td>
+			<td>
+				{% for tupla in diccionario %}
+					{% if mascota.Estudiante == tupla.estudiante %}
+						{{tupla.pie}}
+					{% endif %}	
+				{% endfor %}
+						
+			</td>
+			<td>
+				{% for tupla in diccionario %}
+					{% if mascota.Estudiante == tupla.estudiante %}
+						{{tupla.profesores}}
+					{% endif %}	
+				{% endfor %}
+						
+			</td>
+		
+		</td>
+			
+
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de intervenciones </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+<script>
+    /* Custom filtering function which will search data in column four between two values */
+$.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var min = parseInt( $('#min').val(), 10 );
+        var max = parseInt( $('#max').val(), 10 );
+        var age = parseFloat( data[3] ) || 0; // use data for the age column
+ 
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+             ( isNaN( min ) && age <= max ) ||
+             ( min <= age   && isNaN( max ) ) ||
+             ( min <= age   && age <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+ 
+$(document).ready(function() {
+    var table = $('#example').DataTable();
+     
+    // Event listener to the two range filtering inputs to redraw on input
+    $('#min, #max').keyup( function() {
+        table.draw();
+    } );
+} );
+</script>
+
+
+{% endblock%}
+

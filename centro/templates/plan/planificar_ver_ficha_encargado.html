@@ -1,0 +1,142 @@
+{% extends 'base/base_datos.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'plan:PlanificacionEncargadoListView' colegio.id %}"data-toggle="tooltip" title="Ir menu inicial centro!">Volver a la lista </a></li>
+ 
+
+  <li class="active"> Planificación  de plan Encargado de Convivencia Escolar</li> 
+  </ul>
+<form method="post">
+  {% csrf_token %}
+
+<center>
+  <table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  <h4>Planificación  plan de trabajo de :{{colegio.nombre}}</h4>
+    <TH COLSPAN=4 bgcolor="#CEFCBB" style="text-align:center;"> Plan Gestión y Convivencia Escolar </TH>
+ 
+</TR>
+
+<TR>
+    <TD COLSPAN=2> 
+    <dd>Objetivo general  :{{plan.objetivo_general}}</dd>
+    <dd>Objetivo especifico  :{{plan.objetivo_especificos}}</dd>
+
+   
+  
+    <dd><span class="glyphicon glyphicon-briefcase"></span>. RESPONSABLES :{{plan.responsable }} </dd>
+</TD>
+</TR>
+ 
+
+<TR>
+
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >Plan de Gestión de Convivencia Escolar 
+     {% if mes_actual == "2" %} Marzo {% endif %}
+     {% if mes_actual == "3" %} Abril {% endif %}
+     {% if mes_actual == "4" %} Mayo {% endif %}
+     {% if mes_actual == "5" %} Junio {% endif %}
+     {% if mes_actual == "6" %} Julio {% endif %}
+     {% if mes_actual == "7" %} Agosto {% endif %}
+     {% if mes_actual == "8" %} Septiembre {% endif %}
+     {% if mes_actual == "9" %} Octubre {% endif %}
+     {% if mes_actual == "10" %} Noviembre {% endif %}
+     {% if mes_actual == "11" %} Diciembre {% endif %}
+
+    
+  </TH>
+   
+  </TR>
+<TR>
+    <TD COLSPAN=4>
+
+<ul>
+<strong>Recuerde que las actividades realizadas en los meses anteriores al actual no pueden ser re-planificadas</strong>
+{% for sesion in base|slice:":10" %}
+    <li class="store_item">{{ sesion.nombre }}</li>
+        <ul>
+          
+            {% for accion_activa in accion|slice:":10" %}
+                    {% if accion_activa.base == sesion %}
+                    <li class="store_item">{{ accion_activa.nombre }}</li>
+                    <ul>
+                     {% for plancillo_activo in plancillo|slice:":10" %}
+                          {% if plancillo_activo.accion == accion_activa %}
+                             <li class="store_item">PLAN DE ACTIVIDADES: {{plancillo_activo.nombre}}  </li>
+                            <ul>  
+                            {% for actividad_activa in actividades|slice:":10" %}
+                              {% if actividad_activa.plancillo == plancillo_activo %}
+                                
+                                   <li class="store_item">Actividad: {{actividad_activa.nombre}} / <strong>{{actividad_activa.get_ejecutores|title|truncatewords:'1'}} /{{actividad_activa.fecha|date:"d-m-Y "}} / {{actividad_activa.get_horario}}</strong><a href="{% url 'plan:ingresar_Actividad' actividad_activa.id %}"><small> / Planificar </small></a> </li>
+                                
+                                  
+                                    
+                                
+
+                               {% endif%}
+                            {% endfor %}      
+                           </ul>  
+                           {% endif %}
+                      {% endfor %}          
+                  </ul>
+                  {% endif %}  
+              {% endfor %}
+           </ul>   
+        {% endfor %}    
+</ul>
+
+
+
+
+  </TR>
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#F7E0E9" style="text-align:center;" >Establecimiento {{plan.establecimiento.nombre}}</TH>
+    
+  </TR>
+
+      
+      <TD COLSPAN=4>  
+      
+      <ul><strong>NOMBRE PROFESIONAL</strong></ul>
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
+      </TD>
+   
+  
+    </tr>
+    
+    
+  </thead>
+  <tbody>
+
+    
+    
+    
+    
+  </tbody>
+</table> 
+</center>
+  
+  
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

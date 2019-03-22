@@ -1,0 +1,179 @@
+{% extends "base/base_dupla.html" %}
+{% load staticfiles %}
+{% load bitacora_tags %}
+
+{% block extrahead %}
+
+ <!-- Used to open the Modal -->
+<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">Resumen Ficha</button>
+
+
+<link rel="stylesheet" href="{% static 'css/calendario.css' %}" type="text/css" media="screen">  
+    <style>
+        .clear { /* generic container (i.e. div) for floating buttons */
+        overflow: hidden;
+        width: 200%;
+        }
+        a.button {
+        color: #444;
+        display: block;
+        float: right;
+        height: 12px;
+        margin: 6px;
+        padding: 5px; /* sliding doors padding */
+        text-decoration: none;
+        }
+        a.button span {
+        display: block;
+        line-height: 14px;
+        }
+        a.button:active {
+        background-position: bottom right;
+        color: #000;
+        outline: none; /* hide dotted outline in Firefox */
+        }
+        a.button:active span {
+        background-position: bottom left;
+        }
+    </style>
+    <script>
+        function configurar(){
+            var s = document.getElementById("anos");
+            var m = document.getElementById("mes");
+            for(var i=2011;i<=(Number({{ hoy.year }})+1);i++){
+                var option=document.createElement("option");
+                option.value=i;
+                option.text=i;
+                if(i=={{ hoy.year }})
+                    option.selected = true;
+                s.appendChild(option);
+                }
+                for(var j=0;j<m.length;j++){
+                    if(Number(m[j].value)=={{ hoy.month }})
+                        m[j].selected = true;
+                }
+            }
+        function change(){
+            var mes = document.getElementById('mes');
+            var ano = document.getElementById('anos');
+            window.location.href ="{% url 'bitacora:calendar2' ano=ano mes=mes %}";
+        }
+        window.onload = configurar;
+    </script>
+{% endblock %}
+
+{% block title %}Bitacora {% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <h1>Calendario Mes de :{{ hoy|date:"F" }} del {{hoy.year}} </h1>
+    <div>
+       
+           
+
+         Meses:
+            <a class="btn btn-info btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=1 %}">1</a>
+            <a class="btn btn-success btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=2 %}">2</a>
+            <a class="btn btn-danger btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=3 %}">3</a>
+            <a class="btn btn-info btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=4 %}">4</a>
+            <a class="btn btn-success btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=5 %}">5</a>
+            <a class="btn btn-danger btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=6 %}">6</a>
+            <a class="btn btn-info btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=7 %}">7</a>
+            <a class="btn btn-success btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=8 %}">8</a>
+            <a class="btn btn-danger btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=9 %}">9</a>
+            <a class="btn btn-info btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=10 %}">10</a>
+            <a class="btn btn-success btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=11 %}">11</a>
+            <a class="btn btn-danger btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=12 %}">12</a>
+
+      
+
+    
+        <div class='navegar'>
+            <a href="{% url 'bitacora:calendar2' ano=ant.year  mes=ant.month %}">{{ ant|date:"F" }}</a> | 
+            <a href="{% url 'bitacora:calendar2' ano=sig.year  mes=sig.month %}">{{ sig|date:"F" }}</a>
+        </div>
+    </div>
+{% get_calendar for hoy.month hoy.year as calendar %} 
+    <table id="example" class="table table-bordered" style="font-size:12px">
+
+        <tr>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miercoles</th>
+            <th>Jueves</th>
+            <th>Vienes</th>
+            <th>Sábado</th>
+            <th>Domingo</th>        
+        </tr>           
+
+
+            {% for week in calendar %}
+
+                <tr>
+                {% for day in week %}
+                    <td {% if day.month != hoy.month %}class='nomes'{% endif %} >
+
+                        <a href="{% url 'bitacora:fechas' day.day day.month %}">{{ day.day }}</a> 
+                        
+                        
+                        {% if peticiones and day.month == hoy.month %}
+                            {% for peticion in peticiones|get_peticiones:day.day %}
+                                <div class='peticion'  >
+                                            {% with numero=peticion.numero %} 
+                                            {% if numero == 1 %}
+                                            <span >
+                                           
+                                                <strong> </strong>({{ peticion.get_horario }}){{ peticion.nombre|title|truncatewords:'1'}} {{peticion.establecimiento.nombre|title|truncatewords:'5'}}
+                                                
+                                                <strong>De:[</strong><small> {{ peticion.get_ambito|upper}} -{{ peticion.get_curso|upper}} {{ peticion.get_tipo_letras|upper}} ] </small>
+   
+                                            </span>
+
+                                            {% elif numero == 2 %}
+                                                <span style="color: #04B431;">
+                                               <strong> </strong>({{ peticion.get_horario }}){{ peticion.nombre|title|truncatewords:'1'}} {{peticion.establecimiento.nombre|title|truncatewords:'5'}}
+                                                
+                                                <strong>De:[</strong><small> {{ peticion.get_ambito|upper}} -{{ peticion.get_curso|upper}} {{ peticion.get_tipo_letras|upper}} ] </small>
+   
+                                            </span>
+
+                                            {% elif numero == 3 %}
+                                                <span style="color: #04B431;">
+                                                <strong> </strong>({{ peticion.get_horario }}){{ peticion.nombre|title|truncatewords:'1'}} {{peticion.establecimiento.nombre|title|truncatewords:'5'}}
+                                                
+                                                <strong>De:[</strong><small> {{ peticion.get_ambito|upper}} -{{ peticion.get_curso|upper}} {{ peticion.get_tipo_letras|upper}} ] </small>
+   
+                                            </span>
+
+                                            {% else%}
+                                            <span style="color: red;">
+                                                <strong> </strong>({{ peticion.get_horario }}){{ peticion.nombre|title|truncatewords:'1'}} {{peticion.establecimiento|title|truncatewords:'3'}}
+                                                
+                                                <strong>Por:[</strong>{{ peticion.usuario.first_name|first|upper}} {{ peticion.usuario.last_name|first|upper}} ]
+   
+                                            </span>
+                                            {% endif %}
+                                            {% endwith %}
+                                        
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+    </table>
+</div>
+<div>
+<table>
+    <tr>
+           <strong> Fin de Calendario bitácora de acción</strong>     
+            
+    </tr>
+
+</table>    
+
+
+</div>
+{% endblock %}
+

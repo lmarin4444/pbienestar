@@ -1,0 +1,198 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Establecimientos</a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' estudiante.curso.establecimiento.id %}"data-toggle="tooltip" title="Listado de establecimientos">Volver lista</a></li>
+  
+  
+  
+
+  <li class="active">Informe Intervención de casos</li> 
+</ul>
+<form method="post">
+  {% csrf_token %}
+<center>
+  <table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  <TR>
+   <TH COLSPAN=5  bgcolor="#E1F8FA" style="text-align:center;" >IDENTIFICACION DEL ESTUDIANTE</TH>
+    
+  </TR>
+  <TR>
+    <TD COLSPAN=2>{{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}}</TD>
+    <TD COLSPAN=1>{{ estudiante.curso.establecimiento.nombre|capfirst}}</TD>
+    <TD COLSPAN=1>{{ estudiante.curso.get_numero}}  {{ estudiante.curso.get_letra}}</TD>
+    <TD COLSPAN=1>Edad:{{ estudiante.edad}} años</TD>
+  </TR>
+<TR>
+    <TH COLSPAN=5 bgcolor="#E1F8FA" style="text-align:center;" >PLAN DE INTERVENCIÓN DE CASO</TH>
+    
+  </TR>
+  <TR>
+    <TD COLSPAN=1>FECHA </TD>
+    <TD COLSPAN=1>PROBLEMATICA</TD>
+    <TD COLSPAN=1>OBJETIVO GENERAL</TD>
+    <TD COLSPAN=2>OBJETIVO ESPECIFICO</TD>
+  </TR>
+  <TR>
+    <TD COLSPAN=1>{{plan_caso.fecha|date:"d-m-Y " }} </TD>
+    <TD COLSPAN=1>
+   
+    {{plan_caso.problematica}} </TD>
+    
+    <TD COLSPAN=1>{{plan_caso.objetivo_general}}</TD>
+    <TD COLSPAN=2>
+   {{plan_caso.objetivo_especifico}}
+
+      </TD>
+  </TR>  
+    
+
+<TR>
+    <TD COLSPAN=2>TEMÁTICAS </TD>
+    
+    <TD COLSPAN=3><strong>SESIONES INGRESADAS</strong></TD>
+    
+  </TR>
+  <TR>
+    <TD COLSPAN=2>
+
+  {% for temas in plan_caso.Tematicas.all %}
+      <li>{{temas.nombre}}</li>
+  {% endfor %}
+     </TD>
+    
+    <TD COLSPAN=2>
+    {{plan_caso.cantidad}}</TD>
+
+    <TD COLSPAN=1>
+    {% with total=sesiones.count %} 
+              
+                
+    <ul class = "nav nav-pills">
+    <li class = "active" ><a>SESIONES  <span class ="badge">{{total}}</span></a></li>
+    </ul>
+    {% endwith %}
+
+      </TD>
+  </TR>  
+
+<TR>
+    
+    <TH COLSPAN=5 bgcolor="#E5F3CF" style="text-align:center;" >SESIONES </TH>
+  </TR>
+<TR>
+    <TD COLSPAN=1>FECHA / HORARIO</TD>
+    <TD COLSPAN=1>OBJETIVO</TD>
+    <TD COLSPAN=1>TEMATICAS</TD>
+    <TD COLSPAN=1>ÁREA</TD>
+     <TD COLSPAN=1>ESTADO</TD>
+    
+  </TR>
+  
+{% for sesion in sesiones.all %}
+
+  <TR>
+    <TD COLSPAN=1>{{sesion.fecha|date:"d-m-Y "}} a las {{sesion.get_horario }}</TD>
+    <TD COLSPAN=1>{{sesion.objetivo_especifico}} </TD>
+    <TD COLSPAN=1>{{sesion.tematicas}} </TD>
+    <TD COLSPAN=1> {% for area in sesion.area_intervencion.all %}
+     {{area.nombre}}- 
+    {% endfor %}</TD>
+
+    {% if sesion.numero == 0 %}
+    <TD COLSPAN=1>Agendada </TD>
+    {% elif sesion.numero == 1%}
+    <TD COLSPAN=1>Realizada </TD>
+    {% elif sesion.numero == 2%}
+    <TD COLSPAN=1>Eliminada </TD>
+    {% elif sesion.numero == 3%}
+    <TD COLSPAN=1>Suspendida </TD>
+    {% endif %}
+
+
+
+
+
+
+ {% endfor %}  
+  </TR> 
+
+  <TR>
+    <TH COLSPAN=5 bgcolor="#F7E0E9" style="text-align:center;" >INFORMACIÓN DE EGRESO</TH>
+    
+  </TR>
+{% if retorno  %}
+
+<TR>
+    <TD COLSPAN=1>SITUACIÓN DE EGRESO</TD>
+    <TD COLSPAN=4>DOCUMENTACIÓN ADJUNTA AL EGRESO</TD>
+  </TR>
+  
+  <TR>
+    <TD COLSPAN=1><dd>Fecha egresado  : {{retorno.fecha_retorno  |date:"d-m-Y"}}</dd>
+                  <dd>Motivo término  :{{retorno.get_motivo_termino }}</dd>
+                    <dd>Observación   :{{retorno.observacion_termino }} </dd></TD>
+
+    </TD>
+    <TD COLSPAN=4>
+    {% if retorno.docfile1.url !=  None %}
+       <li><a href="{{ retorno.docfile1.url }}"><span class="glyphicon glyphicon-floppy-save"></span> </a>{{ retorno.filename1 }} 
+       {% if retorno.opcion1 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span>
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span></li>
+        {% endif %} 
+    {% endif %} 
+    {% if retorno.docfile2.url !=  None %}  
+       <li><a href="{{ retorno.docfile2.url }}"><span class="glyphicon glyphicon-floppy-save"></span>  </a> {{ retorno.filename2 }}
+       {% if retorno.opcion2 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span>
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span></li>
+        {% endif %} 
+    {% endif %}
+    {% if retorno.docfile3.url !=  None %}      
+       <li><a href="{{ retorno.docfile3.url }}"> <span class="glyphicon glyphicon-floppy-save"></span>  </a> {{ retorno.filename3 }}
+       {% if retorno.opcion3 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span>
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span></li>
+        {% endif %} 
+      {% endif %}
+
+            
+      </TD>
+  </TR>  
+{% endif %}
+
+    <TD COLSPAN=5>
+    
+    
+      <ul><strong>NOMBRE/PSICOLOGO </strong></ul>
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
+   
+</TD>
+    
+    
+    
+  </thead>
+  <tbody>
+
+    
+    
+    
+    
+  </tbody>
+</table> 
+</center>
+  
+  
+</form>
+{% endblock %}

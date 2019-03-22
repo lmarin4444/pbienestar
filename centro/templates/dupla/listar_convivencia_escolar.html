@@ -1,0 +1,153 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+<h4> Listado de estudiantes Establecimiento {{escuela.nombre}}</h4>
+
+Listado de acciones :
+
+
+<a  class="btn btn-success btn-xs" href="{% url 'dupla:Estudiante_listar_fichas_duplas' escuela.id %}"><small>Listado de fichas derivadas dupla</small></a>
+<a  class="btn btn-warning btn-xs" href="{% url 'dupla:indicador_convivencia' escuela.id %}"><small>Evento de convivencia (Aislado) </small></a>
+
+<a  class="btn btn-primary btn-xs" href="{% url 'dupla:indicador_convivencia_curso' escuela.id %}"><small>Evento de convivencia (Curso particular)</small></a>
+
+<a title="Listar convivencia escolar " class="glyphicon glyphicon-file" href="{% url 'dupla:busqueda' escuela.id %}"></a> Convivencia 
+<a title="Listar convivencia escolar medicación" class="glyphicon glyphicon-thumbs-up" href="{% url 'dupla:indicador_convivencia_mediacion' escuela.id %}"></a>Mediación
+
+
+								
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td>Fecha</td>
+			<td>Observaciones</td>
+			<td>curso</td>
+			<td>Tipo de acción</td>
+			<td>Opciones</td>
+
+
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+
+		{% if  estudiando %}
+			<tr>		 
+			
+				
+				{% for estudio in estudiando %}
+				<td>{{ estudio.fecha|date:"d-m-Y " }} [{{estudio.get_horario}}]{{ motivo.firs_name|capfirst }} {{ motivo.last_name|capfirst }}  </td>
+				<td>{{ estudio.observacion}} </td> 
+				<td>
+					{% if estudiando1 %}
+					{% for curso in estudiando1 %}
+						{% if estudio.id == curso.id %}
+							
+						{{ curso.get_curso}} {{ curso.get_letra}}
+				
+				<!--	
+
+				<div class="dropdown">
+				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    Agregar estudiantes
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><a href="{% url 'dupla:listar_curso_convivencia_escolar' escuela.id curso.id curso.letra curso.curso  %}">Mismo curso</a></li>
+
+				    <li><a href="{% url 'dupla:mover' estudio.id escuela.id %}">Diferentes cursos</a></li>
+				    <li><a href="#">Ver evento</a></li>
+				    <li role="separator" class="divider"></li>
+				    <li><a href="{% url 'alumno:profesinal_establecimiento_listar'%}">Volver a la lista</a></li>
+				  </ul>
+				</div>
+				-->
+						{% endif %}	
+
+					{% endfor%}
+					{% endif %}	
+				
+				
+				</td>
+				<td>{{ estudio.get_tipo_convivencia}} </td> 
+
+				<td>
+					 <strong> [ </strong>
+				    <a title="Modificar" class="glyphicon glyphicon-list-alt" href="{% url 'dupla:busqueda' escuela.id %}"></a> Modificar 
+				    <a title="Eliminar" class="glyphicon glyphicon-remove-circle" href=""></a> Eliminar
+				  <strong> ] </strong>
+						
+						
+				
+			</td>
+
+	
+			</ul>
+			</td>
+
+		
+		</tr>
+		{% endfor %}
+
+		<tr>		 
+			
+				
+				{% for estudio in estudiando2 %}
+				<td>{{ estudio.fecha|date:"d-m-Y " }} [{{estudio.get_horario}}] </td>
+				<td>{{ estudio.observacion}} </td> 
+				<td>
+			
+				
+				
+				</td>
+				<td>{{ estudio.get_tipo_convivencia}} </td> 
+
+				<td>
+					 <strong> [ </strong>
+				    <a title="Ingresar estudiantes" class="glyphicon glyphicon-list-alt" href="{% url 'dupla:MediciacionUpdate' estudio.id %}"></a> Modificar 
+				    <a title="Ingresar estudiante" class="glyphicon glyphicon-remove-circle" href=""></a> Eliminar
+				  <strong> ] </strong>
+						
+						
+				
+			</td>
+
+	
+			</ul>
+			</td>
+
+		
+		</tr>
+		{% endfor %}
+
+
+		
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}
+

@@ -1,0 +1,156 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu centro</a></li>
+  <li><a href="{% url 'sesion:intervenido' %}"data-toggle="tooltip" title="Ir menu personal!">Menu personal</a></li>
+  
+  <li class="active">Listado de horas</li> 
+  </ul>
+Listado  para el estudiante <strong>{{dato.nombres}} {{dato.firs_name}} {{dato.last_name}}</strong>
+<h3>Listado de horas por confirmar</h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td>Fecha</td>
+			<td>Horario</td>
+			<td>Participantes</td>
+			<td>Tipo actividad</td>
+			<td>Opciones</td>
+
+			
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if agenda %}
+		{% for mascota in agenda %}
+
+		{% if mascota.estado == 1 %}
+		<tr>
+			<td>{{ mascota.fecha |date:"d-m-Y" }}</td>
+			<td>{{ mascota.get_horario_i }}</td>
+			<td>{{ mascota.participantes }}</td>
+			<td>{{ mascota.tipo_actividad }} </td>
+			<td>
+		
+
+			
+				<a class="btn-sm btn-info" href="{% url 'sesion:modificar_citas' dato.id mascota.id %}"> Modificar  </a>
+				<a class="btn-sm btn-danger" href="{% url 'sesion:eliminar_citas'  mascota.id%}"> Eliminar </a>
+				<li>Estudiante aún no se confirma su asistencia</li></td>
+			{% else %}
+			
+			{% endif %}	
+		{% endfor %}	
+			</td>
+		</tr>
+		
+		
+		{% else %}
+		<h2>No hay horas tomadas</h2>
+		{% endif %}
+	</tbody>
+</table> 
+
+
+
+
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+<h3>Listado de horas realizada la confirmación (Llamadas telefónicas)</h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td>Fecha</td>
+			<td>Horario</td>
+			<td>Participantes</td>
+			<td>Tipo actividad</td>
+
+			<td>Opciones</td>
+
+			
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if confirma %}
+		{% for mascota in confirma %}
+		<tr>
+			<td>{{ mascota.agenda.fecha |date:"d-m-Y" }}</td>
+			<td>{{ mascota.agenda.get_horario_i }}</td>
+			<td>{{ mascota.agenda.participantes }}</td>
+			<td>{{ mascota.agenda.tipo_actividad }} </td>
+			
+
+			
+			<td>
+
+				(<a class="btn-sm btn-info" href="{% url 'sesion:modificar_citas' dato.id mascota.agenda.id %}"> Modificar  </a>
+				
+				<a class="btn-sm btn-danger" href="{% url 'sesion:eliminar_citas'  mascota.agenda.id%}"> Eliminar </a>
+				<strong>La asistencia en la agenda )</strong>"Realizado el proceso de confirmación"
+				 <br> 1.- <span class="glyphicon glyphicon-phone-alt"></span> {{mascota.get_estado1}} <br>
+				2.- <span class="glyphicon glyphicon-phone-alt"></span> {{mascota.get_estado2}} <br>
+				3.- <span class="glyphicon glyphicon-phone-alt"></span> {{mascota.get_estado3}} <br>
+				{% if mascota.obs == None%}
+				Sin observación
+				{% else %}
+				Con la observación {{mascota.obs}}.  
+				{% endif %}
+			
+				
+			
+			
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h2>No hay registro de llamadas telefónicas </h2>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+
+
+{% endblock%}
+
+

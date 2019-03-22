@@ -1,0 +1,129 @@
+{% extends "admin/base_site.html" %}
+{% load calendario_tags %}
+{% load static %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/calendario.css" type="text/css" media="screen" />
+    <style>
+        .clear { /* generic container (i.e. div) for floating buttons */
+        overflow: hidden;
+        width: 100%;
+        }
+        a.button {
+        color: #444;
+        display: block;
+        float: right;
+        height: 12px;
+        margin: 6px;
+        padding: 5px; /* sliding doors padding */
+        text-decoration: none;
+        }
+        a.button span {
+        display: block;
+        line-height: 14px;
+        }
+        a.button:active {
+        background-position: bottom right;
+        color: #000;
+        outline: none; /* hide dotted outline in Firefox */
+        }
+        a.button:active span {
+        background-position: bottom left;
+        }
+    </style>
+    <script>
+        function configurar(){
+            var s = document.getElementById("anos");
+            var m = document.getElementById("mes");
+            for(var i=2011;i<=(Number({{ hoy.year }})+1);i++){
+                var option=document.createElement("option");
+                option.value=i;
+                option.text=i;
+                if(i=={{ hoy.year }})
+                    option.selected = true;
+                s.appendChild(option);
+                }
+                for(var j=0;j<m.length;j++){
+                    if(Number(m[j].value)=={{ hoy.month }})
+                        m[j].selected = true;
+                }
+            }
+        function change(){
+            var mes = document.getElementById('mes');
+            var ano = document.getElementById('anos');
+            window.location.href = '/admin/projectadmin/show/calendar/'+ano.value+'/'+mes.value+'/';
+        }
+        window.onload = configurar;
+    </script>
+{% endblock %}
+
+{% block title %}Calendario de Actividades{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <h1>Calendario de Actividades</h1>
+    <div>
+        <div class='buscar'>
+            <select id='mes'>
+                <option value=1>Enero</option>
+                <option value=2>Febrero</option>
+                <option value=3>Marzo</option>
+                <option value=4>Abril</option>
+                <option value=5>Mayo</option>
+                <option value=6>Junio</option>
+                <option value=7>Julio</option>
+                <option value=8>Agosto</option>
+                <option value=9>Septiembre</option>
+                <option value=10>Octubre</option>
+                <option value=11>Noviembre</option>
+                <option value=12>Diciembre</option>
+            </select>
+            <select id='anos'><select>
+            <a class='button' href='#'><span onclick='change();'>Aceptar</span></a>
+        </div>
+        <div class='navegar'>
+            <a href='/admin/projectadmin/show/calendar/{{ ant.year }}/{{ ant.month }}/'>{{ ant|date:"F" }}</a> | 
+            <a href='/admin/projectadmin/show/calendar/{{ sig.year }}/{{ sig.month }}/'>{{ sig|date:"F" }}</a>
+        </div>
+    </div>
+    {% get_calendar for hoy.month hoy.year as calendar %}
+    <table>
+        <tr>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miercoles</th>
+            <th>Jueves</th>
+            <th>Vienes</th>
+            <th>Sábado</th>
+            <th>Domingo</th>        
+        </tr>
+            {% for week in calendar %}
+                <tr>
+                {% for day in week %}
+                    <td {% if day.month != hoy.month %}class='nomes'{% endif %}>
+                        {{ day.day }}
+                        {% if peticiones and day.month == hoy.month %}
+                            {% for peticion in peticiones|get_peticiones:day.day %}
+                                <div class='peticion'>
+                                        <a class='Ntooltip' href='/admin/projectadmin/peticion/{{ peticion.id }}/'>
+                                            Peticion #{{ peticion.id }}
+                                            <span>
+                                                <strong>Proyecto: </strong>{{ peticion.proyecto }}<br>
+                                                <strong>Estado: </strong>{{ peticion.get_estado }}<br>
+                                                <strong>Fecha inicio: </strong>{{ peticion.inicio_fecha }}<br>
+                                                <strong>Fecha fin: </strong>{{ peticion.terminado_fecha }}<br>
+                                                <strong>Asignado a: </strong>{{ peticion.asignado_a }}<br>
+                                                <strong>Prioridad: </strong>{{ peticion.get_prioridad }}<br>
+                                            </span>
+                                        </a>
+                                    <p>{{ peticion.asunto }}</p>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+    </table>
+</div>
+{% endblock %}

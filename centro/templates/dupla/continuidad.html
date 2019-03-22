@@ -1,0 +1,26 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial dupla!">Menu </a></li>
+  
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}"data-toggle="tooltip" title="Volver listado anterior!">Volver lista anterior </a></li>
+  
+  
+
+  <li class="active"> Listado </li> 
+</ul>
+<form method="post">
+	{% csrf_token %}
+	<h3>Crear informe de continuidad estudiante {{ dato.nombres|capfirst }} {{ dato.firs_name|capfirst }} {{ dato.last_name|capfirst }} </h3>	
+	{{ form.as_p }}
+	{% if continuidad %}
+	Estudiante ya cuenta con continuidad
+	{% else %}
+	<button class="btn btn-info" type="submit">Sí Registrar</button>
+	{% endif %}
+	<a class= "btn btn-danger" href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}">Cancelar</a>
+</form>
+{% endblock %}

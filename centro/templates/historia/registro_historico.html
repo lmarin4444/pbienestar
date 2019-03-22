@@ -1,0 +1,95 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<h4> Listado de estudiantes en registro histórico. </h4>
+
+ <ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+ 
+
+  <li class="active"> Listado</li> 
+</ul>
+
+
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Fecha</td>
+			
+			<td>Nombres</td>
+			<td>Opciones</td>
+			<td>Informes </td>
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+
+
+		{% if  object_list %}
+		{% for estudio in object_list  %}
+		<tr>
+			<td>{{estudio.fecha}}</td>
+			<td>{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name|capfirst }} {{ estudio.Estudiante.last_name|capfirst }}  </td>
+		
+			
+			<td>
+								
+				<a title="Ver Ficha de derivación" class="glyphicon glyphicon-list" href="{% url 'historia:ver_historia_ficha_derivacion' estudio.id estudio.Estudiante.id %}"></a>
+
+				<a title="Ficha derivación - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:fichaderivacion_pdf_report_historica' estudio.id %}"></a>/
+				
+				<strong>Ficha derivación</strong>
+				
+				<a title="Ver Intervencón" class="glyphicon glyphicon-pencil" href="{% url 'historia:ver_historia_sesiones' estudio.id estudio.Estudiante.id %}"></a>/
+				Intervención
+				
+				
+				<a title="Ver Objetivo Intervención" class="glyphicon glyphicon-list-alt" href="{% url 'historia:ver_historia_objetivos' estudio.id estudio.Estudiante.id %}"></a>/
+				Objetivo Intervención
+			<td>	
+			
+
+			<a title="Ver informe de Evaluación" class="btn btn-info btn-xs" href="{% url 'historia:evaluacion_historia'  estudio.Estudiante.id estudio.id%}">1</a>
+			<!-- continuidad -->
+
+			<a title="Ver Informes de Continuidad" class="glyphicon glyphicon-book" href="{% url 'historia:ver_reporte_continuidad_historia' estudio.Estudiante.id estudio.id %}"></a>/
+			<a title="Ver informe de Egreso" class="btn btn-danger btn-xs" href="{% url 'historia:final_historia' estudio.Estudiante.id estudio.id %}">3</a>
+			
+			
+
+			</td>
+
+				
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}
+

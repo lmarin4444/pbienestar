@@ -1,0 +1,91 @@
+{% extends "base_no_convivencia.html" %}
+{% load static%}
+{% block title%}Módulo centro de Bienestar{% endblock%}
+
+{% block menu%}
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+
+        <ul class="nav navbar-nav" >
+
+        <li class="dropdown">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown">Establecimiento <b class="caret"></b></a>
+
+              
+              <ul class="dropdown-menu">
+              
+              <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}">Establecimientos</a></li>
+          
+            
+            <li><a href="{% url 'dupla:ListarEstablecimientos' %}">Listados y Planificación  </a></li>
+            
+              </ul>
+            </li>
+
+              <li class="dropdown">
+                            
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acciones {{user.first_name|title|truncatewords:'1'}}{{user.last_name|title|truncatewords:'1'}}<b class="caret"></b></a>
+
+
+              <ul class="dropdown-menu">
+             
+              
+              
+              <li><a href="{% url 'alumno:estudiante_listar' %}">Listado de mis estudiantes intervenidos Centro Bienestar</a></li>
+              <li><a href="{% url 'derivacion:centrolistar' %}">Derivaciones Centro Bienestar</a></li>
+              <li><a href="{% url 'profesional:AccionProfesional' %}">Ingresar  actividades extras</a></li>
+              <li><a href="{% url 'profesional:AccionesProfesionalList' %}">Listado de actividades extras</a></li>
+              <li><a href="{% url 'profesional:SeguimientoProfesionalList' %}">Registros individuales Seguimientos </a></li>
+             
+             </ul>
+
+                <li><a href=""></a></li>
+                <li><a class="btn btn-default btn-xs" href="{% url 'bitacora:calendar-ano-mes' %}">Bitácora Diaria</a></li>
+                            
+              <ul  class="btn btn-warning">
+              <li class="active">
+                <a href="{% url 'derivacion:retorno' %}"> Devolución ficha
+                {% with total=retorno.count %} 
+              
+                 <span class="badge pull-right"> {{total}} </span></a>
+                {% endwith %}
+              </li>
+
+              
+                <li class=class="btn btn-success">
+                  {% with lista=inst.count %} 
+                  <a href="{% url 'derivacion:inst_retorno' %}"> Retorno (Der. Inst ó Egreso)
+                  <span class="badge pull-right">{{lista}}</span></a>
+                  {% endwith %}
+                </li>
+            </ul>  
+
+             <li class="dropdown">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown">Salir/pass <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+
+              <li><a href="{% url 'usuario:change_password' %}">Cambiar contraseña</a></li>
+              <li><a href="{% url 'usuario:cerrar' %}">Cerrar sesión</a></li>
+              </ul>
+             </li>
+                                    
+          </ul>
+
+              <!-- Dropdown menu-->
+              
+              
+         </a>
+            </li>
+            
+          </ul>
+       </div>
+    </div>
+</div>
+              
+          </ul>
+       </div>
+    </div>
+</div>
+
+{% endblock%}
+
+

@@ -1,0 +1,36 @@
+{% extends 'base/base_certificado.html' %}
+
+{% block titulo %} Estudiante {% endblock %}
+{% block contenido %}
+
+    <h1> Estudiantes </h1>
+
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Rut</th>
+            <th>Nombres</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for foo in c %}
+            <tr class="active">
+                <td> {{ foo.id }}</td>
+                <td> {{ foo.rut }}</td>
+                <td> {{ foo.nombre }}</td>
+                <td> {{ foo.first_name }}</td>
+                <td> {{ foo.last_name }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    <a href="{% url 'informe:pdf' %}">
+        <input type="button" class="btn-primary" value="Imprimir"/>
+    </a>
+
+
+
+{% endblock %}

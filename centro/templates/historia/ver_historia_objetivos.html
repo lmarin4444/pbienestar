@@ -1,0 +1,62 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<form method="post">
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'historia:registro_historico' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Volver a la lista </a></li>
+ 
+
+  <li class="active"> Listado</li> 
+ </ul> 
+	{% csrf_token %}
+<h3>Objetivo para el estudiante :{{dato.nombres|upper}} {{dato.firs_name|upper}} {{dato.last_name|upper}}</h3>	
+
+
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Fecha de creación</td>
+			<td>Objetivo</td>
+			<td>Tématicas  </td>
+			
+			
+			
+		</tr>
+	</thead>
+	
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog">
+	<tbody>
+		
+		{% if objetivos %}
+		
+		
+		<tr>
+			<td><strong>{{ objetivos.fecha_creacion}}</strong></td>
+			<td>{{ objetivos.objetivo_particular|upper}} </td>
+			<td>{% for temas in tematicas.Tematicas.all %}
+		
+			
+			<li>{{ temas.nombre}} </li>
+			
+	
+				{% endfor %}</td>
+			
+	
+		</tr>
+		
+		
+		{% else %}
+		<h1>No hay asignación de objetivo.</h1>
+		{% endif %}
+	</tbody>
+</table> 
+	
+	
+	<a class= "btn btn-info" href="{% url 'historia:registro_historico'  %}">Volver</a>
+</form>
+{% endblock %}

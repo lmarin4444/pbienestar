@@ -1,0 +1,23 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  
+  <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Listado estudiantes intervenidos </a></li>
+  
+
+  <li class="active">Eliminar acción:{{accion.nombre}} base {{base.nombre|capfirst}} del plan {{plan.nombre|capfirst}}</li> 
+</ul>
+
+<form method="post">
+	{% csrf_token %}
+	<h3>¿Desea eliminar la acción : {{accion.nombre}}  de la base {{ base.nombre|capfirst }}  ?</h3>	
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info" href="{% url 'plan:AccionesListView' base.id %}">Cancelar</a>
+
+</form>
+{% endblock %}

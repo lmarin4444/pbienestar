@@ -1,0 +1,71 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú Centro</a></li>
+  
+  <li class="active">Listado Profesionales</li> 
+</ul>
+
+
+<table id="example" class="table table-bordered" >
+	<thead>
+		<tr>
+			
+			<td>Información</td>
+			
+			<td>Profesional</td>
+			<td>Establecimiento</td>
+			
+
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for estudio in object_list %}
+		<tr>
+			<td>
+			<span class="glyphicon glyphicon-credit-card"></span> {{ estudio.rut }} 
+			<li> Nombre: {{ estudio.usuario.first_name}} {{ estudio.usuario.last_name }}</li>  
+			<span class="glyphicon glyphicon-user"></span>  {{ estudio.usuario.username }}<br>
+			 
+			<span class="glyphicon glyphicon-envelope"></span>  {{ estudio.usuario.email }}</td>  
+
+			<td>{{ estudio.get_profesional}}</td>
+			<td>
+			{% for escuela in estudio.establecimiento.all %}
+			
+			<li>{{ escuela.nombre}} </li>
+			{% endfor %}</td>
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}

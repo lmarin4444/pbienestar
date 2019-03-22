@@ -1,0 +1,14 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<h3>Apoderado de :{{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h3>
+<form method="post">
+	
+
+	{% csrf_token %}
+	{{ form.as_p }}
+	
+
+	<button class="btn btn-info " type="submit">Registrar</button>
+</form>
+{% endblock %}

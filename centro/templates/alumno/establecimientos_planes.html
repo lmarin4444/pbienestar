@@ -1,0 +1,51 @@
+{% extends 'base/base_dupla.html' %}
+{% block content %}
+
+<h3>Listado acciones del establecimiento asignados a : <strong> {{ user.first_name}} {{ user.last_name}}</strong></h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			
+			<td>Establecimiento </td>
+			
+			
+			<td>Cargo</td>
+			<td>Opciones</td>
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if profesional %}
+
+		<tr>
+		
+		
+		{% for escuela in profesional %}
+			
+		<td>{{ escuela.escuela.nombre }} </td>
+		<td>{{ escuela.get_profesional }} </td>
+		
+			<td>
+			
+				<a class="btn btn-success btn-sm" href="{% url 'alumno:ingresar_estudiantes_establecimiento' escuela.id %}">Ing. estudiante</a>
+				<a class="btn btn-info btn-sm" href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.id %}">Lista estudiantes</a>
+				<a class="btn btn-primary btn-sm" href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.id %}"><small>Act. PsicoSocial</small></a>
+			{% if escuela.tipo_profesional == 6 or escuela.tipo_profesional == 7 or escuela.tipo_profesional == 8 or escuela.tipo_profesional == 9 %}
+				<a class="btn btn-warning btn-sm" href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.id %}"><small>Encargado</small></a>
+				<a class="btn btn-danger btn-sm" href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.id %}"><small>Planes</small></a>
+
+			{% endif %}
+		
+		
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros relacionados</h1>
+		{% endif %}
+	</tbody>
+</table> 
+{% endblock%}

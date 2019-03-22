@@ -1,0 +1,49 @@
+{% extends 'base/base_datos.html' %}
+
+
+{% block content %}
+<div  class="col-xs-6 col-md-offset-3"">
+<h3>Ingreso de porcentajes de logros </h3>
+</div>	
+
+	{% csrf_token %}
+<div  class="col-xs-4 col-md-offset-3"">  
+<h4>Para el indicador :{{dato}}</h4>
+<div class="row">
+
+    
+      <strong>Porcentaje obtenido:Solo cifra absoluta ( Sin %)</strong>
+        <label for="{{form.porcentaje.name}}"></label>
+        
+        {{form.porcentaje}} 
+    </div>
+ </div>
+
+ <div  class="col-xs-8 col-md-offset-3">
+      <strong>Dimensión</strong>
+       
+        {{dimension}}
+        
+    </div>
+ </div>
+
+ <div  class="col-xs-6 col-md-offset-3">
+      <strong>Observación</strong>
+        <label for="{{form.observacion.name}}"></label>
+        
+        {{form.observacion}} 
+    </div>
+ </div>
+
+	<div  class="col-xs-8 col-md-offset-3 ">
+      <h3>Registrar  </h3>
+ 
+    
+
+  <button class="btn btn-info " type="submit">Registrar</button>
+    </div>
+ </div>
+	
+ 
+</form>
+{% endblock %}

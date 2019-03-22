@@ -1,0 +1,31 @@
+{{% extends 'base/base_centro.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu centro</a></li>
+  <li><a href="{% url 'calendario:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">Calendario </a></li>
+  
+
+  <li class="active">Modificar Informe de Continuidad</li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success">Modificar Informe</div>
+{% endif %}
+<h3>Reporte de continuidad de: {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h3>
+<h4>Objetivo de intervención: {{objetivo|capfirst}}</h4>
+<form method="post">
+  {% csrf_token %}
+  {{ formulario|crispy }}
+   
+  <button type="submit" class="btn btn-info">Modificar</button>
+ 
+  <a title="Informe en pdf - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:pdf_evaluacion2' dato.id certificado %}"></a>/
+  
+</form>
+
+{% endblock %}

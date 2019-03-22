@@ -1,0 +1,53 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Rut</td>
+			<td>Nombres</td>
+			<td>Curso - Establecimiento</td>
+			<td>Opciones</td>
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for estudio in object_list %}
+		<tr>
+			<td>{{ estudio.rut }} </td>
+			<td>{{ estudio.nombres |capfirst}} {{ estudio.firs_name|capfirst }} {{ estudio.last_name |capfirst}}  </td>
+			<td>{{ estudio.curso.numero}} {{ estudio.curso.letra}}</td>  
+			<td>{{ estudio.curso.establecimiento.nombre }}</td>  
+
+			
+			<td>
+				<a class="btn btn-info btn-sm" href="{% url 'alumno:estudiante_editar' estudio.id %}">Historial</a>
+				
+
+				
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+{% endblock%}

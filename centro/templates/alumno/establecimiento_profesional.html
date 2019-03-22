@@ -1,0 +1,71 @@
+{% extends 'base/base_dupla.html' %}
+{% block content %}
+
+<h3>Listado de establecimientos asignados a : <strong> {{ user.first_name}} {{ user.last_name}}</strong></h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			
+			<td>Establecimiento </td>
+			
+			
+			<td>Cargo</td>
+			<td>Opciones</td>
+			<td>Planes</td>
+			<td>Contingencia</td>
+
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if profesional %}
+
+		<tr>
+		
+		
+		{% for escuela in profesional %}
+			
+		<td>{{ escuela.escuela.nombre }} </td>
+		<td>{{ escuela.get_profesional |title|truncatewords:'2'}} </td>
+		
+			<td>
+			
+
+				<a class="btn btn-success btn-xs" href="{% url 'alumno:ingresar_estudiantes_establecimiento' escuela.escuela.id %}"><small>Ing. Estudiante</small></a>
+				<a class="btn btn-info btn-xs"    href="{% url 'alumno:estado_estudiantes_establecimiento' escuela.escuela.id %}"><small>Estudiante</small></a>
+				<a class="btn btn-primary btn-xs" href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.escuela.id %}"><small>Act. Dupla</small></a>
+				
+			
+			{% if escuela.tipo_profesional == 6 or escuela.tipo_profesional == 7 or escuela.tipo_profesional == 8 or escuela.tipo_profesional == 9 %}
+				<a class="btn btn-warning btn-xs" href="{% url 'dupla:listar_convivencia_escolar' escuela.escuela.id %}"><small>Encargado</small></a>
+				
+
+			{% endif %}
+			</td>
+			<td>
+			<a class="btn btn-info btn-xs" href="{% url 'dupla:ingresar_diagnostico' escuela.escuela.id  %}"><small>D</small></a>
+			<a class="btn btn-info btn-xs" href="{% url 'dupla:DiagnosticoListViewTodos' escuela.escuela.id  %}"><small>DX</small></a>
+
+			<a class="btn btn-success btn-xs" href="{% url 'plan:ingresar_plan' escuela.escuela.id  %}"><small>P</small></a>
+			<a class="btn btn-success btn-xs" href="{% url 'plan:PlanListViewTodos' escuela.escuela.id  %}"><small>XP</small></a>
+			<a class="btn btn-warning btn-xs" href="{% url 'plan:ingresar_plan_mineduc' escuela.escuela.id  %}"><small>PM</small></a>
+			<a class="btn btn-warning btn-xs" href="{% url 'plan:PlanListViewMineduc' escuela.escuela.id  %}"><small>PMX</small></a>
+			
+			
+			<td>
+				
+			<a class="btn btn-danger btn-xs" href="{% url 'bitacora:bitacora_crear' escuela.escuela.id  %}"><small>Suceso</small></a>	
+			</td>
+			
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros relacionados</h1>
+		{% endif %}
+	</tbody>
+</table> 
+{% endblock%}

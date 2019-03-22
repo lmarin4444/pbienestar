@@ -1,0 +1,62 @@
+{% extends 'base/base_usuario.html' %}
+
+{% block content %}
+
+
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Nombre de usuario</td>
+			<td>Nombres</td>
+			<td>Apellidos</td>
+			<td>Email</td>
+			<td>Opciones</td>
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+			<td>{{ mascota.id }}</td>
+			<td>{{ mascota.username}}</td>
+			<td>{{ mascota.first_name }} </td>
+			<td>{{ mascota.last_name}}</td>
+			<td>{{ mascota.email }}</td>
+				
+			<td>
+				
+				<a class="btn btn-warning btn-xs" href="{% url 'usuario:change_password'%}">Resetear Contraseña</a>
+				<a class="btn btn-info btn-xs" href="{% url 'secretaria:secretaria_eliminar' mascota.id %}">Crear Perfil</a>
+				<a class="btn btn-success btn-xs" href="{% url 'profesional:profesional_crear' %}">Crear Profesional</a></li></a>
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de asistencia</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}
+
+
+
+{% endblock%}

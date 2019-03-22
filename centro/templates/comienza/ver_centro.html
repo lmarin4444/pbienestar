@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+{% load static%}
+
+<html lang="en">
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Lorena Marin Valdes">
+
+    <title>{% block title%}{% endblock%}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <!-- Custom CSS -->
+    <link href=" {% static 'css/stylish-portfolio.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href=" {% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<div class="text-vertical-center">
+    
+
+
+</head>
+
+<body style="">
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{% url 'index' %}">Inicio </a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href=""><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesión</a></li>
+                <li><a href="">ingresar derivacion</a></li>
+                <li><a href="{% url 'comienza:dupla_ficha_derivacion' %}">Ver seguimiento</a></li>
+                <li class="">
+                  <a href="#" class="" data-toggle="dropdown">Listar mis derivaciones <b class=""></b></a>
+                  
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-4">
+          <img class="img-circle" src='{% static "img/frontis.jpg" %}' alt="140x140" src="data:image/p" style="width: 140px; height: 140px;">
+          <h2>Nosotros</h2>
+          <blockquote><p class="text-justify" > 
+
+          El Centro de Bienestar, es un programa perteneciente al Departamento de Educación Municipal de la comuna de Cabildo. Este surge 
+          el año 2017 a partir de la necesidad de brindar un espacio de atención sistemática, que permita disminuir los factores de riesgo  
+          relacionados con el desarrollo personal, social y académico  de los estudiantes.
+   
+          <p><a  href="{% url 'comienza:construye' %}" role="button">Leer más ...</a></p>
+
+          </p></blockquote>
+          
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" src='{% static "img/centro_3.jpg" %}' alt="140x140" src="data:image/" style="width: 140px; height: 140px;">
+          <h2>Equipo</h2>
+          <blockquote><p class="text-justify" >
+
+
+          Centro de Bienestar cuenta con un equipo multidisciplinario que posee un sello de alta vocación, calidez y profesionalismo, 
+          para acompañar a los estudiantes a transitar por las diversas etapas del ciclo de vida y los procesos por los que 
+          atraviesan. Estos procesos entendidos desde el bienestar subjetivo 
+          que hace referencia a las percepciones que ellos tienen, respecto de sus condiciones de vida.
+          <p><a  href="{% url 'comienza:construye' %}" role="button">Leer más ...</a></p>
+
+          </p></blockquote>
+         
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" src='{% static "img/centro_2.jpg" %}' alt="140x140" src="data:image/" style="width: 140px; height: 140px;">
+          
+          <h2>Áreas de desarrollo</h2>
+          <blockquote><p class="text-justify" > Centro de Bienestar, brinda apoyo en los niveles individual y grupal dirigidos a potenciar 
+          el proceso de enseñanza/aprendizaje favoreciendo el bienestar subjetivo de la población infanto-juvenil. Para ello
+          cuenta con los siguientes áreas de intervención:</p>
+          
+          <div class="text-left" >
+          <li>Psicología</li>  
+          <li>Trabajo Social</li>
+          <li>Nutrición</li>
+           <li>Terapias complementarias</li>
+          </div>
+          <p><a  href="{% url 'comienza:construye' %}" role="button">Leer más ...</a></p>
+           </blockquote>
+
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+
+
+       <!-- Portfolio -->
+    <section class="content-section" id="portfolio">
+      <div class="container">
+        <div class="content-section-heading text-center">
+          
+          
+       
+          
+          
+        </div>
+      </div>
+    </section>
+
+
+ <hr color="blue" size=12 width="75%">
+
+      <!-- START THE FEATURETTES -->
+
+  <div class="media">
+  <a class="pull-left" href="#">
+      <img  src='{% static "img/reloj.jpg" %}' alt="100x100" src="data:image/p" style="width: 300px; height: 180px;">
+  </a>
+  <div class="media-body">
+       
+  
+<div class="list-group">
+  <a href="#" class="list-group-item active">
+    <h4 class="list-group-item-heading">Horario Centro de Bienestar.</h4>
+    <p class="list-group-item-text">Ubicación calle Matta s/n, costado de Liceo Aª2 de Cabildo.</p>
+
+  </a>
+<dl class="dl-horizontal">
+<br>
+  <dt>Jornada de la mañana</dt>
+  <dd>Desde de las <mark>8:30 horas.</mark> hasta las <mark>13:30 horas.</mark></dd>
+  <dt>Jornada de la tarde</dt>
+  <dd>Desde de las <mark>14:30 horas</mark> hasta las <mark>17:30 horas.</mark></dd>
+  <dl><li class="list-group-item">Atención de lunes a viernes .</li></dl>
+
+</dl>
+
+</div>
+
+
+  </div>
+</div>
+
+
+ 
+  
+
+
+
+
+
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <!--Displays the Navigation Bar Content-->
+    <div class="navbar-header">
+
+        <!-- displays the icon bar in responsive view; when clicked reveals a list-->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <!-- displays the icon bars in responsive view;-->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!--Brand, Logo of your website-->
+        
+        <div>
+    <div class="col-sm-2"><img src='{% static "img/logo.png" %}' class="img-portfolio img-responsive" >
+    </div>
+        <div class="col-sm-6">
+          <a class="navbar-brand"  href="/">Centro de Bienestar</a></div>
+        </div>
+        </div>
+
+      <!-- Allows collapse/show navbar in responsive view-->
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav" >
+          <li ><a href="{% url 'index' %}"></a></li>
+          
+          <!-- Dropdown menu-->
+          
+              
+            </ul>
+          </li>
+       
+        </ul>
+    </div>
+</div>
+</div>
+
+    
+
+<div class="jumbotron">
+    <h2>Centro de Bienestar</h2>
+    <p>
+  Entregar un apoyo integral a los estudiantes de escuelas/liceos municipales de Cabildo, desde el nivel preescolar hasta 4° medio, que se encuentren en jornada regular/diurna, a través de intervenciones individuales y/o grupales, dirigidas a potenciar aspectos personales en beneficio del proceso de enseñanza/aprendizaje y trayectoria escolar, favoreciendo el bienestar subjetivo de la población infanto-juvenil.
+    </p>
+    
+    <p><a  class="btn btn-primary btn-lg" href="{% url 'comienza:construye' %}" role="button">Ver más</a></p>
+
+    
+                             
+</div>
+
+      <!-- FOOTER -->
+      
+        <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4><strong>Centro de Bienestar</strong>
+                    </h4>
+                    <p>Dirección:Calle Matta s/n 
+                        <br>Cabildo</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> (+56 9 ) 588 40 654</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">bienestardecabildo@gmail.cl</a>
+                        </li>
+                        
+    
+
+    </footer>
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/holder.js' %}"></script>
+  
+
+</body>
+</body>
+
+</html>

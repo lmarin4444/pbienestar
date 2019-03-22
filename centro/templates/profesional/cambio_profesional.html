@@ -1,0 +1,76 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+
+	<table id="example" class="table table-bordered" fontsize =14px>
+	<thead>
+	<h4>El estudiante {{ dato.nombres|upper}} {{ dato.firs_name|upper}} {{ dato.last_name|upper}} cambia profesional de  intervencion el día {% now "DATE_FORMAT" %} .</h3>	
+		<tr>
+		
+			<td>El estudiante :</td>
+			<td>{{ dato.nombres|upper}} {{ dato.firs_name|upper}} {{ dato.last_name|upper}}</strong></td>
+			</h4>
+		</tr>
+		<tr>
+		
+			<td>Que ingreso con fecha:</td>
+			<td>{{ intervenido.fecha}} </td>     
+        
+			</td>
+   
+		</tr>
+		<tr>
+			<td>Intervenido actualmente por :</td>
+			<td>{{ user.first_name|upper}} {{ user.last_name|upper}}</td>
+	
+		</tr>
+	
+
+	</thead>
+	
+</table> 
+
+<table id="example" class="table table-bordered" fontsize =12px>
+<thead>
+<tr>
+	<td>
+		Seleccione nuevo profesional
+	</td>
+	<td>
+		{{formulario.usuario}}
+	</td>
+	
+</tr>
+<tr>
+
+	<tr>
+	<td>
+		Ingrese si es necesario una observación
+	</td>
+	<td>
+		{{formulario.observacion}}
+	</td>
+
+
+	
+</tr>
+<tr>
+</tr>
+				
+				
+			
+		
+
+	</thead>	
+</table> 
+
+
+	
+	<h4>¿Desea realizar el cambio ?</h3>	
+
+	<button class="btn btn-danger" type="submit">Sí, enviar</button>
+	<a class= "btn btn-info" href="{% url 'derivacion:intervencion_list' %}">Cancelar</a>
+</form>
+{% endblock %}

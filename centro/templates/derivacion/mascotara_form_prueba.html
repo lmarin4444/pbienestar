@@ -1,0 +1,21 @@
+{% extends 'base/base_datos.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+
+	{{ form|crispy }}
+
+    
+   
+<button style="background-color: #FF9900" type="submit" class="btn btn-primary dark">Registrar una derivacion en perfil personal y local</button>
+
+
+  </div>
+</div>
+
+
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+
+<h3>Listado de estudiantes con Ficha de derivación al centro de Bienestar</h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Rut</td>
+			<td>Nombres</td>
+			<td>Curso</td>
+			<td>Establecimiento</td>
+			<td>Opciones</td>
+
+
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for estudio in object_list %}
+		<tr>
+			<td>{{ estudio.Estudiante.rut }} </td>
+			<td>{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name|capfirst }} {{ estudio.Estudiante.last_name|capfirst }}  </td>
+			<td>{{ estudio.Estudiante.curso.get_numero}} {{ estudio.Estudiante.curso.get_letra}}</td>  
+			<td>{{ estudio.Estudiante.curso.establecimiento.nombre }}</td> 
+			 
+
+			
+			<td>
+				<a class="btn btn-info btn-sm" href="{% url 'alumno:estudiante_editar' estudio.Estudiante.id estudio.Estudiante.curso.establecimiento.id %}">Editar</a>
+				<a  class="btn btn-danger btn-sm" href="{% url 'alumno:estudiante_eliminar' estudio.Estudiante.id %}">Eliminar</a>
+
+				
+				
+				
+				
+				<a  class="btn btn-primary btn-sm" href="{% url 'alumno:familia' estudio.Estudiante.id %}">ver familia</a>
+				<a class="btn btn-default btn-xs" href="{% url 'alumno:ver_ficha' estudio.Estudiante.id %}">Ver Ficha</a>
+				
+
+
+				
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay estudiantes con Ficha de derivación</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}
+

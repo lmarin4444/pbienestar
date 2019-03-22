@@ -1,0 +1,25 @@
+{% extends 'base/base_centro.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial dupla!">Menu Centro Bienestar</a></li>
+  <li><a href="{% url 'calendario:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">Calendario </a></li>
+  <li><a href="{% url 'profesional:AccionesProfesionaCentrolList' %}"data-toggle="tooltip" title="Ir listado acciones externas !">Ver lista acciones  </a></li>
+  
+  
+
+  <li class="active">Listado de mis acciones adicionales </li> 
+</ul>
+<h3 style="text-align:center;" > Ingresar acción de  {{profesional.usuario.first_name}} {{profesional.usuario.last_name}}</h3>
+<form method="post">
+	{% csrf_token %}
+	{{ form|crispy }}
+	 
+	<button type="submit" class="btn btn-info">Registrar</button>
+
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base/base_secre_simple.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+    
+
+  <li class="active">Listado de Establecimientos de la comuna de Cabildo.</li> 
+</ul>
+{% block encabezado %} Listado de Establecimientos {% endblock %}
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Nonbre</td>
+			<td>RBD</td>
+			<td>Localidad</td>
+			<td>Director</td>
+		
+			<td>Teléfono</td>
+			<td>Mi escuela</td>
+			
+			
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if colegios %}
+		{% for mascota in colegios %}
+		
+		<tr>
+			<td>{{ mascota.id }}</td>
+			<td>{{ mascota.nombre }}</td>
+			<td><small> {{ mascota.Rbd}} </small></td>
+			<td>{{ mascota.localidad}}</td>
+			<td>{{ mascota.director }} </td>
+
+		
+			<td>{{ mascota.telefono}} </td>
+			
+			<td>
+				<a class="btn btn-info" href="{% url 'comienza:listado_construccion' %}">Ver mas</a>
+				
+			</td>
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+{% endblock%}

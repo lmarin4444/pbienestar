@@ -1,0 +1,61 @@
+{% extends 'base/base_secre.html' %}
+
+{% block content %}
+
+
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Estudiante</td>
+			<td>Fecha</td>
+			<td>Horario</td>
+			<td>Observacion</td>
+			<td>Tipo de actividad</td>
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+			<td>{{ mascota.id }}</td>
+			<td>{{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}</td>
+			<td>{{ mascota.horario}}</td>
+			<td>{{ mascota.obs }}</td>
+			<td>
+			<ul>{% for vacuna in mascota.VacunaT.all %}
+				<li>
+					{{vacuna.nombre}}
+				</li>
+				{% endfor %}
+			</ul>
+    		</td>
+			
+			<td>
+				<a class="btn btn-success" href="{% url 'secretaria:secretaria_editar' mascota.id %}">Editar</a>
+				<a class="btn btn-warning" href="{% url 'secretaria:secretaria_eliminar' mascota.id %}">Eliminar</a>
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de asistencia</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+{% endblock%}

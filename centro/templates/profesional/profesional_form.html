@@ -1,0 +1,13 @@
+{% extends 'base/base_usuario.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h3 style="text-align:center;" > Ingresar Nuevo Profesional</h3>
+<form method="post">
+	{% csrf_token %}
+	{{ form|crispy }}
+	 
+	<button type="submit" class="btn btn-info">Registrar</button>
+
+
+</form>
+{% endblock %}

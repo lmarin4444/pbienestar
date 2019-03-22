@@ -1,0 +1,117 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'plan:PlanificacionListView' plan.establecimiento.id %}"data-toggle="tooltip" title="Listado de establecimientos">Volver lista</a></li>
+  {% if mensaje %}
+  {{ mensaje }}
+  <li><a href="{% url 'plan:PlanListView' escuela.id %}"data-toggle="tooltip" title="Listado de plan">Ver Plan</a></li>
+  {% endif%}
+  {% if messages %}
+  <div class='alert-warning'>
+    {% for message in messages %}
+      {{ message }}<br>
+    {% endfor %}
+  
+{% endif %}
+
+  <li class="active">INGRESAR ACTIVIDAD<STRONG> ( Si la fecha/hora estan ocupadas no permite ingresar, si el mes es anterior al actual NO PERMITE INGRESAR )</STRONG></li> 
+</ul>
+
+  <li class="active">INGRESAR REGISTRO DE ACTIVIDAD<STRONG> {{plan.nombre}} / {{base.nombre}} / {{accion.nombre}} / {{plancillo.nombre}}</STRONG></li> 
+</ul>
+
+  <div class="p-3 mb-2 bg-success text-white">Ingresar actividad para   {{base.nombre}}/ {{accion.nombre}} /{{plancito.nombre}}/ {{plan.establecimiento.nombre}} </div> 
+
+
+<div class="panel panel-primary">
+
+<div class="p-3 mb-2 bg-primary text-white">Detalle de la actividad a reagendar Fecha: <strong>{{actividad.fecha}} a las {{actividad.get_horario}}</strong></div>
+<table class="table">
+  <thead>
+    <tr>
+      <th> </th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    
+    <div class="p-3 mb-2 bg-success text-white">
+    <tr>
+      <th scope="row">Nombre:</th>
+      <td>{{actividad.nombre}}</td>
+      <td><strong>Tipo:</strong></td>
+      <td>{{actividad.get_tipo}}</td>
+      <td><strong>Descripción:</strong></td>
+      <td>{{actividad.descripcion}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Ejecutores:</th>
+      <td>{{actividad.get_ejecutores}}</td>
+      
+      <td><strong>Responsable:</strong></td>
+      <td>{{actividad.responsable}}</td>
+      <td><strong>Participantes:</strong></td>
+      <td>{{actividad.get_participantes}}</td>
+      
+    </tr></div>
+    
+    <tr>
+      <th scope="row">Asistencia:</th>
+      <td>{{actividad.asistencia}}</td>
+      <td><strong>Convocatoria:</strong></td>
+      <td>{{actividad.cantidad_convocada}}</td>
+      <td><strong>Observación:</strong></td>
+      <td>{{actividad.observaciones}}</td>
+    </tr>
+    
+    <tr>
+      <th scope="row">Verificadores:</th>
+     <td> {% for verifica in actividad.verificadores.all %}
+      
+      <li>{{verifica.nombre}}</li>
+      {% endfor %}</td>
+      <td><strong>Planes Externos:</strong></td>
+      <td>{{actividades.planes_externos.nombre}}</td>
+      <td><strong>Observación:</strong></td>
+      <td>{{actividad.observaciones}}</td>
+    </tr>
+   <tr>
+      <th scope="row">Inicio:</th>
+      <td>{{actividad.inicio}}</td>
+      <td><strong>Desarrollo:</strong></td>
+      <td>{{actividad.desarrollo}}</td>
+      <td><strong>Cierre:</strong></td>
+      <td>{{actividad.cierre}}</td>
+    </tr>
+
+<tr>
+      <th scope="row">Evaluación:</th>
+      <td>{{actividad.get_evaluacion}}</td>
+      <td><strong>Estado:</strong></td>
+      <td>{{actividad.get_estado}}</td>
+      <td><strong>Plan:</strong></td>
+      <td>{{actividad.plancillo.nombre}}</td>
+    </tr>
+
+  </tbody>
+</table>
+
+	<form method="post">
+  
+	{% csrf_token %}
+	
+	 {{ form|crispy }}
+
+	<button class="btn btn-info " type="submit">Registrar</button>
+</form>
+ 
+{% endblock %}

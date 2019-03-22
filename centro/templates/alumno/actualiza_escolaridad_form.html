@@ -1,0 +1,75 @@
+{% extends 'base/base_datos.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h3> Proceso de ingreso de información de estudiante  {{dato.nombres}} {{dato.firs_name}} {{dato.last_name}}</h3>
+<form method="post">
+	{% csrf_token %}
+	
+	<form method="get">
+	{% csrf_token %}
+		<div class="row">
+		<div  class="col-xs-3 col-md-offset-3"">
+		  <strong>Año de la escolaridad:</strong>
+		    <label for="{{form.anno.name}}"></label>
+				
+				{{form.anno}}
+		  </div>
+
+		  
+		  <div class="col-xm-3 ">
+		  		<strong>Fecha  inicio </strong><strong>__ </strong>
+				<label for="{{form.fecha_inicio.name}}"></label>
+				{{form.fecha_inicio}}
+		  </div>
+		  <div class="col-xm-3 ">
+		  	<strong>Fecha término</strong>
+				<label for="{{form.fecha_termino.name}}"></label>
+				{{form.fecha_termino}}
+		  </div>
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.rendimiento.name}}">{{form.rendimiento.label}}</label>
+				{{form.rendimiento}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.conducta.name}}">{{form.conducta.label}}</label>
+				{{form.conducta}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.curso.name}}">{{form.curso.label}}</label>
+				{{form.curso}}
+			</div>
+		</div>	
+
+		
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.Letra.name}}">{{form.Letra.label}}</label>
+				{{form.Letra}}
+			</div>
+		</div>
+		
+		
+
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				
+				<button type="submit" class="btn btn-info">Registrar</button>
+				<a class= "btn btn-success" href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}">Volver</a>
+			</div>
+		</div>
+
+
+	</div>
+	
+</form>
+
+
+{% endblock %}

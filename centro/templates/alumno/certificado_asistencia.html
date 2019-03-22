@@ -1,0 +1,120 @@
+{% load static%}
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+	
+
+<!--  jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+<title> Certificados </title>
+<div class="row">
+  <div class="col-md-4"> Dem Cabildo el {% now "SHORT_DATETIME_FORMAT" %} </div>
+
+  <div class="col-md-8 col-md-offset-3">
+
+<h3 >
+    Certificado de simple  
+    <span class="label label-default">Centro Bienestar</span>
+</h3>
+  </div>
+  </div>
+ 
+<div class="row">
+  <div class="col-md-3 col-md-offset-5">
+	<img class="img-circle" src='{% static "img/logo.png" %}' alt="100x100" src="data:image/p" style="width: 110px; height: 110px;">
+ 
+
+  </div>
+  <div class="col-md-6 col-md-offset-3">
+
+	<p class="lead" class="text-justify">
+
+
+	<div class="jumbotron">
+  		<div class="container">
+
+
+
+    	<h4>El presente certificado se extiende a </h4><h2><strong>{{ object.nombres }} {{ object.firs_name }} {{ object.last_name }} </strong></h2>
+    	<p>El centro de bienestar del Departamento de educación de Cabildo, certifica que el estudiante {{ object.nombres }} {{ object.firs_name }} {{ object.last_name }} Rut:
+    	{{object.rut}}  del establecimiento 
+    	{{ object.curso.establecimiento }} cursando actualmete el {{ object.curso.numero }} ª{{ object.curso.letra }}. 
+    	asiste regularermente a las sesiones indicadas por le centro. </p>
+    
+		<br>
+		<p class="text-justify">
+			Se extiende el presente certificado a peticion del interesado.
+		</p>
+
+  </div>
+</div>
+
+		
+  <!--firma  -->
+<div class="container">
+  <div class="row">
+      <div class="col-md-3 col-md-offset-3">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="" method="post">
+          <fieldset>
+            <legend class="text-center"><h4>Nombre y firma profesional</h4></legend>
+                  
+          </fieldset>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>
+  <!--FIN -->
+  
+<div class="bootstrap-iso">
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md-6 col-sm-6 col-xs-12">
+
+    <!-- Form code begins -->
+    <form method="post">
+      <div class="form-group"> <!-- Date input -->
+        <label class="control-label" for="date">Date</label>
+        <input class="form-control" id="date" name="date" placeholder="DD/MM/YYY" type="text"/>
+      </div>
+      <div class="form-group"> <!-- Submit button -->
+        <button class="btn btn-primary " name="submit" type="submit">BUSCAR</button>
+      </div>
+     </form>
+     <!-- Form code ends --> 
+
+    </div>
+  </div>    
+ </div>
+</div>
+
+ <input size="16" type="text" class="form-control" id="datetime" readonly> 
+It is {% now "SHORT_DATETIME_FORMAT" %}
+<div id="datetime"></div>
+
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'dd/mm/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>
+
+</body>
+</html>

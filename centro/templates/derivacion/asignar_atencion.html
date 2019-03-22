@@ -1,0 +1,48 @@
+{% extends 'base/base_dupla.html' %}
+
+
+{% block content %}
+
+Para el estudiante 
+
+Desde 
+Sale de la lista de espera 
+y es atendido por 
+
+{% endblock %}
+
+<!-- Codigo con ajax que no funciona por no tener la jquery necesaria
+<select>
+	<option> Elige Profesional</option>
+	{% for psicolo in profesionales %}
+		{% with estado=psicolo.tipo_profesional %} 
+		{% if estado == 2 %}	
+		<option value="{{psicolo.id}}" > {{psicolo.first_name}} {{psicolo.last_name_p}} {{psicolo.last_name_ml}} </option>
+		{% endif %}
+	{% endwith %}	
+{% endfor %}		
+</select>
+<div id="datos">
+	
+
+</div>
+{% block extrajs %}
+<script >
+	$('select').on('change',inicio);
+	function inicio(){
+		var id=$(this).val()
+		$.ajax({
+			data:{'id':id},
+			url: 'derivacion:busquedaajax',
+			type:'get',
+		})
+	}
+</script>
+
+{% endblock %}
+-->
+
+
+
+
+

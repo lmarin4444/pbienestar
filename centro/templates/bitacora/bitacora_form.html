@@ -1,0 +1,126 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+		<form method="post">
+		  {% csrf_token %}
+{% if messages %}
+  <div class='alert-warning'>
+    {% for message in messages %}
+      {{ message }}<br>
+    {% endfor %}
+  
+{% endif %}
+</div>
+		{% if mensaje %}
+		<div class="p-3 mb-2 bg-info text-white">{{mensaje}} {{success_message}}-> Día {% now "SHORT_DATE_FORMAT" %}</div> 
+		{% else %}
+
+		
+		
+		{% endif %}
+
+
+		  <table id="example" class="table table-bordered"  border=15px fontsize =14px>
+		  <thead>
+		    <td COLSPAN=3>
+			   <tbody style="background: rgba(218, 247, 210, 0.3); border: 1px solid rgba(100, 200, 0, 0.3);">
+
+			      <th COLSPAN=3> Situación {{form.nombre}}</th>
+			    
+					
+
+
+
+			    </tbody>
+			 </td>
+			<td COLSPAN=3>
+			   <tbody style="background: rgba(247, 219, 210, 0.3); border: 1px solid rgba(100, 200, 0, 0.3);">
+
+			    <tr>
+			      <th>FECHA {{form.fecha}}</th>
+				  <tH >HORARIO{{form.horario}}
+				   CURSO : {{form.curso}}
+			      LETRA : {{form.tipo_letras}}</tH>
+			       <th> <li>{{colegio.nombre}}</li>
+			       <li>{{user.first_name|capfirst}} {{user.last_name|capfirst}}</li></th>
+			      
+			     </tr>
+			    </tbody>
+			 </td>
+
+
+			  
+			 
+
+			<td COLSPAN=3>
+			   <tbody style="background: rgba(210, 236, 247, 0.3); border: 1px solid rgba(100, 200, 0, 0.3);">
+
+			    <tr>
+			      <tH COLSPAN=1>TIPO DE ACTIVIDAD{{form.tipo_actividad}}</tH>
+				  <tH COLSPAN=1>PARTICIPACIÓN{{form.participantes}}</tH>
+				  <tH COLSPAN=1>ÁMBITO:{{form.ambito}}</tH>
+			      
+			     </tr>
+			    </tbody>
+			 </td> 
+			<td COLSPAN=3>
+			   <tbody style="background: rgba(210, 236, 247, 0.3); border: 1px solid rgba(100, 200, 0, 0.3);">
+
+			    <tr>
+			      
+				  <tH COLSPAN=3>DESARROLLO DE LA ACCIÓN{{form.desarrollo}}</tH>
+			      
+			     </tr>
+			    </tbody>
+			 </td> 
+
+		  <tbody>
+
+		    
+		    <tr>
+		    
+		    <h4></h3>      
+		    </tr>
+		    
+		    
+		    
+		  </tbody>
+		</table> 
+
+		  
+
+		  {% if valor == 0 %}  
+		    <button  class="btn btn-danger" type="submit">Guardar</button>
+		    <a  class= "btn btn-info" href="{% url 'derivacion:intervencion_listar' %}">Cancelar</a>
+		    <a title="Informe en pdf - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:pdf_evaluacion1' estudiante.id %}"></a>/
+
+		  {% elif valor == 1%}
+
+		  <button disabled="true" class="btn btn-danger" type="submit">Guardar</button>
+		  <a   class= "btn btn-info" href="{% url 'derivacion:intervencion_listar' %}">Cancelar</a>
+		  
+		{% elif valor == "" %}  
+		    <button class="btn btn-danger" type="submit">Guardar</button>
+		    <a class= "btn btn-info" href="{% url 'derivacion:intervencion_listar' %}">Cancelar</a>
+
+		    <a title="Informe en pdf - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:pdf_evaluacion1' estudiante.id %}"></a>/
+		    
+		  
+		{% endif %}   
+
+		<button class="btn btn-danger" type="submit">Guardar</button>
+		    <a class= "btn btn-info" href="{% url 'comienza:entrar_dupla' %}">Cancelar</a>
+
+		    
+
+
+		</form>
+
+
+
+{% endblock %}
+
+
+
+

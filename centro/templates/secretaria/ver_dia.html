@@ -1,0 +1,69 @@
+{% extends 'base/base_secre.html' %}
+{% block content %}
+
+<h3>Listado de estudiates Para el día : {{date}} hora actual.</h3>
+
+<li><a href="{% url 'secretaria:ver_calandario_mes' %}"data-toggle="tooltip" title="Ir ver clandario mes">Ver citas por mes</a></li>
+
+			
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td>Horario</td>
+			<td>Nombres</td>
+			<td>Curso</td>
+			<td>Establecimiento </td>
+			<td>Profesional</td>
+			
+
+			
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if fechas %}
+		{% for mascota in fechas %}
+		<tr>
+			<td>{{ mascota.get_horario_i }}</td>
+			<td>{{ mascota.Estudiante.nombres|upper }} {{ mascota.Estudiante.firs_name|upper }} {{ mascota.Estudiante.last_name|upper }}</td>
+			
+			<td>{{ mascota.Estudiante.curso.get_numero }} {{ mascota.Estudiante.curso.get_letra }}</td> 
+			<td>{{ mascota.Estudiante.curso.establecimiento.nombre }} </td> 
+			<td>{{ mascota.usuario.first_name}} {{ mascota.usuario.last_name}}</td>
+
+			
+		
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+			
+
+
+
+
+
+
+{% endblock%}
+
+
+
+

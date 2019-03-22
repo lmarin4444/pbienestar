@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- load all required js/css yourself here -->
+  </head>
+  <body>
+    <form method="post" role="form">
+      {{ form|bootstrap }}
+      {% csrf_token %}
+      <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+        
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			
+			<td>Estudiante</td>
+			<td>Familiar</td>
+			<td>Parentesco</td>
+			<td>Escolaridad</td>
+			
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		<tr>
+		{% for mascota in object_list %}<td>
+			{% for estudiante in dato %}
+			{% if mascota.Familia == estudiante.Familia %}
+				<ul>
+					{{ estudiante.nombres |capfirst}} {{ estudiante.firs_name|capfirst}} {{ estudiante.last_name |capfirst}}
+				</ul>  
+			{% endif %}	
+			{% endfor%}
+		</td>	
+				{% if mascota.apoderado.telefono %}
+				
+				<td>{{ mascota.nombre }} {{ mascota.apellido_p }} {{ mascota.apellido_m }}  </td>
+				<td>{{ mascota.parentesco }} <span class="btn-danger pull-right"> {{mascota.apoderado.telefono}} </span> 
+				<p><small>Apoderado.</small></p></td>
+				<td>{{ mascota.get_escolaridad }}</td>
+
+				{% else %}
+
+				<td>{{ mascota.nombre }} {{ mascota.apellido_p }} {{ mascota.apellido_m }}  </td>
+				<td>{{ mascota.parentesco }} </td>
+				<td>{{ mascota.get_escolaridad }}</td>
+
+
+				{% endif %}
+				
+
+				</tr>
+			
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de familiares</h1>
+		{% endif %}
+	</tbody>
+</table> 
+
+{% endblock%}

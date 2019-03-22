@@ -1,0 +1,132 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+
+
+<table id="example" class="table table-bordered" font-size=9>
+	<thead>
+		<tr>
+			
+			<td>Fecha derivacion</td>
+			<td>Estudiante</td>
+			<td>Curso - Establecimiento</td>	
+			
+			<td>Motivos derivación</td>
+			<td>Sugerencias</td>
+			<td>Opciones</td>
+			
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+			
+			<td>{{ mascota.fecha_derivacion|date:"d-m-Y "}}</td>
+			
+			<td>{{mascota.Estudiante.nombres|capfirst}} {{ mascota.Estudiante.firs_name |capfirst}} {{ mascota.Estudiante.last_name|capfirst}}</td>
+			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}} {{ mascota.Estudiante.curso.establecimiento.nombre}}</td>
+			<td>
+			 <ul>{% for motivo in mascota.Motivo_derivacion.all %}
+				<li>
+					{{motivo.nombre}}
+				</li>
+				{% endfor %}
+			</ul>
+			</td>
+			<td>
+				{% for valor in retorno %}
+				{% if mascota.id == valor.Ficha_derivacion.id%}
+				{{valor.observacion_termino}}
+					
+				{% endif %}
+				{% endfor %}
+			</td>
+			<td>
+			{% with derivado=mascota.derivado %} 
+				{% if derivado == 1 %}
+				<div class="btn-group-vertical">
+					<a class="btn btn-success btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Editar </a>
+					<a class="btn btn-warning btn-xs" href="{% url 'derivacion:derivacion_eliminar' mascota.id %}">Borrar</a>
+					<a class="btn btn-info btn-xs" href="{% url 'derivacion:derivacion_centro' mascota.id %}">Enviar al centro</a>
+				</div>	
+				{% else %}
+					{% with estado=mascota.pasada %} 
+					{% if estado == 1 %}
+					Derivado al centro 
+					
+					{% elif estado == 2 %}
+				 		
+					Estudiante ingresado a  Lista de espera
+						
+					{% elif estado == 3 %}
+						Estudiante en intervencion
+						<a class="btn btn-info btn-xs" href="{% url 'sesion:Caso' mascota.id %}">Historia</a>
+
+					{% elif estado == 4 %}
+						<a class="btn btn-info btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Historia</a>			
+						<strong>Estudiante enviado a otra institucion</strong>
+						
+					{% elif estado == 5 %}
+					<div class="btn-group-vertical">	
+						<strong>Retorno</strong>
+
+						
+						<a class="btn btn-success btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Editar</a>
+						<a class="btn btn btn-info btn-xs" href="{% url 'derivacion:derivacion_centro' mascota.id %}">Enviar a centro</a>		
+					<div>	
+					{% elif estado == 6 %}
+						<strong>Estudiante dado de alta</strong>
+					{% endif %}	
+					{% endwith %}
+				{% endif %}
+			{% endwith %} 
+		
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+<!--
+<p>Envelope icon: <span class="glyphicon glyphicon-envelope"></span></p> 
+<p>Envelope icon as a link:
+  <a href="#"><span class="glyphicon glyphicon-envelope"></span></a>
+</p>
+<p>Search icon: <span class="glyphicon glyphicon-search"></span></p>
+<p>Search icon on a button:
+  <button type="button" class="btn btn-default">
+    <span class="glyphicon glyphicon-search"></span> Search
+  </button>
+</p>
+<p>Search icon on a styled button:
+  <button type="button" class="btn btn-info">
+    <span class="glyphicon glyphicon-search"></span> Search
+  </button>
+</p>
+<p>Print icon: <span class="glyphicon glyphicon-print"></span></p> 
+<p>Print icon on a styled link button:
+  <a href="#" class="btn btn-success btn-lg">
+    <span class="glyphicon glyphicon-print"></span> Print 
+  </a>
+</p> -->
+{% endblock%}
+

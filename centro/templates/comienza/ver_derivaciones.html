@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Lorena Marin Valdes">
+
+    <title>{% block title%}{% endblock%}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <!-- Custom CSS -->
+    <link href=" {% static 'css/stylish-portfolio.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href=" {% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<div class="text-vertical-center">
+    
+
+
+</head>
+
+<body style="">
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{% url 'index' %}">Inicio </a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="{% url 'about' %}"><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesión</a></li>
+                <li><a href="{% url 'about' %}">ingresar derivacion</a></li>
+                <li><a href="{% url 'dupla_ficha_derivacion' %}">Ver seguimiento</a></li>
+                <li class="">
+                  <a href="#" class="" data-toggle="dropdown">Listar mis derivaciones <b class=""></b></a>
+                  
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-4">
+          <img class="img-circle" src='{% static "img/ver_derivaciones1.png" %}' alt="140x140" src="data:image/p" style="width: 140px; height: 140px;">
+          <h2>Cooperacion directa</h2>
+          <blockquote><p class="text-left" >Dentro del proceso de gestion en la atencion de los estudiantes de la comuna la interaccion con el trabajo de las duplas es fundamental en el proceso de atencion del Centro de Bienestar</p></blockquote>
+          <p class="text-left"><a class="btn btn-default" href="{% url 'index' %}" role="button">Volver »</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" src='{% static "img/ver_derivaciones2.png" %}' alt="140x140" src="data:image/" style="width: 140px; height: 140px;">
+          <h2>Reuniones de equipo</h2>
+          <blockquote><p class="text-left" >Las derivaciones realizadas por los equipos psicosociales de cada uno de los establecimientos de la comuna, podran realizar procesos de seguimiento online de manera de poder observar en primera linea el proceso de intervencion de cada uno de los estudiantes derivados.</p></blockquote>
+          <p class="text-left"><a class="btn btn-default" href="{% url 'index' %}" role="button">Volver »</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" src='{% static "img/ver_derivaciones3.jpeg" %}' alt="140x140" src="data:image/" style="width: 140px; height: 140px;">
+          <h2>Red de apoyo</h2>
+          <blockquote><p class="text-left" >Nuestros estudiantes cuentan  con un apoyo Psicologico, el centro a través de actividades y talleres,  entrega herramientas para mejorar el comportamiento, manejar el estrés, fomentar el autocuidado y promover la vida saludable. </p></blockquote>
+          <p><a class="btn btn-default" href="{% url 'index' %}" role="button">Volver»</a></p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+
+
+      <!-- START THE FEATURETTES -->
+
+    
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <!--Displays the Navigation Bar Content-->
+    <div class="navbar-header">
+        <!-- displays the icon bar in responsive view; when clicked reveals a list-->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <!-- displays the icon bars in responsive view;-->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!--Brand, Logo of your website-->
+        <a class="navbar-brand" href="/">Centro de Bienestar</a>
+    </div>
+
+    <!-- Allows collapse/show navbar in responsive view-->
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Inicio</a></li>
+          <li><a href="#">Acerca de nosotros</a></li>
+          <!-- Dropdown menu-->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Listados</a></li>
+              <li><a href="#">Derivaciones</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="jumbotron">
+    <h2>Dem</h2>
+    <p>Departamento de educacion Cabildo</p>
+    <p><a class="btn btn-primary btn-lg" role="button">Leer más</a></p>
+</div>
+
+      <!-- FOOTER -->
+      
+        <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4><strong>Centro de Convivencia</strong>
+                    </h4>
+                    <p>Ubicado en Liceo Polivalente Aª2 Cabildo
+                        <br>Zoila Gac #639</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> (33) xx xx xx</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">bienestardecabildo@gmail.cl</a>
+                        </li>
+                        
+    
+
+    </footer>
+
+   
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/holder.js' %}"></script>
+  
+
+</body>
+</body>
+
+</html>

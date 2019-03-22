@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Lorena Marin Valdes">
+
+    <title>{% block title%}{% endblock%}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <!-- Custom CSS -->
+    <link href=" {% static 'css/stylish-portfolio.css' %}" rel="stylesheet">
+    <link rel="icon" href='{% static "img/logo-convivencia-escolar.gif" %}'>
+    <!-- Custom Fonts -->
+    <link href=" {% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <!--<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+     HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    
+
+
+</head>
+
+<body style="">
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+             
+              
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+<!-- Carousel el carrusel se llama myCarousel
+    ================================================== -->
+    <!-- Carousel el carrusel se llama myCarousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+        
+        
+        
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src='{% static "img/carruesel16.jpg" %}' alt="First slide" >
+
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Misión.</h1>
+              <p>Misión Centro de Bienestar.</p>
+              <p><a class="btn btn-lg btn-dark" href="#" role="button">Ver más </a></p>
+            </div>
+          </div>
+        </div>
+
+        
+
+        <div class="item">
+        <img  alt="" >
+          <img src='{% static "img/carruesel12.jpg" %}' alt="Second slide" >
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Visión.</h1>
+              <p>Visión Centro de Bienestar.</p>
+              <p><a class="btn btn-lg btn-dark" href="#" role="button">Ver más</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <img src='{% static "img/carruesel14.jpg" %}' alt="Second slide" alt="Third slide" src="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Objetivos.</h1>
+              <p>Entregar un apoyo integral a los estudiantes de escuelas/liceos municipales de Cabildo, desde el nivel preescolar hasta 4° medio, que se encuentren en jornada regular/diurna, a través de intervenciones individuales y/o grupales, dirigidas a potenciar aspectos personales en beneficio del proceso de enseñanza/aprendizaje y trayectoria escolar, favoreciendo el bienestar subjetivo de la población infanto-juvenil.</p>
+              <p><a class="btn btn-lg btn-dark" href="#" role="button">Ver Más</a></p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <a class="left carousel-control" href="#" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div><!-- /.carousel -->
+
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-4">
+          <img class="img-circle" src='{% static "img/manuales.jpeg" %}' alt="140x140" src="data:image/p" style="width: 140px; height: 140px;">
+          <h2>Manuales - formatos</h2>
+          <blockquote><p class="text-left" >Listado de manuales y formatos.-  </p></blockquote>
+          <p class="text-left"><a class="btn btn-default" href="{% url 'comienza:construye' %}" role="button">Ver más  »</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" src='{% static "img/reglamentos.jpg" %}' alt="140x140" src="data:image/" style="width: 140px; height: 140px;">
+          <h2>Reglamentos</h2>
+          <blockquote><p class="text-left" >Listado de reglamentos.- institucionales </p></blockquote>
+          <p class="text-left"><a class="btn btn-default" href="{% url 'comienza:construye' %}" role="button">Ver más»</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" src='{% static "img/descargas.jpg" %}' alt="140x140" src="data:image/" style="width: 140px; height: 140px;">
+          
+          <h2>Descargas</h2>
+          <blockquote><p class="text-left" >Material descargable.-   </p></blockquote>
+          <p><a class="btn btn-default"  href="{% url 'comienza:construye' %}" role="button">Ver más»</a></p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+
+
+      <!-- START THE FEATURETTES -->
+
+  
+
+<div class="navbar navbar-default navbar-fixed-top">
+    <!--Displays the Navigation Bar Content-->
+    <div class="navbar-header">
+
+        <!-- displays the icon bar in responsive view; when clicked reveals a list-->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <!-- displays the icon bars in responsive view;-->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+
+        </button>
+        <!--Brand, Logo of your website-->
+        
+  <div>
+  <span class="col-md-6 col-sm-8">
+     
+    <a class="navbar-brand"  href="/">Página Principal</a>
+    
+    </span> 
+    <span class="fa-stack fa-12x"> 
+    <img class="img-circle" src='{% static "img/logo-convivencia-escolar.gif" %}' alt="100x100" src="data:image/p" style="width: 80px; height: 80px;">
+    
+    </span>   
+    
+    </div>
+
+   </div>
+
+      <!-- Allows collapse/show navbar in responsive view-->
+
+{% block menu%}
+    
+{% endblock%}
+
+    
+
+
+
+      <!-- FOOTER -->
+      
+        <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4><strong>Centro de Bienestar</strong>
+                    </h4>
+                    <p>Mata s/n Costado Liceo Nª2 A Cabildo
+                        <br>Cabildo</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> (+ 56 9)58 84 06 54</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">bienestardecabildo@gmail.cl</a>
+                        </li>
+                        
+    
+
+    </footer>
+
+   
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/holder.js' %}"></script>
+  
+
+</body>
+</body>
+
+</html>

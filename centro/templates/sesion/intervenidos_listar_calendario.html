@@ -1,0 +1,72 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<h3> Listado de interveciones para {{user.first_name|capfirst}} {{user.last_name|capfirst}} </h3> 
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Nª </td>
+			<td>Estudiante</td>
+			<td>Fecha derivacion  </td>
+			<td>Fecha de inicio  </td>
+			<td>Accion</td>
+			<td>Derivante</td>
+			<td>Acciones</td>
+
+		
+		</tr>
+	</thead>
+	
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog"> 
+
+	<tbody>
+		
+		{% if object_list %}
+		{% for mascota in object_list %}
+		
+		<tr>
+			<td>{{ forloop.counter }}</td>
+			<td>{{mascota.Estudiante.nombres|upper}} {{ mascota.Estudiante.firs_name |upper}} {{ mascota.Estudiante.last_name|upper }}</td>		
+			<td>{{ mascota.dia }}-{{ mascota.mes}}-{{ mascota.anno }}</td>
+			<td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+			<td>{{ mascota.objetivo }}</td>
+			<td>{{ mascota.Profesional|upper }}</td>
+
+	
+				
+			<td>
+			<div class="btn-group-vertical">
+				<a class="btn btn-info btn-xs" href="{% url 'sesion:sesion_eliminar' mascota.id %}">Historial</a>
+				<a class="btn btn-danger btn-xs" href="{% url 'calendario:calendar-ano-mes'  %}">Asistencia</a>
+				<a class="btn btn-success btn-xs" href="{% url 'sesion:agregar_cita' mascota.Estudiante.id  %}">Ir a solicitar hora</a>
+				
+			</div>	
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de asistencia</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}
+
+
+
+{% endblock%}

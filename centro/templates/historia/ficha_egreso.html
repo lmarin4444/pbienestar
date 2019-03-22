@@ -1,0 +1,158 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success">Ficha de egreso</div>
+{% endif %}
+<form method="post">
+  {% csrf_token %}
+
+  <table id="example" class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+    <tr>
+    
+      <td>NOMBRE :</td>
+      <td>{{ estudiante.nombres|capfirst}} {{ estudiante.firs_name|capfirst}} {{ estudiante.last_name|capfirst}}</strong></td>
+      </h4>
+    </tr>
+
+    <tr>
+    
+      <td>ESTABLECIMIENTO:</td>
+      <td>{{ estudiante.curso.establecimiento.nombre|capfirst}} </td>
+  
+    </tr>
+     <tr>
+    
+      <td>EDAD :</td>
+      <td>{{ estudiante.edad}} </td>
+  
+    </tr>
+
+    <tr>
+    
+      <td>CURSO:</td>
+      <td>{{ estudiante.curso.get_numero}}  {{ estudiante.curso.get_letra}} </td>
+  
+    </tr>
+   <tr>
+    
+      <td>MOTIVO DE LA DERIVACIÓN</td>
+      <td>
+    
+        {% if ficha %} 
+          {% for x in ficha.Motivo_derivacion.all %}
+            
+              <li>{{x.nombre}}   </li>
+            
+           {% endfor%}
+         {% endif %}    
+      </td>
+
+
+    </tr>
+
+
+
+    <tr>
+    
+      <td>FECHA DEL INFORME:</td>
+      <td>{% now "SHORT_DATE_FORMAT" %}  </td>
+  
+    </tr>
+    <tr>
+    
+      <td>FECHA DE EGRESO:</td>
+      <td>{{ultimo.fecha}}  </td>
+  
+    </tr>
+           
+      <tr>
+    
+      <td>FASE DE INTERVENCION:</td>
+      <td>Ficha de egreso</td>
+  
+    </tr>
+    <tr>
+    
+      <td>MOTIVO</td>
+      
+      <td> 
+        {{formulario.Motivo_egreso}}
+       </td>  
+  
+    </tr>
+    <tr>
+    
+      <td>OBJETIVO DE LA INTERVENCION</td>
+      <td><dd> {{objetivo.objetivo_particular}}</dd>
+    
+        {% if objetivo %} 
+          {% for x in objetivo.Tematicas.all %}
+            
+            {% for t in x.objetivo.all %}
+              <li>{{t.nombre}}   </li>
+             {% endfor%} 
+           {% endfor%}
+         {% endif %}    
+
+    </td>
+    </tr>
+ 
+    <tr>
+    
+      <td>SINTESIS DE INTERVENCIÓN</td>
+      <td>{{formulario.sintesis}}</td>
+  
+    </tr>
+    
+	<tr>
+    
+      <td>SUGERENCIAS PARA ESTABLECIMIENTO DE EDUCACIÓN</td>
+      <td>{{formulario.sugerencias}}</td>
+  
+    </tr>
+
+    <tr>
+    
+      <td><ul><strong>NOMBRE/PSICOLOGO</strong></ul>
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul></td>
+      <td><h5>FIRMA</h5></td>
+  
+    </tr>
+    <tr>
+    
+      <td><strong>NOMBRE/QUIEN RECIBE EL INFORME</strong></td>
+      <td><h5>FIRMA</h5></td>
+  
+    </tr>
+    
+  </thead>
+  <tbody>
+
+    
+    <tr>
+    
+    <h4>FICHA DE EGRESO</h3>      
+    </tr>
+    
+    
+    
+  </tbody>
+</table> 
+
+  
+ 
+
+    <a class= "btn btn-info" href="{% url 'historia:registro_historico' %}">Cancelar</a>
+    <a title="Informe en pdf - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:pdf_evaluacion3_historia' estudiante.id historia.id %}"></a>/
+
+  
+  
+  
+  
+</form>
+{% endblock %}

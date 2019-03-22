@@ -1,0 +1,82 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial dupla!">Menu Psicosocial</a></li>
+  <li><a href="{% url 'bitacora:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">Calendario </a></li>
+  <li><a href="{% url 'profesional:AccionProfesional' %}"data-toggle="tooltip" title="Ir Acciones extras!">Ingresar otra acción </a></li>
+  
+
+  <li class="active">Listado de mis acciones adicionales </li> 
+</ul>
+<h3> Acciones realizadas por {{user.first_name|capfirst}} {{user.last_name|capfirst}} / {{profesional.get_profesional}}</h3> 
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Nª </td>
+			<td>Fecha</td>
+			<td>Tipo de acción  </td>
+			<td>Cantidad </td>
+			<td>Descripción  </td>
+			<td>Acciones </td>
+
+
+		
+		</tr>
+	</thead>
+	
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog"> 
+   
+	<tbody>
+		
+		{% if acciones%}
+		{% for mascota in acciones %}
+		
+		<tr>
+			<td>{{ forloop.counter }}</td>
+			<td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+			<td>{{ mascota.get_tipo_accion}}</td>
+			<td>{{ mascota.get_cantidad}}</td>
+			<td>{{ mascota.descripcion }}</td>
+			
+			<td>
+			<div class="btn-group-vertical">
+				
+				<a class="btn btn btn-info btn-xs" href="{% url 'profesional:AccionExternaDelete' mascota.id %}">Modificar </a>
+				<a class="btn btn btn-danger btn-xs" href="{% url 'profesional:AccionExternaDelete' mascota.id %}">Eliminar </a>
+
+				
+				
+			</div>	
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}

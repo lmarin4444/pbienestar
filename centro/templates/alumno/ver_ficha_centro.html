@@ -1,0 +1,510 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  
+
+<!--  jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+  $(function(){
+        //Obtenemos la información de csfrtoken que se almacena por cookies en el cliente
+    
+    $("#usuario").html('{{ user.first_name}} {{user.last_name}}');
+
+    
+  });
+</script>
+
+
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu centro</a></li>
+  <li><a href="{% url 'derivacion:intervencion_listar' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Volver lista</a></li>
+  
+
+  <li class="active">Ver familia del estudiante.</li> 
+</ul>
+<title> Familia del estudiante. </title>
+<div class="row">
+  <div class="col-md-4"> Dem Cabildo el {% now "SHORT_DATETIME_FORMAT" %} .</div>
+  
+  
+  </div>
+
+
+<div class="media-body">
+  <a class="pull-left" href="#">
+    <img class="media-object" src='{% static "img/logo.png" %}' alt="100x100" src="data:image/p" style="width: 110px; height: 110px;" alt="Centro Bienestar">
+  </a>
+  <div class="media-body">
+  <h2 class="media-heading">Ficha Familiar
+ <span class="label label-default">{{ estudiante.nombres|capfirst }} {{ estudiante.firs_name|capfirst }} {{ estudiante.last_name |capfirst}} </span></h2>
+    
+
+  </div>
+</div>
+
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+        Antedecentes Personales {{ estudiante.nombres|capfirst }} {{ estudiante.firs_name|capfirst }} {{ estudiante.last_name|capfirst }}</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse in">
+      <div class="panel-body">
+      <table id="example" class="table table-bordered" font-size=9>
+        
+      <tr><td>Rut:{{estudiante.rut}}</td>
+      
+      <td>Domicilio:{{estudiante.domicilio_estudiante}}</td>
+      <td> Fecha de nacimiento:{{estudiante.fecha_nacimiento}}</td>
+      <td> 
+      <dd>Edad Actualizada:{{estudiante.edad}}</dd>
+       <dd>Edad Ficha:{{ficha.edad}}</dd></td>
+      
+      
+      </tr>
+     <tr>
+       <td>
+          <dd>Establecimiento Actual: {{ estudiante.curso.establecimiento}} </dd> 
+          <dd>Establecimiento Ficha: {{ ficha.establecimiento}}  </dd>
+
+       </td>
+       <td>
+         <dd>Curso Actual: {{ estudiante.curso.get_numero}} {{ estudiante.curso.get_letra}} </dd>
+         <dd>Curso Ficha: {{ ficha.curso }} {{ ficha.letra}} </dd>
+       </td>
+       <td>
+       <h5>Programas </h5>
+         <h5>¿Pertenece a  P.I.E.?
+      {% with Programa_pie=ficha.pie %} 
+      
+      {% if Programa_pie %}
+        Si
+      {% else%}
+       No
+      {% endif %}  
+      {% endwith %}  
+      <h5>¿Pertenece a habilidades para la vida?
+      {% with hpv=ficha.habilidades %} 
+      
+      {% if hpv %}
+        Si
+      {% else%}
+       No
+      {% endif %}  
+      {% endwith %}  
+     </td> 
+     <td>
+        <h5>¿Es atendido por una red de apoyo? {{ficha.Red_apoyo.nombre}}
+     </td>
+        
+       
+     </tr>
+      </table>
+
+     <style>
+/* Add a dark gray background color to the modal header and center text */
+.modal-header, h4, .close {
+    background-color: #333;
+    color: #fff !important;
+    text-align: center;
+    font-size: 30px;
+}
+
+.modal-header, .modal-body {
+    padding: 40px 50px;
+}
+</style>
+
+<!-- Used to open the Modal -->
+<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">Genograma  </button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog"> 
+
+    <!-- Modal content-->
+    <div class="modal-content"> 
+      <div class="modal-header"> 
+        <button type="button" class="close" data-dismiss="modal">&times;</button> 
+        <h3><span class="glyphicon glyphicon-calendar"></span>Genograma :</h3> 
+        
+      </div> 
+      <div class="modal-body"> 
+        <form role="form"> 
+          <div class="form-group"> 
+ 
+             Imagen Genograma
+
+      </h4>
+     </div> 
+          {% if ficha.Imagen %}
+         
+          
+         <img src="{{ ficha.Imagen.url }}" alt="Prueba de mapa de imágenes" width="300" height="214" border="0" usemap="#billar">
+        <td><a href="{{ ficha.Imagen.url }}"> <span class="glyphicon glyphicon-search"></span> </a></td>
+
+
+{% endif %}
+    
+
+      <div class="modal-footer">  
+        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+          <span class="glyphicon glyphicon-add"></span> Aceptar
+        </button> 
+       
+    </div>
+  </div>
+</div>
+      
+
+      
+
+      </div>
+    </div>
+  </div>
+  
+    <div id="collapse2" class="panel-collapse collapse">
+      <div class="panel-body">
+
+
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+        Ficha de derivación</a>
+      </h4>
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
+      <div class="panel-body">Dentro de la ficha de derivación se indican rasgos generales de las caracteristícas de cada niño o niña.</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<ul id="tab" class="nav nav-tabs" role="tablist"> 
+<li> 
+<a id="tab1-tab" aria-controls="tab1" data-toggle="tab" role="tab" href="#tab1" aria-expanded="true">Ficha de derivación</a> 
+</li> 
+<li> 
+<a id="tab2-tab" aria-controls="tab2" data-toggle="tab" role="tab" href="#tab2" aria-expanded="true">Apoderado</a> 
+</li> 
+<li> 
+<a id="tab3-tab" aria-controls="tab3" data-toggle="tab" role="tab" href="#tab3" aria-expanded="true">Familia</a> 
+</li> 
+<li> 
+<a id="tab4-tab" aria-controls="tab4" data-toggle="tab" role="tab" href="#tab4" aria-expanded="true">Genograma</a> 
+</li> 
+</ul> 
+
+
+
+<div id="tabContent" class="tab-content"> 
+<div id="tab4" class="tab-pane fade" aria-labelledby="profile-tab" role="tab-panel"> 
+ {% if ficha.Imagen %}
+<p><img src="{{ ficha.Imagen.url }}" style="width:700px;height:700px"></p>
+{% else %}
+<h4>Sin imagen</h4>
+{% endif %}
+</div>
+
+<div id="tab1" class="tab-pane fade" aria-labelledby="profile-tab" role="tab-panel"> 
+
+<div class="container">
+
+<table id="example" class="table table-bordered"  border=25px fontsize =12px>
+  <thead>
+    <tr>
+    
+      <td> <strong>Motivo de la derivación:</strong> </td>
+      {% if estudiante %}
+     <td><strong>Motivo de la derivación:</strong>
+     <ul>{% for motivo in ficha.Motivo_derivacion.all %}
+        <li>
+          {{motivo.nombre}}
+        </li>
+        
+    {% endfor %}
+
+      </ul>
+  
+    </td>
+    </tr>
+    
+    <TR>
+    <TD COLSPAN=4 style="text-align:left;" >1 .-Apreciación del equipo respecto al motivo de consulta (Posibles causas o factores, indicadores presentes y Ámbitos
+  afectados - social, Educacinal , Familiar)
+      <li> <STRONG> {{ficha.cuatro}}  </STRONG></li></TD>
+      </TR>
+    
+<TR>
+    <TD COLSPAN=4 style="text-align:left;" >2 .- Señale las acciones realizadas frete a la situacion descrita anteriormente
+  afectados -social, Educacinal , Familiar)
+      <li><STRONG> {{ficha.cinco}}</STRONG></li></TD>
+</TH>
+
+<TR>
+    <TD COLSPAN=4 style="text-align:left;" >3 .- ANTECEDENTES ESCOLARES, CONDUCTA (Elementos más destacables positivos y negativos)
+      <li><STRONG> {{ficha.conducta}}</STRONG></li></TD>
+</TH>
+<TR>
+    <TD COLSPAN=4 style="text-align:left;" >4 .- ANTECEDENTES ESCOLARES, RENDIMIENTO (Area de mayor y menor dificultad)
+      <li><STRONG> {{ficha.rendimiento}}</STRONG></li></TD>
+</TH>
+ <TR>
+    <TD COLSPAN=4 style="text-align:left;" >5 .- ANTECEDENTES ESCOLARES, RESPONSABILIDAD(Asistencia cumplimiento de deberes)
+      <li><STRONG> {{ficha.area_responsabilidad}}</STRONG></li></TD>
+</TH>
+</TR>
+ <TR>
+    <TD COLSPAN=4 style="text-align:left;" >6 .- ANTECEDENTES FAMILIARES, RESPONSABILIDAD(Asistencia cumplimiento de deberes)
+    <ul>
+<li> Composición de la familia(Genograma y tipo de relaciones)</li>
+<li>Comportamiento figuras de cuidado del estudiante</li>
+<li>Situación social (El: vulneración de derecho, VIF, Presencia de alcoholismo o drogas )</li>
+<li>Situación de salud</li></ul>
+      <li><STRONG> {{ficha.antecedentes_familiares}}</STRONG></li></TD>
+</TH>
+<TR>
+    <TD COLSPAN=4 style="text-align:left;" >7 .- Antedecentes de salud del estudiante y su grupo familiar (Patologías, consumo de sustancias)
+      <li><STRONG> {{ficha.seis}}</STRONG></li></TD>
+</TH>
+</TR>
+<TR>
+    <TD COLSPAN=4 style="text-align:left;" >8 .- Observaciones generales del equipo PsicoSocial
+      <li><STRONG> {{ficha.observacion}}</STRONG></li></TD>
+</TH>
+</TR>
+
+
+
+  </thead>
+  <tbody>
+    <tr>  <h4>Deglose ficha de derivación</h4> </tr>
+  </tbody>
+</table> 
+
+ </td>
+</div>
+{% endif%} 
+</div> 
+
+
+<div id="tab2" class="tab-pane fade" aria-labelledby="profile-tab" role="tab-panel"> 
+<div class="container">
+
+  <h3>Apoderado de {{estudiante.nombres}} {{estudiante.firs_name}}</h3>
+  {{nino}}
+
+{% for family in apoderado %}
+  <tr>
+     <li>
+     {% if family.opcion == 1 %}
+     El estudiate vive en la misma casa con {{family.nombre}} {{family.apellido_p}} {{family.apellido_m}} - <strong>Telefono: {{family.telefono}}</strong> -- Domicilio: {{family.domicilio}} -- Ocupación: {{family.ocupacion}}
+     {% else %}
+      El estudiante no vive en la misma casa con {{family.nombre}} {{family.apellido_p}} {{family.apellido_m}} - <strong>Telefono: {{family.telefono}}</strong> -- Domicilio: {{family.domicilio}} -- Ocupación: {{family.ocupacion}}
+     {% endif %}
+   </li>
+
+  </tr> 
+    
+{% endfor %}
+{{pariente.nombre}}
+
+
+
+  </ul>
+
+  </div> 
+</div>  
+<div id="tab3" class="tab-pane fade" aria-labelledby="profile-tab" role="tab-panel"> 
+
+<div class="container">
+<h3>Antecedentes familiares</h3>
+   
+<td>  
+      
+      <div>
+        LIstado de familiares para el estudiante <strong>{{estudiante.nombres}} {{estudiante.firs_name}} {{estudiante.last_name}}</strong>
+
+      </div>
+        <tr>
+          {% if parentesco %}
+
+             <ul>{% for familia in parentesco %}
+              <li>
+              {% if familia.opcion == 1 %}
+              Estudiante vive en la misma casa con 
+              {{familia.parentesco}} --{{familia.nombre}} {{familia.apellido_p}} {{familia.apellido_m}} -- Edad: {{familia.edad}} --Escolaridad:<strong> {{familia.get_escolaridad}}</strong> --Ocupacion: <strong>{{familia.ocupacion}}</strong>
+
+              {% else %}
+              Estudiante no vive en la misma casa con
+              {{familia.parentesco}} --{{familia.nombre}} {{familia.apellido_p}} {{familia.apellido_m}} -- Edad: {{familia.edad}} --Escolaridad:<strong> {{familia.get_escolaridad}}</strong> --Ocupacion: <strong>{{familia.ocupacion}}</strong>
+              {% endif %}
+              </li>
+              {% endfor %}
+              </ul>
+          </tr>
+    {% else %}
+    <h1>No hay registros de asistencia</h1>
+    {% endif %}
+
+   
+ 
+  </td>
+  
+ 
+  </div>
+
+
+</div> 
+<div class="buttons-tab-nav "> 
+<a href="#" class="btn btn-default " tab-to-open="tab2">Subir</a> 
+
+</div> 
+<section id="ficha" class="ficha">
+  <div id="menu2" class="tab-pane fade">
+
+    <div class="container">
+      
+
+
+<table id="example" class="table table-bordered">
+  <thead>
+    <tr>
+      
+      <td> Familiar</td>
+      
+
+    
+    </tr>
+    
+  </thead>
+  <tbody>
+    
+      <tr>
+      
+
+ 
+        
+        <td>
+  Eliminar
+          
+        </td>
+      </tr>
+
+     
+  
+
+    
+
+    
+  </tbody>
+</table> 
+
+
+
+
+ 
+ 
+                      
+
+
+      <h3>Ficha de derivación  </h3>
+      {% if ficha %}
+     <td>
+      <strong>Motivo de la derivacion:</strong>
+       <ul>{% for motivo in ficha.all %}
+        <li>
+          {{motivo.nombre}}
+        </li>
+        
+        {% endfor %}
+
+      </ul>
+    
+  <strong><ul>Apreciacion del equipo respecto al motivo de consulta (Posibles causas o factores, indicadores presentes y Ámbitos
+  afectados -social, Educacinal , Familiar)</ul></strong>
+  <li> {{ficha.cuatro}} </li>
+  
+  <ul><strong>Señale las acciones realizadas frete a la situacion descrita anteriormente</strong></ul>
+  <li>{{object.cinco}}</li>
+  <ul><strong>Describa antedecentes escolares
+  CONDUCTA (Elementos más destacables positivos y negativos)</strong></ul>
+  <li>{{ficha.conducta}}</li>
+
+  <ul><strong>RENDIMIENTO (Area de mayor y menor dificultad)</strong></ul>
+  <li>{{ficha.rendimiento}}</li>
+
+  <ul><strong>AREA DE RESPONSABILIDAD(Asistencia cumplimiento de deberes)</strong></ul>
+  <li>{{object.area_responsabilidad}}</li>
+
+ <ul><strong>ANTECEDENTES FAMILIARES</strong>
+ - Composición de la familia(Genograma y tipo de relaciones)
+ - Comportamiento figuras de cuidado del estudiante
+ - Situación social (El: vulneración de derecho, VIF, Presencia de alcoholismo o drogas )
+ - Situación de salud</ul>
+ <li>{{ficha.antecedentes_familiares}}</li>
+
+<ul><strong>Antedecentes de salud del estudiante y su grupo familiar (Patologías, consumo de sustancias)</strong></ul>
+  <li>{{ficha.seis}}</li>
+<ul><strong>Observaciones generales del equipo PsicoSocial</strong></ul>
+  <li>{{ficha.observacion}}</li>  
+ {% if ficha.Imagen %}
+<ul>
+    <p><img src="{{ ficha.Imagen.url }}" style="width:500px;height:500px"></p>
+</ul>
+{% endif %}
+ </td>
+}
+
+</div>
+
+  
+
+
+{% endif%}
+
+</section>
+
+</table>    
+  <!--firma  -->
+  <!--FIN -->
+     <!-- Form code ends --> 
+    
+
+    </div>
+  </div>    
+ </div>
+</div>
+
+<div align="center">
+
+  <div class="alert alert-sucess">En Cabildo a  {% now "SHORT_DATETIME_FORMAT" %}</div>  
+</div>  
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends 'base/base_encuestas.html' %}
+{% load bootstrap3 %}
+{% block extra-head %}
+    {{ form.media }} hola
+{% endblock%}
+
+{% block contenido %}
+
+
+<h2>Tomar una hora</h2>
+
+<form action="{% url 'secretaria:agregar' %}" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form layout='horizontal' %}
+    {% buttons %}
+    
+    <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "floppy-disk" %} Asignar una hora
+    </button>
+    {% endbuttons %}
+</form>
+
+{% endblock contenido %}

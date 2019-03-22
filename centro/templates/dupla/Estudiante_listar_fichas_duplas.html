@@ -1,0 +1,82 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial dupla!">Menu </a></li>
+  
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' colegio.id %}"data-toggle="tooltip" title="Volver listado anterior!">Volver lista anterior </a></li>
+  
+  
+
+  <li class="active"> Listado </li> 
+</ul>
+
+<h3>Listado de estudiantes con Ficha de derivación interna</h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td>Nombres</td>
+			<td>Curso</td>
+			<td>Derivado por:</td>
+			<td>Opciones</td>
+
+
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for estudio in object_list %}
+		<tr>
+			
+			<td>{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name|capfirst }} {{ estudio.Estudiante.last_name|capfirst }}  </td>
+			<td>{{ estudio.Estudiante.curso.get_numero}} {{ estudio.Estudiante.curso.get_letra}}</td>  
+			<td>{{ estudio.quien_deriva}}</td> 
+	
+			<td>
+				
+				
+				<a class="btn btn-success btn-xs" href=""> Mod.Ficha Derivación</a>
+				<a class="btn btn-info btn-xs" href=""> Mod.Ficha Egreso</a>
+				<a class="btn btn-warning btn-xs" href=""> Mod.Ficha Continuidad</a>
+				<a class="btn btn-primary btn-xs" href=""> Plan interv.</a>
+				
+				<a class="btn btn-danger btn-xs" href="">Derivar </a>
+				<a title="Ver Ficha derivación" class="glyphicon glyphicon-eye-open" href=""></a>
+				
+
+
+				
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay estudiantes con Ficha de derivación</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}
+

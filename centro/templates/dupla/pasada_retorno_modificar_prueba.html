@@ -1,0 +1,46 @@
+{% extends 'base/base_dupla.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap3 %}
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Establecientos</a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}"data-toggle="tooltip" title="Volver listado anterior!">Volver lista </a></li>
+  
+  
+  
+
+  <li class="active">Modificar una derivación y/o egreso  </li> 
+</ul>
+
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+
+
+<h4> MODIFICAR DERIVACIÓN A OTRA INSTITUCIÓN Y/O EGRESO</h4>	
+Estudiante: <strong>{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}</strong> 	
+
+	
+<form method="post">
+  
+	{% csrf_token %}
+	{{ formulario.as_p }}
+	
+
+	<button class="btn btn-info " type="submit">Registrar</button>
+</form>
+
+
+	</div>
+	
+</form>
+
+  </div>
+</div>
+
+
+</form>
+
+{% endblock %}

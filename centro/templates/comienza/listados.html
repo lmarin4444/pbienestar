@@ -1,0 +1,115 @@
+{% extends "base_no.html" %}
+{% load static%}
+{% block title%} Listado de documentos{% endblock%}
+
+
+
+
+
+{% block encabezado%}Listado de Establecimientos{% endblock%}
+{% block subencabezado%}Comuna de Cabildo{% endblock%}
+
+{% block content %}
+    
+  <table class="table table-striped">
+<thead>
+<tr>
+  <th>País</th>
+  <th>Capital</th>
+  <th>Superficie</th>
+  <th>Habitantes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>España</td>
+  <td>Madrid</td>
+  <td>504.645 km<sup>2</sup></td>
+  <td>46,6 M</td>
+</tr>
+...
+</tbody>
+</table>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Titulo 1</th>
+                    <th>Titulo 2</th>
+                    <th>Titulo 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hola</td>
+                    <td>Hola</td>
+                    <td>Hola</td>
+                </tr>
+                <tr>
+                    <td>Hola1</td>
+                    <td>Hola1</td>
+                    <td>Hola1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ 
+</div>
+       
+ <table>
+<tbody>
+  <!-- Aplicadas en las filas -->
+  <tr class="active">Documento 1</tr>
+  <tr class="success">Formatos </tr>
+  <tr class="warning">Formularios </tr>
+  <tr class="danger">Listados </tr>
+ 
+  <!-- Aplicadas en las celdas (<td> o <th>) -->
+  <tr>
+    <td class="active">.1 </td>
+    <td class="success">..2.</td>
+    <td class="warning">..3.</td>
+    <td class="danger">...4</td>
+  </tr>
+</tbody>
+</table>     
+            
+
+
+
+<table class="table table-inverse">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Username</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+                 
+   {% endblock %}              
+                 

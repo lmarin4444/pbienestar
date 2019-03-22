@@ -1,0 +1,149 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  
+
+<!--  jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+  $(function(){
+        //Obtenemos la información de csfrtoken que se almacena por cookies en el cliente
+    
+    $("#usuario").html('{{ user.first_name}} {{user.last_name}}');
+
+    
+  });
+</script>
+
+
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú PsicoSocial</a></li>
+  <li><a href="{% url 'dupla:ListarEstablecimientos'  %}"data-toggle="tooltip" title="Listado de establecimientos">Volver lista</a></li>
+  
+
+  <li class="active">Ver Plan.</li> 
+</ul>
+<title> Plan de gestión formación y convivencia. </title>
+<div class="row">
+  <div class="col-md-4"> Dem Cabildo el {% now "SHORT_DATETIME_FORMAT" %} .</div>
+  
+  
+  </div>
+
+
+<div class="media-body">
+  <a class="pull-left" href="#">
+    <img class="media-object" src='{% static "img/logo-convivencia-escolar.gif" %}' alt="100x100" src="data:image/p" style="width: 110px; height: 110px;" alt="Centro Bienestar">
+  </a>
+  <div class="media-body">
+  <h2 class="media-heading">Planificación Equipo PsicoSocial ( Encargado )
+ <span class="label label-default">{{ escuela.nombre|capfirst }}  </span></h2>
+    
+
+  </div>
+</div>
+
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+        Plan de gestión y convivencia {{ colegio.nombre|capfirst }} </a>
+
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse in">
+      <div class="panel-body">
+      <table id="example" class="table table-bordered" font-size=9>
+        
+      <tr><td>Fecha creación: {{plan.fecha}}</td></tr>
+      
+      <tr><td>Grupo de trabajo: {{plan.responsable}}</td></tr>
+      <tr><td>Sello: {{plan.sello}}</td></tr>
+      <tr><td> 
+      Objetivo General:{{plan.objetivo_general}}</td></tr>
+      <tr><td>
+        <dd>Objetivos especificos:{{plan.objetivo_especificos}}</dd>
+      </td></tr>
+       <tr><td>
+        <dd>Año de vigencia :{{plan.annio}}</dd>
+      </td></tr>
+      
+      
+      </tr>
+     <tr>
+   
+     
+        
+       
+     </tr>
+      </table>
+
+     <style>
+/* Add a dark gray background color to the modal header and center text */
+.modal-header, h4, .close {
+    background-color: #EEBA0A;
+    color: ##625008 !important;
+    text-align: center;
+    font-size: 30px;
+}
+
+.modal-header, .modal-body {
+    padding: 20px 50px;
+}
+</style>
+
+
+<!-- Used to open the Modal -->
+<a class="btn btn-primary btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 0 %}"><small>Enero</small></a>
+<a class="btn btn-warning btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 1 %}"><small>Febrero</small></a>
+<a class="btn btn-success btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 2 %}"><small>Marzo</small></a>
+<a class="btn btn-info btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 3 %}"><small>Abril</small></a>
+<a class="btn btn-primary btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 4 %}"><small>Mayo</small></a>
+<a class="btn btn-warning btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 5 %}"><small>Junio</small></a>
+<a class="btn btn-success btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 6 %}"><small>Julio</small></a>
+<a class="btn btn-info btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 7 %}"><small>Agosto</small></a>
+<a class="btn btn-primary btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 8 %}"><small>Septiembre</small></a>
+<a class="btn btn-warning btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 9 %}"><small>Octubre</small></a>
+<a class="btn btn-success btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 10 %}"><small>Noviembre</small></a>
+<a class="btn btn-info btn-sm" href="{% url 'plan:PlanificacionEncargadoConvivenciaListView' escuela.id 11 %}"><small>Diciembre</small></a>
+
+
+
+      
+
+      </div>
+    </div>
+  </div>
+  
+    
+    
+
+    </div>
+  </div>    
+ </div>
+</div>
+
+<div align="center">
+
+  <div class="alert alert-sucess">En Cabildo a  {% now "SHORT_DATETIME_FORMAT" %}</div>  
+</div>  
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+
+<form method="post">
+	{% csrf_token %}
+	
+	<h3>¿Desea eliminar el caso de intervención de {{ estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }} {{estudiante.last_name|capfirst }}?</h3>
+	{% if caso %}
+	<br><span style="color: red;">ELIMINACION DEFINITIVA  </span><br>
+	<br><span style="color: red;"><marquee width="200" scrollamout="300" scrolldelay="100" loop="7">Proceso no se puede revertir</marquee>  </span><br>
+	<li>Plan de intervención de casos </li>
+	<li>Sesiones realizadas</li>
+	<li>Sesiones agendadas </li>
+	{% endif %}
+{% if caso %}
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info" href="{% url 'alumno:listar_estudiantes_establecimiento' colegio.id %}">Cancelar</a>
+{% else %}
+<br><span style="color: red;">ESTUDIANTE SIN PLAN DE INTERVENCIÓN</marquee>  </span><br>
+	
+	<a class= "btn btn-info" href="{% url 'alumno:listar_estudiantes_establecimiento' colegio.id %}">Cancelar</a>
+{% endif %}	
+</form>
+
+{% endblock %}

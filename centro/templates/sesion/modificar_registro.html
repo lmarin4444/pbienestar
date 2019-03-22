@@ -1,0 +1,41 @@
+{% extends 'base/base_datos_centro.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu centro</a></li>
+  <li><a href="{% url 'calendario:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">Calendario </a></li>
+  
+
+  <li class="active">Listado mis intervenciones</li> 
+</ul>
+
+
+<div class="container">
+  <div class="row">
+   
+        <h3> Para el estudiante {{dato.nombres}} {{dato.firs_name}} {{dato.last_name}}</h3>
+        
+        
+        <strong>Registro para el día: {{hoy.agenda.fecha}} a las {{hoy.agenda.horario_i}}</strong>
+      
+
+       
+          <form method="post">
+				{% csrf_token %}
+				
+				{{ formulario.as_p }}	
+        
+                <button class="btn btn-info " type="submit">Registrar</button>
+				</form>
+          
+
+          
+
+
+
+
+	
+
+{% endblock %}

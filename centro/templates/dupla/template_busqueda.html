@@ -1,0 +1,53 @@
+
+{% extends 'base/base_datos_agenda_dupla.html' %}
+
+{% block content %}
+<div  class="col-xs-6 col-md-offset-3"">
+<h3>Busqueda de estudiantes  </h3>
+</div>	
+
+
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver lista</a></li>
+  
+  
+
+  <li class="active">Acción de convivencia escolar </li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-danger">{{escuela.nombre}} {{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success"><h4>Ingresar accion de convivencia escolar :{{colegio.nombre}} </h4></div>
+{% endif %}
+  <form action="url/buscador/" method="GET">
+{% csrf_token %}
+<input name="q" placeholder="Escribe el nombre de un estudiante" id="buscador">
+</form>
+  
+  <button class="btn btn-info " type="submit">Registrar</button>
+</form>
+ 
+{% if search_url %}
+            <li> <!-- solo donde se tengan registros-->
+              <form action='{% url search_url %}' method='GET'>
+                <div class="input-field">
+                  <input id="search" type="search" name='q'>
+                  <label for="search"><i class="material-icons">search</i></label>
+                  <i class="material-icons">close</i>
+                </div>
+              </form>
+            </li>
+          {% endif %} 
+{% for motivo in object.all %}
+			
+			 <li> {{ q.nombres }} </li>
+
+			{% endfor %}
+
+{% endblock %}
+

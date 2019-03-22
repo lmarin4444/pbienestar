@@ -1,0 +1,90 @@
+
+{% extends 'base/base_secre.html' %}
+
+{% block content %}
+    
+
+<h4>Listado de estudiantes próxima semana.</h4> <br>
+<span class="glyphicon glyphicon-calendar"></span> Desde  :{{fecha_inicio |date:"d-m-Y"}} -- <span class="glyphicon glyphicon-calendar"></span> Hasta : {{fecha_termino |date:"d-m-Y"}}
+
+<a class="btn-xs btn-success" href="{% url 'secretaria:ver_semana' %}"> Ver semana actual </a>
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+		
+			
+			<td><div class="btn-toolbar" role="toolbar">
+    		<span class="glyphicon glyphicon-user"></span> Estudiante
+  			</button></td>
+  			</div>
+
+			<td><div class="btn-toolbar" role="toolbar">
+    		<span class="glyphicon glyphicon-calendar"></span> Fecha
+  			</button></td>
+  			</div>
+			
+			<td><div style="text-align: center;" class="btn-toolbar" role="toolbar">
+    		<span class="glyphicon glyphicon-time"></span>
+  			</button></td>
+  			</div>
+
+			<td>Curso</td>
+			<td>Establecimiento </td>
+			
+			<td><div style="text-align: center;"  class="btn-toolbar" role="toolbar">
+    		<span class="glyphicon glyphicon-envelope"></span>
+  			</button></td>
+  			</div>
+
+
+			
+			<td>Profesional Centro</td>
+			<td>Ver</td>
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if fechas %}
+		{% for estudio in fechas %}
+		<tr>
+			
+			<td>{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }}  </td>
+			
+			<td>{{ estudio.fecha |date:"d-m-Y"}}</td> 
+			 <td>{{ estudio.get_horario_i}}</td> 
+			
+			 <td>{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }}</td>  
+			<td>{{ estudio.Estudiante.curso.establecimiento.nombre}}</td> 
+			<td>{{ estudio.Estudiante.curso.establecimiento.correo}}</td> 
+
+			<td>{{ estudio.usuario.first_name}} {{ estudio.usuario.last_name}}</td> 
+			<td><a class="btn btn-info btn-xs" href="{% url 'secretaria:Intervenidos_sesiones' estudio.Estudiante.id %}">Ver </a></td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de asistencia</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{% endblock%}
+
+
+
+

@@ -1,0 +1,63 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+
+
+
+<table id="example" class="table table-bordered" fontsize =10px>
+	<thead>
+		<tr>
+			
+			<td>Fecha</td>
+			<td>Estudiante</td>
+			<td>Estado</td>
+			<td>Opciones</td>	
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+		
+			<td>{{ mascota.fecha_bitacora|date:"d-m-Y "}}</td>
+			<td>{{ mascota.Estudiante.nombres|capfirst}} {{ mascota.Estudiante.firs_name|capfirst}}  {{ mascota.Estudiante.last_name |capfirst}}</td>
+			 
+			<td> {{ mascota.get_estado}}</td>
+			 
+			<td>
+			<a class="btn btn-primary btn-xs" href="{% url 'sesion:Caso' mascota.id %}">Ver caso</a>				
+			</td>
+
+			
+			
+
+		
+		{% endfor %}
+		
+		{% else %}
+		<h2>No hay registros  </h2>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}
+
+
+
+{% endblock%}
+

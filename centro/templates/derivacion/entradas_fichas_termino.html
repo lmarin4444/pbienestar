@@ -1,0 +1,100 @@
+>{% extends 'base/base_centro.html' %}
+
+{% block content %}
+
+
+
+<!-- Used to open the Modal -->
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  
+  <li><a href="{% url 'derivacion:intervencion_listar' %}"data-toggle="tooltip" title="Ir listado de Fichas estudiantes !">Listado de fichas estudiantes </a></li>
+  <li><a href="{% url 'derivacion:intervencion_retorno' %}"data-toggle="tooltip" title="Ir listado de estudiantes a ser egresados!">Listado estudiantes a ser egresados </a></li>
+  
+
+  <li class="active"> Listado </li> 
+</ul>
+
+<h3><strong>Listado de fichas a ser egresadas </strong>
+ <span class="label label-danger">Al {% now "SHORT_DATE_FORMAT" %} a las {% now "TIME_FORMAT"  %} </span></h3>
+
+Listado de estudiantes a egresar
+</ul>
+
+
+
+<table id="example" class="table table-bordered" fontsize =10px>
+	<thead>
+		<tr>
+		
+			<td>Derivación </td>
+			
+			
+			
+			<td>Estudiante</td>
+			<td>Curso Establecimiento</td>
+			<td>Profesional derivante</td>
+			<td>Opciones</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+					
+			<td>{{ mascota.fecha_derivacion|date:"d-m-Y "}}</td>
+
+
+
+			<td>{{ mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name}} </td>
+			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}} {{ mascota.Estudiante.curso.establecimiento.nombre}}</td>
+			
+			 <td>{{ mascota.usuario.first_name}} {{ mascota.usuario.last_name}}</td>
+			
+			
+			<td>
+
+			
+			
+			
+			<a class="btn btn-danger btn-xs" href="{% url 'historia:ir_historia' mascota.Estudiante.id %}">Egresar</a>
+			
+			
+			
+			
+			</td>
+			
+			
+		</td>
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de intervenciones </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+{% endblock%}
+
+

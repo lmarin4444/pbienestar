@@ -1,0 +1,18 @@
+
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+
+
+       <h3>Proceso de conformación  para el estudiante :{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.nombres.last_name|capfirst}}</h3>
+        <h4>El dia :{{agendo.fecha}} a las {{ agendo.horario_i}}</h4>
+          <form method="post">
+				{% csrf_token %}
+				
+				{{ formulario.as_p }}
+				<button class= "btn btn-info" type="submit">Registrar</button>
+          </form>
+     
+
+        
+{% endblock %}

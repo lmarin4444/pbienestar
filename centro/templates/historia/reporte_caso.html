@@ -1,0 +1,169 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<h4> Listado de estudiantes en registro histórico. </h4>
+
+ <ul class="breadcrumb">
+
+  <li><a href="{% url 'comienza:entrar_centro' %}" data-toggle="tooltip" title="Ir pagina Principal!">Menú Centro</a></li>
+  <li><a href="{% url 'historia:registro_historico' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Volver lista historicos </a></li>
+ 
+
+  <li class="active"> Listado</li> 
+</ul>
+<form method="post">
+  {% csrf_token %}
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success">Crear informe de evaluación</div>
+{% endif %}
+
+
+  <table id="example" class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+    <tr>
+    
+      <td>NOMBRE :</td>
+      <td>{{ estudiante.nombres|capfirst}} {{ estudiante.firs_name|capfirst}} {{ estudiante.last_name|capfirst}}</td>
+      
+    </tr>
+    <tr>
+    
+      <td>ESTABLECIMIENTO:</td>
+      <td>{{ estudiante.curso.establecimiento.nombre|capfirst}} </td>
+  
+    </tr>
+    <tr>
+    
+      <td>EDAD :</td>
+      <td>{{ estudiante.edad}} </td>
+  
+    </tr>
+    <tr>
+    
+      <td>CURSO :</td>
+      <td>{{ estudiante.curso.get_numero}} {{ estudiante.curso.get_letra}} </td>
+  
+    </tr>
+    <tr>
+      <td>FECHA DE ENTREGA:</td>
+    
+      <td>{% now "SHORT_DATE_FORMAT" %}  </td>
+ 
+    </tr>
+    <tr>
+    
+      <td>PROFESIONAL QUE DERIVA:</td>
+      <td>{{ ficha.usuario.first_name|capfirst}} {{ ficha.usuario.last_name|capfirst}}</td>
+  
+    </tr>
+    
+      
+      <tr>
+       <td>MOTIVO DE DERIVACION:</td>
+        
+        <td>
+          {% for motivo in ficha.Motivo_derivacion.all %}
+         <li> {{motivo.nombre}}</li>
+
+          {% endfor %}  
+        </td>  
+      
+      </tr>
+ 
+      <tr>
+    
+      <td>FASE DE INTERVENCION:</td>
+      <td>Término de fase de Evaluación</td>
+  
+    </tr>
+    <tr>
+    
+      <td>SITUACION ACTUAL</td>
+      
+      <td> 
+        {{formulario.situacion_actual}}
+       </td>  
+  
+    </tr>
+    <tr>
+    
+      <td>OBJETIVO DE LA INTERVENCION</td>
+      <td><li> {{historia.objetivo_intervencion.objetivo_particular}}</li>
+    
+        {% if historia.objetivo %} 
+          {% for x in historia.objetivo.Tematicas.all %}
+            
+         
+              <li>{{x.nombre}}   </li>
+            
+           {% endfor%}
+         {% endif %}    
+
+    </td>
+    </tr>
+ <tr>
+    
+      <td>DERIVADO A OTRA INSTITUCION:</td>
+      <td>{{ficha.Red_apoyo.nombre}}</td>
+
+  
+    </tr>
+    <tr>
+    
+      <td>OBSERVACIONES</td>
+      <td>{{formulario.observaciones}}</td>
+   
+  
+    </tr>
+     <tr>
+    
+      <td>SUGERENCIAS A LA FAMILIA</td>
+      <td>{{formulario.familia}}</td>
+  
+    </tr>
+
+    <tr>
+    
+      <td><ul><strong>NOMBRE/PSICOLOGO</strong></ul>
+      {% if yo %}
+      <ul>{{ yo.first_name|upper}} {{ yo.last_name|upper}}</ul>
+      {% else %}
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
+      {% endif %}
+      <td><h5>FIRMA</h5></td>
+  
+    </tr>
+    <tr>
+    
+      <td><strong>NOMBRE/QUIEN RECIBE EL INFORME</strong></td>
+      <td><h5>FIRMA</h5></td>
+  
+    </tr>
+    
+  </thead>
+  <tbody>
+
+    
+    <tr>
+    
+    <h4>REPORTE BREVE DE PROCESO DE EVALUACIÓN</h3>      
+    </tr>
+    
+    
+    
+  </tbody>
+</table> 
+
+  
+
+    
+    <a class= "btn btn-info" href="{% url 'historia:registro_historico' %}">Cancelar</a>
+
+    <a title="Informe en pdf - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:pdf_evaluacion1_historia' estudiante.id  historia.id%}"></a>/
+    
+
+</form>
+{% endblock %}

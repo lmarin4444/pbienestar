@@ -1,0 +1,15 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<h3>¿Desea eliminar el seguimiento de {{ object.Estudiante.nombres|capfirst}} {{ object.Estudiante.firs_name|capfirst}} {{ object.Estudiante.last_name|capfirst}} ?</h3>	
+	Fecha :{{object.fecha}}<br>
+	Observación :{{object.observacion}}<br>
+	Actividad :{{object.get_tipo_seg}}<br>
+	Origen:{{object.get_tipo_s}}<br>
+
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info" href="{% url 'alumno:listar_estudiantes_establecimiento' object.Estudiante.curso.establecimiento.id %}">Cancelar</a>
+</form>
+{% endblock %}

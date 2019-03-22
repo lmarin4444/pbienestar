@@ -1,0 +1,11 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	Proceso de eliminacion de objetivos.
+	<h3>¿Desea eliminar el Objetivo :{{ object.nombre }}?</h3>	
+	<button class="btn btn-danger btn" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info btn " href="{% url 'sesion:objetivo_listar' %}">Cancelar</a>
+</form>
+{% endblock %}

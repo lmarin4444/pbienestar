@@ -1,0 +1,19 @@
+{% extends 'base/base_centro.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap3 %}
+
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+
+	Estudiante es retornado a dupla PsicoSocial para seguimiento interno con fecha  {% now "DATE_FORMAT" %}
+
+	<h3>¿Desea retorna a dupla PsicoSocial   el registro de {{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}?</h3>	
+
+	{{ formulario|crispy }}
+	<button class="btn btn-danger" type="submit">Sí, enviar</button>
+	<a class= "btn btn-info" href="{% url 'derivacion:centro_listar' %}">Cancelar</a>
+
+</form>
+{% endblock %}

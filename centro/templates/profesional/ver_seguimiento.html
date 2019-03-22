@@ -1,0 +1,23 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	
+	<h3>Seguimiento de : {{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}</h3>	
+	INFORMACIÓN DEL SEGUIMIENTO SELECCIONADO :
+	El día :<strong> {{seguimiento.fecha}}</strong><br>
+	{% if seguimiento %}
+	SEGUIMIENTO:<br>
+		Tipo de seguimiento : {{seguimiento.get_tipo_seg}}<br>
+		Origen del seguimiento : {{ seguimiento.get_tipo_s}}<br>
+		Oservación : {{seguimiento.observacion}}<br>
+		
+	
+	{% else %}
+		Estudiante sin información
+	{% endif %}
+	<br>
+	<a class= "btn btn-info" href="{% url 'profesional:SeguimientoProfesionalList' %}">Volver</a>
+</form>
+{% endblock %}

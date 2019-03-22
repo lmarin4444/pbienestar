@@ -1,0 +1,89 @@
+{% extends 'base/base_datos.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Listado estudiantes intervenidos</a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Listado de estudiantes </a></li>
+  <li class="active">Modificar Estudiante</li> 
+</ul>
+<form method="post">
+	{% csrf_token %}
+	
+	<form method="get">
+	{% csrf_token %}
+		<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div >
+				<label for="{{form.rut.name}}">{{form.rut.label}} del estudiante:</label>
+				
+				{{form.rut}}
+				
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.nombres.nombres}}">{{form.nombres.label}}</label>
+				{{form.nombres}}
+			</div>
+		</div>
+	 	<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.firs_name.name}}">{{form.firs_name.label}}</label>
+				{{form.firs_name}}
+			</div>
+		</div>
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.last_name.name}}">{{form.last_name.label}}</label>
+				{{form.last_name}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.fecha_nacimiento.name}}">{{form.fecha_nacimiento.label}}</label>
+				{{form.fecha_nacimiento}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.edad.name}}">{{form.edad.label}}</label>
+				{{form.edad}}
+			</div>
+		</div>	
+
+		
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.domicilio_estudiante.name}}">{{form.domicilio_estudiante.label}}</label>
+				{{form.domicilio_estudiante}}
+			</div>
+		</div>
+		
+		
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form.curso.name}}">{{form.curso.label}}</label>
+				{{form.curso}}
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				
+				<button type="submit" class="btn btn-info">Registrar</button>
+			</div>
+		</div>
+
+
+	</div>
+	
+</form>
+
+
+{% endblock %}

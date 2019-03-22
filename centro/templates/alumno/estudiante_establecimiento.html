@@ -1,0 +1,169 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+<h4> Listado de estudiantes Establecimiento {{escuela.nombre}}</h4>
+
+Listado de acciones :
+ <span class="glyphicon glyphicon-user"></span> Para el estudiante
+ <span class="glyphicon glyphicon-home"></span> La familia del estudiante
+<span class="glyphicon glyphicon-education"></span> La escolaridad del  estudiante 
+<samp  class="glyphicon glyphicon-download-alt text-danger"></samp> Asignar famila a un estudiante (Realizar la asigación de hermanos en sistema educacional )
+<a  class="btn btn-success btn-xs" href="{% url 'dupla:Estudiante_listar_fichas_duplas' escuela.id %}"><small>Listado de fichas  dupla</small></a>
+<a  class="btn btn-warning btn-xs" href="{% url 'dupla:Estudiante_listar_fichas_duplas' escuela.id %}"><small>Listado de estudiantes derivados</small></a>
+
+<a  class="btn btn-info btn-xs" href="{% url 'dupla:EntradasDerivadas' escuela.id %}"><small>Egreso</small></a>
+<a  class="btn btn-primary btn-xs" href="{% url 'dupla:EntradasRetornoCasoDuplaList' escuela.id %}"><small>Estudiantes a ser egresado  </small></a>
+
+
+<a  class="btn btn-success btn-xs" href="{% url 'dupla:ListarCasos' escuela.id %}"><small>Listado intervenciones / Continuidad</small></a>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td>Nombres</td>
+			<td>Curso</td>
+			
+			<td>Opciones</td>
+
+
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if  estudiando %}
+		{% for estudio in estudiando  %}
+		<tr>
+			
+			<td>{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name|capfirst }} {{ estudio.Estudiante.last_name|capfirst }}  </td>
+			<td>{{ estudio.get_curso}} {{ estudio.get_Letra}}</td>  
+			
+
+			
+			<td>
+			
+				<span title="Modificar Estudiante" class="glyphicon glyphicon-user"></span> <a class="btn btn-info btn-xs" href="{% url 'alumno:estudiante_editar' estudio.Estudiante.id escuela.id %}">Editar</a>
+				<a  class="btn btn-danger btn-xs" href="{% url 'alumno:estudiante_eliminar' estudio.Estudiante.id %}"><small>Eliminar</small></a>
+				
+				
+				
+			    <strong> [ </strong>
+			    <a title="Ingresar Ficha de derivación" class="glyphicon glyphicon-log-in" href="{% url 'derivacion:derivacion_crear' estudio.Estudiante.id escuela.id %}"></a> Crear Ficha Derivación
+			  
+					
+					
+					
+					
+				<a title="Ver Ficha de derivación" class="glyphicon glyphicon-eye-open" href="{% url 'alumno:ver_ficha' estudio.Estudiante.id %}"></a>
+				<strong> ] </strong>
+				
+				<strong> <small>[ FAMILIA</small> </strong>
+				<a title="Ingresar Integrante de la familia" class="glyphicon glyphicon-log-in" href="{% url 'alumno:parentesco_crear' estudio.Estudiante.id  %}"></a> /Hermanos
+				<a title="Ingresar Hermanos" class="glyphicon glyphicon-log-in" href="{% url 'alumno:hermano_crear' estudio.Estudiante.id%}"></a> /Apoderado
+				<a title="Ingresar Apoderado " class="glyphicon glyphicon-log-in " href="{% url 'alumno:apoderado_crear' estudio.Estudiante.id  %}"></a>  /
+				<a title="Asignar Familia" class="glyphicon glyphicon-download-alt text-danger" href="{% url 'alumno:asignar_familia' estudio.Estudiante.id %}"></a>/
+				<a title="Ver Familia" class="glyphicon glyphicon-home " href="{% url 'alumno:familia' estudio.Estudiante.id %}"></a><strong> ]</strong>
+				
+				
+													
+				<small><strong> [ ESCOLARIDAD </strong></small> 
+				<a title="Ver Escolaridad" class="glyphicon glyphicon-education" href="{% url 'alumno:ver_escolaridad' estudio.Estudiante.id  estudio.id%}"></a>/
+				<a title="Modificar Escolaridad" class="glyphicon glyphicon-wrench" href="{% url 'alumno:actualizar_escolaridad' estudio.Estudiante.id  estudio.id %}"></a> /
+				<strong>]</strong>
+				<br>
+
+				<small><strong> DUPLA PSICOSOCIAL  [ </strong></small> 
+				<a title="Crear Ficha" class="glyphicon glyphicon-list-alt" href="{% url 'dupla:derivacion_dupla_crear' estudio.Estudiante.id  estudio.Estudiante.curso.establecimiento.id %}"></a> /
+				
+				<a title="Ver Ficha derivación" class="glyphicon glyphicon-eye-open" href="{% url 'dupla:dupla_ver_ficha' estudio.Estudiante.id %}"></a>
+				<a title="Modificar Ficha de derivación" class="glyphicon glyphicon-wrench" href="{% url 'dupla:FichaderivacionduplaUpdate' estudio.Estudiante.id %}"></a> /
+				<a title="Crear Ficha Ingreso " class="glyphicon glyphicon-pencil" href="{% url 'dupla:entrevista_ingreso_dupla' estudio.Estudiante.id  %}"></a> /
+				<a title="Modificar Ficha de Ingreso" class="glyphicon glyphicon-wrench" href="{% url 'dupla:FichaingresonduplaUpdate' estudio.Estudiante.id %}"></a> /  
+				
+				<strong>]</strong>
+				<small><strong> ATENCIÓN CASOS [ </strong></small> 
+				<a title="Crear plan de intervención" class="glyphicon glyphicon-list-alt" href="{% url 'dupla:Intervencion_casosCrear' estudio.Estudiante.id  estudio.Estudiante.curso.establecimiento.id %}"></a> /
+				<a title="Ver plan de intervención de casos" class="glyphicon glyphicon-eye-open" href="{% url 'dupla:IntervencionCasosDetailView' estudio.Estudiante.id %}"></a>
+				<a title="Ver historia estudiante" class="glyphicon glyphicon-search" href="{% url 'dupla:Dupla_casos' estudio.Estudiante.id  %}"></a> /
+				<a title="Modificar plan intervención de casos" class="glyphicon glyphicon-wrench" href="{% url 'dupla:PlanCasosUpdate' estudio.Estudiante.id %}"></a> /
+				<a title="Eliminar plan de intervención de casos" class="glyphicon glyphicon-remove" style="color:red" href="{% url 'dupla:eliminar_caso_dupla' estudio.Estudiante.id %}"></a> /
+				
+				<strong>]</strong>
+
+				
+			
+				<small><strong> EGRESO Y/O DERIV. OTRA INST [ </strong></small> 
+				<a title="Ingresar derivación y/o egreso" class="glyphicon glyphicon-list-alt" href="{% url 'dupla:RetornoDefinitivo' estudio.Estudiante.id %}"></a> /
+				<a title="Ver Ficha derivación" class="glyphicon glyphicon-eye-open" href="{% url 'dupla:FichaEstudianteegresoDetailView' estudio.Estudiante.id %}"></a>
+				<a title="Modificar Ficha de derivación" class="glyphicon glyphicon-wrench" href="{% url 'dupla:ModificarRetornoDefinitivo' estudio.Estudiante.id  %}"></a> 
+				
+				<a title="Imprimir Ficha de egreso" class="glyphicon glyphicon-print" href="{% url 'informe:fichaegreso_dupla_pdf_report' estudio.Estudiante.id %}"></a>
+				<strong>]</strong>
+				
+
+				<small><strong> SEGUIMIENTO  [ </strong></small> 
+				<a title="Ingresar" class="glyphicon glyphicon-list-alt" href="{% url 'dupla:CrearSeguimiento' estudio.Estudiante.id %}"></a> /
+				<a title="Ver Seguimiento" class="glyphicon glyphicon-eye-open" href="{% url 'dupla:ListarSeguimiento' estudio.Estudiante.id %}"></a>
+				
+				<strong>]</strong>
+				<small><strong> INFORMES  [ </strong></small> 
+				<a title="Continuidad" class="glyphicon glyphicon-pushpin" href="{% url 'dupla:CrearContinuidad' estudio.Estudiante.id %}"></a> /
+				<a title="Ficha de egreso" class="glyphicon glyphicon-open" href="{% url 'dupla:CrearSeguimiento' estudio.Estudiante.id %}"></a> /
+				<a title="Ingresar" class="glyphicon glyphicon-list-alt" href="{% url 'dupla:CrearSeguimiento' estudio.Estudiante.id %}"></a> /
+				<a title="Ver Entrevista Ingreso dupla " class="glyphicon glyphicon-eye-open" href="{% url 'dupla:Ver_entrevista_ingreso' estudio.Estudiante.id %}"></a>
+				
+				<strong>]</strong>
+				
+					
+				<small><strong> HISTORIA [ </strong></small> 
+				<a title="Crear Ficha" class="glyphicon glyphicon-list-alt" href="{% url 'dupla:historia_dupla' estudio.Estudiante.id %}"></a> /
+		
+				<strong>]</strong>	
+				{% if ficha %}
+					{% for fichas in ficha %}
+						{% if fichas.Estudiante == estudio.Estudiante %}
+						<span style="color: red;">ESTUDIANTE EN INTERVENCIÓN CENTRO DE BIENESTAR</span>
+
+						{% endif %}
+					{% endfor %}
+				{% endif %}		
+
+				{% if ficha %}
+					{% for fichas in casos %}
+						{% if fichas.estudiante == estudio.Estudiante %}
+						<strong><span style="color: brown;">ESTUDIANTE EN INTERVENCIÓN PSICOSOCIAL</span></strong>
+
+						{% endif %}
+					{% endfor %}
+				{% endif %}				
+			</td>
+		</tr>
+		
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}
+

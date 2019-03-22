@@ -1,0 +1,70 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Rut</td>
+			<td>Nombres</td>
+			<td>Domicilio </td>
+			<td>Fecha de nacimiento</td>
+			<td>Edad</td>
+			<td>Curso</td>
+			<td>Establecimiento</td>
+
+
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for estudio in object_list %}
+		<tr>
+			<td>{{ estudio.rut }} </td>
+			<td>{{ estudio.nombres }} {{ estudio.firs_name }} {{ estudio.last_name }}  </td>
+			<td>{{ estudio.domicilio_estudiante }}</td>
+			 <td>{{ estudio.fecha_nacimiento }}</td>  
+			 <td>{{ estudio.edad }}</td>  
+			 <td>{{ estudio.curso }}</td>  
+			 <td>{{ estudio.establecimiento }}</td>  
+
+
+		
+			
+			<td>
+				<a class="btn btn-info btn-sm" href="{% url 'alumno:estudiante_editar' estudio.id %}">Editar</a>
+				<a  class="btn btn-primary btn-sm" href="{% url 'alumno:estudiante_eliminar' estudio.id %}">Eliminar</a>
+				
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{{ estudio.Estudiante.firs_name }} {{ estudio.Estudiante.last_name }}
+
+
+
+{% endblock%}
+

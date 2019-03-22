@@ -1,0 +1,40 @@
+{% extends 'base/base_datos_agenda.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'comienza:entrar_centro' %}" data-toggle="tooltip" title="Ir al menu del centro!">Menu Centro</a></li>
+  <li><a href="{% url 'sesion:intervenido' %}"data-toggle="tooltip" title="Ir menu personal!">Menu personal</a></li>
+  <li><a href="{% url 'calendario:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">Calendario </a></li>
+  
+
+  <li class="active">Tomar cita</li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success">Crear una nueva cita en la agenda</div>
+{% endif %}
+<h3>Estudiante :{{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h3>
+<form method="post">
+	{% csrf_token %}
+	{{ formulario|crispy }}
+		
+<div class="container-fluid">
+<div class="row">
+    
+   
+<button style="background-color: #FF9900" type="submit" class="btn btn-primary dark">Registrar una cita</button>
+
+
+
+  </div>
+</div>
+
+
+</form>
+
+
+{% endblock %}

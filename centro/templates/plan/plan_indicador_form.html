@@ -1,0 +1,30 @@
+{% extends 'base/base_datos.html' %}
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de planes">Volver a la lista</a></li>
+  
+  <li><a href="{% url 'plan:AccionesListView' accion_base.id %}"data-toggle="tooltip" title="Plan">Ver acciones</a></li>
+  <li><a href="{% url 'plan:IndicadorListView' accion_base.id %}"data-toggle="tooltip" title="Plan">Ver Indicadores</a></li>
+
+  <li class="active"> Ingresar Indicador para la base {{accion_base.nombre}} de {{accion_base.plan.establecimiento.nombre}}</li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-info">{{mensaje}} CANTIDAD DECLARADA : {{cantidad_indicadores_base}} v/s CANTIDAD INGRESADA: {{indicadores}}</div>
+{% else %}
+
+<div class="alert alert-success"><h4>Ingresar indicadores de :{{escuela.nombre}} </h4></div>
+{% endif %}
+	<form method="post">
+  
+	{% csrf_token %}
+	{{ form.as_p }}
+	
+
+	<button class="btn btn-info " type="submit">Registrar</button>
+</form>
+ 
+{% endblock %}

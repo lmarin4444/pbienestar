@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<h3>Productos</h3>
+<div class="row">
+        <div class="col-lg-10">
+                <a onclick="return abrir_modal('{% url 'productos:crear_producto' %}','Productos / Nuevo')" class="btn btn-primary">
+                        Crear
+                </a>
+        </div>
+</div>

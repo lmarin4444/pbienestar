@@ -1,0 +1,89 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+
+
+
+<!-- Used to open the Modal -->
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  
+  <li><a href="{% url 'derivacion:intervencion_listar' %}"data-toggle="tooltip" title="Ir listado de Fichas estudiantes !">Listado de fichas estudiantes </a></li>
+  <li><a href="{% url 'derivacion:intervencion_retorno' %}"data-toggle="tooltip" title="Ir listado de estudiantes a ser egresados!">Listado estudiantes a ser egresados </a></li>
+  
+
+  <li class="active"> Listado </li> 
+</ul>
+<h3><strong>Listado de informes de continuidad Históricos</strong></h3>
+<h4> Para el estudiante: {{dato.nombres}} {{dato.firs_name}} {{dato.last_name}}</h4>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+				
+			<td>Fecha</td>
+			<td>Motivo</td>
+			<td>Antecedentes</td>
+			<td>Observaciones</td>
+			<td>Sugerencias</td>
+
+			<td>Acciones</td>
+			
+			
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if informes %}
+		<tr>
+		{% for mascota in informes %}<td>
+			
+				<ul>
+					{{ mascota.fecha }}
+
+				</ul>  
+		
+		</td>	
+						
+				<td>{{ mascota.get_motivo }}  </td>
+				<td>{{ mascota.antecedentes }}  </td>
+				<td>{{ mascota.observaciones }}  </td>
+				<td>{{ mascota.sugerencias }}  </td>
+				
+														
+			<td>
+			<a class="btn btn-info btn-xs" href="{% url 'historia:listar_continuidad_historia' dato.id mascota.id mascota.Historia.id %}">Ver</a>
+			<a title="Informe en pdf - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:pdf_evaluacion2_historia' dato.id mascota.id mascota.Historia.id %}"></a>/
+			
+			</td>
+				
+				
+			</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<a class="btn btn-info btn-xs" href="{% url 'historia:registro_historico'  %}">Volver</a>
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+{% endblock%}
+

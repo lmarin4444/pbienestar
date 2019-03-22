@@ -1,0 +1,24 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	
+	<h3>Confirmación para el  estudiante: {{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}</h3>	
+	AGENDADA:
+	El día :<strong> {{agendo.fecha}}</strong> a las <strong> {{agendo.horario_i}} hrs.</strong><br>
+	{% if confirma %}
+	CONFIRMACION:
+		El día  : {{confirma.fecha_confirma}}<br>
+		Resultado de Llamado 1 : {{confirma.get_estado1}}<br>
+		Resultado de Llamado 2 : {{confirma.get_estado2}}<br>
+		Resultado de Llamado 3 : {{confirma.get_estado3}}<br>
+		Con la observación :{{confirma.obs}}
+	
+	{% else %}
+		Estudiante sin confirmación de sesión
+	{% endif %}
+	<br>
+	<a class= "btn btn-info" href="{% url 'sesion:intervencion_listar' dato.id %}">Volver</a>
+</form>
+{% endblock %}

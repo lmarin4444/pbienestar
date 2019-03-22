@@ -1,0 +1,22 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+
+	<table id="example" class="table table-bordered" fontsize =10px>
+	<thead>
+		<tr>
+		
+			<td>Nombre :</td>
+			<td>{{ estudiante.nombres|upper}} {{ estudiante.firs_name|upper}} {{ estudiante.last_name|upper}}</strong></td>
+			</h4>
+		</tr>
+				
+	</thead>
+	</table>
+
+	
+	<a class= "btn btn-info" href="">Volver</a>
+</form>
+{% endblock %}

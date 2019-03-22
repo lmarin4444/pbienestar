@@ -1,0 +1,268 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Used to open the Modal -->
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Ir menu personal !">Establecimientos</a></li>
+  <li><i class="fa fa-calendar" style="font-size:12px;color:black"></i><a href="{% url 'bitacora:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">  Calendario </a></li>
+
+
+
+  <li class="active">Registro de actividades/ {{agenda.establecimiento.nombre}}</li> 
+
+</ul>
+<h3><strong>Actividades planificadas </strong>
+ <span class="label label-danger">para el día {{dia}}/{{mes}}/{{anio}}</span> HORA ACTUAL  {% now "TIME_FORMAT"  %} </span></h3>
+
+{% if valor == 1 %}
+Actividades dentro del plazo de acción
+{% else %}
+Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión 
+{% endif %}
+</ul>
+
+<table id="example" class="table table-bordered" fontsize =10px>
+	<thead>
+		<tr>
+		
+			
+			<td>Hora</td>
+			<td>Actividad</td>
+			<td>Curso</td>
+			<td>Tipo</td>
+			<td>Acción</td>
+			<td>Acciones</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if agenda %}
+		{% for mascota in agenda %}
+		<tr>
+			
+	{% with numero=mascota.numero %} 
+     <!-- El valor 1 es cuando las acciones de bitacora aun no se realizan por o tanto es 
+     solo para los ambitos 1 y 2  -->
+     {% if numero == 1 %}
+   		<span >
+      		 
+			 <td> {{ mascota.get_horario}}</td>
+		     <td>{{ mascota.nombre}}</td>
+			 {% if mascota.curso or mascota.letra %}
+			 <td> {{ mascota.get_curso}} {{ mascota.get_tipo_letras}}</td>
+			 {% else %}
+			 <td>-</td>
+			{% endif %}
+
+			 <td>{{ mascota.get_ambito}}</td>
+			 {% if mascota.get_tipo_actividad %}
+			 <td>{{ mascota.get_tipo_actividad}}</td>
+			 {% else %}
+			 <td>-</td>
+			{% endif %}			 
+			
+			<td>
+
+			<!-- Para la accion Ambito 1 y 2 que es 
+				1: Plan de gestion 
+				2: Atencion de casos
+			El numero 1 es solo para los ambitos 1 y 2 dado que las acciones de Contingencia y convivencia escolar
+			solo se ingresan no se agendan, van en las acciones posteriores 
+				-->
+			<li><i class="fa-li fa fa-spinner fa-spin"></i>Acción sin ejecutar :{{mascota.sesion.intervencion_casos.estudiante.nombres|capfirst }} {{mascota.sesion.intervencion_casos.estudiante.firs_name|capfirst }}
+			
+			{% if mascota.ambito == 1 %}
+				<a class="btn btn-primary btn-xs" href="{% url 'plan:ingresar_hecho_actividades' mascota.id mascota.actividad.id  %}">Registrar </a>
+				<a class="btn btn-success btn-xs" href="{% url 'plan:justificar_hecho_actividades' mascota.id mascota.actividad.id  %}">Justificar </a>
+				<a class="btn btn-warning btn-xs" href="{% url 'plan:reagendar_hecho_actividades' mascota.id mascota.actividad.id  %}">Re Agendar </a>
+				
+				<a class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}"><small>Ver</small> </a>
+
+			{% endif %}
+			{% if mascota.ambito == 2 %}
+				<a class="btn btn-success btn-xs" href="{% url 'bitacora:RegistrarSesionUpdate' mascota.sesion.id %}">Aistencia </a>
+				<a class="btn btn-danger btn-xs" href="{% url 'bitacora:anular_sesion' mascota.id %}">Inasistencia </a>
+
+				<a class="btn btn-info btn-xs" href="{% url 'dupla:IntervencionCasosDetailView' mascota.sesion.intervencion_casos.estudiante.id%}" >ver </a>
+			
+			{% endif %}
+
+			
+			</li>
+			
+			
+
+   			</td>
+          </span>
+
+          {% elif numero == 2 %}
+			<span class="fa fa-check color-green" ">
+                                                
+   			
+			 <td> {{ mascota.get_horario}}</td>
+		     <td>{{ mascota.nombre}}</td>
+			 {% if mascota.curso or mascota.letra %}
+			 <td> {{ mascota.get_curso}} {{ mascota.get_tipo_letras}}</td>
+			 {% else %}
+			 <td>-</td>
+			{% endif %}
+
+			 <td>{{ mascota.get_ambito}}</td>
+			 {% if mascota.get_tipo_actividad %}
+			 <td>{{ mascota.get_tipo_actividad}}</td>
+			 {% else %}
+			 <td>-</td>
+			{% endif %}		
+
+			<td>
+
+			<span class="fa fa-check-square-o " style="font-size:15px;color: #04B431;"></i>Ingresado o Realizado {{mascota.sesion.intervencion_casos.estudiante.nombres|capfirst }} {{mascota.sesion.intervencion_casos.estudiante.firs_name|capfirst }}
+			
+
+
+			{% if mascota.ambito == 1 %}
+				
+				<a class="btn btn-info btn-xs" href="">Modificar </a>
+				<a  class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}"><small>Ver</small> </a>
+				{% if valor == 2 %}
+				<a class="btn btn-info btn-xs" href="">Modificar </a>
+				<a  class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}"><small>Ver</small> </a>
+				
+				{% endif %}
+			{% endif %}
+			{% if mascota.ambito == 2 %}
+				
+				
+				<a class="btn btn-info btn-xs" href="{% url 'dupla:IntervencionCasosDetailView' mascota.sesion.intervencion_casos.estudiante.id%}" >ver </a>
+			
+			{% endif %}
+
+			{% if mascota.ambito == 0 %}
+				<span class="fa fa-check color-green" >
+				<a class="btn btn-success btn-xs" href="{% url 'bitacora:modificar_contingencia' mascota.id %}">Modificar</a>
+				<a class="btn btn-danger btn-xs" href="{% url 'bitacora:eliminar_contingencia' mascota.id %}">Eliminar</a>
+				<a class="btn btn-info btn-xs" href="{% url 'bitacora:ver_sucesos' mascota.id %}">Ver</a>
+
+			{% endif %}
+			{% if mascota.ambito == 3 %}<!-- Ambito : Convivencia escolar -->
+				
+				<span class="fa fa-check color-green" >
+				<a class="btn btn-success btn-xs" href="">Modificar</a>
+				<a class="btn btn-danger btn-xs" href="{% url 'dupla:eliminar_mediacion' mascota.id %}">Eliminar</a>
+				
+				<a  class="btn btn-info btn-xs" href="">Ver </a>
+
+			{% endif %}
+			{% if mascota.ambito == 4 %}<!-- Ambito : Convivencia escolar MEDIACION-->
+				
+				<span class="fa fa-check color-green" >
+				<a class="btn btn-success btn-xs" href="">Modicar</a>
+				<a class="btn btn-danger btn-xs" href="">Eliminar</a>
+				<a  class="btn btn-info btn-xs" href="">Ver </a>
+
+			{% endif %}
+			
+   			</td>
+
+			</span>
+
+			{% else %}
+			<span style="color: red;">
+            
+            <td> {{ mascota.get_horario}}</td>
+		     <td>{{ mascota.nombre}}</td>
+			 {% if mascota.curso and mascota.letra %}
+			 <td> {{ mascota.get_curso}} {{ mascota.get_tipo_letras}}</td>
+			 {% else %}
+			 <td>-</td>
+			{% endif %}
+
+			 <td>{{ mascota.get_ambito}}</td>
+			 {% if mascota.get_tipo_actividad %}
+			 <td>{{ mascota.get_tipo_actividad }}</td>
+			 {% else %}
+			 <td>-</td>
+			{% endif %}		
+
+			{% if mascota.ambito == 1 %}<!--Ambiti: Plan de gestion -->
+
+				{% if valor == 2 %}<!-- Accion de plan fuera de plazo -->
+				<a class="btn btn-info btn-xs" href="">Re agendar </a>
+				<a  class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}"><small>Ver</small> </a>
+				
+				{% endif %}
+			{% endif %}
+			{% if mascota.ambito == 2 %}<!-- Ambito: atencion de casos -->
+				
+			<td>
+
+			<i class="fa fa-close" style="font-size:18px;color:red"></i>No asistio
+			<a class="btn btn-info btn-xs" href="{% url 'dupla:IntervencionCasosDetailView' mascota.sesion.intervencion_casos.estudiante.id%}" >ver </a>
+   			</td>
+			
+			{% endif %}
+
+			{% if mascota.ambito == 0 %}<!-- Ambito: Contingencia -->
+			<td>
+
+			<i class="fa fa-close" style="font-size:18px;color:red"></i>Anulado
+			<a class="btn btn-info btn-xs" href="{% url 'dupla:IntervencionCasosDetailView' mascota.sesion.intervencion_casos.estudiante.id%}" >ver </a>
+   			</td>
+
+			{% endif %}
+			{% if mascota.ambito == 1 %}<!-- Ambito: Plan de gestón -->
+			<td>
+
+			<i class="glyphicon glyphicon-ban-circle" style="font-size:28px;color:red"></i>Justificado (No realizado)
+			<a class="btn btn-warning btn-xs" href="{% url 'plan:reagendar_hecho_actividades' mascota.id mascota.actividad.id  %}">Re Agendar </a>
+			<a class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}" >ver </a>
+			
+   			</td>
+
+			{% endif %}
+
+			{% if mascota.ambito == 3 %}<!-- Ambito : Convivencia escolar -->
+			<td>
+
+			<i class="fa fa-close" style="font-size:28px;color:red"></i>No realizado
+			<a class="btn btn-success btn-xs" href="">Justificar </a>
+   			</td>
+
+			{% endif %}
+                                  
+   
+ 			 </span>
+			 {% endif %}
+			{% endwith %}		
+
+
+
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de intervenciones </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+ 
+
+{% endblock%}
+

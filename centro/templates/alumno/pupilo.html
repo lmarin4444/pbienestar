@@ -1,0 +1,59 @@
+{% extends 'base/base_secre_simple.html' %}
+
+{% block content %}
+{% block encabezado %} Listado de estudiantes {% endblock %}
+
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Rut</td>
+			<td>Nonbre</td>
+			<td>Curso</td>
+			<td>Establecimiento</td>
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if ninnos %}
+		{% for mascota in ninnos %}
+		<tr>
+			<td>{{ mascota.id }}</td>
+			<td>{{ mascota.rut}}</td>
+			
+			<td> {{ mascota.nombres}} {{ mascota.firs_name }} {{ mascota.last_name }}</td>
+			<td>{{ mascota.curso.numero}} {{ mascota.curso.letra}}</td>
+			<td>{{ mascota.establecimiento}} </td>
+			
+			<td>
+				<a class="btn btn-info" href="{% url 'alumno:alumno_editar' mascota.id %}">Certificado Asistencia</a>
+				<a class="btn btn-success" href="{% url 'alumno:alumno_editar' mascota.id %}">Certificado Simple</a>
+				
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+{% endblock%}

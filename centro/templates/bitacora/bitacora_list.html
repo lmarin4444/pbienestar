@@ -1,0 +1,71 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+
+
+<table id="example" class="table table-bordered" font-size=9>
+	<thead>
+		<tr>
+			
+			<td>Fecha</td>
+			<td>Establecimiento</td>	
+			<td>Accion</td>
+			<td>Ámbito</td>
+			
+			<td>Participantes</td>
+
+
+	
+
+			<td>Opciones </td>
+			
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+			
+			<td>{{ mascota.fecha|date:"d-m-Y "}} <br>{{ mascota.get_horario}}</td>
+			<td>{{ mascota.establecimiento.nombre}} <br> {{ mascota.nombre}}</td>
+			<td>{{ mascota.nombre}}</td>
+			<td>{{ mascota.get_ambito}}<br>
+			{% if mascota.get_tipo_actividad >= 0 %}	
+			{{ mascota.get_tipo_actividad}}</td>
+			{% endif %}
+			<td>{{ mascota.get_participantes}}</td>
+			
+			<td>
+			
+				
+				<div class="btn-group-vertical">
+					<a class="btn btn-success btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Editar </a>
+					<a class="btn btn-warning btn-xs" href="{% url 'derivacion:derivacion_eliminar' mascota.id %}">Borrar</a>
+					<a class="btn btn-info btn-xs" href="{% url 'derivacion:derivacion_centro' mascota.id %}">Re-agendar</a>
+				</div>	
+				
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+{% endblock%}
+

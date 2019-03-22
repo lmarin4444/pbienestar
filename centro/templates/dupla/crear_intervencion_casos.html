@@ -1,0 +1,33 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+
+
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver Establecimientos</a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' colegio.id %}"data-toggle="tooltip" title="Listado de establecimientos">Volver lista</a></li>
+  
+  
+
+  <li class="active">Crear plan de intervención de casos Establecimiento {{colegio.nombre}} </li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-danger">{{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}}{{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success"><h4>Ingresar plan de intervención: {{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}} </h4></div>
+{% endif %}
+	<form method="post">
+  
+	{% csrf_token %}
+	{{ form.as_p }}
+	
+{% if mensaje == "" %}
+	<button class="btn btn-info " type="submit">Registrar</button>
+{% endif %}
+</form>
+ 
+{% endblock %}

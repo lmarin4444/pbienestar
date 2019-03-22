@@ -1,0 +1,13 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<form method="">
+	{% csrf_token %}
+		
+	<h3>La ficha de derivación fue  enviada exitosamente,  ¡Muchas gracias! ...</h3>	
+	
+	
+	<a class= "btn btn-info" href="{% url 'derivacion:centrolistar' %}">Derivaciones enviadas</a>
+	<a class= "btn btn-primary" href="{% url 'derivacion:derivacion_listar' %}">Derivaciones guardadas </a>
+</form>
+{% endblock %}

@@ -1,0 +1,153 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success">Crear informe de evaluación</div>
+{% endif %}
+
+
+  <table id="example" class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+    <tr>
+    
+      <td>NOMBRE :</td>
+      <td>{{ estudiante.nombres|capfirst}} {{ estudiante.firs_name|capfirst}} {{ estudiante.last_name|capfirst}}</td>
+      
+    </tr>
+    <tr>
+    
+      <td>ESTABLECIMIENTO:</td>
+      <td>{{ estudiante.curso.establecimiento.nombre|capfirst}} </td>
+  
+    </tr>
+    <tr>
+    
+      <td>EDAD :</td>
+      <td>{{ estudiante.edad}} </td>
+  
+    </tr>
+    <tr>
+    
+      <td>CURSO :</td>
+      <td>{{ estudiante.curso.get_numero}} {{ estudiante.curso.get_letra}} </td>
+  
+    </tr>
+    <tr>
+      <td>FECHA DE ENTREGA:</td>
+    
+      <td>{% now "SHORT_DATE_FORMAT" %}  </td>
+ 
+    </tr>
+    <tr>
+    
+      <td>PROFESIONAL QUE DERIVA:</td>
+      <td>{{ ficha.usuario.first_name|capfirst}} {{ ficha.usuario.last_name|capfirst}}</td>
+  
+    </tr>
+    
+      
+      <tr>
+       <td>MOTIVO DE DERIVACIÓN:</td>
+        
+        <td>
+          {% for motivo in ficha.Motivo_derivacion.all %}
+         <li> {{motivo.nombre}}</li>
+
+          {% endfor %}  
+        </td>  
+      
+      </tr>
+ 
+      <tr>
+    
+      <td>FASE DE INTERVENCIÓN:</td>
+      <td>Término de fase de Evaluación</td>
+  
+    </tr>
+    <tr>
+    
+      <td>SITUACIÓN ACTUAL</td>
+      
+      <td> 
+        {{formulario.situacion_actual}}
+       </td>  
+  
+    </tr>
+    <tr>
+    
+      <td>OBJETIVO DE LA INTERVENCIÓN</td>
+      <td><li> {{objetivo.objetivo_particular}}</li>
+    
+        {% if objetivo %} 
+          {% for x in objetivo.Tematicas.all %}
+            
+         
+              <li>{{x.nombre}}   </li>
+            
+           {% endfor%}
+         {% endif %}    
+
+    </td>
+    </tr>
+ <tr>
+    
+      <td>DERIVADO A OTRA INSTITUCIÓN:</td>
+      <td>{{ficha.Red_apoyo.nombre}}</td>
+
+  
+    </tr>
+    <tr>
+    
+      <td>OBSERVACIONES</td>
+      <td>{{formulario.observaciones}}</td>
+   
+  
+    </tr>
+     <tr>
+    
+      <td>SUGERENCIAS A LA FAMILIA</td>
+      <td>{{formulario.familia}}</td>
+  
+    </tr>
+
+    <tr>
+    
+      <td><ul><strong>NOMBRE/PSICÓLOGO PSICÓLOGA</strong></ul>
+      {% if yo %}
+      <ul>{{ yo.first_name|upper}} {{ yo.last_name|upper}}</ul>
+      {% else %}
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
+      {% endif %}
+      <td><h5>FIRMA</h5></td>
+  
+    </tr>
+    <tr>
+    
+      <td><strong>NOMBRE/QUIÉN RECIBE EL INFORME</strong></td>
+      <td><h5>FIRMA</h5></td>
+  
+    </tr>
+    
+  </thead>
+  <tbody>
+
+    
+    <tr>
+    
+    <h4>REPORTE BREVE DE PROCESO DE EVALUACIÓN</h3>      
+    </tr>
+    
+   
+  </tbody>
+</table> 
+
+  
+  
+ 
+</form>
+{% endblock %}

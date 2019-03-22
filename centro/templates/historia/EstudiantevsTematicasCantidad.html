@@ -1,0 +1,61 @@
+{% extends 'base/base_usuario.html' %}
+
+{% block content %}
+
+
+
+<table id="example" class="table table-bordered" font-size=9>
+	<thead>
+		<tr>
+			
+			<td>Fecha de creación</td>
+			<td>Estudiante</td>
+			<td>Establecimiento</td>
+			<td>Profesional tratante</td>
+			<td>Temática o temáticas a tratar</td>	
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+			
+			<td>{{ mascota.fecha_creacion|date:"d-m-Y "}}</td>
+			
+			<td>{{mascota.Estudiante.nombres|capfirst}} {{ mascota.Estudiante.firs_name|capfirst }} {{ mascota.Estudiante.last_name|capfirst }}</td>
+			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}} {{ mascota.Estudiante.curso.establecimiento.nombre}}</td>
+			<td>{{mascota.usuario.first_name}} {{mascota.usuario.last_name}}</td>
+			<td>
+			 <ul>{% for motivo in mascota.Tematicas.all %}
+				<li>
+					{{motivo.nombre}}
+				</li>
+				{% endfor %}
+			</ul>
+			</td>
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+{% endblock%}
+

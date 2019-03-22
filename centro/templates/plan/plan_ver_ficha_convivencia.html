@@ -1,0 +1,207 @@
+{% extends 'base/base_datos.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+<form method="post">
+  {% csrf_token %}
+
+<center>
+  <table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  
+    <TH COLSPAN=4 bgcolor="#FAFAA7" style="text-align:center;"> Área convivencia escolar del plan de Equipo de formación y Convivencia Escolar {{plan.establecimiento.nombre}} </TH>
+ 
+</TR>
+
+<TR>
+    <TD COLSPAN=2> 
+    <dd><span class="glyphicon glyphicon-asterisk"></span><strong> Responsables :</strong> {{plan.responsable}}</dd>
+    <dd><span class="glyphicon glyphicon-asterisk"></span> <strong> Objetivo general  :</strong>{{plan.objetivo_general}}</dd>
+    <dd><span class="glyphicon glyphicon-cog"></span> <strong>Objetivo especifico  :</strong>{{plan.objetivo_especificos}}</dd>
+
+   
+  
+    
+</TD>
+</TR>
+ 
+
+<TR>
+
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >Listado de actividades 
+    
+  </TH>
+   
+  
+<TR>
+    <TD COLSPAN=4>
+
+
+
+<table  class="table table-bordered" style="font-size:12px">
+
+  <thead>
+    <tr>
+    
+      <td>Componente</td>
+      <td>Acción</td>
+      <td>Plan</td>
+      <td>Actividad</td>
+      <td>Estado</td>
+
+      
+    </tr>
+    
+  </thead>
+  <tbody>
+
+{% for sesion in base %}
+ <tr>
+     <td><strong>{{ sesion.nombre }} </strong>
+     {% for indicador_activo in indicador_base%}
+     {% if indicador_activo.base == sesion%}
+     <li>{{indicador_activo.nombre}} / {{indicador_activo.get_nivel_logro}}</li>
+     {% endif %}
+     {% endfor %}
+     </td>
+    <td>
+      {% for accion_activa in accion %}
+
+                  {% if accion_activa.base == sesion %}
+                    <li><strong>{{ accion_activa.nombre }}  </strong>
+                    
+                    <ul>Evidencia/Logros 
+                    {% for medios in accion_activa.medios_verificacion.all %}
+                     <li>{{medios.nombre}}</li>
+
+                    {% endfor %}
+
+                    </li></ul>
+                    {% endif %}
+               {% endfor %}  </td>
+    
+            <td> {% for accion_activa in accion %}     
+                     {% if accion_activa.base == sesion %}
+                       {% for plancillo_activo in plancillo%}
+                           {% if plancillo_activo.accion == accion_activa %}
+                              <li>{{plancillo_activo.nombre}}
+                              {% if plancillo_activo.numero < 5 %}    
+                                Curso: {{plancillo_activo.get_numero}} {{plancillo_activo.get_letra}}  </li>
+                              {% endif %}  
+                            {% endif %}
+                        {% endfor %}
+                      {% endif %} 
+              {% endfor %} </td>            
+
+                          
+  
+            <td> {% for accion_activa in accion %}     
+                     {% if accion_activa.base == sesion %}
+                       {% for plancillo_activo in plancillo%}
+                           {% if plancillo_activo.accion == accion_activa %}
+                              {% for actividad_activa in actividades %}
+                                {% if actividad_activa.plancillo == plancillo_activo %}
+                                
+                                   <p style="color:rgb(22,17,189);">{{actividad_activa.nombre}} / </strong>
+                                   {% if actividad_activa.fecha  %}
+                                        [{{actividad_activa.get_mes}}] - {{actividad_activa.fecha|date:"d-m-Y "}}  / {{actividad_activa.get_horario}}
+                                    {% else %} 
+                                     {{actividad_activa.get_mes}}
+                                    {% endif %}  
+                                       {{actividad_activa.responsable}} / {{actividad_activa.get_ejecutores}}</small></a> 
+                                 </p>
+                              
+                                    {% for hecho_activo in hecho_a %}
+                                        {% if hecho_activo.actividades == actividad_activa %}
+                                           <ul style="color:blue"> {{hecho_activo.get_estado}}/{{hecho_activo.fecha|date:"d-m-Y "}}/ {{ hecho_activo.usuario.first_name}} {{ hecho_activo.usuario.last_name}}</ul></li>
+                                        {% endif %}
+
+
+                                    {% endfor %} 
+                                {% endif%}
+                            {% endfor %}
+                          
+                            {% endif %}
+                        {% endfor %}
+                      {% endif %} 
+              {% endfor %}  </td>    
+
+
+              <td> {% for accion_activa in accion %}     
+                     {% if accion_activa.base == sesion %}
+                       {% for plancillo_activo in plancillo%}
+                           {% if plancillo_activo.accion == accion_activa %}
+                              {% for actividad_activa in actividades %}
+                              {% if actividad_activa.plancillo == plancillo_activo %}
+                                
+                                   <p style="color:rgb(35,22,2);"><strong>{{actividad_activa.get_estado}}  </strong>
+                                
+                                 </p>
+                              
+                                 
+                                {% endif%}
+                            {% endfor %}
+                          
+                            {% endif %}
+                        {% endfor %}
+                      {% endif %} 
+              {% endfor %}  </td> 
+   
+            
+{% endfor %}    
+
+
+
+
+  </tr> 
+
+</table>
+
+  
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#F7E0E9" style="text-align:center;" >Establecimiento {{plan.establecimiento.nombre}}</TH>
+    
+  </TR>
+
+      
+      <TD COLSPAN=4>  
+      
+      <ul><strong>NOMBRE/EQUIPO DE FORMACIÓN Y CONVIVENCIA ESCOLAR </strong></ul>
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
+      </TD>
+   
+  
+    </tr>
+    
+    
+  </thead>
+  <tbody>
+
+    
+    
+    
+    
+  </tbody>
+</table> 
+</center>
+  
+  
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{%  extiende  "base.html"  %} 
+{%  carga  crispy_forms_tags  %}
+
+{%  block  title  %} Iniciar sesión {%  endblock  %}
+
+{%  block  toggle_login  %} {%  endblock  %}
+
+{%  block  heading  %} 
+  <h2> Login </ h2> 
+{%  endblock  %}
+
+{%  block  content  %} 
+  <form  action = " {%  url  " mysite_login "  %} "  method = "post"  accept-charset = "utf-8" > 
+    {{  form | crujiente  }} 
+    {%  csrf_token  %} 
+    <input  type = "hidden"  name = "next"  value = " {{  next  }} " > 
+    <input  class = "btn btn-default"  type = "submit"  value = "Login"
+  
+  %}

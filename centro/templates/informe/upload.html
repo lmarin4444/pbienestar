@@ -1,0 +1,17 @@
+{% extends 'base/base_datos.html' %}
+
+{% block content %}
+
+<div class="col-md-8 col-md-offset-2">
+<h3>Ingresar un nuevo archivo</h3>
+</div>
+<form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+	<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+            {{ form.as_p }}
+             <input type="submit" class="btn btn-info" value="Registar">
+           </div>
+    </div>        
+       
+    </form>
+{% endblock %}

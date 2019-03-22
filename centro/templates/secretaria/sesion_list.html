@@ -1,0 +1,123 @@
+{% extends 'base/base_secre.html' %}
+
+{% block content %}
+
+Para el estudiante {{dato.nombres}} {{ dato.firs_name }} {{ dato.last_name }} / {{dato.curso.establecimiento.nombre}} /{{dato.curso.get_numero}}{{dato.curso.get_letra}}
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Nª Total </td>
+			<td># Sesión</td>
+			
+			<td>Fecha </td>
+			<td>Horario</td>
+			
+			
+			<td>Participantes</td>
+			
+			<td>Tipo Sesión</td>
+			
+		</tr>
+	</thead>
+	
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog">     
+	<tbody>
+		
+		{% if sesion %}
+		{% for mascota in sesion %}
+		
+		<tr>
+			<td>{{ forloop.counter }}</td>
+			<td>{{ mascota.numero }}</td>
+			
+			<td>{{ mascota.fecha}}</td>
+			<td>{{ mascota.get_horario_i}}</td>
+		
+		
+			<td>{{ mascota.get_participantes}}</td>
+		
+			<td>{{ mascota.tipo_sesion}}</td>
+
+	
+				
+			
+		</tr>
+
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de asistencia</h1>
+		{% endif %}
+	</tbody>
+</table> 
+
+
+<table id="example" class="table table-bordered">
+	<thead>
+<h4>Resumen general de asistencias de {{dato.nombres}} {{dato.firs_name}} {{dato.last_name}}</h4>
+<thead>
+		<tr>
+			<td>Nª  </td>
+			<td>Fecha </td>
+			<td>Horario</td>
+			<td>Situación</td>
+			
+
+		</tr>
+	</thead>
+{% if agendado %}
+		  
+	 {% for mascota in agendado %}
+	
+			<tr>
+				
+				{% if mascota.numero == 1 %}
+				<td>{{ forloop.counter }}</td>
+				<td>{{ mascota.fecha }}</td>
+				
+				<td>{{ mascota.get_horario_i}}</td>
+				<td> Hora solo agendada</td>
+				{% elif mascota.numero == 2 %}
+				<td>{{ forloop.counter }}</td>
+				<td>{{ mascota.fecha }}</td>
+				
+				<td>{{ mascota.get_horario_i}}</td>
+				<td>Sesión realizada</td>
+
+				{% else %}
+
+				<td class="danger">{{ forloop.counter }}</td>
+				<td class="danger">{{ mascota.fecha }}</td>
+				
+				<td class="danger">{{ mascota.get_horario_i}}</td>
+				<td class="danger">Estudiante no asistio</td>
+
+				{% endif %}
+				
+				
+	
+			
+		{% endfor %}
+		<a class="btn-xs btn-info" href="{% url 'secretaria:ver_semana' %}">Volver semana actual</a>
+		<a class="btn-xs btn-success" href="{% url 'secretaria:ver_escuela' %}">Volver próxima semana </a>
+		{% else %}
+		<h1>No hay registros de asistencia</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{% endblock%}

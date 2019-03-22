@@ -1,0 +1,167 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+
+	<table id="example" class="table table-bordered" fontsize =10px>
+	<thead>
+		<tr>
+		
+			<td>Nombre :</td>
+			<td>{{ dato.nombres|upper}} {{ dato.firs_name|upper}} {{ dato.last_name|upper}}</strong></td>
+			</h4>
+		</tr>
+		<tr>
+		
+			<td>Año actual de escolaridad :</td>
+			{% if escolar.anno%}
+			<td>{{ escolar.anno}} </td>
+			{% else %}
+			<td> ---- </td>
+			{% endif %}
+	
+		</tr>
+		<tr>
+		
+			<td>Fecha inicio de la escolaridad :</td>
+			{% if escolar.fecha_inicio%}
+			<td>{{ escolar.fecha_inicio}} </td>
+			{% else %}
+			<td> ---- </td>
+			{% endif %}
+		</tr>
+		<tr>
+		
+			<td>Fecha término de la escolaridad :</td>
+			{% if escolar.fecha_termino%}
+			<td>{{ escolar.fecha_termino}} </td>
+			{% else %}
+			<td> ---- </td>
+			{% endif %}
+	
+		</tr>
+		<tr>
+		
+			<td>Rendimiento del estudiante:</td>
+			{% if escolar.rendimiento%}
+			<td>{{ escolar.rendimiento|upper}} </td>
+			{% else %}
+			<td> ---- </td>
+			{% endif %}
+	
+		</tr>
+		<tr>
+		
+			<td>Conducta del estudiante:</td>
+			{% if escolar.conducta%}
+			<td>{{ escolar.conducta|upper}} </td>
+			{% else %}
+			<td> ---- </td>
+			{% endif %}
+	
+		</tr>
+		<tr>
+		
+			<td>Curso:</td>
+			{% if escolar.curso%}
+			<td>{{ escolar.get_curso}} {{ escolar.get_Letra}} </td>
+				{% else %}
+			<td> ---- </td>
+			{% endif %}
+		</tr>
+
+
+		
+	</thead>
+	<tbody>
+
+		
+		<tr>
+		
+		<h4>El estudiante del establecimiento: {{escolar.establecimiento.nombre}}</h3>			
+		</tr>
+		
+		
+		
+	</tbody>
+</table> 
+
+
+<h3>Historia de  escolaridad</h3>
+	<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+
+			
+			<td>Año</td>
+			<td>Fecha incio</td>
+			<td>Fecha término</td>
+			<td>Rendimiento</td>
+			<td>Conducta</td>
+			<td>Curso</td>
+			<td>Establecimiento</td>
+			
+
+
+
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if anterior %}
+		{% for escolaridad in anterior %}
+		<tr>
+			{% if escolaridad.anno%}
+			<td>{{ escolaridad.anno }}</td> 
+			{% else %}
+			<td> ---- </td>
+			{% endif %}
+			{% if escolaridad.fecha_inicio %}
+			<td>{{ escolaridad.fecha_inicio }}</td> 
+			{% else %}
+			<td> ---- </td>
+			{% endif %}
+			{% if escolaridad.fecha_termino %}
+			<td>{{ escolaridad.fecha_termino }}</td> 
+			{% else %}
+			<td> ---- </td>
+			{% endif %}	
+			{% if escolaridad.rendimiento %}
+			<td>{{ escolaridad.rendimiento }}</td> 
+			{% else %}
+			<td> ---- </td>
+			{% endif %}
+			{% if escolaridad.conducta %}
+			<td>{{ escolaridad.conducta }}</td> 
+			{% else %}
+			<td> ---- </td>
+			{% endif %}
+			{% if escolaridad.curso %}
+			<td>{{ escolaridad.get_curso}} {{ escolaridad.get_Letra}}</td>  
+			{% else %}
+			<td> ---- </td>
+			{% endif %}
+			
+			<td>{{ escolaridad.establecimiento.nombre }}</td> 
+			 
+
+			
+
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No cuenta con escolaridad anterior</h1>
+		{% endif %}
+	</tbody>
+</table> 
+
+
+
+	
+	
+	<a class= "btn btn-info" href="{% url 'derivacion:intervencion_listar'  %}">Volver</a>
+</form>
+{% endblock %}

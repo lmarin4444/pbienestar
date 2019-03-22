@@ -1,0 +1,10 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<h3>¿Desea eliminar el registro de {{ object.Estudiante.nombres|capfirst}} {{ object.Estudiante.firs_name|capfirst}} {{ object.Estudiante.last_name|capfirst}}?</h3>	
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info" href="{% url 'sesion:sesion_listar' %}">Cancelar</a>
+</form>
+{% endblock %}

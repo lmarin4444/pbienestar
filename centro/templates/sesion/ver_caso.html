@@ -1,0 +1,65 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+
+
+
+<table id="example" class="table table-bordered">
+  <thead>
+    <tr>
+      <td># Sesión</td>
+      <td>Fecha</td>
+      <td>Temática </td>
+      <td>Actividad </td>
+      <td>Tipo sesión </td>
+      <td>Estudiante </td>
+
+    
+    </tr>
+    
+  </thead>
+  <tbody>
+    {% if object_list %}
+    {% for mascota in object_list %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ mascota.fecha }}</td>
+      <td>{{ mascota.objetivo }}</td>
+      <td>{{ mascota.publico}}</td>
+      <td>{{ mascota.tipo_sesion.nombre}}</td>
+      <td>{{ mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name}} {{ mascota.Estudiante.last_name}} </td>
+
+      
+
+
+      <td>
+       
+        
+      </td>
+    </tr>
+    {% endfor %}
+    
+    {% else %}
+    <h1>No hay sesiones aun</h1>
+    {% endif %}
+  </tbody>
+</table> 
+<ul class="pager">
+  <li>
+    {% if page_obj.has_previous %}
+         <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+    {% endif %}
+        </li>
+  <li>
+    {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+      {% endif %}
+    </li>
+</ul>
+
+
+{{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}
+
+
+
+{% endblock%}

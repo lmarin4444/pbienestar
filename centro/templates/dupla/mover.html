@@ -1,0 +1,72 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+
+{% block content %}
+
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver lista</a></li>
+  
+  
+  
+
+  <li class="active">Seleccionar estudiantes para el evento de convivencia escolar  </li> 
+</ul>
+{% if mensaje %}
+<div class="alert alert-danger">{{escuela.nombre}} {{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success"><h4>Ingresar acción de convivencia escolar :{{escuela.nombre}} </h4></div>
+{% endif %}
+  <form  method="post">
+  
+  {% csrf_token %}
+  {{ form.as_p }}
+  
+
+  <button class="btn btn-info " type="submit">Registrar</button>
+  
+  
+</form>
+
+<table id="example" class="table table-bordered" fontsize =10px>
+	<thead>
+		<tr>
+		
+			
+			<td>Estudiantes</td>
+			<td>Observación</td>
+	
+			
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if evento %}
+		{% for mascota in evento %}
+		<tr>
+			<td>		
+			
+			<li>{{ mascota.nombres|upper}} {{ mascota.firs_name|upper}} {{ mascota.last_name|upper}}</li>
+			
+			</td>
+			<td>{{ mascota.observacion_estudiante}}</td>
+			
+			
+			
+			
+		</td>
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>Sin registros.  </h1>
+		{% endif %}
+	</tbody>
+</table> 
+ 
+{% endblock %}
+

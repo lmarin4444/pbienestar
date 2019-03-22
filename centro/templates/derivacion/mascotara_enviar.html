@@ -1,0 +1,10 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	<h3>¿Desea enviar al centro  el registro de {{ object.Estudiante }}?</h3>	
+	<button class="btn btn-dark" type="submit">Sí, enviar</button>
+	<a class= "btn btn-default" href="{% url 'derivacion:derivacion_new' %}">Cancelar</a>
+</form>
+{% endblock %}

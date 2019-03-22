@@ -1,0 +1,151 @@
+{% extends 'base/base_datos_agenda_dupla.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Listado establecimientos</a></li>
+
+  <li><i class="fa fa-calendar" style="font-size:12px;color:black"></i><a href="{% url 'bitacora:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">  Calendario </a></li>
+
+  {% if mensaje %}
+  <li><a href="{% url 'plan:PlanListView' escuela.id %}"data-toggle="tooltip" title="Listado de plan">Ver Plan</a></li>
+  {% endif%}
+  
+
+  <li class="active">REGISTRO DE ACTIVIDAD <STRONG> {{plan.nombre}} / {{base.nombre}} / {{accion.nombre}} / {{plancillo.nombre}}</STRONG></li> 
+</ul>
+
+  <div class="p-3 mb-2 bg-success text-white">Ingresar actividad para {{base.nombre}}/ {{accion.nombre}} /{{plancito.nombre}}/ {{actividad.fecha}}/ {{plan.establecimiento.nombre}} </div> 
+
+
+<div class="panel panel-primary">
+
+<div class="p-3 mb-2 bg-primary text-white">Detalle de la actividad a registrar</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th> </th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    
+    <div class="p-3 mb-2 bg-success text-white">
+    <tr>
+      <th scope="row">Nombre:</th>
+      <td>{{actividad.nombre}}</td>
+      <td><strong>Tipo:</strong></td>
+      <td>{{actividad.get_tipo}}</td>
+      <td><strong>Descripción:</strong></td>
+      <td>{{actividad.descripcion}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Ejecutores:</th>
+      <td>{{actividad.get_ejecutores}}</td>
+      
+      <td><strong>Responsable:</strong></td>
+      <td>{{actividad.responsable}}</td>
+      <td><strong>Participantes:</strong></td>
+      <td>{{actividad.get_participantes}}</td>
+      
+    </tr></div>
+    
+    <tr>
+      <th scope="row">Asistencia:</th>
+      <td>{{actividad.asistencia}}</td>
+      <td><strong>Convocatoria:</strong></td>
+      <td>{{actividad.cantidad_convocada}}</td>
+      <td><strong>Observación:</strong></td>
+      <td>{{actividad.observaciones}}</td>
+    </tr>
+    
+    <tr>
+      <th scope="row">Verificadores:</th>
+     <td> {% for verifica in actividad.verificadores.all %}
+      
+      <li>{{verifica.nombre}}</li>
+      {% endfor %}</td>
+      <td><strong>Planes Externos:</strong></td>
+      <td>{{actividades.planes_externos.nombre}}</td>
+      <td><strong>Observación:</strong></td>
+      <td>{{actividad.observaciones}}</td>
+    </tr>
+   <tr>
+      <th scope="row">Inicio:</th>
+      <td>{{actividad.inicio}}</td>
+      <td><strong>Desarrollo:</strong></td>
+      <td>{{actividad.desarrollo}}</td>
+      <td><strong>Cierre:</strong></td>
+      <td>{{actividad.cierre}}</td>
+    </tr>
+
+<tr>
+      <th scope="row">Evaluación:</th>
+      <td>{{actividad.get_evaluacion}}</td>
+      <td><strong>Estado:</strong></td>
+      <td>{{actividad.get_estado}}</td>
+      <td><strong>Plan:</strong></td>
+      <td>{{actividad.plancillo.nombre}}</td>
+    </tr>
+
+  </tbody>
+</table>
+
+
+
+</div>
+
+
+<div class="p-3 mb-2 bg-primary text-white">Detalle actividad</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th> </th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+ 
+    </tr>
+  </thead>
+ 
+  <tbody>
+
+    
+    <div class="p-3 mb-2 bg-success text-white">
+    {% for hechos in hecho_a %}
+  
+      <li><strong>Fecha:</strong>
+      {{hechos.fecha}}
+      <strong>Observación:</strong>
+      {{hechos.observacion}}
+      <strong>Estado:</strong>
+      {{hechos.get_estado}}
+      <strong>Logros:</strong>
+      {{hechos.logros}}
+      <strong>Mejora:</strong>
+      {{hechos.mejora}}</li>
+  
+    {% endfor %}
+
+
+  </tbody>
+</table>
+
+
+
+</div>
+
+
+<a class="btn btn-primary btn-xs" href="{% url 'bitacora:fechas' dia mes %}"> Volver </a>
+
+ 
+{% endblock %}

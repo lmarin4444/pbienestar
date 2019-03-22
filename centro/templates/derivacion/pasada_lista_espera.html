@@ -1,0 +1,16 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+
+	El estudiante, pasa a lista de espera.
+
+	<h3>¿Desea pasar a lista de espera  el registro de {{ object.Estudiante.nombres|capfirst}} {{ object.Estudiante.firs_name|capfirst}} {{ object.Estudiante.last_name|capfirst}}?</h3>	
+
+	
+	<button class="btn btn-danger" type="submit">Sí, enviar</button>
+	<a class= "btn btn-info" href="{% url 'derivacion:espera_listar' %}">Cancelar</a>
+
+</form>
+{% endblock %}

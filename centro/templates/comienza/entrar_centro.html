@@ -1,0 +1,142 @@
+{% extends "base_no.html" %}
+{% load static%}
+{% block title%}Modulo centro de bienestar{% endblock%}
+
+{% block menu%}
+    
+
+    
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+
+        <ul class="nav navbar-nav navbar-left" >
+        <li>
+            
+
+        </li>
+        
+         <li >
+           <ul  class="btn btn-warning">
+             <li class="active">
+                <a href="{% url 'derivacion:centro_listar' %}"> Derivaciones entrantes
+                {% with total=derivada.count %} 
+              
+
+                 <span class="badge pull-right"> {{total}} </span></a>
+                {% endwith %}
+              </li>
+
+                <li class=class="btn btn-success">
+                  {% with lista=espera.count %} 
+                  <a href="{% url 'derivacion:espera_listar' %}"> Lista  de espera
+                  <span class="badge pull-right">{{lista}}</span></a>
+                  {% endwith %}
+                </li>
+            </ul>
+                
+           <li class="dropdown">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown">Área Intervención <b class="caret"></b></a>
+
+              
+              <ul class="dropdown-menu">
+              
+              <li><a href="{% url 'derivacion:intervencion_listar' %}">Fichas en intervención (Todas)</a></li>
+              <li><a href="{% url 'derivacion:intervencion_list' %}">Cambiar de profesional  {{ user.first_name|title|truncatewords:'1'}} {{ user.last_name|title|truncatewords:'1'}}</a></li>
+              <li><a href="{% url 'sesion:intervenido' %}">Intervenciones de <strong> {{ user.first_name}} {{ user.last_name}}</strong></a></li>
+              <li><a href="{% url 'derivacion:ReporteIntervenidos' %}">Reporte Intervenciones<strong> {{ user.first_name}} {{ user.last_name}}</strong></a></li>
+              
+              <li><a href="{% url 'derivacion:intervencion_otrar' %}">Intervenciones derivadas a otras instituciones</a></li>
+              <li><a href="{% url 'derivacion:intervencion_retorno' %}">Intervenciones en Etapa de término</a></li>
+
+              
+              <li><a href="{% url 'alumno:establecimiento' %}">Información Establecimientos</a></li>
+
+              
+            
+
+              </ul>
+            </li>
+            <!-- 
+            <li class="dropdown">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown">Registro Histórico <b class="caret"></b></a>
+
+              <ul class="dropdown-menu">
+              
+
+              <li><a href="{% url 'historia:registro_historico' %}">Registro Histórico de Estudiantes</a></li>
+              <li><a href="{% url 'derivacion:intervencion_otrar' %}">Intervenciones derivadas a otras instituciones</a></li>
+                  
+              <!- Comentario en una página HTML 
+                                        la comento para borrarla despues
+                <li><a href="{% url 'sesion:sesion_crear' %}">Crear intervencion individual historica </a></li>
+  
+                                        
+              
+              
+
+                
+                <li><a href="{% url 'calendario:calendar2' ano=2017  mes=1 %}">Calendario 2017</a></li>
+               
+              </ul>
+            </li>
+-->
+
+
+
+         <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Info sesión  <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        
+                        <li><a href="{% url 'sesion:tipo_sesion_listar' %}">Listado de Tipos de sesión</a></li>
+                  
+                        <li><a href="{% url 'profesional:profesional_listar_Centro' %}">Listado de profesionales </a></li>
+                        
+                        
+                      </ul>
+          </li>
+         <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Registros  <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="{% url 'historia:registro_historico' %}">Registro Histórico de Estudiantes</a></li>
+                        <li><a href="{% url 'sesion:listar_intervenciones' %}">Registro de las intervenciones de {{user.username|capfirst}} </a></li>
+                        <li><a href="{% url 'calendario:calendar2' ano=2017  mes=1 %}">Calendario 2017</a></li>
+                        <li><a href="{% url 'calendario:calendar2' ano=2018  mes=1 %}">Calendario 2018</a></li>
+                       <li><a href="{% url 'calendario:calendar-ano-mes' %}">Calendario Actual </a></li>
+
+                       <li><a href="{% url 'derivacion:modificar_informes' %}">Modificar informes  </a></li>
+                      
+                        
+
+
+                       
+
+
+                        
+         </ul>
+          </li>
+          
+
+          <!-- Dropdown menu
+          <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Informes  <b class="caret"></b></a>
+
+                      <ul class="dropdown-menu">
+                        
+
+          
+
+                      </ul>
+                      -->
+                      <li>
+                        <a href="{% url 'usuario:cerrar' %}"  >Salir </a>
+                      </li>
+
+                      <li><a href="{% url 'usuario:change_password' %}">Cambiar contraseña</a></li>
+            </li>
+       
+        </ul>
+    </div>
+    </div>
+</div>
+
+{% endblock%}
+  

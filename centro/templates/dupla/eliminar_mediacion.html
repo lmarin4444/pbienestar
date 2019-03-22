@@ -1,0 +1,28 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  
+  <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Listado estudiantes intervenidos </a></li>
+  
+
+  <li class="active">Eliminar mediación {{lista.nombre|capfirst}} </li> 
+  <p> Del día {{lista.fecha}} a las {{lista.horario}} ambito :{{lista.get_ambito}} 
+  </p>
+ </ul>
+
+<form method="post">
+	{% csrf_token %}
+	<h3>¿Desea eliminar el evento  {{ lista.nombre|capfirst }}  ?</h3>	
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info" href="{% url 'bitacora:fechas' lista.fecha.day lista.fecha.month %}">Cancelar</a>
+
+
+
+
+</form>
+{% endblock %}

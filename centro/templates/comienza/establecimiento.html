@@ -1,0 +1,46 @@
+{% extends "base_1.html" %}
+{% load static%}
+{% block title%} Red PsicoSocial{% endblock%}
+
+
+{% block encabezado%}Listado de Establecimientos{% endblock%}
+{% block subencabezado%}Comuna de Cabildo{% endblock%}
+
+{% block content %}
+    <p>
+          <div class="jumbotron">
+            <div class="container"> 
+              <div class="table-responsive">
+               <table class="table">               
+              <tr>
+                <td><strong>Nombre</strong></td>
+                <td><strong>RBD</strong></td>
+                <td><strong>Localidad</strong></td>
+                <td><strong>Director</strong></td>
+                <td><strong>Telefono</strong></td>
+               </tr>
+       
+               {% for est in colegio %}
+               {% if est.Rbd != 1 %}                
+              <tr>
+                <td>{{ est.nombre }}</td>
+                <td>{{ est.Rbd }}</td>
+                <td>{{ est.localidad }}</td>
+                <td>{{ est.director }}</td>
+                <td>{{ est.telefono }}</td>
+
+              </tr>
+              {% endif %}
+
+        {% endfor %}
+      </table>                
+    </div>
+  </div>
+</div>
+</p>
+    <p><a href="{% url 'index' %}" class="btn btn-primary btn-lg" role="button">Inicio</a></p>
+  </div>
+</div>
+                 
+   {% endblock %}              
+                 

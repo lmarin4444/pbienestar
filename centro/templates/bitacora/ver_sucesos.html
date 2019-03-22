@@ -1,0 +1,95 @@
+{% extends 'base/base_datos.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'bitacora:fechas' agendado.fecha.day agendado.fecha.month %}"data-toggle="tooltip" title="Ir  Calendario">Volver a calendario </a></li>
+ 
+
+  <li class="active"> Visualización de contingencia</li> 
+  </ul>
+<form method="post">
+  {% csrf_token %}
+
+<center>
+  <table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  <h4>Suceso de {{user.first_name}} {{user.last_name}} </h4>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;">Evento: {{agendado.nombre}} {{ agendado.fecha|date:"d-m-Y "}} a las {{ agendado.get_horario}}</TH>
+ 
+</TR>
+
+<TR>
+    <TD COLSPAN=2> 
+  
+    <dd><span class="glyphicon glyphicon-asterisk"></span><strong> Curso :</strong> {{agendado.get_curso}} {{agendado.get_tipo_letras}}</dd>
+    
+
+    
+    <dd><span class="glyphicon glyphicon-asterisk"></span> <strong> Ámbito  :</strong>{{agendado.get_ambito}}</dd>
+    
+    <dd><span class="glyphicon glyphicon-cog"></span> <strong>Tipo Actividad  :</strong>{{agendado.get_tipo_actividad}}</dd>
+    <dd><span class="glyphicon glyphicon-briefcase"></span><strong> Participantes :</strong> {{agendado.participantes }} </dd>
+    <dd><span class="glyphicon glyphicon-briefcase"></span><strong> Establecimiento:</strong> {{agendado.establecimiento.nombre }} </dd>
+    <dd><span class="glyphicon glyphicon-briefcase"></span><strong> Desarrollo:</strong> {{agendado.desarrollo }} </dd>
+    <dd><span class="glyphicon glyphicon-briefcase"></span><strong> Acciones :</strong> {{plan_externo.acciones }} </dd>
+
+
+</TD>
+</TR>
+ 
+
+<TR>
+    <TD COLSPAN=4>
+
+<ul>
+
+
+
+
+
+  </TR>
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#F7E0E9" style="text-align:center;" >Profesional <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul></TH>
+    
+  </TR>
+
+      
+      
+  
+    </tr>
+    
+    
+  </thead>
+  <tbody>
+
+    
+    
+    
+    
+  </tbody>
+</table> 
+</center>
+  
+  
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

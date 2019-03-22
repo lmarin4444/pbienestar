@@ -1,0 +1,75 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+<h3> Listado de interveciones de {{user.first_name|capfirst}} {{user.last_name|capfirst}} </h3> 
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Nª </td>
+			<td>Estudiante</td>
+			<td>Fecha creación(Objetivo)  </td>
+			<td>Temáticas</td>
+			<td>Objetivo </td>
+			<td>Acciones</td>
+		</tr>
+	</thead>
+	
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog">
+	<tbody>
+		
+		{% if object_list %}
+		{% for mascota in object_list %}
+		
+		<tr>
+			<td>{{ forloop.counter }}</td>
+			<td>{{mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}</td>
+			<td>{{ mascota.fecha_creacion|date:"d-m-Y "}}</td>
+		<td>
+		{% for temas in mascota.Tematicas.all %}
+		<lu><li>{{ temas.nombre }} {{temas.objetivo.nombre}}</li></lu>
+				{% for objetiv in temas.objetivo.all %}
+				<lu><li>{{ objetiv.nombre }} </li></lu>
+				{% endfor%}	
+			{% endfor%}	
+		</td>
+			<td>{{ mascota.objetivo_particular }}
+			
+	
+
+			</td>
+
+			
+					
+			<td>
+				
+				<a class= "btn btn-info" href="{% url 'sesion:cambio_objetivo' mascota.Estudiante.id mascota.id %}">Cambiar objetivo</a>
+</form>
+				
+				
+				
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay asigación de objetivos</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+{% endblock%}

@@ -1,0 +1,23 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  
+  <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Listado estudiantes intervenidos </a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' escolar %}"data-toggle="tooltip" title="Ir listado establecimiento">Volver a la lista</a></li>
+  
+
+  <li class="active">Eliminar un miembro de la familia de {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</li> 
+</ul>
+
+<form method="post">
+	{% csrf_token %}
+
+	<h3>¿Desea eliminar apoderado  de {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}?</h3>	
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info" href="{% url 'alumno:familia' dato.id %}">Cancelar</a>
+</form>
+{% endblock %}

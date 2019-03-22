@@ -1,0 +1,93 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+
+
+<h3>Listado de Temáticas </h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Nombre</td>
+			<td>Descripción </td>
+			
+			
+			<td>Opciones </td>
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+			<td>{{ mascota.id }}</td>
+			<td>{{ mascota.nombre }}</td>
+			<td>{{ mascota.descripcion}}</td>
+			
+			<td>
+				<a class="btn btn-info btn-xs" href="{% url 'sesion:tematica_editar' mascota.id %}">Editar</a>
+				
+				<!-- <a class="btn btn-danger btn-xs" href="{% url 'sesion:tematica_eliminar' mascota.id %}">Eliminar</a>-->
+				<!-- Used to open the Modal -->
+<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal">Eliminar </button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog"> 
+
+    <!-- Modal content-->
+    <div class="modal-content"> 
+      <div class="modal-header"> 
+        <button type="button" class="close" data-dismiss="modal">&times;</button> 
+        <h3><span class="glyphicon glyphicon-ban-circle"></span> Eliminar Temática:</h3> 
+        
+      </div> 
+      <div class="modal-body"> 
+        <form role="form"> 
+          <div class="form-group"> 
+ 
+              Las Temáticas no pueden ser eliminadas, si de todas formas desea eliminarla,  debe contactarse con el administrador del sistema.
+
+      </h4>
+     </div> 
+          
+      <div class="modal-footer">  
+        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+          <span class="glyphicon glyphicon-add"></span> Aceptar
+        </button> 
+       
+    </div>
+  </div>
+</div>
+      
+
+				
+			</td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay objetivos definidos</h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}
+
+
+
+{% endblock%}

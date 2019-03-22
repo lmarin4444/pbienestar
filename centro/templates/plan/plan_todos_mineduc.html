@@ -1,0 +1,65 @@
+{% extends 'base/base_dupla.html' %}
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver lista</a></li>
+  
+ 
+  <li class="active">Planes por años</li> 
+</ul>
+
+<h3>Listado de planes  : <strong> {{colegio.nombre}}</strong></h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			
+			<td>Año </td>
+			<td>Nombre plan</td>
+			<td>Obj. General</td>
+			<td>Descargable</td>
+			<td>Acciones</td>
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if planes %}
+
+		<tr>
+		{% for escuela in planes %}
+			
+			<td>{{ escuela.fecha|date:" Y "}} </td>
+			<td><li>{{ escuela.nombre }}</li></td>
+			<td><li>{{ escuela.objetivo_general }}</li></td>
+			
+			
+	{% if escuela.docfile1 %}		        			
+	<td><a href="{{ escuela.docfile1.url }}"><span class="glyphicon glyphicon-floppy-save"></span> </a>Descargar plan </td>
+	{% else %}	
+		<td>Plan sin documento adjunto</td>
+	{% endif %}	
+
+		
+			<td>
+			
+	<button type="button" class="btn btn-success btn-xs">
+	<a href="{% url 'plan:PlanmineducListView' escuela.id %}" data-toggle="tooltip" title="ingresar indicadores">
+    <span class="glyphicon glyphicon-eye-open"></span> Ver Detalles...
+  </button>
+				
+			
+			
+			</td>
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros relacionados</h1>
+		{% endif %}
+	</tbody>
+</table> 
+{% endblock%}

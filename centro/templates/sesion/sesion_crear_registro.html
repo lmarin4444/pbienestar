@@ -1,0 +1,44 @@
+{% extends 'base/base_datos_centro.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu centro</a></li>
+  <li><a href="{% url 'calendario:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">Calendario </a></li>
+  
+
+  <li class="active">Listado de registro</li> 
+</ul>
+
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}</div>
+{% else %}
+
+<div class="alert alert-success">Registrar la inacistencia de un estudiante</div>
+{% endif %}
+<div class="container">
+  <div class="row">
+   
+        <h3> Para el estudiante {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h3>
+        Con fecha :{{agenda.fecha}} horario : {{agenda.horario_i}} <br>
+        Con los particiontes a la sesión: {{agenda.participantes}} --Tipo sesión: {{agenda.tipo_actividad}}
+      
+          <form method="post">
+				{% csrf_token %}
+				
+				{{ form|crispy }}	
+                <button class="btn btn-info " type="submit">Registrar</button>
+				</form>
+          
+
+          
+
+      </div>
+    </div>
+
+
+
+	
+
+{% endblock %}

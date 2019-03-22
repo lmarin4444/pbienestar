@@ -1,0 +1,96 @@
+
+{% extends 'base/base_centro.html' %}
+{% load bootstrap3 %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+
+       <h3>Asignación de  objetivos para el estudiante {{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.nombres.last_name|capfirst}}</h3>
+        <div class="input-group">
+          <form method="post">
+				{% csrf_token %}
+				
+			
+				{{ formulario.as_p }}
+				<button class= "btn btn-info" type="submit">Registrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+<div class="col-md-6">
+  <div class="bs-example">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Temáticas</a>
+                </h4>
+            </div>
+            
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+
+
+
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Listado de Temáticas </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    
+                    {% if tema %}
+						
+						
+						<tr>
+							
+						<td>
+						{% for temas in tema.all %}
+						<lu>{{ temas.nombre }} {{temas.objetivo.nombre}}</lu>
+								{% for objetiv in temas.objetivo.all %}
+								<li>{{ objetiv.nombre }} </li>
+								{% endfor%}	
+						{% endfor%}	
+						</td>
+						{% endif%}
+			
+
+
+						
+
+	
+                	
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Info</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    < Ingresar un objetivo de intervención para el estudiante seleccionado
+                </div>
+            </div>
+        </div>
+
+        
+        
+    </div>
+  
+</div>
+
+</div>
+  </div>
+</div>
+
+
+	
+
+{% endblock %}
+

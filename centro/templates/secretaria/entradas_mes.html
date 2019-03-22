@@ -1,0 +1,17 @@
+{% extends 'base/base_encuestas.html' %}
+{% block cabezera %}Agenda |{{ month|date:"F" }}{% endblock %}
+
+
+
+{% block contenido %}
+    <h2>  Entradas del Mes de {{ month|date:"F" }} <h2>
+{% for entrada in entradas %}
+
+    {% ifchanged %} <h3> {{entrada.fecha|date:"d/m/Y"}}</h3>{% endifchanged %}
+
+    <li> {{ forloop.counter }}<a href="{{entrada.get_absolute_url }}">
+{{ entrada }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}
