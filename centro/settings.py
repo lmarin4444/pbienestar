@@ -23,9 +23,9 @@ USE_L10N=False
 SECRET_KEY = '7nn-$!t8r$eedv5xuwb79z=$k#$o@68fvoppr47ukxj$%$d^v$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 #from django.core.urlresolvers import reverse_lazy
 #LOGIN_URL=reverse_lazy('login')
@@ -96,12 +96,26 @@ WSGI_APPLICATION = 'centro.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
+
+
+# PRODUCTION
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dbprod01pb',
+        'USER': 'pbuserdb01',
+        'PASSWORD': 'PS2BBB98FkJUs&%',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
 
 
 # Password validation
