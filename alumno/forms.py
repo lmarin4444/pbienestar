@@ -96,7 +96,7 @@ class EstudianteFormVersinrut(forms.ModelForm):
 			'nombres': 'Nombres',
 			'firs_name':'Apellido Paterno',
 			'last_name': 'Apellido Materno',
-			'fecha_nacimiento':' Fecha_nacimiento',
+			'fecha_nacimiento':' Fecha de nacimiento',
 			'domicilio': 'Domicilio',
 	
 		
@@ -134,7 +134,7 @@ class EstudianteFormUpdate(forms.ModelForm):
 			'nombres': 'Nombres',
 			'firs_name':'Apellido Paterno',
 			'last_name': 'Apellido Materno',
-			'fecha_nacimiento':' Fecha nacimiento',
+			'fecha_nacimiento':' Fecha de nacimiento',
 			'edad':'Edad',
 			'domicilio': 'Domicilio',
 			
@@ -163,7 +163,7 @@ class cursoForm(forms.ModelForm):
 			'Profesor',	
 		]
 		labels = {
-			'numero': 'Numero de mascotas',
+			'numero': 'Número de mascotas',
 			'letra': 'Razones para adoptar',
 			'establecimiento':'Establecimiento',
 			'Profesor':'Profesor del curdo',
@@ -193,11 +193,11 @@ class EstablecimientoForm(forms.ModelForm):
 		]
 		labels = {
 			'nombre ': 'Establecimiento',
-			'Rbd': 'Numero de rbd',
+			'Rbd': 'Número de rbd',
 			'localidad':'Localidad',
 			'clave': 'indicador de clave',
 			'director': 'Director',
-			'telefono':' Telefono:',
+			'telefono':' Teléfono:',
 			'cantidad':'Cupo de estudiantes',
 			'saldo':'Cupo actual',
 
@@ -243,7 +243,7 @@ class ParentescoForm(forms.ModelForm):
 			'apellido_m': 'Apellido Materno',
 			'parentesco': 'Parentesco',
 			'edad':'Edad',
-			'ocupacion':'Ocupacion',
+			'ocupacion':'Ocupación',
 			'Escolaridad':'Escolaridad',
 			'opcion':'Indique SÍ -> si el familiar vive con el niño o niña en la misma casa y NO -> si el familia no vive en la misma casa',
 			
@@ -361,12 +361,12 @@ class HermanoForm(forms.ModelForm):
 			'apellido_m': 'Apellido Materno',
 			'parentesco': 'Parentesco',
 			'edad':'Edad',
-			'ocupacion':'Ocupacion',
+			'ocupacion':'Ocupación',
 			'Escolaridad':'Escolaridad',
 			'opcion':'Indique SÍ -> si el familiar vive con el niño o niña en la misma casa y NO -> si el familia no vive en la misma casa',
 			'curso':'Ingrese el curso',
 			'establecimiento':'Establecimiento educacional', 
-			'pertenece_centro':'Pertencece al centro de bienestar?', 
+			'pertenece_centro':'¿Pertencece al centro de bienestar?', 
 	
 
 		}
