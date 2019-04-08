@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.views.decorators.csrf import requires_csrf_token
 from django.shortcuts import render, redirect, get_object_or_404,render_to_response
 from django.http import Http404
@@ -1226,6 +1225,8 @@ def search(request,pk):
 	form = EstudianteForm(request.POST or None)
 	form2 =EscolaridadForm(request.POST or None)
 	#mensaje = []
+	# Aqui modifique la asignacion de la escuela dado que no funciona
+	escuela=establecimiento.objects.get(id=pk)	
 	mensaje=""
 	if 'rut' in request.GET:
 		
@@ -1234,11 +1235,13 @@ def search(request,pk):
 		if rut>=0 or digito>= 0 or digito=='k' or digito=='K':	
 			digito=str(digito)
 
-			digito_upper = digito.upper()
+			print ("Digito verificador %s" % ( digito) )
 
+			digito_upper = digito.upper()
+			print ("Dígito verificador %s" % ( digito_upper) )
 			rut=str(rut)
 			valor=digito_verificador(rut)
-
+			print ("Rut %s" % ( rut) )
 			if valor== 10:
 				valor='K'
 			if str(valor) == str(digito_upper):
@@ -1263,6 +1266,7 @@ def search(request,pk):
 					
 					estudiante = Estudiante.objects.get(rut=rut_p)
 					lugar=estudiante.curso.establecimiento
+					escuela=estudiante.curso.establecimiento
 					lugar_curso=estudiante.curso.numero
 					lugar_letra=estudiante.curso.letra
 					if lugar_curso == 0:
@@ -1299,10 +1303,13 @@ def search(request,pk):
 				except Estudiante.DoesNotExist:
 					
 					estudiante=Estudiante()
+					
+					print ("Estudiante %s" % ( estudiante) )
 					estudiante.rut=rut_p
+					print ("Estudiante rut_p %s" % ( rut_p) )
 					form = EstudianteForm(instance=estudiante)
 					escuela=establecimiento.objects.get(id=pk)
-					print escuela
+					print ("Escuela %s" % ( escuela) )
 					escolaridad=""
 					
 
@@ -1311,10 +1318,9 @@ def search(request,pk):
 			escuela=establecimiento.objects.get(id=pk)	
 			return render(request, 'alumno/ingresar_escolaridad.html',
                       {'estudiante': estudiante, 'form':form,'form2':form2,'digito':digito,'mensaje':mensaje,'escuela':escuela})
-	escuela=establecimiento.objects.get(id=pk)  
+			escuela=establecimiento.objects.get(id=pk)  
 	
 
-	
 	return render(request,'alumno/ingresar_escolaridad.html', {'mensaje': mensaje,
     	'form':form,
     	'form2':form2,
@@ -1324,41 +1330,51 @@ def search(request,pk):
 
 	if request.method == 'POST':
 
-		if form.is_valid() and form2.is_valid():
+		if form2.is_valid() and form3.is_valid():
+		
+			estudiando = form2.save(commit=False)# estudiante
+			print ("Estudiando form2  %s" % ( estudiando) )
 
-			estudiando = form.save(commit=False)
-			escolar=form2.save(commit=False)
+			escolar=form3.save(commit=False)# Escolaridad 
+			print ("Estudiando form3 %s" % ( escolar) )
 			escuela=establecimiento.objects.get(id=pk)
+			print ("Escuela  %s" % ( escuela) )
 			#ir a buscar el curso
 			#etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 
 			try:
+				print ("escolar-curso 2 %s" % ( escolar.curso) )
+				print ("escolar-letra 2 %s" % ( escolar.Letra) )
+				print ("escuela 2 %s" % ( escuela) )
 				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 
 			except curso.DoesNotExist:
+				print ("escolar-curso %s" % ( escolar.curso) )
+				print ("escolar-letra %s" % ( escolar.Letra) )
+				print ("escuela %s" % ( escuela) )
 				curso.objects.create(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 	        #codigo
 			family=Familia.objects.create(cantidad=1)
-			print family
+
 			estudiando.Familia=family
 
 			estudiando.curso=etapa
-			print etapa
+
 			diff = (datetime.date.today() - estudiando.fecha_nacimiento).days
-			print diff
+
 			years = str(int(diff/365))		
-			print years
+
 			estudiando.edad=years
 			estudiando.save()
 			
 			x=datetime.datetime.today()
-			print x
+
 			y=x.year
 			escolar.edad=y
-			print y
+
 			escolar.establecimiento=escuela
-			print escuela
+
 			escolar.Estudiante=estudiando
 			escolar.save()
 
@@ -1385,7 +1401,7 @@ def search(request,pk):
         "form3":form3,
 
         "escuela":escuela,
-        "mensaje":mensaje
+        "mensaje":mensaje,
     }		
 	return render(request, template, context)	
 	
@@ -1401,9 +1417,11 @@ def ingresar_estudiantes_establecimiento(request,pk):
 	if request.method == 'POST':
 		if form.is_valid() and form2.is_valid() :
 
-			estudiando = form.save(commit=False)
-			escolar=form2.save(commit=False)
-			pesadilla=form3.save(commit=False)
+			estudiando = form.save(commit=False)# Estudiante
+			print ("estudiando  %s" % ( estudiando) )
+			escolar=form2.save(commit=False)# escolaridad
+			print ("escolar  %s" % ( escolar.Letra) )
+			#pesadilla=form3.save(commit=False)
 			escuela=establecimiento.objects.get(id=pk)
 			#ir a buscar el curso
 			#etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
@@ -1412,6 +1430,8 @@ def ingresar_estudiantes_establecimiento(request,pk):
 				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 
 			except curso.DoesNotExist:
+
+				
 				curso.objects.create(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 	        #codigo
@@ -1443,13 +1463,15 @@ def ingresar_estudiantes_establecimiento(request,pk):
 			return HttpResponseRedirect(url)
 		else:
 			
-			if form3.is_valid():
-				estudiando = form3.save(commit=False)
-				#valor1=estudiando[:12]
-				#largo=len(estudiando.rut)
-				#corte=largo - 2
-				#valor1=estudiando[:corte]
+			if form.is_valid():
+				estudiando = form.save(commit=False)
+				print estudiando
+				valor1=estudiando[:12]
+				largo=len(estudiando.rut)
+				corte=largo - 2
+				valor1=estudiando[:corte]
 				valor= estudiando.rut
+				print valor
 				try:
 					persona=Estudiante.objects.get(rut=valor)
 					estudiar=Estudiante.objects.get(pk=persona.id)
