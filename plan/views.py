@@ -337,7 +337,7 @@ class ingresar_acciones(CreateView):
 				
 
 				accion_base=Base.objects.get(id=base)
-				
+				plan=accion_base.plan
 				indicadores=Accion.objects.filter(base=accion_base).count()
 				
 				indicadores_lista=Accion.objects.filter(base=accion_base)
@@ -358,9 +358,10 @@ class ingresar_acciones(CreateView):
 				context['indicadores_lista']=indicadores_lista
 
 				context['accion_base']=accion_base
+				context['plan']=plan
 				context['mensaje']=mensaje
 				context['colegio']=colegio
-
+				print colegio
 
 				return context
 			
@@ -837,7 +838,7 @@ class ver_bases(ListView):
 			context['base']=base_activa	
 			return context
 def modificar_plan(request,pk):
-# Realizar un retorno de una ficha de derivacion a la dupla 
+# Modificar un plan  
 	
 	plan = get_object_or_404(Plan, pk=pk)
 	
@@ -883,7 +884,7 @@ def modificar_base(request,pk):
 	dato = get_object_or_404(Base, pk=pk)
 	plan=dato.plan
 	escuela=plan.establecimiento
-
+ 
 	
 	if request.method=='POST':
 		formulario = Base_PlanForm(request.POST or None, instance=dato)
@@ -892,10 +893,7 @@ def modificar_base(request,pk):
 			
 			instance.plan=plan
 			instance.usuario = request.user
-				
 			instance.save()
-				
-				
 			url = reverse(('plan:PlanListView'), kwargs={ 'pk': escuela.id})
 			return HttpResponseRedirect(url)
 				
@@ -911,6 +909,7 @@ def modificar_base(request,pk):
 		"form": form,
 		"dato": dato,
 		"plan":plan,
+		"base":dato,
 		"escuela":escuela,
 		 }
 	return render(request, 'plan/plan_accion_form.html', context)	

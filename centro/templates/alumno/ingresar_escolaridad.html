@@ -2,6 +2,18 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+<h4> Proceso de ingreso de información de estudiantes al establecimiento:  {{escuela.nombre}}.</h4>
+{% if mensaje %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú </a></li>
+  
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Ir listado establecimiento">Volver establecimientos</a></li>
+ 
+ </ul> 
+ <div class="alert alert-danger">{{mensaje}} {{escuela.establecimiento.nombre}}</div>
+{% else %}
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
@@ -11,10 +23,6 @@
   <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Volver a la lista</a></li>
  
  </ul> 
-<h4> Proceso de ingreso de información de estudiantes al establecimiento:  {{escuela.nombre}}.</h4>
-{% if mensaje %}
-<div class="alert alert-danger">{{mensaje}} {{escuela.establecimiento.nombre}}</div>
-{% else %}
 <div class="alert alert-success">Rut correcto, ingresar un nuevo estudiante</div>
 {% endif %}
 
@@ -32,10 +40,12 @@
         <p>&nbsp;</p>
         <article>
             <!-- $_SERVER['HTTP_USER_AGENT'] -->
-            <h3>Estudiante con información previa</h3>
-            <p class="text-justify">Estudiante que ya cuenta con información en el sistema solo  debe ingresar su rut.
-                <strong>y/o actualizar la escolaridad </strong> en caso que lo amerite
-                <strong>u otra información </strong>, anterior. </p>
+            <h3>Ingresar nuevo estudiante</h3>
+            <p class="text-justify">Ingrese rut sin puntos, para su verificación. 
+
+
+                <strong>en caso que ya exista,  </strong> se despliegan datos y
+                <strong>se indica establecimiento - curso </strong> </p>
 
                         
         </article>

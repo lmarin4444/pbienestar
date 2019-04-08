@@ -132,6 +132,8 @@ class UserView(DetailView):
 
 
 def change_password(request):
+    
+
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():

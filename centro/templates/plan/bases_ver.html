@@ -6,10 +6,10 @@
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
   <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
 
-  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver Lista</a></li>
-  <li><a href="{% url 'plan:PlanListView' base.plan.establecimiento.id %}"data-toggle="tooltip" title="Listado de establecimientos">Volver </a></li>
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Establecimientos</a></li>
+  <li><a href="{% url 'plan:PlanListView' base.plan.establecimiento.id %}"data-toggle="tooltip" title="Listado de establecimientos">Ver plan </a></li>
   
-  
+
 {% if plan.get_numero %}
   <li class="active">Llistado de bases e indicadores para el plan: {{base.plan.nombre}} Curso: {{base.plan.get_numero}}ª {{base.plan.get_letra}}</li> 
 {% else %}
@@ -18,31 +18,33 @@
 </ul>
 
 
-Para la base <strong>{{base.nombre}} </strong>
+Para el componente <strong>{{base.nombre}} </strong>
+<li>Listado de acciones </li>
 <ul>
 {% for acciones in base.accion_set.all %}
 <li>{{acciones.nombre }}</li>
 	
 {% endfor %}
 </ul>
-<h5>Listado de acciones</h5>
+<h5>Despliegue contenido  acciones</h5>
 <table id="example" class="table table-bordered">
+
 	<thead>
-		<tr>
+		<tr COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;">
 			
 			
 			
 			
 			<td>Nombre</td>
 			<td>Estrategia</td>
-			<td>Descrpcion</td>
+			<td>Descrpción</td>
 			<td>Incio</td>
 			<td>Término</td>
 			<td>Responsables</td>
 			<td>Recursos</td>
 			<td>Verificadores</td>
 
-			<td>Acciones</td>
+			
 
 
 		</tr>
@@ -77,17 +79,6 @@ Para la base <strong>{{base.nombre}} </strong>
 		
 		
 		
-			<td>
-		
-			
-
-				
-				
-		<a class="btn btn-success btn-sm" href="{% url 'plan:ingresar_Actividad' plancillo.id %}"><small>Modificar</small></a>
-		<a class="btn btn-info btn-sm" href=""><small>Eliminar</small></a>
-				
-			
-			
 			</td>
 			
 		</tr>
@@ -99,7 +90,7 @@ Para la base <strong>{{base.nombre}} </strong>
 	</tbody>
 </table> 
 
-
+<h5><strong>Listado de indicadores para el componente: {{base.nombre}}</h5></strong>
 <ul>
 {% for indicadores in base.indicador_base_set.all %}
 <li>{{indicadores.nombre }}</li>
@@ -108,10 +99,10 @@ Para la base <strong>{{base.nombre}} </strong>
 
 {% endfor %}
 </ul>
-<h5>Listado de indicadores</h5>
+
 <table id="example" class="table table-bordered">
 	<thead>
-		<tr>
+		<tr COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;">
 			
 			
 			
@@ -152,14 +143,6 @@ Para la base <strong>{{base.nombre}} </strong>
 			<td>
 		
 			
-
-				
-				
-		<a class="btn btn-success btn-sm" href="{% url 'plan:ingresar_Actividad' plancillo.id %}"><small>Modificar</small></a>
-		<a class="btn btn-info btn-sm" href=""><small>Eliminar</small></a>
-
-				
-			
 			
 			</td>
 			
@@ -175,21 +158,61 @@ Para la base <strong>{{base.nombre}} </strong>
 
 
 
-<h3>Esquema de Plan Formación y Convivencia Escolar</h3>
-
-<ul>
-  
-  <li>Bases
-    <ul>
-      <li>Acciones</li>
-      <ul><li>Plan Cronológico</li>
-
-      <ul>Actividades</ul></ul>
-      <li>Indicadores</li>
+<table class="table table-bordered table-striped table-condensed">
+        <caption>
+        <h3>Esquema de Plan Formación y Convivencia Escolar</h3>
+        </caption>
+        <thead>
+        <tr>
+        <th>Partes</th>
+        <th>.............</th>
+        <th>.............</th>
+        <th>.............</th>
+       
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="success">
+        <td>Componentes</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        
+        </tr>
+        <tr class="danger">
+        
+         <td>Acciones</td>
+        <td></td>
+        <td></td>
+        
+        
+       
+        </tr>
+        <tr class="warning">
+        
+        
+        <td>Planes </td>
+        <td></td>
+        
+       
+        </tr>
+        
       
-      
-    </ul>
-  </li>
-  
-</ul>
+      	<tr class="success">
+        <td>Actividades </td>
+         
+        </tr>
+        <tr class="danger">
+        <td>Indicadores</td>
+        <td>Proceso de Monitoreo </td>
+        <td></td>
+		<td></td>
+        </tr>
+        
+        </tbody>
+   		
+
+
+        <a href="#" class="btn btn-info btn-lg" ><span class="glyphicon glyphicon-arrow-up"></span><br>Subir</a>
+
 {% endblock%}

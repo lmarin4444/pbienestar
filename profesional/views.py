@@ -65,7 +65,7 @@ class ProfesionalCreate(CreateView):
 			#num=profesional_dupla.tipo_profesional+1
 			
 			
-			Profile.objects.create(user=usuario, adress=dupla.adress,location='Cabildo',birth_date='2018-02-02',area=num)
+			Profile.objects.create(user=ingresado.usuario, adress=ingresado.domicilio,location='Cabildo',birth_date='2018-02-02',area=num)
 			ingresado.save()
 			form.save_m2m()
 			url = reverse(('profesional:profesional_listar'))

@@ -154,7 +154,7 @@ class Estudiante(models.Model):
 	firs_name 				= models.CharField(max_length=50)
 	last_name 				= models.CharField(max_length=50)
 	domicilio_estudiante 	= models.CharField(max_length=70)
-	fecha_nacimiento 		= models.DateField(blank=True, null=True)
+	fecha_nacimiento 		= models.DateField()
 	edad 					= models.IntegerField(blank=True, null=True)
 	curso 					= models.ForeignKey(curso)
 	Familia 				= models.ForeignKey(Familia,blank=True, null=True)

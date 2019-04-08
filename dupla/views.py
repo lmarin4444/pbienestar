@@ -1729,9 +1729,7 @@ def historia_dupla(request,pk):
 	     'retorno':retorno,
        	 'asiste':asiste,
           'intervenido':intervenido,
-          
-        		 
-        		 
+           		 		 
 	})	
 
 # Ver la hostoria dentro de la dupla psicosocial

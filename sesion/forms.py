@@ -54,7 +54,7 @@ class DiagnosticoForm(forms.ModelForm):
 		]
 		labels = {
 
-			'situacion_actual':'Sitiación actual',
+			'situacion_actual':'Situación actual',
 			'observaciones':'Observaciones',
 			'familia':'Sugerencias a la familia'
 		}
@@ -523,7 +523,7 @@ class SeguimientocentroForm(forms.ModelForm):
 		]
 		labels = {
 			'fecha':'Fecha',
-			'observacin':'Acciones relalizadas',
+			'observacion':'Acciones relalizadas',
 			'tipo_seg':'Actividad de seguimiento',
 			
 

@@ -79,7 +79,7 @@ class CargoForm(forms.ModelForm):
 		labels = {
 			
 			
-			'profesional':'Seleccione  Usuario para crear Profesional',	
+			'profesional':'Seleccione  usuario para crear Profesional',	
 			'escuela':'Selecione establecimiento',
 			'tipo_profesional':'Selecione el tipo de profesional',
 			'cantidad_horas_convivencia':'Cantidad de horas de Encargado de Convivencia',

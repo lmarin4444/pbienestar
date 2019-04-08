@@ -13,9 +13,7 @@ urlpatterns = [
 	
 	url(r'^show/calendar/(?P<ano>\d+)/(?P<mes>\d+)/$',login_required(views.show_calendar_personal),name='personal'),
 	url(r'^show/calendar/(?P<ano>\d+)/(?P<mes>\d+)/$',login_required(views.show_calendar),name='calendar2'),
-
-	
-	url(r'^show/calendar/$',login_required(views.show_calendar),name='calendar-ano-mes'),
+    url(r'^show/calendar/$',login_required(views.show_calendar),name='calendar-ano-mes'),
 	
 	url(r'^bitacora/(?P<pk>\d+)/',login_required(views.BitacoraCreate.as_view()), name='bitacora_crear'), 
 	url(r'^listar', login_required(views.BitacoraList.as_view()), name='bitacora_listar'),

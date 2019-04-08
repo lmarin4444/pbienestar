@@ -58,11 +58,11 @@ class derivacionForm(forms.ModelForm):
 			
 			'fecha_derivacion':'Fecha que deriva',
 			
-			'pie':'Pertenece programa Pie?',
-			'anio_pie':'Año que pertenece Pie',
+			'pie':'¿Pertenece al programa Pie?',
+			'anio_pie':'Indique el año de incio de la participación del programa P.I.E y ello existe',
 			'habilidades':'Participa en el programa H.P.V. (Habilidades para la vida)?',
-			'Red_apoyo':'Red de apoyo',
-			'Red_apoyo_obs':'DESCRIPCION DETALLE RED DE APOYO',
+			'Red_apoyo':'Indique si el estudiante presenta relacion con alguna red de apoyo',
+			'Red_apoyo_obs':'DESCRIPCIÓN DETALLE RED DE APOYO',
 			'edad_f':'Edad',
 			'Motivo_derivacion':'Selecione motivo o motivos',
 			'cuatro':'IV. APRECIACIÓN DEL EQUIPO RESPECTO DE MOTIVO DE CONSULTA (POSIBLES CAUSAS O FACTORES, INDICADORES PRESENTES Y ÁMBITOS AFECTADOS –SOCIAL, EDUCACIONAL, FAMILIAR-):',
@@ -144,15 +144,15 @@ class MotivoRetornoForm(forms.ModelForm):
 			'motivo_termino':'Motivo del término',
 			'observacion_termino':'Observación o sugerencias',
 			
-			'opcion1':'Indique Si solo si quiere que el profesional Psicosocial pueda visualizar el archivo',
+			'opcion1':'Indique Sí, solo si quiere que el profesional Psicosocial pueda visualizar el archivo',
 			'filename1':'Nombre del archivo1',
 			'docfile1':'archivo1',
 			
-			'opcion2':'Indique Si solo si quiere que el profesional Psicosocial pueda visualizar el archivo',
+			'opcion2':'Indique Sí, solo si quiere que el profesional Psicosocial pueda visualizar el archivo',
 			'filename2':'Nombre del archivo2',
 			'docfile2':'archivo2',
 			
-			'opcion3':'Indique Si solo si quiere que el profesional Psicosocial pueda visualizar el archivo',
+			'opcion3':'Indique Sí, solo si quiere que el profesional Psicosocial pueda visualizar el archivo',
 			'filename3':'Nombre del archivo3',
 			'docfile3':'archivo2',
 			'Red_apoyo':'Selecione red a derivar',

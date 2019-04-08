@@ -69,7 +69,7 @@ class PlanFormMineduc(forms.ModelForm):
 			
 			'fecha':'Fecha de ingreso plan',
 			'nombre':'Ingresar nombre del plan ' ,
-			'descripcion':'Descripcion ',
+			'descripcion':'Descripción ',
 			'objetivo_general':'Objetivo General',
 			'docfile1':'Adjuntar archivo',
 			
@@ -153,7 +153,7 @@ class Indicador_baseForm(forms.ModelForm):
 		]
 		labels = {
 			
-			'nombre':'Nombre de identificacion del indicador',
+			'nombre':'Nombre de identificación del indicador',
 			'descripcion':'Descripción del indicador ' ,
 			'objetivo':'Objetivo del indicador ' ,
 			'alcance':'Identificar el alcance del indicador ' ,
@@ -195,12 +195,12 @@ class Indicador_baseLogroForm(forms.ModelForm):
 		]
 		labels = {
 			
-			'nombre':'Nombre de identificacion del indicador',
+			'nombre':'Nombre de identificación del indicador',
 			'descripcion':'Descripción del indicador ' ,
 			'objetivo':'Objetivo del indicador ' ,
 			'alcance':'Identificar el alcance del indicador ' ,
 			'nivel_logro':'Porcentaje de nivel de logro ' ,
-			'justificacion_logro':'Justificacion de exito o fracaso de logro' ,
+			'justificacion_logro':'Justificación de exito o fracaso de logro' ,
 			
 			
 
@@ -237,11 +237,11 @@ class Accion_baseForm(forms.ModelForm):
 		]
 		labels = {
 			
-			'nombre':'Nombre de identificacion de la acción',
-			'objetivo_estrategico':'Descripción de la estrategica ( Objetivo estrategico)' ,
-			'descripcion':'Descripcion de la acción ' ,
+			'nombre':'Nombre de identificación de la acción',
+			'objetivo_estrategico':'Descripción de la estrategica ( Objetivo estratégico)' ,
+			'descripcion':'Descripción de la acción ' ,
 			'fecha_inicio':'Fecha inicial estimada ' ,
-			'fecha_termino':'Fecha de termino estimada' ,
+			'fecha_termino':'Fecha de término estimada' ,
 			'responsables':'Responsables de la ejecución de la acción',
 			'recursos':'Recursos a utilizar ',
 			'medios_verificacion':'Medios de verificación',	
@@ -293,7 +293,7 @@ class Base_PlancilloForm(forms.ModelForm):
 		]
 		labels = {
 			
-			'fecha':'Fecha de creacion cronología de acciones ',
+			'fecha':'Fecha de creación cronología de acciones ',
 			'nombre':'Nombre del plan ',
 			'responsable':'Responsable / Responsables',
 			
@@ -301,7 +301,7 @@ class Base_PlancilloForm(forms.ModelForm):
 			'letra':'Letra del curso',
 			'cantidad_horas':'Cantidad total de horas que abordara el plan',
 			'duracion':'Indicar duración en meses ',
-			'justificacion':'Justificacion de la construccion del plan',
+			'justificacion':'Justificación de la construcción del plan',
 			'objetivo_general':'Objetivo general de la cronología de actividades',
 			'objetivo_especificos':'Objetivo específico de la cronología de actividades',
 			'materiales':'Materiales a utilizar ',
@@ -367,8 +367,8 @@ class Base_ActividadesForm(forms.ModelForm):
 			'tipo':'Tipo de la actividad',
 			'descripcion ':'Descripción de la actividad',
 			'ejecutores':'Ejecutores de la actividad',
-			'inicio':'Plaificación : Inicio',
-			'desarrollo':'Plaificación : Desarrollo',
+			'inicio':'Planificación : Inicio',
+			'desarrollo':'Planificación : Desarrollo',
 			'cierre':'Plaificación : Cierre',
 			'participantes':'Participantes a la  actividad',
 			'responsable':'Responsable o responsables de la actividad',
@@ -444,9 +444,9 @@ class Base_ActividadesPlanificacion(forms.ModelForm):
 			'tipo':'Tipo de la actividad',
 			'descripcion ':'Descripción de la actividad',
 			'ejecutores':'Ejecutores de la actividad',
-			'inicio':'Plaificación : Inicio',
-			'desarrollo':'Plaificación : Desarrollo',
-			'cierre':'Plaificación : Cierre',
+			'inicio':'Planificación : Inicio',
+			'desarrollo':'Planificación : Desarrollo',
+			'cierre':'Planificación : Cierre',
 			'participantes':'Participantes a la  actividad',
 			'responsable':'Responsable o responsables de la actividad',
 			'cantidad_convocada':'Cantidad de personas convocadas',

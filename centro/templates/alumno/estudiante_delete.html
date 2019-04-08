@@ -17,7 +17,11 @@
 	{% csrf_token %}
   Estudiante rut: {{ object.rut}}<br>
   Establecimiento: {{ object.curso.establecimiento.nombre}}
-  
+  <h1>ESTA ACCIÓN ES IRREVERSIBLE</h1>
+  <div class="alert alert-danger alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <H3><strong>¡Cuidado!</strong> Una vez eliminado el estudiante, es borrada toda su información del sistema.</H3>
+</div>
 	<h3>¿Desea definitivamente eliminar la informción de  {{ object.nombres|capfirst}} {{ object.firs_name|capfirst}} {{ object.last_name|capfirst}}?</h3>	
 	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
 	<a class= "btn btn-info" href="{% url 'alumno:listar_estudiantes_establecimiento' object.curso.establecimiento.id %}">Cancelar</a>
