@@ -168,7 +168,7 @@ def PlanMineducListView(request,pk):
 def PlanListView(request,pk):
 #Registrar los bases para cada plan
 
-
+	
 	try:
 		colegio=establecimiento.objects.get(id=pk)
 		x= datetime.date.today() 
