@@ -1878,76 +1878,41 @@ def search_estudiante(request,pk):
 def buscar_estudiantes(request,pk):
 
 	form3 = EstudianteVerForm(request.POST or None)	
-	form = EstudianteForm(request.POST or None)
-	form2 =EscolaridadForm(request.POST or None)
+	estudiante=None
+	
 	escuela=establecimiento.objects.get(id=pk)
+	print escuela
 	template = 'alumno/buscar_estudiante.html'
 	
-	mensaje=""
+	mensaje="aqui pase"
 	if request.method == 'POST':
-		if form.is_valid() and form2.is_valid() :
-
-			estudiando = form.save(commit=False)
-			escolar=form2.save(commit=False)
-			pesadilla=form3.save(commit=False)
-			escuela=establecimiento.objects.get(id=pk)
+		if form3.is_valid() :
+			est=form3.save(commit=False)
+			print est.rut	
+			try: 
+				estudiante=Estudiante.objects.get(rut=est.rut)
+				print estudiante
+				mensaje=" Estudiante encontrado "
+				print mensaje
+				escuela=establecimiento.objects.get(id=pk)
+			except Estudiante.DoesNotExist:
+				mensaje= " Estudiante no existe en los registros"
+				estudiante=None
 			#ir a buscar el curso
 			#etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 
-			try:
-				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
-
-			except curso.DoesNotExist:
-				curso.objects.create(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
-				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
-	        #codigo
-			family=Familia.objects.create(cantidad=1)
-			
-			estudiando.Familia=family
-
-			estudiando.curso=etapa
-			
-			diff = (datetime.date.today() - estudiando.fecha_nacimiento).days
-			
-			years = str(int(diff/365))		
-			
-			estudiando.edad=years
-			estudiando.save()
-			
-			x=datetime.datetime.today()
-			
-			y=x.year
-			escolar.edad=y
-			
-			escolar.establecimiento=escuela
-			
-			escolar.Estudiante=estudiando
-			escolar.save()
 
 
-			url = reverse(('alumno:listar_estudiantes_establecimiento'), kwargs={ 'pk': escuela.id})
-			return HttpResponseRedirect(url)
 		else:
 			
-			if form3.is_valid():
-				estudiando = form3.save(commit=False)
-				valor1=estudiando[:12]
-				print estudiando
-				valor= int(valor1)
-				
-				print valor
-				
-				
-				estudiar=Estudiante.objects.get(pk=valor)
-				form = EstudianteForm(instance=estudiar)
-			else:
-				mensaje="Error en el  formulario y/o Estudiante ya existe "	
-
+			mensaje="Error en el  formulario y/o Estudiante ya existe "	
+	else:
+		mensaje="Búsqueda de estudiantes "	
 
 	context = {
-        "form": form,
-        "form2":form2,
+    
         "form3":form3,
+        "estudiante":estudiante,
 
         "escuela":escuela,
         "mensaje":mensaje

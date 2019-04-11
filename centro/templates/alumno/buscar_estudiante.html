@@ -2,10 +2,13 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+
+
+
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú </a></li>
   <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Estudiantes intervenidos </a></li>
   
   <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Volver a la lista</a></li>
@@ -13,7 +16,7 @@
  </ul> 
 
 {% if mensaje %}
-<div class="alert alert-danger">{{mensaje}}{{estudiante}}</div>
+<div class="alert alert-danger">{{mensaje}}</div>
 
 {% endif %}
 
@@ -45,9 +48,9 @@
     <div class="col-md-4 col-sm-8">
 
 		<div style.display = 'inline' class="form-group has-success">
-		  <label disabled for="{{form2.rut.name}}  placeholder="Ingrese RUT" > </label>
+		  <label disabled for="{{form.rut.name}}  placeholder="Ingrese RUT" > </label>
 		  
-		  {{form2.rut}} 
+	 {{ form3.as_p }}
 		  <input type="submit" class="btn btn-success btn-sm" value="Buscar Rut">
 		
 		</div>
@@ -73,7 +76,7 @@
   <thead>
   
   <TR>
-   <TH COLSPAN=4  bgcolor="#E1F8FA" style="text-align:center;" >IDENTIFICACION DEL ESTUDIANTE</TH>
+   <TH COLSPAN=4  bgcolor="#E1F8FA" style="text-align:center;" >IDENTIFICACIÓN DEL ESTUDIANTE</TH>
     
   </TR>
   <TR>
