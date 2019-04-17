@@ -83,37 +83,37 @@ class Ficha_derivacion_historica(models.Model):
 	def __unicode__(self):
 		return '{} {}  '.format(self.id,self.fecha_derivacion)	
 
-# Fichas de duplas hostoricas
+#Fichas de duplas hostoricas
 class Ficha_derivacion_dupla_hostorica(models.Model):
 	
-    fecha_derivacion 		= models.DateField()
+    fecha_derivacion 		= models.DateField(null=True),
     quien_deriva			= models.CharField(max_length=200,blank=True, null=True)
     profe_jefe              = models.CharField(max_length=200,blank=True, null=True)
     	
     #Preguntas abiertas de la ficha de derivacion	
     	
-    derivado     	 		= models.IntegerField(default=1)
-    pasada 					= models.IntegerField(default=1)
+    derivado     	 		= models.IntegerField(default=1,blank=True, null=True)
+    pasada 					= models.IntegerField(default=1,blank=True, null=True)
     	
     #Preguntas abiertas de la ficha de derivacion	
-    Motivo_derivacion_dupla	= models.ManyToManyField(Motivo_derivacion_dupla)
-    conducta				= models.TextField()
-    afecta 					= models.TextField()
-    reiterada				= models.TextField()
-    marzo					= models.IntegerField()
-    abril					= models.IntegerField()
-    mayo					= models.IntegerField()
-    junio					= models.IntegerField()
-    julio					= models.IntegerField()
-    agosto					= models.IntegerField()
-    septiembre				= models.IntegerField()
-    octubre					= models.IntegerField()
-    noviembre				= models.IntegerField()
-    diciembre				= models.IntegerField()
-    observacion 			= models.TextField(default="Sin observación")
+    Motivo_derivacion_dupla	= models.TextField(null=True)
+    conducta				= models.TextField(null=True)
+    afecta 					= models.TextField(null=True)
+    reiterada				= models.TextField(null=True)
+    marzo					= models.IntegerField(null=True)
+    abril					= models.IntegerField(null=True)
+    mayo					= models.IntegerField(null=True)
+    junio					= models.IntegerField(null=True)
+    julio					= models.IntegerField(null=True)
+    agosto					= models.IntegerField(null=True)
+    septiembre				= models.IntegerField(default=0,blank=True, null=True)
+    octubre					= models.IntegerField(default=0,blank=True, null=True)
+    noviembre				= models.IntegerField(default=0,blank=True, null=True)
+    diciembre				= models.IntegerField(default=0,blank=True, null=True)
+    observacion 			= models.TextField(default="No observado")
 # datos que indican escolaridad del estudiante al momento de realizar la ficha de derivacion 
 # sacados de la escolaridad
-    establecimiento 		= models.ForeignKey(establecimiento)
+    #establecimiento 		= models.ForeignKey(establecimiento)
     curso			 		= models.CharField(max_length=10,blank=True, null=True)
     letra			 		= models.CharField(max_length=2,blank=True, null=True)
 # enlaces a los otros  modelos
@@ -125,11 +125,7 @@ class Ficha_derivacion_dupla_hostorica(models.Model):
 	
 
     def __unicode__(self):
-        return '{} {} {}'.format(self.id,self.fecha_derivacion,self.Estudiante)	
-
-
-
-
+        return '{} '.format(self.id)	
 
 
 class sesion_historica(models.Model):

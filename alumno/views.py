@@ -668,7 +668,31 @@ def EstudianteUpdate(request,pk,escuela):
 class EstudianteDelete(DeleteView):
 	model = Estudiante
 	template_name = 'alumno/estudiante_delete.html'
-	success_url = reverse_lazy('alumno:profesinal_establecimiento_listar')		
+	success_url = reverse_lazy('alumno:profesinal_establecimiento_listar')	
+
+
+
+
+
+#def post(self, request, *args, **kwargs):
+#		self.object = self.get_object
+		
+
+#		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+#		estudiante=Estudiante.objects.get(id=pk)
+		# Buscar la familia 
+#		family=estudiante.Familia
+
+#		try:
+#			sifamilia=Estudiante.objects.filter(familia=family)
+			
+#		except Estudiante.DoesNotExist:
+#			parienetes=Parentesco.objects.filter(Famiilia=family)
+#			parienetes.delete()
+#			family.delete()
+
+
+		
 	
 class ParentescoList(ListView):
 	model = Parentesco
@@ -1900,8 +1924,6 @@ def buscar_estudiantes(request,pk):
 				estudiante=None
 			#ir a buscar el curso
 			#etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
-
-
 
 		else:
 			

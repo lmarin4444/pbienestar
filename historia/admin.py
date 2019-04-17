@@ -14,6 +14,8 @@ from .models import Motivo_Retorno_historia
 from .models import Diagnostico_historia
 from .models import Ficha_de_egreso_historia
 from .models import Reporte_continuidad_historia
+from .models import Ficha_derivacion_dupla_hostorica
+
 
 # Register your models here.
 admin.site.register(Reporte_continuidad_historia)
@@ -26,3 +28,5 @@ admin.site.register(agenda_historica)
 admin.site.register(Intervenidos_historico)
 admin.site.register(Ficha_derivacion_historica)
 admin.site.register(Historia)
+admin.site.register(Ficha_derivacion_dupla_hostorica)
+

@@ -41,8 +41,6 @@ def ver_centro(request):
 
     return render (request,"comienza/ver_centro.html",{})    
 
-
-
 def nosotros(request):
     return render (request,"comienza/nosotros.html",{})
 
