@@ -39,6 +39,7 @@ from datetime import datetime
 from datetime import date
 #from rlextra.rml2pdf import rml2pdf
 import cStringIO
+from cStringIO import StringIO
 from django.views.generic import View
 from django.conf import settings
 import os
@@ -228,6 +229,7 @@ class ReporteEstudiantePDF_certificado(View):
         response = HttpResponse(content_type='application/pdf')
         #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
         buffer = BytesIO()
+        
         #Canvas nos permite hacer el reporte con coordenadas X y Y
         encabezados=('Informe de asistencia ')
         #Creamos una lista de tuplas que van a contener a las personas
@@ -317,9 +319,16 @@ class ReporteEstudiantePDF_certificado(View):
         #Con show page hacemos un corte de página para pasar a la siguiente
         p.showPage()
         p.save()
-        p = buffer.getvalue()
-        buffer.close()
-        response.write(p)
+        
+        #try:
+        #    from StringIO import StringIO
+        #except ImportError:
+        #    from io import StringIO
+        temp = StringIO()
+        #p = buffer.getvalue()
+        #buffer.close()
+        #response.write(p)
+        response.write(temp.getvalue())
         return response
 
 def ver_calendario(request):
@@ -3660,3 +3669,27 @@ def fichaderivacionegresodupla_pdf_report(request,pk):
     Elements.append(Spacer(0,20))
     doc.build(Elements, onFirstPage = myFirstPage, onLaterPages = myLaterPages)
     return response
+
+# estructura reportalab hola mundo
+def hello_pdf(request):
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=hello.pdf'
+
+    temp = StringIO()
+
+    # Create the PDF object, using the StringIO object as its "file."
+    p = canvas.Canvas(temp)
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(100, 100, "Hello world.")
+
+    # Close the PDF object cleanly.
+    p.showPage()
+    p.save()
+
+    # Get the value of the StringIO buffer and write it to the response.
+    response.write(temp.getvalue())
+    return response   
+

@@ -6,7 +6,8 @@ from informe.views import ver_calendario,FormatosDelete,FormatosList, \
     ReporteEstudiantePDF,ReporteEstudiantePDF_certificado,upload_file,ReporteEvaluacionPDF, \
     informe1_pdf_report,informe3_pdf_report,informe2_pdf_report,informe1_pdf_report_historico,informe3_pdf_report_historia, \
     informe2_pdf_report_historia,fichaderivacion_pdf_report,fichaderivacion_pdf_report_historica,fichaderivacion_dupla_pdf_report, \
-    entrevistaingreso_dupla_pdf_report,fichaegreso_dupla_pdf_report,fichacontinuidad_dupla_pdf_report, fichaderivacionegresodupla_pdf_report
+    entrevistaingreso_dupla_pdf_report,fichaegreso_dupla_pdf_report,fichacontinuidad_dupla_pdf_report, fichaderivacionegresodupla_pdf_report, \
+    hello_pdf
 
 
 
@@ -43,6 +44,7 @@ urlpatterns = [
     url(r'^fichacontinuidad_dupla_pdf_report/(?P<pk>\d+)/$', login_required(fichacontinuidad_dupla_pdf_report), name='fichacontinuidad_dupla_pdf_report'),
     url(r'^fichaderivacionegresodupla_pdf_report/(?P<pk>\d+)/$', login_required(fichaderivacionegresodupla_pdf_report), name='fichaderivacionegresodupla_pdf_report'),
 
+    url(r'^hello_pdf', login_required(hello_pdf), name='hello_pdf'),
 
 
 ]
