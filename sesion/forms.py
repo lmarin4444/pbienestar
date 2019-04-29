@@ -16,7 +16,8 @@ class FormCita(forms.ModelForm):
 			'horario_i',
 			
 			'participantes',
-			'tipo_actividad',	
+			'tipo_actividad',
+			'furgon',	
 		
 		]
 		labels = {
@@ -26,6 +27,7 @@ class FormCita(forms.ModelForm):
 			
 			'participantes':'Participantes a la sesión',
 			'tipo_actividad': 'Tipo Actividad',
+			'furgon': 'Seleccione necesidad de furgón',
 			
 			
 		}
@@ -36,6 +38,7 @@ class FormCita(forms.ModelForm):
 			
 			'participantes': forms.Select(attrs={'class':'form-control'}),
 			'tipo_actividad': forms.Select(attrs={'class':'form-control'}),
+			
 			
 
 		}

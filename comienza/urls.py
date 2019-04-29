@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^equipop/$',equipop, name='equipop'),
     url(r'^construye/$',construye, name='construye'),
     url(r'^mi_error_404/$',mi_error_404, name='mi_error_404'),
+
    
 
 

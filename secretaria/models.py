@@ -41,79 +41,112 @@ SITUACION    = (
             (4,'Asiste, no se realiza sesión devido a que llega tarde'),
             )
 TIPO_HORARIO = (
-        (0, '09:00'),
-        (1, '09:10'),
-        (2, '09:20'),
-        (3, '09:30'),
-        (4, '09:40'),
-        (5, '09:50'),
+        (0, '08:00'),
+        (1, '08:10'),
+        (2, '08:20'),
+        (3, '08:30'),
+        (4, '08:40'),
+        (5, '08:50'),
         
-        (6, '10:00'),
-        (7, '10:10'),
-        (8, '10:20'),
-        (9, '10:30'),
-        (10, '10:40'),
-        (11, '10:50'),
+        (6, '9:00'),
+        (7, '9:10'),
+        (8, '9:20'),
+        (9, '9:30'),
+        (10, '9:40'),
+        (11, '9:50'),
 
-        (12, '11:00'),
-        (13, '11:10'),
-        (14, '11:20'),
-        (15, '11:30'),
-        (16, '11:40'),
-        (17, '11:50'),
+        (12, '10:00'),
+        (13, '10:10'),
+        (14, '10:20'),
+        (15, '10:30'),
+        (16, '10:40'),
+        (17, '10:50'),
 
-        (18, '12:00'),
-        (19, '12:10'),
-        (20, '12:20'),
-        (21, '12:30'),
-        (22, '12:40'),
-        (23, '12:50'),
+        (18, '11:00'),
+        (19, '11:10'),
+        (20, '11:20'),
+        (21, '11:30'),
+        (22, '11:40'),
+        (23, '11:50'),
 
-        (24, '13:00'),
-        (25, '13:10'),
-        (26, '13:20'),
-        (27, '13:30'),
-        (28, '13:40'),
-        (29, '13:50'),
+        (24, '12:00'),
+        (25, '12:10'),
+        (26, '12:20'),
+        (27, '12:30'),
+        (28, '12:40'),
+        (29, '12:50'),
 
-        (30, '14:00'),
-        (31, '14:10'),
-        (32, '14:20'),
-        (33, '14:30'),
-        (34, '14:40'),
-        (35, '14:50'),
+        (30, '13:00'),
+        (31, '13:10'),
+        (32, '13:20'),
+        (33, '13:30'),
+        (34, '13:40'),
+        (35, '13:50'),
 
-        (36, '15:00'),
-        (37, '15:10'),
-        (38, '15:20'),
-        (39, '15:30'),
-        (40, '15:40'),
-        (41, '15:50'),
+        (36, '14:00'),
+        (37, '14:10'),
+        (38, '14:20'),
+        (39, '14:30'),
+        (40, '14:40'),
+        (41, '14:50'),
 
-        (42, '16:00'),
-        (43, '16:10'),
-        (44, '16:20'),
-        (45, '16:30'),
-        (46, '16:40'),
-        (47, '16:50'),
+        (42, '15:00'),
+        (43, '15:10'),
+        (44, '15:20'),
+        (45, '15:30'),
+        (46, '15:40'),
+        (47, '15:50'),
 
-        (48, '17:00'),
-        (49, '17:10'),
-        (50, '17:20'),
-        (51, '17:30'),
-        (52, '17:40'),
-        (53, '17:50'),
+        (48, '16:00'),
+        (49, '16:10'),
+        (50, '16:20'),
+        (51, '16:30'),
+        (52, '16:40'),
+        (53, '16:50'),
 
-        (54, '18:00'),
-        (55, '18:10'),
-        (56, '18:20'),
-        (57, '18:30'),
+        (54, '17:00'),
+        (55, '17:10'),
+        (56, '17:20'),
+        (57, '17:30'),
+
+        (58, '17:40'),
+        (59, '17:50'),
+        (60, '18:00'),
+        (61, '18:10'),
+
+        (62, '18:20'),
+        (63, '18:30'),
+        (64, '18:40'),
+        (65, '18:50'),
+
+        (66, '19:00'),
+        (67, '19:10'),
+        (68, '19:20'),
+        (69, '19:30'),
+
+        (70, '19:40'),
+        (71, '20:00'),
+        
+
+
+
 
         )
             
-
+FURGON = (
+        (0, 'No'),
+        (1, 'Sí'),
+        )
         
-            
+ACCION = (
+        (0,'Sesión '),
+        (1,'Reunión Centro Bienestar'),        
+        (2,'Reunión establecimiento'),        
+        (3,'Reunión duplas y/o equipos de convivencia'),        
+        (4,'Jornadas'),        
+        (5,'Ferias'),        
+        (6,'Capacitación'),        
+        )         
 #proceso de confirmacion de asistencia en base a una sesion 
 
 class fechas(object):
@@ -222,7 +255,7 @@ class tipo_actividad(models.Model):
     Definicion = models.CharField(max_length=100)
     nombre     = models.CharField(max_length=50)
     def __str__(self):
-        return '{}'.format(self.nombre)
+        return '{} {}'.format(self.id,self.nombre)
 
 
 
@@ -256,9 +289,12 @@ class agenda(models.Model):
     usuario         = models.ForeignKey(User)
     numero          = models.IntegerField(blank=True, null=True)# 1: hora tomada 2:hora realizada 3:hora no asistida
     estado          = models.IntegerField(blank=True, null=True, default=1)# 1: hora por confirmar 2:hora confirmada
+    furgon          = models.IntegerField(choices=FURGON,default=0)# 0: no necesita furgon 1: si necesita coordinar furgón
     
     def get_horario_i(self):
         return u'%s' % TIPO_HORARIO[self.horario_i][1]
+    def get_furgon(self):
+        return u'%s' % FURGON[self.Furgon][1]        
     def __str__(self):
 		return '{} {} {} {}'.format( self.id,self.Estudiante,self.fecha,self.horario_i)
 
@@ -307,3 +343,26 @@ class Reserva(models.Model):
 	"""docstring for reserva"""
 	fecha_entrada  = models.DateField
 	fecha_salida   = models.DateField
+
+class agenda_profesional (models.Model):
+   
+
+    fecha           = models.DateField(null=True)
+    horario_i       = models.IntegerField(choices=TIPO_HORARIO,default=0)
+    horario_t       = models.IntegerField(choices=TIPO_HORARIO,default=1)
+    bloques         = models.IntegerField(blank=True, null=True)# 1: hora tomada 2:hora realizada 3:hora no asistida
+    accion          = models.IntegerField(choices=ACCION,default=0)
+    tipo_actividad  = models.ForeignKey(tipo_actividad)
+    usuario         = models.ForeignKey(User)
+    numero          = models.IntegerField(blank=True, null=True)# 1: hora tomada 2:hora realizada 3:hora no asistida
+    estado          = models.IntegerField(blank=True, null=True, default=1)# 1: hora por confirmar 2:hora confirmada
+    observacion     = models.TextField(blank=True, null=True)#Agregar informacion sobre inacistencia extra
+    agendar         = models.ForeignKey(agenda,blank=True, null=True)
+    
+    def get_horario_i(self):
+        return u'%s' % TIPO_HORARIO[self.horario_i][1]
+    def get_horario_t(self):
+        return u'%s' % TIPO_HORARIO[self.horario_t][1]        
+        
+    def __str__(self):
+        return '{} {} {} {}'.format( self.id,self.fecha,self.horario_i,self.horario_t)

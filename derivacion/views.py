@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse,HttpResponseRedirect
 from django.core import serializers
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView,DetailView,TemplateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView,DetailView,TemplateView,View
 from derivacion.forms import derivacionForm,IntervencionForm,FormRetorno,MotivoRetornoForm,RetornoFaltainfoForm
 from derivacion.models import Ficha_derivacion
 from alumno.models import Estudiante,Escolaridad
@@ -29,7 +29,7 @@ from django.db.models import Q
 # Usados para borrar los archivos de las fichas
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
-
+#from django_pdf.utileria import render_pdf
 #Historia de los estudiantes del centro
 
 #historia de una ficha retornada
@@ -1106,3 +1106,18 @@ def search(request):
 
     # eso es todo por hoy ^^
     return HttpResponse(data, content_type="application/json")
+
+
+class PDFPrueba(View):
+    	"""Regresa pdf desde template"""
+	def get(self, request, *args, **kwargs):
+		datos={
+    			"nombre":"Hector",
+    			"apellidos":"Rojas",
+    			"edad":"44",
+
+
+		}
+		pdf=render_pdf("derivacion/mi_pdf.html",{"datos":datos})	
+		return HttpResponse(pdf, content_type="applications/pdf")
+    		

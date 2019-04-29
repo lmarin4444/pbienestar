@@ -12,6 +12,8 @@
   <li><a href="{% url 'sesion:intervenido' %}"data-toggle="tooltip" title="Ir menu personal!">Menu personal</a></li>
   <li><a href="{% url 'calendario:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">Calendario </a></li>
   
+<span class="glyphicon glyphicon-flag"></span>
+<i class="glyphicon glyphicon-flag"></i>
 
   <li class="active">Tomar cita</li> 
 </ul>
@@ -19,7 +21,7 @@
 <div class="alert alert-danger">{{mensaje}}</div>
 {% else %}
 
-<div class="alert alert-success">Crear una nueva cita en la agenda</div>
+<div glyphicon .glyphicon-leaf class="alert alert-success">Crear una nueva cita en la agenda</div>
 {% endif %}
 <h3>Estudiante :{{dato.nombres}} {{dato.firs_name}} {{dato.last_name}}</h3>
 <form method="post">

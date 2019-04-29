@@ -72,8 +72,58 @@ def CrearCita(request,id_Estudiante):
 		 }
 	return render(request, 'sesion/formcita_nueva.html', context)
 
+# Crear asignacion de actividad individual de cada profesional
 
-#@login_required(login_url='/admin/')
+def CrearCitaProfesional(request):
+	
+    #group_required = 'puede_administrar_encuestas
+
+	
+	if request.method=='POST':
+		formulario = FormagendaProfesional(request.POST, request.FILES)
+ 		if formulario.is_valid():
+			instance = formulario.save(commit=False)
+
+			# Verificar si el bloque que quiero bloquear no tienen ninguna asignación 
+			for i in range(instance.horario_i, instance.horario_t):
+				
+				try:
+
+		 			hoy=agenda.objects.get(Q(fecha=instance.fecha) & Q(horario_i=i)& Q(usuario=request.user))
+		 			
+				except agenda.DoesNotExist:
+				  # do something
+					hoy=None
+				try:
+
+		 			hoy=agenda_profesional.objects.get(Q(fecha=instance.fecha) & Q(horario_i=i)& Q(usuario=request.user))
+		 			
+				except agenda.DoesNotExist:
+				  # do something
+					hoy=None
+				
+			if hoy==None:	
+				instance.Estudiante=dato
+				instance.usuario = request.user
+				instance.numero=1# significa hora pedida ( 2: hora realizada 3: hora no asistida)
+				instance.save()
+				return HttpResponseRedirect('/calendario/show/calendar')
+			else:
+				mensaje='Horario ocupado por '+hoy.Estudiante.nombres+" "+hoy.Estudiante.firs_name+" "+hoy.Estudiante.last_name
+				formulario = FormagendaProfesional(request.POST or None, instance=hoy)
+	else:
+		formulario = FormagendaProfesional()
+	
+	context = {
+		"formulario": formulario,
+		"dato": dato,
+		"mensaje":mensaje,
+		 }
+	return render(request, 'sesion/formcita_nueva.html', context)
+
+
+
+
 
 #Modificar una cita
 def ModificarCita(request,pk,age):

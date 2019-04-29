@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django import forms
-from secretaria.models import MascotaRA,agenda,Reserva,Pregunta
+from secretaria.models import MascotaRA,agenda,Reserva,Pregunta,agenda_profesional
 from bootstrap3_datetime.widgets import DateTimePicker
 from django import forms
 from secretaria.models import Confirma
@@ -87,6 +87,52 @@ class Formagenda(forms.ModelForm):
 			
 
 		}
+
+# Crear un evento a ser agendado por un profesional que no sea una sesion 
+
+class FormagendaProfesional(forms.ModelForm):
+	class Meta:
+		model = agenda_profesional 
+
+		fields = [
+			
+			'fecha',
+			'horario_i',
+			'horario_t',
+			'accion',
+			'tipo_actividad',	
+			
+			
+		
+		]
+		labels = {
+			
+			'fecha':'Fecha de la cita',
+			'horario_i': 'Horario inicio ',
+			'horario_t': 'Horario término',
+			'accion': 'Acción a realizar',
+			'tipo_actividad': 'Tipo Actividad',
+			
+			
+			
+			
+		}
+		widgets = {
+			
+			'Fecha':forms.DateInput(format=('%d-%m-%Y'), attrs={'class':'datepicker','placeholder':'Selecionar Fecha '}),
+			'horarios_i': forms.TextInput(attrs={'class':'form-control'}),
+			'horarios_t': forms.TextInput(attrs={'class':'form-control'}),
+			'accion': forms.Select(attrs={'class':'form-control'}),
+			'tipo_actividad': forms.Select(attrs={'class':'form-control'}),
+			
+			
+			
+
+		}
+
+
+
+
 class FormagendaCalendario(forms.ModelForm):
 	class Meta:
 		model = agenda 

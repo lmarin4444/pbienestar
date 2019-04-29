@@ -7,7 +7,7 @@ from derivacion.views import listadousuarios, index, mascota_view, mascota_list,
     IntervencionUpdateView,seguimientocentroListView,MascotaseguimientoList,EntradasBitacora,AsignarUpdateView, \
     BusquedaAjaxView,asignar_intervencion,EntradasFicha,gracias,EntradasList,EntradasOtrasList,EntradasRetornoDuplaList,historia_retorno, \
     ModificarFicha,RetornoDefinitivo,RetornoInstList,MascotaCreate_Prueba,MascotaUpdate_centro,ModificarRetornoDefinitivo, \
-    ReporteIntervenidos
+    ReporteIntervenidos,PDFPrueba
     
 
     
@@ -74,6 +74,11 @@ urlpatterns = [
     url(r'^listar_retorno/(?P<ficha>\d+)/(?P<pk>\d+)/$', login_required(historia_retorno), name='listar_retorno'),
     # Ver todos los intervenidos actuales 
     url(r'^ReporteIntervenidos', login_required(ReporteIntervenidos.as_view()), name='ReporteIntervenidos'),
+    # Imprimir desde template 
+    url(r'^PDFPrueba', login_required(PDFPrueba.as_view()), name='PDFPrueba'),
+
+
+
 
 ]
 

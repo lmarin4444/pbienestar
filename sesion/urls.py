@@ -12,7 +12,7 @@ from sesion.views import listadousuarios, SesionList,SesionCreate,SesionDelete,S
     Motivo_egresoDelete,Motivo_egresoList,historia,historia_dupla,VerObjetivo,VerObjetivohistorico,Ficha_egresoModificar, \
     ReportecontinuidadModificar,CrearSeguimiento,ListarSeguimiento,ver_registro,ModificarRegistro,confirma_ver, \
     confirma_modificar,SeguimeintoDelete,SeguimientoUpdate,VerReportecontinuidad,ReportecontinuidadModificar, \
-    Reportecontinuidad_solo
+    Reportecontinuidad_solo,CrearCitaProfesional
 
  
 
@@ -20,6 +20,8 @@ urlpatterns = [
     
     #sesiones desde la salida de una cita 
     url(r'^agregarcitanuevo/(?P<id_Estudiante>\d+)/$',login_required(CrearCita), name='nuevoagregar_cita'),
+    # Crear asignacion de horario para actividades fuera de las acciones de los estudiantes
+    url(r'^CrearCitaProfesional/$',login_required(CrearCitaProfesional), name='CrearCitaProfesional'),
 
 
    # sesiones 

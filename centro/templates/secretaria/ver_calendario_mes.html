@@ -16,6 +16,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<!-- para iconos diferentes a boostrap3  -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 
 <script type="text/javascript">
   $(function(){
@@ -28,11 +37,10 @@
 </script>
 
 
-
 <ul class="breadcrumb">
 
-  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_secretaria' %}"data-toggle="tooltip" title="Ir menu inicial secretaria!">Menu Secretaria</a></li>
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir página Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_secretaria' %}"data-toggle="tooltip" title="Ir menu inicial secretaria!">Menú Secretaria</a></li>
   
   
 
@@ -48,14 +56,21 @@
 
 <div class="media-body">
   <a class="pull-left" href="#">
-    <img class="media-object" src='{% static "img/logo.gif" %}' alt="100x100" src="data:image/p" style="width: 110px; height: 110px;" alt="Centro Bienestar">
+    <img class="media-object" src='{% static "img/logo.png" %}' alt="100x100" src="data:image/p" style="width: 110px; height: 110px;" alt="Centro Bienestar">
   </a>
-  <div class="media-body">
-  <h2 class="media-heading">Visialización de citas por mes
- <span class="label label-default">{{ escuela.nombre|capfirst }}  </span></h2>
-    
 
-  </div>
+  <h2 >Visualización de citas por mes.
+ </h2>
+
+
+Nomenclatura
+           <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span> FURGON
+
+           <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span> ARTETERAPIA
+
+          <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  NUTRICIONISTA
+
+
 </div>
 
 
@@ -64,7 +79,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-        Plan de gestión y convivencia {{ colegio.nombre|capfirst }} </a>
+        Visualización de citas por mes </a>
 
       </h4>
     </div>
@@ -72,20 +87,10 @@
       <div class="panel-body">
       <table id="example" class="table table-bordered" font-size=9>
         
-      <tr><td>Fecha creación: {{plan.fecha}}</td></tr>
+      <tr><td>Seleccionar el mes para visualizar las citas agendadas</td></tr>
       
-      <tr><td>Grupo de trabajo: {{plan.responsable}}</td></tr>
-      <tr><td>Sello: {{plan.sello}}</td></tr>
-      <tr><td> 
-      Objetivo General:{{plan.objetivo_general}}</td></tr>
-      <tr><td>
-        <dd>Objetivos especificos:{{plan.objetivo_especificos}}</dd>
-      </td></tr>
-       <tr><td>
-        <dd>Año de vigencia :{{plan.annio}}</dd>
-      </td></tr>
-      
-      
+      <tr><td></td></tr>
+   
       </tr>
      <tr>
    
@@ -111,8 +116,8 @@
 
 
 <!-- Used to open the Modal -->
-<a class="btn btn-success btn-sm" href="{% url 'calendario:show_secretaria_mes' anio 1 %}"><small>Enero</small></a>
-<a class="btn btn-success btn-sm" href="{% url 'calendario:show_secretaria_mes' anio 2 %}"><small>Enero</small></a>
+<a class="btn btn-primary btn-sm" href="{% url 'calendario:show_secretaria_mes' anio 1 %}"><small>Enero</small></a>
+<a class="btn btn-warning btn-sm" href="{% url 'calendario:show_secretaria_mes' anio 2 %}"><small>Febrero</small></a>
 <a class="btn btn-success btn-sm" href="{% url 'calendario:show_secretaria_mes' anio 3 %}"><small>Marzo</small></a>
 <a class="btn btn-info btn-sm" href="{% url 'calendario:show_secretaria_mes' anio 4 %}"><small>Abril</small></a>
 <a class="btn btn-primary btn-sm" href="{% url 'calendario:show_secretaria_mes' anio 5 %}"><small>Mayo</small></a>

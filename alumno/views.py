@@ -674,22 +674,22 @@ class EstudianteDelete(DeleteView):
 
 
 
-#def post(self, request, *args, **kwargs):
-#		self.object = self.get_object
+def post(self, request, *args, **kwargs):
+		self.object = self.get_object
 		
 
-#		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
-#		estudiante=Estudiante.objects.get(id=pk)
-		# Buscar la familia 
-#		family=estudiante.Familia
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		estudiante=Estudiante.objects.get(id=pk)
+	# Buscar la familia 
+		family=estudiante.Familia
 
-#		try:
-#			sifamilia=Estudiante.objects.filter(familia=family)
+		try:
+			sifamilia=Estudiante.objects.filter(familia=family)
 			
-#		except Estudiante.DoesNotExist:
-#			parienetes=Parentesco.objects.filter(Famiilia=family)
-#			parienetes.delete()
-#			family.delete()
+		except Estudiante.DoesNotExist:
+			parienetes=Parentesco.objects.filter(Famiilia=family)
+			parienetes.delete()
+			family.delete()
 
 
 		
@@ -919,9 +919,6 @@ class ApoderadoUpdate(UpdateView):
 	template_name = 'alumno/apoderado_form.html'
 
 	
-	def get_queryset(self):
-		queryset = super(ApoderadoUpdate, self).get_queryset()
-		return queryset
 
 	def get_context_data(self, **kwargs):
         # Llamamos ala implementacion primero del  context
@@ -941,6 +938,7 @@ class ApoderadoUpdate(UpdateView):
 		
 		if form.is_valid():
 			solicitud = form.save(commit=False)
+			print form
 			solicitud.curso = 0
 			pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
 			pariente=Parentesco.objects.get(id=pk)
@@ -1070,7 +1068,7 @@ class HermanoUpdate(UpdateView):
 		
 		if form.is_valid():
 			solicitud = form.save(commit=False)
-			solicitud.curso = 0
+
 			pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
 			pariente=Parentesco.objects.get(id=pk)
 			family=pariente.Familia

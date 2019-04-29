@@ -11,6 +11,7 @@ from .models import tipo_actividad
 from .models import Reserva
 from .models import Confirma
 from .models import Registro
+from .models import agenda_profesional
 
 
 
@@ -29,6 +30,7 @@ admin.site.register(Pregunta)
 admin.site.register(VacunaT)
 admin.site.register(MascotaRA)
 admin.site.register(agenda,agendaAdmin)
+admin.site.register(agenda_profesional)
 admin.site.register(tipo_actividad)
 admin.site.register(Reserva)
 

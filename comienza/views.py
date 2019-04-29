@@ -160,3 +160,9 @@ def handler404(request):
 def mi_error_404(request):
     nombre_template = '404.html'
     return render(request, template_name=nombre_template)
+
+def hpv(request):
+    return render (request,"comienza/hpv.html",{}) 
+
+
+

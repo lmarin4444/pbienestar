@@ -24,10 +24,10 @@ class PlanForm(forms.ModelForm):
 		labels = {
 			
 			'fecha':'Fecha de ingreso plan',
-			'responsable':'Indicar el grupo de trabajo ' ,
+			'responsable':'Grupo de trabajo, participantes en la confección del plan ' ,
 			'sello':'Sello del establecimiento',
 			'objetivo_general':'Objetivo General',
-			'objetivo_especificos':'Objetivos especificos',
+			'objetivo_especificos':'Objetivos específicos',
 			
 			
 
