@@ -208,11 +208,12 @@ class ReporteEstudiantePDF_certificado(View):
 
     def cabecera(self,pdf):
             #Utilizamos el archivo logo_django.png que está guardado en la carpeta media/imagenes
-            archivo_imagen = settings.MEDIA_ROOT+'/imagenes/logo.png'
-            archivo_imagen2 = settings.MEDIA_ROOT+'/imagenes/logo_cabildo.jpg'
+           
+            #archivo_imagen = settings.MEDIA_ROOT+'/imagenes/logo.png'
+            #archivo_imagen2 = settings.MEDIA_ROOT+'/imagenes/logo_cabildo.jpg'
             #Definimos el tamaño de la imagen a cargar y las coordenadas correspondientes
-            pdf.drawImage(archivo_imagen, 50, 750, 70, 70,preserveAspectRatio=True)
-            pdf.drawImage(archivo_imagen2, 330, 750, 220, 90,preserveAspectRatio=True)
+            #pdf.drawImage(archivo_imagen, 50, 750, 70, 70,preserveAspectRatio=True)
+            #pdf.drawImage(archivo_imagen2, 330, 750, 220, 90,preserveAspectRatio=True)
 
             #Establecemos el tamaño de letra en 16 y el tipo de letra Helvetica
             pdf.setFont("Helvetica", 11)
