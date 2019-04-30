@@ -226,10 +226,10 @@ class ReporteEstudiantePDF_certificado(View):
         
     def get(self, request, *args, **kwargs):
         #Indicamos el tipo de contenido a devolver, en este caso un pdf
-        response = HttpResponse(content_type='application/pdf')
+        
         #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
         buffer = BytesIO()
-        
+        temp=StringIO()
         #Canvas nos permite hacer el reporte con coordenadas X y Y
         encabezados=('Informe de asistencia ')
         #Creamos una lista de tuplas que van a contener a las personas
@@ -240,7 +240,16 @@ class ReporteEstudiantePDF_certificado(View):
         detalles =  estudiante.nombres
          # Create the PDF object, using the BytesIO object as its "file."
         
-        p = canvas.Canvas(buffer,pagesize=A4)
+        response = HttpResponse(content_type='application/pdf')
+        filename="Informe de evaluacion_"+estudiante.nombres+"_"+estudiante.firs_name+".pdf"
+        response['Content-Disposition']='attachment; filename="%s"' % filename
+        
+        
+        
+        # Observa que ahora en vez de usar el nombre del archivo usamos el response
+
+        #p = canvas.Canvas(buffer,pagesize=A4)
+        p = canvas.Canvas(temp,pagesize=A4)
 
 
         # Draw things on the PDF. Here's where the PDF generation happens.
@@ -324,7 +333,7 @@ class ReporteEstudiantePDF_certificado(View):
         #    from StringIO import StringIO
         #except ImportError:
         #    from io import StringIO
-        temp = StringIO()
+        #temp = StringIO()
         #p = buffer.getvalue()
         #buffer.close()
         #response.write(p)
