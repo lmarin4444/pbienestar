@@ -1,0 +1,98 @@
+{% extends 'base/base_secre.html' %}
+{% block content %}
+    
+<h4>Listado de estudiantes semana actual.</h4> <br>
+
+	{% for especialistas in profesionales %}
+		<span class="glyphicon glyphicon-calendar"></span> Desde  :{{fecha_inicio |date:"d-m-Y"}} -- <span class="glyphicon glyphicon-calendar"></span> Hasta : {{fecha_termino |date:"d-m-Y"}}
+
+		Profesional: {{ especialistas.usuario.first_name}} {{ especialistas.usuario.last_name}}
+<table id="example" class="table table-bordered">
+	<thead>
+		 <tr class="success">
+		
+
+
+		<tr class="warning">
+		
+		<td>Hora</td>
+		<td>Lunes {{fecha_inicio |date:"d"}}</td>
+
+		<td>Martes {{martes |date:"d"}}</td>
+		<td>Miercoles {{miercoles |date:"d"}}</td>
+		<td>Jueves {{jueves |date:"d"}}</td>
+		<td>Viernes {{fecha_termino|date:"d"}}</td>
+		
+		
+		
+
+		</tr>
+	</thead>
+	<tbody>
+		<td>9:30 - 9:00</td>
+		<td>Planificación</td>
+		<td>Planificación</td>
+		<td>Planificación</td>
+		<td>Planificación</td>
+		<td>Planificación</td>	
+
+		<tr><td>9:30 - 9:00</td></tr>
+
+	{% if fechas %}
+		{% for estudio in fechas %}
+		<tr class="info">
+			{% if estudio.fecha == fecha_inicio %}
+				{% if estudio.horario_i == 6 %}
+				<td>Lunes {{fecha_inicio |date:"d"}}</td>
+				{% endif %}		
+			{% endif %}	
+			{% if estudio.fecha == martes %}
+				<td>Martes {{martes |date:"d"}}</td>
+			{% endif %}	
+			{% if estudio.fecha == miercoles %}
+				<td>Miércoles {{miercoles |date:"d"}}</td>
+			{% endif %}	
+			{% if estudio.fecha == jueves %}
+				<td>Jueves {{jueves |date:"d"}}</td>
+			{% endif %}	
+			{% if estudio.fecha == fecha_termino %}
+				<td>Viernes {{fecha_termino |date:"d"}}</td>
+			{% endif %}	
+			<td>{{estudio.fecha|date:"d"}} /{{estudio.fecha|date:"m"}}</td>
+			<td>{{ estudio.get_horario_i}}</td> 
+			<td>{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }}  </td>
+			
+			 <td><small>{{ estudio.Estudiante.curso.establecimiento.nombre}} /</small>{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }}</td>  
+ 
+
+			<td>{{ estudio.usuario.first_name}} {{ estudio.usuario.last_name}}</td> 
+
+
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de asistencia</h1>
+		{% endif %}
+	</tbody>
+</table> 
+
+
+{% endfor %}
+
+
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{% endblock%}

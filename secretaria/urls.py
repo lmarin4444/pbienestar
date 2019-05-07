@@ -52,6 +52,7 @@ urlpatterns = [
     url(r'^confirmacion_eliminar/(?P<pk>\d+)/(?P<age>\d+)$', login_required(views.Confirmacion_Delete), name='Confirmacion_eliminar'),
     url(r'^ver_dia', login_required(views.ver_dia), name='ver_dia'),
     url(r'^ver_semana', login_required(views.ver_semana), name='ver_semana'),
+    url(r'^ver_impresa', login_required(views.ver_impresa), name='ver_impresa'),
     #Para ver los apoderados  de cada estudiante 
     url(r'^VerApoderado/(?P<pk>\d+)/(?P<fami>\d+)$',login_required(views.ver_apoderado), name='ver_apoderado'),
     # Ver un calendario por mes

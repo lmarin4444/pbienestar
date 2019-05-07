@@ -17,6 +17,7 @@ from secretaria.forms import MascotaRAForm,FormPregunta,Formagenda,FormagendaCal
 from secretaria.models import MascotaRA,Pregunta,agenda,Confirma,Registro
 from sesion.models import Intervenidos,sesion
 from alumno.models import apoderado
+from profesional.models import Profesional
 from django.http import HttpResponse,HttpResponseRedirect
 from alumno.models import Estudiante
 from django.contrib.auth.decorators import login_required
@@ -595,6 +596,47 @@ def ver_semana(request):
                  
     })
 
+def ver_impresa(request):
+    
+    # Obtener todos los usuarios que son profesionales centro de bienestar
+
+    profesionales=Profesional.objects.filter(tipo_profesional =0)
+    print profesionales
+    date = datetime.date.today()
+    start_week = date - datetime.timedelta(date.weekday())
+    print start_week
+    end_week = start_week + datetime.timedelta(7)
+    #start_week=end_week
+    end_week = start_week + datetime.timedelta(4)
+    print end_week
+    #fechas = agenda.objects.filter(Q(fecha__gte=start_week), Q(fecha__lte=end_week)) 
+    fechas = agenda.objects.filter(fecha__range=[start_week, end_week]).order_by('horario_i')
+    
+    
+    dias = timedelta(days=1)
+    
+    martes=start_week+dias
+
+    dias = timedelta(days=2)
+    miercoles=start_week+dias
+    dias = timedelta(days=3)
+    jueves=start_week+dias
+    print fechas
+    #BUSCAR LOS PSICOLOGOS DE LA PROXIMA SEMANA 
+
+    return render(
+        request,
+        'secretaria/ver_impresa.html',
+         context={
+         'fechas':fechas,
+         'fecha_inicio':start_week,
+         'fecha_termino':end_week,
+         'martes':martes,
+         'miercoles':miercoles,
+         'jueves':jueves,
+         'profesionales':profesionales
+                    
+    })
 
 def ver_dia(request,fecha=None):
 

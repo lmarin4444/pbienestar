@@ -209,10 +209,14 @@ class ReporteEstudiantePDF_certificado(View):
     def cabecera(self,pdf):
             #Utilizamos el archivo logo_django.png que está guardado en la carpeta media/imagenes
            
-            #archivo_imagen = settings.MEDIA_ROOT+'/imagenes/logo.png'
-            #archivo_imagen2 = settings.MEDIA_ROOT+'/imagenes/logo_cabildo.jpg'
+            
+            
+            archivo_imagen=Image(settings.MEDIA_ROOT + '/logo.png')
+            #archivo_imagen2=Image(settings.MEDIA_ROOT + '/encabezadocabildo.jpg', width=550, height=30)
+
+
             #Definimos el tamaño de la imagen a cargar y las coordenadas correspondientes
-            #pdf.drawImage(archivo_imagen, 50, 750, 70, 70,preserveAspectRatio=True)
+            pdf.drawImage(archivo_imagen, 50, 750, 70, 70,preserveAspectRatio=True)
             #pdf.drawImage(archivo_imagen2, 330, 750, 220, 90,preserveAspectRatio=True)
 
             #Establecemos el tamaño de letra en 16 y el tipo de letra Helvetica
@@ -3124,16 +3128,11 @@ def fichaegreso_dupla_pdf_report(request,pk):
 
 )
 
-
     estilo = getSampleStyleSheet()
     estiloHoja = getSampleStyleSheet()
     cabecera = estiloHoja['Heading4']
-    
     imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/logo_formacion_convivencia.jpg',width=490,height=40)
-
     Elements.append(imagen_logo)
-    
-    
     parrafo = Paragraph("",cabecera)
     Elements.append(parrafo)
    
@@ -3172,10 +3171,6 @@ def fichaegreso_dupla_pdf_report(request,pk):
     Paragraph('<font size=10>%s</font>' % "Profesional dupla:", estilo['Normal']), 
     Paragraph('<font size=10>%s</font>' % ficha.usuario.first_name+" "+ficha.usuario.last_name, estilo['Normal']),
     ))
-
-    
-
-   
     
     data.append((
       
@@ -3196,11 +3191,6 @@ def fichaegreso_dupla_pdf_report(request,pk):
     Paragraph('<font size=10>%s</font>' % egreso.motivo, estilo['Normal']),   
     ))
 
-    
-    
-    
-
-    
     table = Table(
         data,
         #colWidths=250 # Valor del ancho de las columnas
@@ -3230,12 +3220,7 @@ def fichaegreso_dupla_pdf_report(request,pk):
                         ( 'BOX' , ( 0 , 0 ) , ( -1 , -1 ) , 0.25 , colors.black ) ,
                         ] ) )
  
-    Elements. append ( t )     
-
-    
-    
-
-        
+    Elements. append ( t )          
     Elements.append(Spacer(0,60))
     #Elements.append(table2)
     Elements.append(Spacer(0,20))
@@ -3682,9 +3667,12 @@ def fichaderivacionegresodupla_pdf_report(request,pk):
 
 # estructura reportalab hola mundo
 def hello_pdf(request):
+   
+
+
     # Create the HttpResponse object with the appropriate PDF headers.
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=hello.pdf'
+    response['Content-Disposition'] = 'attachment; filename=Certificado_para_escribir.pdf'
 
     temp = StringIO()
 
@@ -3694,6 +3682,15 @@ def hello_pdf(request):
     # Draw things on the PDF. Here's where the PDF generation happens.
     # See the ReportLab documentation for the full list of functionality.
     p.drawString(100, 100, "Hello world.")
+    p.drawString(100, 100, "Hello world.")
+    p.drawString(100, 100, "Hello world.")
+    p.drawString(100, 100, "Hello world.")
+    for var in Asl.objects.filter(generales=True):
+        # creo variable p para guardar la descripcion
+        p=Paragraph(var.descripcion, styles['Normal'])
+        # añado a la lista la llave primaria de acl y ademas la descripcion contenida en p
+        lista_acl.append((var.pk, p))
+        detalle_orden=Table([encabezados] + lista_acl,colWidths=[70,400])
 
     # Close the PDF object cleanly.
     p.showPage()
@@ -3703,3 +3700,82 @@ def hello_pdf(request):
     response.write(temp.getvalue())
     return response   
 
+def pdf_export(request):
+    id_cont=request.GET['id']
+    filename="Contrato de CubanCloud_"+request.user.first_name+"_"+request.user.last_name+".pdf"
+    # Creamos el response
+    response=HttpResponse(content_type='application/pdf')
+    response['Content-Disposition']='attachment; filename="%s"' % filename
+    # Observa que ahora en vez de usar el nombre del archivo usamos el response
+    doc=SimpleDocTemplate(
+        response,
+        pagesize=letter,
+        rightMargin=72,
+        leftMargin=72,
+        topMargin=2,
+        bottomMargin=18,
+    )
+    Story=[]
+    im=Image(settings.MEDIA_ROOT + '/logo.png', width=550, height=70)
+    Story.append(im)
+    styles=getSampleStyleSheet()
+    datos1=Paragraph('NOMBRE Y APELLIDO(S) DEL CLIENTE: '+request.user.first_name+' '+request.user.last_name,styles['Normal'])
+    datos2=Paragraph('NOMBRE DE USUARIO: '+request.user.username,styles['Normal'])
+    Story.append(datos1)
+    Story.append(datos2)
+    datos3=Paragraph('E-MAIL: '+request.user.email,styles['Normal'])
+    Story.append(datos3)
+    noContrato=Paragraph('NO. CONTRATO: '+str(id_cont),styles['Normal'])
+    Story.append(noContrato)
+    p=Image(settings.MEDIA_ROOT+'/logo.png',width=550, height=30)
+    Story.append(p)
+    encabezados=('Servicios Contratados', 'ID.Servicio', 'Plan', 'Precio')
+    lista_nombres=[]
+    for var in agenda.objects.all():
+        lista_nombres.append((var.fecha, var.pk, str(var.plazo) + " p", var.precio))
+    lista_nombres.reverse()
+    detalle_orden=Table([encabezados] + lista_nombres,colWidths=[170,100,100,100])
+    # Aplicamos estilos a las celdas de la tabla
+    detalle_orden.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (3, -1), 1, colors.dodgerblue),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.darkblue),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.dodgerblue)
+            # # La primera fila(encabezados) va a estar centrada
+            # ('ALIGN', (0, 0), (0, 0), 'CENTER'),
+            # # Los bordes de todas las celdas serán de color negro y con un grosor de 1
+            # ('GRID', (0, 0), (-1, -1), 0, colors.transparent),
+            # # El tamaño de las letras de cada una de las celdas será de 10
+            # ('FONTSIZE', (0, 0), (0, 0), 10),
+
+        ]
+    ))
+    Story.append(detalle_orden)
+    p=Image(settings.MEDIA_ROOT + '/espacioPDF.png', width=550, height=30)
+    Story.append(p)
+    p=Paragraph('ACUERDOS DE NIVEL DE SERVICIOS',styles['Normal'])
+    Story.append(p)
+    encabezados=['No.', 'AsL']
+    lista_acl=[]
+    for var in Asl.objects.filter(generales=True):
+        lista_acl.append((var.pk, var.descripcion))
+    lista_acl.reverse()
+    detalle_orden=Table([encabezados] + lista_acl,colWidths=[70,400,0])
+    # Aplicamos estilos a las celdas de la tabla
+    detalle_orden.setStyle(TableStyle(
+        [
+            ('GRID', (0, 0), (3, -1), 1, colors.dodgerblue),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.darkblue),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.dodgerblue)
+            # # La primera fila(encabezados) va a estar centrada
+            # ('ALIGN', (0, 0), (0, 0), 'CENTER'),
+            # # Los bordes de todas las celdas serán de color negro y con un grosor de 1
+            # ('GRID', (0, 0), (-1, -1), 0, colors.transparent),
+            # # El tamaño de las letras de cada una de las celdas será de 10
+            # ('FONTSIZE', (0, 0), (0, 0), 10),
+
+        ]
+    ))
+    Story.append(detalle_orden)
+    doc.build(Story)
+    return response
