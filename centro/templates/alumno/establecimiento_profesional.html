@@ -25,7 +25,11 @@
 		
 		{% for escuela in profesional %}
 			
-		<td>{{ escuela.escuela.nombre|title|truncatewords:'2' }} </td>
+		<td>
+		{{ escuela.escuela.nombre|truncatewords:15|make_list|slice:":25"|join:"" }}
+				{% if escuela.escuela.nombre|truncatewords:15|make_list|slice:":25"|length_is:"25" %} ...{% endif %}
+
+		
 		<td>{{ escuela.get_profesional |title|truncatewords:'2'}} </td>
 		
 			<td>
