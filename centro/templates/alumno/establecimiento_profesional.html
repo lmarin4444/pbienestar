@@ -8,8 +8,6 @@
 			
 			
 			<td>Establecimiento </td>
-			
-			
 			<td>Cargo</td>
 			<td>Opciones</td>
 			<td>Planes</td>
@@ -27,7 +25,7 @@
 		
 		{% for escuela in profesional %}
 			
-		<td>{{ escuela.escuela.nombre }} </td>
+		<td>{{ escuela.escuela.nombre|title|truncatewords:'2' }} </td>
 		<td>{{ escuela.get_profesional |title|truncatewords:'2'}} </td>
 		
 			<td>

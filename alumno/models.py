@@ -129,7 +129,6 @@ class curso(models.Model):
 
 	numero 			= models.IntegerField(choices=TIPO_CHOICES, blank=True, null=True)
 	letra 			= models.IntegerField(choices=TIPO_LETRAS, blank=True, null=True)
-	
 	establecimiento = models.ForeignKey(establecimiento)
 	Profesor 		= models.ForeignKey(Profesor,blank=True, null=True)
 

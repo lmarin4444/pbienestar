@@ -178,6 +178,7 @@ def PlanListView(request,pk):
 		
 	except Plan.DoesNotExist:
 		plan =None
+		base=None
 
 	if request.method == 'POST':
 
@@ -1299,7 +1300,11 @@ def PlanificacionListView(request,pk):
 		escuela=establecimiento.objects.get(id=pk)
 		x= datetime.date.today() 
 		annio=str(int(x.year))
-		plan=Plan.objects.get(establecimiento=escuela,annio=annio)
+		try:
+			plan=Plan.objects.get(establecimiento=escuela,annio=annio)
+		except Plan.DoesNotExist:
+			plan=None
+		
 		base=Base.objects.filter(plan=plan)
 		accion=Accion.objects.all()
 		plancillo=Plancillo.objects.all()
@@ -1435,7 +1440,11 @@ def PlanificacionDuplaListView(request,pk,mes):
 		
 		x= datetime.date.today() 
 		annio=str(int(x.year))
-		plan=Plan.objects.get(establecimiento=colegio,annio=annio)
+		try:
+			plan=Plan.objects.get(establecimiento=colegio,annio=annio)
+		except Plan.DoesNotExist:
+			plan=None
+		
 
 		base=Base.objects.filter(plan=plan)
 		accion=Accion.objects.all()
