@@ -7,7 +7,7 @@
 
   <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de planes">Establecimientos</a></li>
 
-  <li><a href="{% url 'plan:PlanListView' escuela.id %}"data-toggle="tooltip" title="Volver plan">Ver Plan</a></li>
+  <li><a href="{% url 'plan:PlanListView' colegio %}"data-toggle="tooltip" title="Volver plan">Ver Plan</a></li>
 
   {% if indicadores >= 1 %}
   <li><a href="{% url 'plan:AccionesListView' accion_base.id %}"data-toggle="tooltip" title="Plan">Ver acciones</a></li>
