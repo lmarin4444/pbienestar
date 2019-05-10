@@ -362,7 +362,7 @@ class ingresar_acciones(CreateView):
 				context['plan']=plan
 				context['mensaje']=mensaje
 				context['colegio']=colegio
-				print colegio
+				
 
 				return context
 			
@@ -957,8 +957,7 @@ def modificar_accion(request,pk):
 	base=accion.base 
 	plan=base.plan
 	escuela=plan.establecimiento
-
-	
+	colegio=escuela.id
 	if request.method=='POST':
 		formulario = Accion_baseForm(request.POST or None, instance=accion)
  		if formulario.is_valid():
@@ -966,27 +965,19 @@ def modificar_accion(request,pk):
 			base=instance.base
 			instance.base=base
 			instance.usuario = request.user
-				
 			instance.save()
-		
 			formulario.save_m2m()	
-				
 			url = reverse(('plan:AccionesListView'), kwargs={ 'pk': base.id})
 			return HttpResponseRedirect(url)
-				
-			
-				
 		formulario = Accion_baseForm(request.POST or None, instance=accion)
-	else:
-
-
-				
+	else:		
 		formulario = Accion_baseForm(request.POST or None, instance=accion)
 	context = {
 		"form": formulario,
-		
 		"plan":plan,
 		"escuela":escuela,
+		"colegio":colegio,
+
 		 }
 	return render(request, 'plan/plan_accion_form.html', context)	
 
@@ -995,12 +986,9 @@ class eliminar_accion(DeleteView):
 	model = Accion
 	template_name = 'plan/eliminar_accion.html'
 
-	        
-
 	def get_context_data(self, **kwargs):
         # Llamamos ala implementacion primero del  context
 		context = super(eliminar_accion, self).get_context_data(**kwargs)
-		
 		#pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
 		a=self.kwargs.get('pk') # El mismo nombre que en tu URL
 		accion=Accion.objects.get(id=a)
@@ -1010,7 +998,6 @@ class eliminar_accion(DeleteView):
 		context['base']=base
 		context['plan']=plan
 		context['escuela']=plan.establecimiento
-
 		return context
 
 	def post(self,request,*args,**kwargs):	        
