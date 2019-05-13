@@ -12,7 +12,8 @@
 
   <li class="active">Eliminar Plan cronológico:{{plancito.nombre|capfirst}} de la acción {{accion.nombre|capfirst}} de la base {{base.nombre|capfirst}} del plan {{plan.nombre|capfirst}}</li> 
 </ul>
-
+<h1> Al eliminar una acción, se eliminará automáticamente toda la información
+relacionada a dicho plan y no hay forma alguna de revertir dicho proceso</h1>
 <form method="post">
 	{% csrf_token %}
 	<h3>¿Desea eliminar el plan cronológico : {{plancito.nombre}}  de la acción {{accion.nombre|capfirst}}  ?</h3>	
