@@ -908,10 +908,12 @@ def modificar_base(request,pk):
 		form = Base_PlanForm(request.POST or None, instance=dato)
 	context = {
 		"form": form,
-		"dato": dato,
+
 		"plan":plan,
 		"base":dato,
 		"escuela":escuela,
+		"colegio":escuela.id,
+
 		 }
 	return render(request, 'plan/plan_accion_form.html', context)	
 
@@ -976,6 +978,8 @@ def modificar_accion(request,pk):
 		"form": formulario,
 		"plan":plan,
 		"escuela":escuela,
+		"base":base,
+
 		"colegio":colegio,
 
 		 }
@@ -1971,7 +1975,7 @@ class duplicar_plancillo(CreateView):
 		planchico=self.kwargs.get('plancillo') # El mismo nombre que en tu URL
 		plancito=Plancillo.objects.get(id=planchico)
 		actividades_copiadas=Actividades.objects.filter(plancillo=plancito)
-			
+		print actividades_copiadas	
 		form = Base_PlancilloForm(instance=plancito)
 		
 		if request.method == 'POST':
@@ -1984,16 +1988,19 @@ class duplicar_plancillo(CreateView):
 				
 				form.instance = form.save(commit=False)
 
-
-				Plancillo.objects.create(fecha=form.instance.fecha,nombre=form.instance.nombre,responsable=form.instance.responsable,
+				
+				
+				n =Plancillo.objects.create(fecha=form.instance.fecha,nombre=form.instance.nombre,responsable=form.instance.responsable,
 							numero=form.instance.numero,letra=form.instance.letra,Curso=form.instance.Curso,
 							cantidad_horas=form.instance.cantidad_horas,duracion=form.instance.duracion,
 							justificacion=form.instance.justificacion,objetivo_general=form.instance.objetivo_general,
 							objetivo_especificos=form.instance.objetivo_especificos,materiales=form.instance.materiales,
 							reportes=form.instance.reportes,evaluacion=form.instance.evaluacion,accion=form.instance.accion,usuario=form.instance.usuario)
-				plan_copiado = request.GET["id"]
+				n.save()
+
 				
-				plan_plancillo = Plancillo.objects.get(id=plan_copiado)
+				plan_plancillo = Plancillo.objects.get(id=n.id)
+				print plan_plancillo
 				for activo in actividades_copiadas:
 					Actividades.objects.create(fecha=activo.fecha,horario=activo.horario,mes=activo.mes,
 						nombre=activo.nombre,tipo=activo.tipo,descripcion=activo.descripcion,ejecutores=activo.ejecutores,
@@ -2002,9 +2009,6 @@ class duplicar_plancillo(CreateView):
 						verificadores=None,observaciones=activo.observaciones,planes_externos=activo.planes_externos,planes_mineduc=None,evaluacion=activo.evaluacion,
 						estado=activo.estado,plancillo=plan_plancillo,usuario=activo.usuario
 						
-
-
-
 
 						)
 

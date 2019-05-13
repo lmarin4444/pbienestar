@@ -9,12 +9,14 @@
 
   <li><a href="{% url 'plan:PlanListView' colegio %}"data-toggle="tooltip" title="Volver plan">Ver Plan</a></li>
 
+
+
   {% if indicadores >= 1 %}
   <li><a href="{% url 'plan:AccionesListView' accion_base.id %}"data-toggle="tooltip" title="Plan">Ver acciones</a></li>
   {% endif %}
  
 
-  <li class="active">Ingresar Acción para el componente {{accion_base.nombre}} de {{accion_base.plan.establecimiento.nombre}}</li> 
+  <li class="active">Ingresar Acción para el componente <strong>{{base.nombre}} </strong> de {{base.plan.establecimiento.nombre}}</li> 
 </ul>
 {% if mensaje %}
 <div class="alert alert-info">{{mensaje}} CANTIDAD DECLARADA : {{cantidad_indicadores_base}} v/s CANTIDAD INGRESADA: {{indicadores}}</div>
