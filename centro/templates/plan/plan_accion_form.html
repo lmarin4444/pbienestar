@@ -11,10 +11,8 @@
 
 
 
-  {% if indicadores >= 1 %}
-  <li><a href="{% url 'plan:AccionesListView' accion_base.id %}"data-toggle="tooltip" title="Plan">Ver acciones</a></li>
-  {% endif %}
- 
+  
+  <li><a href="{% url 'plan:AccionesListView' base.id %}"data-toggle="tooltip" title="Plan">Ver acciones</a></li>
 
   <li class="active">Ingresar Acción para el componente <strong>{{base.nombre}} </strong> de {{base.plan.establecimiento.nombre}}</li> 
 </ul>

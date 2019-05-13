@@ -11,6 +11,9 @@
 <li><a href="{% url 'plan:AccionesListView' base.id %}"data-toggle="tooltip" title="Listado de acciones">Lista acciones</a></li>
 
   <li class="active">Eliminar acción:{{accion.nombre}} base {{base.nombre|capfirst}} del plan {{plan.nombre|capfirst}}</li> 
+  <h2>Al eliminar una acción, se eliminará automáticamente toda la información
+  relacionada a dicho componente y no hay forma alguna de revertir dicho
+  proceso. </h2>
 </ul>
 
 <form method="post">

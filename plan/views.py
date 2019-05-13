@@ -362,6 +362,7 @@ class ingresar_acciones(CreateView):
 				context['plan']=plan
 				context['mensaje']=mensaje
 				context['colegio']=colegio
+				context['base']=accion_base
 				
 
 				return context
@@ -369,6 +370,7 @@ class ingresar_acciones(CreateView):
 			except Accion.DoesNotExist:
 				context['indicadores_lista']=''
 				context['accion_base']=accion_base
+				context['base']=accion_base
 				context['mensaje']=''
 				context['colegio']=colegio
 				context['form'] = self.form_class(fecha=date())
@@ -958,6 +960,7 @@ def modificar_accion(request,pk):
 	accion= get_object_or_404(Accion, pk=pk)
 	base=accion.base 
 	plan=base.plan
+
 	escuela=plan.establecimiento
 	colegio=escuela.id
 	if request.method=='POST':
@@ -979,6 +982,8 @@ def modificar_accion(request,pk):
 		"plan":plan,
 		"escuela":escuela,
 		"base":base,
+		"accion":accion,
+
 
 		"colegio":colegio,
 
