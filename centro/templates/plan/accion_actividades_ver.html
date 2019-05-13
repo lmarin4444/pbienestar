@@ -6,7 +6,7 @@
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
   <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
 
-  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver Lista</a></li>
+  <li><a href="{% url 'plan:AccionesListView' base.id %}"data-toggle="tooltip" title="Listado de acciones">Volver Lista</a></li>
   <li><a href="{% url 'plan:ingresar_plancillo' accion.id base.id %}"data-toggle="tooltip" title="Ingresar planes">Ingresar planes de acción( Actividades)</a></li>
   
   {% if mensaje %}
