@@ -799,7 +799,7 @@ class ver_actividades(ListView):
 				context['accion']=accion
 				context['base']=accion.base
 
-				context['actividades']=""
+				context['actividades']=None
 				return context
 
 class ver_bases(ListView):
@@ -2085,9 +2085,9 @@ class duplicar_Actividad_plan(CreateView):
 				plan=base.plan	
 				
 				instance = form.save(commit=False)
-				#verificar si la actividad ya existe 
+				#Crear la actvidad en base a una ya creada
 	
-				instance.usuario=self.request.user
+				
 				instance.plancillo=plancito
 
 				Actividades.objects.create(fecha=form.instance.fecha,horario=form.instance.horario,mes=form.instance.mes,
@@ -2100,13 +2100,13 @@ class duplicar_Actividad_plan(CreateView):
 							
 							observaciones=form.instance.observaciones,planes_externos=form.instance.planes_externos,
 							evaluacion=form.instance.evaluacion,
-							estado=form.instance.estado,plancillo=plancito,usuario=form.instance.usuario)
+							estado=form.instance.estado,plancillo=plancito,usuario=self.request.user)
 
 
 	
 
-				
-				url = reverse(('plan:ver_actividades'), kwargs={ 'pk': pk })
+			
+				url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancito.id })
 				return HttpResponseRedirect(url)
 			else:
 				return self.render_to_response(self.get_context_data(Base_ActividadesPlan=form))

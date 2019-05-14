@@ -16,7 +16,7 @@
 <li class="active">Cronograma de actividades para el plan: {{plan.nombre}} </li> 
 {% endif %}
 </ul>
-
+<strong>Si la fecha es el 01/01 del año actual INDICA ACTIVIDAD SIN FECHA ASIGNADA </strong>
 
 <table id="example" class="table table-bordered">
 	<thead>
@@ -45,7 +45,7 @@
 		
 		{% for plancillo in actividades %}
 		<td>{{ plancillo.get_mes }} </td>
-		{% if plancillo.fecha %}
+		{% if plancillo.fecha  %}
 		<td>{{ plancillo.fecha |date:"d-m-Y" }} - [{{plancillo.get_horario }}] </td>
 		{% else %}
 		<td>"Sin fecha asignada"</td>
@@ -69,8 +69,8 @@
 		<a class="btn btn-success btn-sm" href="{% url 'plan:ingresar_Actividad' plancillo.id %}"><small>Modificar</small></a>
 		<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
 		{% else %}
-		<a class="btn btn-success btn-sm" href="{% url 'plan:ingresar_Actividad_plan' plancillo.plancillo.id %}"><small>Modificar</small></a>
-		<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.plancillo.id %}"><small>Duplicar actividad</small></a>
+		<a class="btn btn-success btn-sm" href="{% url 'plan:ingresar_Actividad_plan' plancillo.id %}"><small>Modificar</small></a>
+		<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
 		{% endif %}
 				
 			

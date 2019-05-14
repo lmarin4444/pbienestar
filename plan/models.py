@@ -577,10 +577,10 @@ class Actividades(models.Model):
     cantidad_convocada 			= models.IntegerField(default=0)
     
     	
-    verificadores               = models.ManyToManyField(Verificadores,blank=True,default=1)
+    verificadores               = models.ManyToManyField(Verificadores,blank=True)
     
     observaciones 		 		= models.TextField(default=0)
-    planes_externos 	 		= models.ForeignKey(Planes_externos,default=1)
+    planes_externos 	 		= models.ForeignKey(Planes_externos,blank=True, null=True)
     planes_mineduc              = models.ManyToManyField(Planes_mineduc,default=1)
     
     evaluacion  				= models.IntegerField(choices=EVALUACION,default=0)
