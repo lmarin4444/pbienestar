@@ -67,10 +67,14 @@
 			
 		{% if plancillo.fecha %}		
 		<a class="btn btn-success btn-sm" href="{% url 'plan:modificar_actividad_plan' plancillo.id %}"><small>Modificar</small></a>
-		<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
+			{% if plancillo.estado == 0 %}		
+			<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
+		{% endif %}	
 		{% else %}
 		<a class="btn btn-success btn-sm" href="{% url 'plan:modificar_actividad_plan' plancillo.id %}"><small>Modificar</small></a>
+		{% if plancillo.estado == 0 %}
 		<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
+		{% endif %}
 		{% endif %}
 				
 			
