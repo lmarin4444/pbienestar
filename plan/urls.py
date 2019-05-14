@@ -41,6 +41,8 @@ urlpatterns = [
 	#Ingresar una actividad en el plan solo la medular
 
 	url(r'^ingresar_Actividad_plan/(?P<pk>\d+)/', login_required(views.ingresar_Actividad_plan.as_view()), name='ingresar_Actividad_plan'),
+	url(r'^modificar_actividad_plan/(?P<pk>\d+)/', login_required(views.modificar_actividad_plan), name='modificar_actividad_plan'),
+
 
 	url(r'^ver_actividades/(?P<pk>\d+)/$', login_required(views.ver_actividades.as_view()), name='ver_actividades'),
 

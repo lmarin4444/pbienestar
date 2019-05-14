@@ -347,12 +347,16 @@ class Base_ActividadesForm(forms.ModelForm):
 			'desarrollo',
 			'cierre',
 			'participantes',
+			'numero',
+			'letra',
+
 			'responsable',
 			'cantidad_convocada',
 			
 			'verificadores',
 			'observaciones',
 			'planes_externos',
+			'planes_mineduc',
 
 			'evaluacion',
 			
@@ -371,12 +375,17 @@ class Base_ActividadesForm(forms.ModelForm):
 			'desarrollo':'Planificación : Desarrollo',
 			'cierre':'Plaificación : Cierre',
 			'participantes':'Participantes a la  actividad',
+			'numero':'Curso',
+			'letra':'Letra',
 			'responsable':'Responsable o responsables de la actividad',
+
 			'cantidad_convocada':'Cantidad de personas convocadas',
 			
 			'verificadores':'Verificadores de la actividad ',
 			'observaciones':'Observaciones',
 			'planes_externos':'Programas comunales ',
+			'planes_mineduc':'Programas mineduc ',
+			
 			'evaluacion':'Proceso de evaluación de la actividad',
 			
 
@@ -397,12 +406,17 @@ class Base_ActividadesForm(forms.ModelForm):
 			'desarrollo':forms.Textarea(attrs={'class':'form-control'}),
 			'cierre':forms.Textarea(attrs={'class':'form-control'}),
 			'participantes': forms.Select(attrs={'class':'form-control'}),
+
+			'numero': forms.Select(attrs={'class':'form-control'}),
+			'letra': forms.Select(attrs={'class':'form-control'}),
+			
 			'responsable':forms.Textarea(attrs={'class':'form-control'}),	
 			'cantidad_convocada': forms.TextInput(attrs={'class':'form-control'}),
 			
 			'verificadores': forms.CheckboxSelectMultiple(),
 			'observaciones': forms.TextInput(attrs={'class':'form-control'}),
 			'planes_externos': forms.Select(attrs={'class':'form-control'}),
+			'planes_mineduc': forms.CheckboxSelectMultiple(),
 			'evaluacion': forms.Select(attrs={'class':'form-control'}),
 			
 		

@@ -722,16 +722,20 @@ class ingresar_Actividad_plan(CreateView):
 	        # Llamamos ala implementacion primero del  context
 			context = super(ingresar_Actividad_plan, self).get_context_data(**kwargs)
 			plancito = self.kwargs.get('pk') # El mismo nombre que en tu URL
-			plancillo=Plancillo.objects.get(id=plancito)
-			accion=plancillo.accion
-			base=accion.base
-			plan=base.plan
 			
+			plancillo=Plancillo.objects.get(id=plancito)
+			print plancillo
+			accion=plancillo.accion
+			print accion
+			base=accion.base
+			print base
+			plan=base.plan
+			print plan
 			context['plancito']=plancillo
 			context['accion']=accion
 			context['base']=base
 			context['plan']=plan
-
+			context['form']=Base_ActividadesPlan
 			context['mensaje']=""
 			
 			return context
@@ -741,32 +745,34 @@ class ingresar_Actividad_plan(CreateView):
 		self.object = self.get_object
 		form = self.form_class(request.POST)
 		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		plancito = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		plancillo=Plancillo.objects.get(id=plancito)
+		accion=plancillo.accion
+		base=accion.base
+		plan=base.plan
 			
 		if request.method == 'POST':
 			form = Base_ActividadesPlan(request.POST)
 		        #codigo
 			if form.is_valid():
-				
-				#Verificar si el plan existe 
-				
-				plancito=Plancillo.objects.get(id=pk)
-				accion=plancito.accion
-				base=accion.base
-				plan=base.plan	
-				
+								
 				instance = form.save(commit=False)
 				#verificar si la actividad ya existe 
 	
 				instance.usuario=self.request.user
-				instance.plancillo=plancito
+				instance.plancillo=plancillo
 
 
 				instance.save()
+				form.save_m2m()
 				
 				url = reverse(('plan:ver_actividades'), kwargs={ 'pk': pk })
 				return HttpResponseRedirect(url)
 			else:
-				return self.render_to_response(self.get_context_data(Base_ActividadesForm=form))
+				form = Base_ActividadesPlan(request.POST)
+				return render(request, 'plan/Actividades_form.html', {'form': form})
+
+
 
 
 
@@ -1957,6 +1963,7 @@ class duplicar_plancillo(CreateView):
 			base_activa=Base.objects.get(id=base)
 			accion_activa=Accion.objects.get(id=accion)
 			plancito=Plancillo.objects.get(id=planchico)
+			actividades_copiadas=Actividades.objects.filter(plancillo=planchico)
 			print plancito
 			form = Base_PlancilloForm(instance=plancito)
 			try:
@@ -1967,11 +1974,14 @@ class duplicar_plancillo(CreateView):
 				context['mensaje']='Listado de planes / Actividades '
 				context['base']=base_activa
 				context['form']=form
+				context['actividades_copiadas']=actividades_copiadas
+
 				return context
 			except Plancillo.DoesNotExist:
 				context['accion']=accion_activa
 				context['mensaje']='Listado de planes / Sin Cronogramas '
 				context['base']=base_activa
+				context['actividades_copiadas']=None				
 				return context
 	def post(self, request, *args, **kwargs):
 		self.object = self.get_object
@@ -2006,12 +2016,13 @@ class duplicar_plancillo(CreateView):
 				
 				plan_plancillo = Plancillo.objects.get(id=n.id)
 				print plan_plancillo
+				print actividades_copiadas
 				for activo in actividades_copiadas:
 					Actividades.objects.create(fecha=activo.fecha,horario=activo.horario,mes=activo.mes,
 						nombre=activo.nombre,tipo=activo.tipo,descripcion=activo.descripcion,ejecutores=activo.ejecutores,
 						inicio=activo.inicio,desarrollo=activo.desarrollo,cierre=activo.cierre,participantes=activo.participantes,
 						numero=activo.numero,letra=activo.letra,responsable=activo.responsable,cantidad_convocada=activo.cantidad_convocada,
-						verificadores=None,observaciones=activo.observaciones,planes_externos=activo.planes_externos,planes_mineduc=None,evaluacion=activo.evaluacion,
+						observaciones=activo.observaciones,planes_externos=activo.planes_externos,evaluacion=activo.evaluacion,
 						estado=activo.estado,plancillo=plan_plancillo,usuario=activo.usuario
 						
 
@@ -2033,6 +2044,58 @@ class duplicar_plancillo(CreateView):
 		else:
 				form = Base_PlancilloForm(request.POST or None, instance=plancillo)
 				return self.render_to_response(self.get_context_data(Base_PlancilloForm=form))
+
+# Modificar una actividad solo construida
+
+def modificar_actividad_plan(request,pk):
+# Modificar un plan  
+	
+	actividad = get_object_or_404(Actividades, pk=pk)
+	plancillo=actividad.plancillo
+	print plancillo
+	accion=plancillo.accion
+	base=accion.base
+	plan=base.plan
+	escuela=plan.establecimiento
+
+	
+	if request.method=='POST':
+		formulario = Base_ActividadesPlan(request.POST or None, instance=actividad)
+ 		if formulario.is_valid():
+			instance = formulario.save(commit=False)
+			
+			instance.plancillo=plancillo
+			instance.usuario = request.user
+				
+			instance.save()
+				
+				
+			url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancillo.id})
+			return HttpResponseRedirect(url)
+				
+			
+				
+		formulario = Base_ActividadesPlan(request.POST or None, instance=actividad)
+	else:
+
+
+				
+		formulario = Base_ActividadesPlan(request.POST or None, instance=actividad)
+	context = {
+		"form": formulario,
+		"plan":plan,
+		"base":base,
+		"accion":accion,
+		"plancillo":plancillo,
+
+		"escuela":escuela,
+
+		 }
+	return render(request, 'plan/actividades_form.html', context)	
+
+
+
+
 # Duplicar una actividad 
 class duplicar_Actividad_plan(CreateView):
 	model = Actividades	

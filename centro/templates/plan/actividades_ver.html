@@ -6,14 +6,14 @@
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
   <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
 
-  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver Lista</a></li>
-  <li><a href="{% url 'plan:ver_plancillo' accion.id base.id %}"data-toggle="tooltip" title="Plan cronológico">Volver Planificación</a></li>
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Lista establecimientos</a></li>
+  <li><a href="{% url 'plan:ver_plancillo' accion.id base.id %}"data-toggle="tooltip" title="Plan cronológico">Volver </a></li>
   
   
 {% if plan.get_numero %}
-  <li class="active">Cronograma de actividades para el plan: {{plan.nombre}} Curso: {{plan.get_numero}}ª {{plan.get_letra}}</li> 
+  <li class="active">Cronograma de actividades para el plan: {{plan.nombre}} Curso: {{plan.get_numero}} ª {{plan.get_letra}} /{{base.nombre}}/{{accion.nombre}} / {{plancillo.nombre}}</li> 
 {% else %}
-<li class="active">Cronograma de actividades para el plan: {{plan.nombre}} </li> 
+<li class="active">Cronograma de actividades para el plan: {{plan.nombre}} /{{base.nombre}}/{{accion.nombre}} / {{plancillo.nombre}}</li> 
 {% endif %}
 </ul>
 <strong>Si la fecha es el 01/01 del año actual INDICA ACTIVIDAD SIN FECHA ASIGNADA </strong>
@@ -66,10 +66,10 @@
 		
 			
 		{% if plancillo.fecha %}		
-		<a class="btn btn-success btn-sm" href="{% url 'plan:ingresar_Actividad' plancillo.id %}"><small>Modificar</small></a>
+		<a class="btn btn-success btn-sm" href="{% url 'plan:modificar_actividad_plan' plancillo.id %}"><small>Modificar</small></a>
 		<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
 		{% else %}
-		<a class="btn btn-success btn-sm" href="{% url 'plan:ingresar_Actividad_plan' plancillo.id %}"><small>Modificar</small></a>
+		<a class="btn btn-success btn-sm" href="{% url 'plan:modificar_actividad_plan' plancillo.id %}"><small>Modificar</small></a>
 		<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
 		{% endif %}
 				
