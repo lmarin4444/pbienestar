@@ -736,6 +736,8 @@ class ingresar_Actividad_plan(CreateView):
 			context['base']=base
 			context['plan']=plan
 			context['form']=Base_ActividadesPlan
+			context['escuela']=plan.establecimiento
+
 			context['mensaje']=""
 			
 			return context
@@ -770,7 +772,13 @@ class ingresar_Actividad_plan(CreateView):
 				return HttpResponseRedirect(url)
 			else:
 				form = Base_ActividadesPlan(request.POST)
-				return render(request, 'plan/Actividades_form.html', {'form': form})
+				return render(request, 'plan/Actividades_form.html', {'form': form,
+					'plan': plan,
+					'accion': accion,
+					'base': base,
+					'plancito': plancillo,
+
+					})
 
 
 
