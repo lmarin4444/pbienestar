@@ -218,8 +218,6 @@ def show_calendar_planes(request,ano=None,mes=None):
 #ver los planes por area 1: Dupla PsicoSocial
 def PlanesExternoListView(request,pk):
 #Registrar los logros de cada uno de las dimensiones de logros para cada diagnostico
-
-
     try:
         plan_externo=Planes_externos.objects.get(id=pk)
         x= datetime.date.today() 
