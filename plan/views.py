@@ -2065,6 +2065,7 @@ def modificar_actividad_plan(request,pk):
 	base=accion.base
 	plan=base.plan
 	escuela=plan.establecimiento
+	colegio=escuela
 
 	
 	if request.method=='POST':
@@ -2076,6 +2077,7 @@ def modificar_actividad_plan(request,pk):
 			instance.usuario = request.user
 				
 			instance.save()
+			formulario.save_m2m()
 				
 				
 			url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancillo.id})
@@ -2097,6 +2099,7 @@ def modificar_actividad_plan(request,pk):
 		"plancillo":plancillo,
 
 		"escuela":escuela,
+		"colegio":colegio,
 
 		 }
 	return render(request, 'plan/actividades_form.html', context)	
