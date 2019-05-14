@@ -2105,7 +2105,54 @@ def modificar_actividad_plan(request,pk):
 	return render(request, 'plan/actividades_form.html', context)	
 
 
+# Modificar una actividad ya planificada
+def modificar_actividad_planificada(request,pk):
+# Modificar una actividad una vez planificada 
+	
+	actividad = get_object_or_404(Actividades, pk=pk)
+	plancillo=actividad.plancillo
+	accion=plancillo.accion
+	base=accion.base
+	plan=base.plan
+	escuela=plan.establecimiento
+	colegio=escuela
 
+	
+	if request.method=='POST':
+		formulario = Base_ActividadesForm(request.POST or None, instance=actividad)
+ 		if formulario.is_valid():
+			instance = formulario.save(commit=False)
+			
+			instance.plancillo=plancillo
+			instance.usuario = request.user
+				
+			instance.save()
+			formulario.save_m2m()
+				
+				
+			url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancillo.id})
+			return HttpResponseRedirect(url)
+				
+			
+				
+		formulario = Base_ActividadesForm(request.POST or None, instance=actividad)
+	else:
+
+
+				
+		formulario = Base_ActividadesForm(request.POST or None, instance=actividad)
+	context = {
+		"form": formulario,
+		"plan":plan,
+		"base":base,
+		"accion":accion,
+		"plancillo":plancillo,
+
+		"escuela":escuela,
+		"colegio":colegio,
+
+		 }
+	return render(request, 'plan/actividades_form.html', context)	
 
 # Duplicar una actividad 
 class duplicar_Actividad_plan(CreateView):

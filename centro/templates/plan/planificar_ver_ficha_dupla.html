@@ -74,7 +74,7 @@
                             {% for actividad_activa in actividades %}
                               {% if actividad_activa.plancillo == plancillo_activo %}
                                 
-                                   <li class="store_item">Actividad: {{actividad_activa.nombre}} / <strong>{{actividad_activa.get_ejecutores|title|truncatewords:'1'}} /{{actividad_activa.fecha|date:"d-m-Y "}} / {{actividad_activa.get_horario}}</strong><a href="{% url 'plan:ingresar_Actividad' actividad_activa.id %}"><small> / Planificar </small></a> - </strong><a href="{% url 'plan:ingresar_Actividad' actividad_activa.id %}"><small> / Modificar </small></a></li>
+                                   <li class="store_item">Actividad: {{actividad_activa.nombre}} / <strong>{{actividad_activa.get_ejecutores|title|truncatewords:'1'}} /{{actividad_activa.fecha|date:"d-m-Y "}} / {{actividad_activa.get_horario}}</strong><a href="{% url 'plan:ingresar_Actividad' actividad_activa.id %}"><small> / Planificar </small></a> - </strong><a href="{% url 'plan:modificar_actividad_planificada' actividad_activa.id %}"><small> / Modificar </small></a></li>
                                 
                                   
                                     
