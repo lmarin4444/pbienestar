@@ -6,8 +6,11 @@
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
   <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial dupla!">Menu </a></li>
   
-  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' colegio.id %}"data-toggle="tooltip" title="Volver listado anterior!">Volver lista anterior </a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' colegio.id %}"data-toggle="tooltip" title="Volver listado anterior!">Volver lista estudiantes dupla </a></li>
+
+  <li><a href="{% url 'alumno:estado_estudiantes_establecimiento' colegio.id %}"data-toggle="tooltip" title="Volver listado anterior!">Volver lista estudiantes  </a></li>
   
+
   
 
   <li class="active"> Listado </li> 
@@ -18,7 +21,7 @@
 	<thead>
 		<tr>
 			
-			<td>Nombres</td>
+			<td>Estudiante</td>
 			<td>Curso</td>
 			<td>Derivado por:</td>
 			<td>Opciones</td>
