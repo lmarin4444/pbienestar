@@ -2122,12 +2122,10 @@ def modificar_actividad_planificada(request,pk):
 		formulario = Base_ActividadesForm(request.POST or None, instance=actividad)
  		if formulario.is_valid():
 			instance = formulario.save(commit=False)
-			
 			instance.plancillo=plancillo
 			instance.usuario = request.user
-				
 			instance.save()
-			
+			formulario.save_m2m()
 				
 				
 			url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancillo.id})
