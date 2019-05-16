@@ -5,7 +5,7 @@
 <ul class="breadcrumb" >
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú </a></li>
   <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Estudiantes intervenidos </a></li>
   <li><a href="{% url 'derivacion:retorno' %}"data-toggle="tooltip" title="Ir listado de Fichas retornadas desde el centro de Bienestar">Listado de Fichas Retornadas </a></li>
   <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Volver a la lista</a></li>
@@ -24,7 +24,7 @@
  Profesor jefe   {{profe_jefe|capfirst}}  .</h4>
 
 
-<h3 style="text-align:center;" > Ingresar Entrevista de ingreso Equipo de formación y convivenica.</h3>
+<h3 style="text-align:center;" > Ingresar Entrevista de ingreso Equipo de formación y convivencia.</h3>
 
    <form method="post" enctype="multipart/form-data">
 	{% csrf_token %}
@@ -61,7 +61,7 @@
 				{{form.imagen}}
 			</div>
 		<div class="col-md-10 col-md-offset-1">
-		 <h4>II. PROBLEMATICA</h4>
+		 <h4>II. PROBLEMÁTICA</h4>
 		  	<strong>- Apreciación de la posible problemática de análisis ( Posibles causas o factores,
 		  	indicadores presentes y ámbitos afectados - SOCIAL , EDUCACIONAL , FAMILIAR.</strong>
 		</div>
@@ -88,7 +88,9 @@
 				
 				{% else%}
 				
-				<div class="alert alert-danger">Debe contar con entrevista de ingreso para poder imprimir</div>
+					<div class="alert alert-danger">Debe contar con entrevista de ingreso para poder imprimir</div>
+					<button type="submit" class="btn btn-info">Registrar</button>
+				<a class= "btn btn-danger" href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}">Cancelar</a>
 				{% endif%}
 			</div>
 		
@@ -96,8 +98,7 @@
 
 		<div class="form-group">
 				
-				<button type="submit" class="btn btn-info">Registrar</button>
-				<a class= "btn btn-danger" href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}">Cancelar</a>
+				<div class="alert alert-danger">Debe contar con FICHA DE DERIVACIÓN </div>
 				
 			</div>
 		
