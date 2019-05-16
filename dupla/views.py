@@ -187,13 +187,13 @@ def FichaingresonduplaUpdate(request,pk):
 	
 	mensaje=""
 	estudiante= get_object_or_404(Estudiante, pk=pk)
-	print estudiante
+
 	try:
 		ficha=Ficha_derivacion_dupla.objects.get(Estudiante=estudiante,estado=1)
-		print ficha
+	
 		try:
 			ficha_ingreso=Entrevista_ingreso_dupla.objects.get(ficha_derivacion_dupla=ficha)
-			print ficha_ingreso
+			
 		except Entrevista_ingreso_dupla.DoesNotExist:
 			ficha_ingreso=None	
 			mensaje="Estudiante sin ficha para modificar"
@@ -234,6 +234,8 @@ def FichaingresonduplaUpdate(request,pk):
 	context = {
 		"form": formulario,
 		"ficha":ficha,
+		"ficha_dupla":ficha,
+
 		"ficha_ingreso":ficha_ingreso,
 		"dato":estudiante,
 		"mensaje":mensaje,
@@ -296,13 +298,11 @@ class entrevista_ingreso_dupla(CreateView):
 		
 		context['dato']=Estudiante.objects.get(id=pk)
 		context['mensaje']=mensaje
-
 		establecimiento=Estudiante.objects.get(id=pk)
 		escuela=establecimiento.curso.establecimiento.nombre
 		context['escuela']=escuela
 		context['ficha_dupla']=ficha_dupla
 		context['entrevista_ingreso']=entrevista_ingreso
-		
 		context['profe_jefe']=profe_jefe
 
 		return context
