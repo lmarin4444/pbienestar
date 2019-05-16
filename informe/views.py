@@ -2678,10 +2678,10 @@ def fichaderivacion_dupla_pdf_report(request,pk):
     estilo = getSampleStyleSheet()
     estiloHoja = getSampleStyleSheet()
     cabecera = estiloHoja['Heading4']
-    
+        
     #imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/logo_formacion_convivencia.jpg',width=490,height=40)
-    imagen_logo = Image('http://demoschoolzen.educationzen.com/images/tia.png')
-    Elements.append(imagen_logo)
+    
+    #Elements.append(imagen_logo)
     # cambie para el proceso del logo
     parrafo = Paragraph("",cabecera)
     Elements.append(parrafo)    
