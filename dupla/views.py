@@ -237,6 +237,7 @@ def FichaingresonduplaUpdate(request,pk):
 		"ficha_dupla":ficha,
 
 		"ficha_ingreso":ficha_ingreso,
+		"entrevista_ingreso":ficha_ingreso,
 		"dato":estudiante,
 		"mensaje":mensaje,
 
