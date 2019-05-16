@@ -2679,16 +2679,29 @@ def fichaderivacion_dupla_pdf_report(request,pk):
     estiloHoja = getSampleStyleSheet()
     cabecera = estiloHoja['Heading4']
     
-    imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/logo_formacion_convivencia.jpg',width=490,height=40)
+    #imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/logo_formacion_convivencia.jpg',width=490,height=40)
 
-    Elements.append(imagen_logo)
+    #Elements.append(imagen_logo)
+    # cambie para el proceso del logo
+    parrafo = Paragraph("",cabecera)
+    Elements.append(parrafo)    
     
-    
+    Elements.append(Spacer(0,8))
+    Elements.append(Spacer(0,8))
+
+    Elements.append(Spacer(0,8))
+    Elements.append(Spacer(0,8))
+
+    Elements.append(Spacer(0,8))
+    Elements.append(Spacer(0,8))
+
     parrafo = Paragraph("",cabecera)
     Elements.append(parrafo)
    
     Elements.append(Spacer(0,8))
     Elements.append(Spacer(0,8))
+
+
 
 
 
@@ -2825,7 +2838,36 @@ def fichaderivacion_dupla_pdf_report(request,pk):
  
     Elements. append ( t )     
 
-    
+    table = Table(
+        data,
+        #colWidths=250 # Valor del ancho de las columnas
+        colWidths=[130,390]
+    )
+    table.setStyle(
+        TableStyle([
+            ('VALIGN',(0, 0), (-1, -1),'MIDDLE'),
+            ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+            ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
+        ])
+    )
+
+
+    Elements.append(table)
+    Elements.append(Spacer(0,15))
+    data = [ [ 'Meses'+" "+ request.user.first_name+" "+request.user.last_name , 'FIRMA'   ] ,
+        
+        
+        [ 'NOMBRE / QUIEN RECIBE EL INFORME' , 'FIRMA'   ] ,
+  ] 
+    t = Table ( data,30 * [ 3.599 * inch ] , 2 * [ 0.6 * inch ] ) 
+    t. setStyle ( TableStyle ( [ ( 'VALIGN' , ( 1 , 1 ) , ( -2 , -2 ) , 'TOP' ) ,
+                        ( 'VALIGN' , ( 0 , 0 ) , ( -1 , -1 ) , 'TOP' ) ,
+                        ( 'TEXTCOLOR' , ( 0 , 0 ) , ( 0 , -1 ) , colors.black) ,
+                        ( 'INNERGRID' , ( 0 , 0 ) , ( -1, -1 ) , 0.25 , colors.black ) ,
+                        ( 'BOX' , ( 0 , 0 ) , ( -1 , -1 ) , 0.25 , colors.black ) ,
+                        ] ) )
+ 
+    Elements. append ( t )     
     
 
         
