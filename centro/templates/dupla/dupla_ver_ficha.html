@@ -152,8 +152,9 @@
                 
              <dd> Establecimiento: {{ estudiante.curso.establecimiento}}</dd>
              <dd> Curso:{{ estudiante.curso.get_numero}} {{ estudiante.curso.get_letra}}</dd>
+             {% if ficha %}
              <dd>Imprimir ficha de derivación <a title="Ficha derivación - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:fichaderivacion_dupla_pdf_report' estudiante.id %}"></a>/</dd>
-           
+           {% endif %}
 
       </h4>
      </div> 

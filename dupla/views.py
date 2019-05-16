@@ -293,8 +293,12 @@ class entrevista_ingreso_dupla(CreateView):
 		except Ficha_derivacion_dupla.DoesNotExist:
 			profe_jefe=None
 			ficha_derivacion_dupla=None
+			ficha_dupla=None
 			mensaje='Estudiante sin ficha de derivación '
-			
+			try:
+				entrevista_ingreso=Entrevista_ingreso_dupla.objects.get(ficha_derivacion_dupla=ficha_dupla)
+			except Entrevista_ingreso_dupla.DoesNotExist:
+				entrevista_ingreso=None
 
 		
 		context['dato']=Estudiante.objects.get(id=pk)
