@@ -2921,7 +2921,7 @@ def entrevistaingreso_dupla_pdf_report(request,pk):
         canvas.drawCentredString(PAGE_WIDTH/2.0, PAGE_HEIGHT - 108, Title)
         canvas.setFont('Times-Roman', 12)
        # canvas.drawString(inch, 0.75 * inch, " %d  %s" %(doc.page, pageinfo))
-        canvas.drawString(230, inch, "Equipo de formación y convivencia escolar")
+        canvas.drawString(230, inch, "Convivencia escolar")
         canvas.setFont('Times-Bold', 12)
         canvas.drawString(200,  inch-12, "convivenciaescolar@gmail.com")
         canvas.line(100, inch+10 ,500,inch+10)
@@ -2996,10 +2996,17 @@ def entrevistaingreso_dupla_pdf_report(request,pk):
     estiloHoja = getSampleStyleSheet()
     cabecera = estiloHoja['Heading4']
     
-    imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/logo_formacion_convivencia.jpg',width=490,height=40)
+    #imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/logo_formacion_convivencia.jpg',width=490,height=40)
 
-    Elements.append(imagen_logo)
-    
+    #Elements.append(imagen_logo)
+    Elements.append(Spacer(0,8))
+    Elements.append(Spacer(0,8))
+
+    Elements.append(Spacer(0,8))
+    Elements.append(Spacer(0,8))
+
+    Elements.append(Spacer(0,8))
+    Elements.append(Spacer(0,8))
     
     parrafo = Paragraph("",cabecera)
     Elements.append(parrafo)
