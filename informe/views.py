@@ -2796,15 +2796,70 @@ def fichaderivacion_dupla_pdf_report(request,pk):
 
     data.append((
       
-    Paragraph('<font size=10>%s</font>' % "Establecimiento (Ficha)", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.establecimiento, estilo['Normal']),   
+    Paragraph('<font size=10>%s</font>' % "Inasistencias Marzo/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=10>%s</font>' % ficha.marzo+" ", estilo['Normal']), 
+
     ))
     data.append((
       
-    Paragraph('<font size=10>%s</font>' % "Curso (Ficha):", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.curso+" "+ficha.letra, estilo['Normal']),   
+    Paragraph('<font size=10>%s</font>' % "Inasistencias Abril/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=10>%s</font>' % ficha.abril+" ", estilo['Normal']), 
+
+    ))
+    data.append((
+      
+    Paragraph('<font size=10>%s</font>' % "Inasistencias Mayo/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=10>%s</font>' % ficha.mayo+" ", estilo['Normal']), 
+
+    ))
+    data.append((
+      
+    Paragraph('<font size=10>%s</font>' % "Inasistencias Junio/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=10>%s</font>' % ficha.junio+" ", estilo['Normal']), 
+
     ))
     
+    data.append((
+      
+    Paragraph('<font size=10>%s</font>' % "Inasistencias Julio/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=10>%s</font>' % ficha.julio+" ", estilo['Normal']), 
+
+    ))
+
+    data.append((
+      
+    Paragraph('<font size=8>%s</font>' % "Inasistencias Agosto/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=8>%s</font>' % ficha.agosto+" ", estilo['Normal']), 
+
+    ))
+
+    data.append((
+      
+    Paragraph('<font size=8>%s</font>' % "Inasistencias Septiembre/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=8>%s</font>' % ficha.septiembre+" ", estilo['Normal']), 
+
+    ))
+
+    data.append((
+      
+    Paragraph('<font size=8>%s</font>' % "Inasistencias Octubre/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=8>%s</font>' % ficha.octubre+" ", estilo['Normal']), 
+
+    ))
+
+    data.append((
+      
+    Paragraph('<font size=8>%s</font>' % "Inasistencias Noviembre/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=8>%s</font>' % ficha.noviembre+" ", estilo['Normal']), 
+
+    ))
+
+    data.append((
+      
+    Paragraph('<font size=8>%s</font>' % "Inasistencias Dicembre/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=8>%s</font>' % ficha.diciembre+" ", estilo['Normal']), 
+
+    ))
 
     
     table = Table(
@@ -2823,12 +2878,10 @@ def fichaderivacion_dupla_pdf_report(request,pk):
 
     Elements.append(table)
     Elements.append(Spacer(0,15))
-    data = [ [ 'Meses'+" "+ request.user.first_name+" "+request.user.last_name , 'FIRMA'   ] ,
+    data = [ [ 'Profesional'+" "+ request.user.first_name+" "+request.user.last_name , 'FIRMA'   ] ,
         
-        
-        [ 'NOMBRE / QUIEN RECIBE EL INFORME' , 'FIRMA'   ] ,
   ] 
-    t = Table ( data,30 * [ 3.599 * inch ] , 2 * [ 0.6 * inch ] ) 
+    t = Table ( data,30 * [ 3.599 * inch ] , 1 * [ 0.6 * inch ] ) 
     t. setStyle ( TableStyle ( [ ( 'VALIGN' , ( 1 , 1 ) , ( -2 , -2 ) , 'TOP' ) ,
                         ( 'VALIGN' , ( 0 , 0 ) , ( -1 , -1 ) , 'TOP' ) ,
                         ( 'TEXTCOLOR' , ( 0 , 0 ) , ( 0 , -1 ) , colors.black) ,
@@ -2838,36 +2891,7 @@ def fichaderivacion_dupla_pdf_report(request,pk):
  
     Elements. append ( t )     
 
-    table = Table(
-        data,
-        #colWidths=250 # Valor del ancho de las columnas
-        colWidths=[130,390]
-    )
-    table.setStyle(
-        TableStyle([
-            ('VALIGN',(0, 0), (-1, -1),'MIDDLE'),
-            ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-            ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
-        ])
-    )
-
-
-    Elements.append(table)
-    Elements.append(Spacer(0,15))
-    data = [ [ 'Meses'+" "+ request.user.first_name+" "+request.user.last_name , 'FIRMA'   ] ,
-        
-        
-        [ 'NOMBRE / QUIEN RECIBE EL INFORME' , 'FIRMA'   ] ,
-  ] 
-    t = Table ( data,30 * [ 3.599 * inch ] , 2 * [ 0.6 * inch ] ) 
-    t. setStyle ( TableStyle ( [ ( 'VALIGN' , ( 1 , 1 ) , ( -2 , -2 ) , 'TOP' ) ,
-                        ( 'VALIGN' , ( 0 , 0 ) , ( -1 , -1 ) , 'TOP' ) ,
-                        ( 'TEXTCOLOR' , ( 0 , 0 ) , ( 0 , -1 ) , colors.black) ,
-                        ( 'INNERGRID' , ( 0 , 0 ) , ( -1, -1 ) , 0.25 , colors.black ) ,
-                        ( 'BOX' , ( 0 , 0 ) , ( -1 , -1 ) , 0.25 , colors.black ) ,
-                        ] ) )
- 
-    Elements. append ( t )     
+    
     
 
         
