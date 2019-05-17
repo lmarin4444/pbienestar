@@ -176,8 +176,6 @@
 </div>
 
 
-
-
 <ul id="tab" class="nav nav-tabs" role="tablist"> 
 <li> 
 <a id="tab1-tab" aria-controls="tab1" data-toggle="tab" role="tab" href="#tab1" aria-expanded="true">Ficha de derivación</a> 
@@ -185,11 +183,6 @@
 
 </ul> 
 <div id="tabContent" class="tab-content"> 
-
-<div id="tab4" class="tab-pane fade" aria-labelledby="profile-tab" role="tab-panel">
-
-</div>
-
 <div id="tab1" class="tab-pane fade" aria-labelledby="profile-tab" role="tab-panel"> 
 
 <div class="container">
@@ -233,14 +226,11 @@
 
 
               {% endif %}
+              {% else %}
+              <h3>No cuenta con dicha de derivación</h3>
           {% endif %}
         
       </td>
-
-
-
-      
-
 
 
 <div class="buttons " align="center"> 
@@ -252,6 +242,50 @@
 
   	<div class="container">
     	<h3>Ficha de derivación  </h3>
+      
+      <td>
+       
+          {% if deriva %}
+             Motivo de la derivación: <ul>{{deriva.get_motivo_termino}} </ul>
+             Motivo: <li>{{deriva.motivo}} </li>
+             Fecha de la derivación: <li>{{deriva.fecha_derivacion|date:"d-m-Y "}} </li>
+             Observación:<li>{{deriva.observacion_termino}} </li>
+
+              {% if deriva.Red_apoyo == 'No es derivado a otra institución' %}
+                Situación:Información incompleta
+              {% else %}
+                Situación :<strong>{{deriva.Red_apoyo.nombre}} </strong> 
+                
+                     {% if deriva.filename1  %}
+                          <li>Nombre del archivo 1:<a href="{{ deriva.docfile1.url }}"><span class="glyphicon glyphicon-floppy-save"></span> </a>{{ deriva.filename1 }} 
+                     {% else %}
+                            <ul>Sin asignación de archivo nª1</ul>
+                     {% endif %}
+
+                  {% if deriva.filename2  %}
+
+                    <li>Nombre del archivo 2:<a href="{{ deriva.docfile2.url }}"><span class="glyphicon glyphicon-floppy-save"></span></a> {{ deriva.filename2 }} 
+                
+                   {% else %}     
+                        <ul>Sin asignación de archivo nª2</ul>
+
+                    {% endif %}      
+
+                     {% if deriva.filename3  %}
+
+                     <li>Nombre del archivo 3:<a href="{{ deriva.docfile3.url }}"><span class="glyphicon glyphicon-floppy-save"></span></a> {{ deriva.filename3 }} 
+                      {% else %}     
+                        <ul>Sin asignación de archivo nª3</ul>
+
+                    {% endif %}  
+
+
+
+              {% endif %}
+          {% endif %}
+        
+      </td>
+
       {% if ficha %}
      <td>
       <strong>Motivo de la derivacion:</strong>

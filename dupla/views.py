@@ -2644,9 +2644,12 @@ def FichaEstudianteegresoDetailView(request,pk):
 		except Derivacion_Ficha_derivacion_dupla.DoesNotExist:
 			deriva=None
 			
-	except Ficha_derivacion.DoesNotExist:
+	except Ficha_derivacion_dupla.DoesNotExist:
 		ficha_id=None	
-		deriva=None	
+		try:
+			deriva=Derivacion_Ficha_derivacion_dupla.objects.get(ficha_derivacion_dupla=ficha_id)
+		except Derivacion_Ficha_derivacion_dupla.DoesNotExist:
+			deriva=None
 			
 
     #book_id=get_object_or_404(Book, pk=pk)
