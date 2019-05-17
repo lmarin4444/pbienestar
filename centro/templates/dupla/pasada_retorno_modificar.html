@@ -22,7 +22,7 @@
 <h4> MODIFICAR DERIVACIÓN A OTRA INSTITUCIÓN Y/O EGRESO</h4>	
 Estudiante: <strong>{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}</strong> 	
 
-	
+{% if ficha %}	
 <table  class="table table-bordered" fontsize =10px>
 
 	<tbody>	
@@ -161,8 +161,17 @@ Estudiante: <strong>{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ d
 
   </div>
 </div>
-
-
-</form>
+{% else %}
+<!-- Sección Jumbotron -->
+<div class="container">
+ <div class="row">
+  <div class="jumbotron">
+   <h3>Estudiante: <strong>{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}</strong>  </h3> 
+   <p>Sin ficha de derivación. </p>
+   
+ </div>
+</div>
+</div><!-- Fin Sección Jumbotron -->
+{% endif %}
 
 {% endblock %}
