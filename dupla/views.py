@@ -305,7 +305,10 @@ class entrevista_ingreso_dupla(CreateView):
 		context['mensaje']=mensaje
 		establecimiento=Estudiante.objects.get(id=pk)
 		escuela=establecimiento.curso.establecimiento.nombre
+		colegio=establecimiento.curso.establecimiento
 		context['escuela']=escuela
+		context['colegio']=colegio
+
 		context['ficha_dupla']=ficha_dupla
 		context['entrevista_ingreso']=entrevista_ingreso
 		context['profe_jefe']=profe_jefe
@@ -1004,6 +1007,8 @@ def ModificarRetornoDefinitivo(request,pk):
 # Realizar un retorno de una ficha de derivacion a la dupla 
 	
 	dato = get_object_or_404(Estudiante, pk=pk)
+	escuela=dato.curso.establecimiento
+	print escuela
 	try:
 		ficha=Ficha_derivacion_dupla.objects.get(Estudiante=dato,estado=1)
 		try:
@@ -1057,7 +1062,7 @@ def ModificarRetornoDefinitivo(request,pk):
 			return HttpResponseRedirect('/derivacion/intervencion_otrar')
 
 	else:
-		formulario = Derivacion_Ficha_derivacionForm(instance=retorno_ficha)
+		formulario = Derivacion_Ficha_derivacionForm(request.POST,request.FILES,instance=retorno_ficha)
 		
 
 
@@ -1065,6 +1070,8 @@ def ModificarRetornoDefinitivo(request,pk):
 		"formulario": formulario,
 		"dato": dato,
 		"ficha":ficha,
+		"escuela":escuela,
+
 		 }
 	return render(request, 'dupla/pasada_retorno_modificar.html', context)	
 

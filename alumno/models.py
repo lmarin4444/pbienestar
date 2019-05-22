@@ -160,7 +160,7 @@ class Estudiante(models.Model):
 	
 
 	def __unicode__(self):
-		return '{} {} {} {} {}'.format(self.id, self.rut,self.nombres, self.firs_name, self.last_name)
+		return '{} {} {} {} {}'.format(self.id, self.rut,self.nombres, self.firs_name, self.curso.establecimiento.nombre)
 
 class vida(models.Model):
 	"""docstring for materia"""

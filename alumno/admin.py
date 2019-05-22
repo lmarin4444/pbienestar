@@ -21,7 +21,7 @@ from .models import EscolaridadAnterior
 from .models import Profesor
 
 class EstudianteAdmin(admin.ModelAdmin):
-	list_display = ('id','rut','nombres','firs_name','last_name')
+	list_display = ('id','rut','nombres','firs_name','last_name','curso')
 	search_fields = ['Estudiante']
 	list_per_page = 25
 	list_max_show_all = 30

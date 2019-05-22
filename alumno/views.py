@@ -1186,10 +1186,10 @@ class EstablecimientoaccList(ListView):
 def listar_estudiantes_establecimiento(request,pk):
 		
 	estudiando=Escolaridad.objects.filter(establecimiento__id=pk)
-
+	print estudiando
 	escuela=establecimiento.objects.get(id=pk)
-	ficha=Ficha_derivacion.objects.filter(Estudiante__curso__establecimiento=escuela,estado=1)
-	casos=Intervencion_casos.objects.filter(estudiante__curso__establecimiento=escuela)
+	ficha=Ficha_derivacion.objects.filter(Estudiante__curso__establecimiento__id=pk,estado=1)
+	casos=Intervencion_casos.objects.filter(estudiante__curso__establecimiento__id=pk)
 	contexto = {'estudiando':estudiando,
 				'escuela':escuela,
 				 'ficha':ficha,
