@@ -638,6 +638,7 @@ def EstudianteUpdate(request,pk,escuela):
  			instance = form.save(commit=False)
  			
 			edad_formulario=instance.fecha_nacimiento
+			print instance.fecha_nacimiento
 			diff = (datetime.date.today() - edad_formulario).days
 
 			years = str(int(diff/365))	
