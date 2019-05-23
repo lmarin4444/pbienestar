@@ -1468,9 +1468,9 @@ def ingresar_estudiantes_establecimiento(request,pk):
 		if form.is_valid() and form2.is_valid() :
 
 			estudiando = form.save(commit=False)# Estudiante
-			print ("estudiando  %s" % ( estudiando) )
+			#print ("estudiando  %s" % ( estudiando) )
 			escolar=form2.save(commit=False)# escolaridad
-			print ("escolar  %s" % ( escolar.Letra) )
+			#print ("escolar  %s" % ( escolar.Letra) )
 			#pesadilla=form3.save(commit=False)
 			escuela=establecimiento.objects.get(id=pk)
 			#ir a buscar el curso
