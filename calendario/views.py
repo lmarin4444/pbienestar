@@ -70,7 +70,7 @@ def buscar_fechas (request,dia,mes):
     #group_required = 'puede_administrar_encuestas
 
     age = agenda.objects.filter(Q(fecha__day=dia) & Q(fecha__month=mes) & Q(usuario=request.user)).order_by('horario_i')  
-    
+    print age
     context = {
         "agenda":age,
         

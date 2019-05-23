@@ -21,7 +21,7 @@
   <div class="row">
    
         <h3> Para el estudiante {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h3>
-        Con fecha :{{agenda.fecha}} horario : {{agenda.horario_i}} <br>
+        Con fecha :{{agenda.fecha}} horario : {{agenda.get_horario_i}} <br>
         Con los particiontes a la sesión: {{agenda.participantes}} --Tipo sesión: {{agenda.tipo_actividad}}
       
           <form method="post">
