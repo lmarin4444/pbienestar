@@ -669,28 +669,55 @@ def EstudianteUpdate(request,pk,escuela):
 class EstudianteDelete(DeleteView):
 	model = Estudiante
 	template_name = 'alumno/estudiante_delete.html'
-	success_url = reverse_lazy('alumno:profesinal_establecimiento_listar')	
+
+
+	def get_context_data(self, **kwargs):
+        # Llamamos ala implementacion primero del  context
+		context = super(EstudianteDelete, self).get_context_data(**kwargs)
+		
+		#pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		estudiante=Estudiante.objects.get(id=pk)
+
+		context['estudiante']=estudiante
+		return context
 
 
 
 
-
-def post(self, request, *args, **kwargs):
+	def post(self, request, *args, **kwargs):
 		self.object = self.get_object
 		
 
 		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
 		estudiante=Estudiante.objects.get(id=pk)
+		escuela=estudiante.curso.establecimiento
 	# Buscar la familia 
 		family=estudiante.Familia
 
-		try:
-			sifamilia=Estudiante.objects.filter(familia=family)
-			
-		except Estudiante.DoesNotExist:
-			parienetes=Parentesco.objects.filter(Famiilia=family)
+		
+		sifamilia=Estudiante.objects.filter(Familia=family)
+		cont=0
+		for tengo_familia in sifamilia:
+			cont=cont+1
+
+
+
+
+		if cont > 1 :
+			mensaje="La familia del estudiante no es borrada "
+			# Retornamos el objeto
+			estudiante.delete()
+			url = reverse(('alumno:listar_estudiantes_establecimiento'), kwargs={ 'pk': escuela.id})
+			return HttpResponseRedirect(url) 	
+		else:
+			parienetes=Parentesco.objects.filter(Familia=family)
 			parienetes.delete()
 			family.delete()
+			estudiante.delete()
+			# Retornamos el objeto
+			url = reverse(('alumno:listar_estudiantes_establecimiento'), kwargs={ 'pk': escuela.id})
+			return HttpResponseRedirect(url)
 
 
 		
@@ -1327,9 +1354,9 @@ def search(request,pk):
 					
 					estudiante=Estudiante()
 					
-					print ("Estudiante %s" % ( estudiante) )
+					
 					estudiante.rut=rut_p
-					print ("Estudiante rut_p %s" % ( rut_p) )
+					
 					form = EstudianteForm(instance=estudiante)
 					escuela=establecimiento.objects.get(id=pk)
 					print ("Escuela %s" % ( escuela) )
