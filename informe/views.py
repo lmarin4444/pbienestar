@@ -43,7 +43,7 @@ from cStringIO import StringIO
 from django.views.generic import View
 from django.conf import settings
 import os
-
+from PIL import Image, ImageDraw, ImageFont
 
 def search_form(request):
     return render_to_response('search_form.html')
@@ -2021,14 +2021,17 @@ def fichaderivacion_pdf_report(request,pk):
     estiloHoja = getSampleStyleSheet()
     cabecera = estiloHoja['Heading4']
     
-    imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg',width=490,height=40)
+    #imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg',width=490,height=40)
 
+    
+    imagen_logo = "https://www.bienestardemcabildo.cl"+URL('default', 'download', args=hoja.inventario_id.cliente.imagen)
     Elements.append(imagen_logo)
-    
-    
     parrafo = Paragraph("",cabecera)
     Elements.append(parrafo)
    
+    Elements.append(Spacer(0,24))
+    Elements.append(Spacer(0,24))
+
     Elements.append(Spacer(0,8))
     Elements.append(Spacer(0,8))
 
@@ -2072,6 +2075,10 @@ def fichaderivacion_pdf_report(request,pk):
     Paragraph('<font size=10>%s</font>' % "Motivo de la derivación:", estilo['Normal']),
     Paragraph('<font size=8>%s</font>' % " Listado motivos indicados en Ficha derivación", estilo['Normal']),   
     ))
+    
+
+
+
 
     for motivo in ficha.Motivo_derivacion.all():
 
@@ -2085,6 +2092,14 @@ def fichaderivacion_pdf_report(request,pk):
     Paragraph('<font size=10>%s</font>' % "Fecha de la derivación:", estilo['Normal']),
     Paragraph('<font size=10>%s</font>' % ficha.fecha_derivacion.strftime('%d/%m/%Y'), estilo['Normal']),   
     ))
+
+
+    if ficha.Imagen:
+        data.append((
+          
+        Paragraph('<font size=10>%s</font>' % "Genograma", estilo['Normal']),
+        drawImage(ficha.Imagen, 0, A4[1]/2, width=400, height=400)   
+        ))
 
 
     if ficha.pie:
