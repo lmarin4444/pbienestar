@@ -132,7 +132,7 @@
 {% for registro in asiste.all %}
 
   <TR>
-    <TD COLSPAN=1>{{registro.agenda.fecha |date:"d-m-Y" }} a las {{registro.agenda.horario_i}} </TD>
+    <TD COLSPAN=1>{{registro.agenda.fecha |date:"d-m-Y" }} a las {{registro.agenda.get_horario_i}} </TD>
     <TD COLSPAN=1>{{registro.fecha |date:"d-m-Y" }}</TD>
 
     <TD COLSPAN=1>
