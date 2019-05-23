@@ -2093,12 +2093,7 @@ def fichaderivacion_pdf_report(request,pk):
     ))
 
 
-    if ficha.Imagen:
-        data.append((
-          
-        Paragraph('<font size=10>%s</font>' % "Genograma", estilo['Normal']),
-        drawImage(ficha.Imagen, 0, A4[1]/2, width=400, height=400)   
-        ))
+    
 
 
     if ficha.pie:
