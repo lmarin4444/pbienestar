@@ -2023,9 +2023,8 @@ def fichaderivacion_pdf_report(request,pk):
     
     #imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg',width=490,height=40)
 
+    #Elements.append(imagen_logo)
     
-    imagen_logo = "https://www.bienestardemcabildo.cl"+URL('default', 'download', args=hoja.inventario_id.cliente.imagen)
-    Elements.append(imagen_logo)
     parrafo = Paragraph("",cabecera)
     Elements.append(parrafo)
    
