@@ -23,7 +23,7 @@ USE_L10N=False
 SECRET_KEY = '7nn-$!t8r$eedv5xuwb79z=$k#$o@68fvoppr47ukxj$%$d^v$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
