@@ -793,7 +793,8 @@ def RetornoUpdateView(request,pk):
 			infoarchivo2.estado = 1 # porque aun sigue activa dentro del centro 
 			infoarchivo2.save()
 
-			return HttpResponseRedirect('/derivacion/centro_listar')
+			return redirect('derivacion:centro_listar')
+			
 	else:
 		formulario = RetornoFaltainfoForm()
 
