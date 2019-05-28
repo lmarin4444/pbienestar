@@ -262,6 +262,7 @@ def FichaEstudianteDetailView(request,pk):
 		estudiante_id=Estudiante.objects.get(pk=pk)
 		family=estudiante_id.Familia
 		colegio=Escolaridad.objects.get(Estudiante__id=pk)
+		print colegio
 	except Estudiante.DoesNotExist:
 		estudiante_id=None
 	try:
@@ -1214,18 +1215,19 @@ class EstablecimientoaccList(ListView):
 def listar_estudiantes_establecimiento(request,pk):
 		
 	estudiando=Escolaridad.objects.filter(establecimiento__id=pk)
-	print estudiando
 	escuela=establecimiento.objects.get(id=pk)
-	ficha=Ficha_derivacion.objects.filter(Estudiante__curso__establecimiento__id=pk,estado=1)
+	ficha=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=pk) & Q(estado=1))
+	
 	casos=Intervencion_casos.objects.filter(estudiante__curso__establecimiento__id=pk)
+	
+
 	contexto = {'estudiando':estudiando,
 				'escuela':escuela,
 				 'ficha':ficha,
 				 'casos':casos,
 				 }
+
 	return render(request, 'alumno/estudiante_establecimiento.html', contexto)
-
-
 
 def digito_verificador(rut):
 	if rut.isdigit(): 
