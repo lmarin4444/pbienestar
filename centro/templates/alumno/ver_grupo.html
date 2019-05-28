@@ -81,7 +81,8 @@
       </tr>
      <tr>
        <td>
-          Establecimiento: {{ estudiante.curso.establecimiento}}  
+          <dd>Establecimiento Actual: {{ estudiante.curso.establecimiento}} </dd> 
+          <dd>Establecimiento Ficha: {{ ficha.establecimiento}}  </dd>
 
        </td>
        <td>
@@ -89,24 +90,12 @@
        </td>
        <td>
        <h5>Programas </h5>
-         <h5>Pertenece a  P.I.E.:
-      {% with Programa_pie=ficha.pie %} 
+
+         <h5>¿Pertenece a  P.I.E.? {% if ficha.pie == "True" %} Sí {% else %} No {% endif %}
       
-      {% if Programa_pie %}
-        Si
-      {% else%}
-       No
-      {% endif %}  
-      {% endwith %}  
-      <h5>Pertenece a habilidades para la vida:
-      {% with hpv=ficha.habilidades %} 
+      <h5>¿Pertenece a habilidades para la vida? {% if  ficha.habilidades == "True" %} Sí {% else %} No {% endif %}
       
-      {% if hpv %}
-        Si
-      {% else%}
-       No
-      {% endif %}  
-      {% endwith %}  
+      
      </td> 
      <td>
         <h5>Es atendido por una red de apoyo :{{ficha.Red_apoyo.nombre}}
