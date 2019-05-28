@@ -74,7 +74,9 @@
       <tr><td>Rut:{{estudiante.rut}}</td>
       
       <td>Domicilio:{{estudiante.domicilio_estudiante}}</td>
-      <td> Fecha de nacimiento:{{estudiante.fecha_nacimiento}}</td>
+      <td>Fecha de nacimiento:{{estudiante.fecha_nacimiento|date:"d-m-Y "}}</td>
+
+
       <td> 
       <dd>Edad Actuaizada :{{estudiante.edad}}</dd>
       <dd>Edad En Ficha   :{{ficha.edad}}</dd>
@@ -90,29 +92,14 @@
        </td>
        <td>
          
-         <dd>Curso:{{ estudiante.curso.get_numero}} {{ estudiante.curso.get_letra}} </dd>
-         <dd>Curso:{{ ficha.curso}}ª{{ ficha.letra}} </dd>
+         <dd>Curso Actual:{{ estudiante.curso.get_numero}} {{ estudiante.curso.get_letra}} </dd>
+         <dd>Curso Ficha:{{ ficha.curso}}{{ ficha.letra}} </dd>
        </td>
        <td>
        <h5>Programas </h5>
-         <h5>Pertenece a  P.I.E.:
-      {% with Programa_pie=ficha.pie %} 
+         <h5>Pertenece a  P.I.E.: {{ficha.pie }} 
+         <h5>Pertenece a habilidades para la vida:{{ ficha.habilidades }}
       
-      {% if Programa_pie %}
-        Si
-      {% else%}
-       No
-      {% endif %}  
-      {% endwith %}  
-      <h5>Pertenece a habilidades para la vida:
-      {% with hpv=ficha.habilidades %} 
-      
-      {% if hpv %}
-        Si
-      {% else%}
-       No
-      {% endif %}  
-      {% endwith %}  
      </td> 
      <td>
         <h5>Es atendido por una red de apoyo :{{ficha.Red_apoyo.nombre}}

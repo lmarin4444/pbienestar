@@ -17,7 +17,7 @@ from derivacion.models import Motivo_Retorno_Ficha_derivacion
 # Register your models here.
 
 class Ficha_derivacionAdmin(admin.ModelAdmin):
-	list_display = ('fecha_derivacion','derivado','pasada','get_Estudiante','get_usuario','id','estado')
+	list_display = ('fecha_derivacion','derivado','pasada','get_Estudiante','get_usuario','id','estado','pie','habilidades')
 	search_fields = ['fecha_derivacion','get_Estudiante']
 	list_per_page = 25
 	list_max_show_all = 30

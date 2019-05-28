@@ -433,7 +433,67 @@ class eliminar_contingencia(DeleteView):
 # Registrar la asistencia a una sesion
 # Ingresar la asistencia a una cita
 
+# Registar una sesion de dupla
+
 # Registar una sesion
+class RegistrarSesion(CreateView):
+    model = Intervencion_sesion
+    form_class = Intervencion_asistencia_sesionForm
+    #template_name = 'sesion/sesion_form.html'
+    template_name = 'bitacora/registrar_sesion.html'
+    success_url = reverse_lazy('sesion:sesion_listar')
+
+    def get_context_data(self, **kwargs):
+        context = super(RegistrarSesion, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        Sesion=Intervencion_sesion.objects.get(pk=pk)
+
+        dato=Sesion.intervencion_casos.estudiante
+        context['dato'] = dato
+        context['agenda'] = Sesion
+
+        return context
+
+    def post(self,request,*args,**kwargs):          
+        self.object=self.get_object
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            solicitud = form.save(commit=False)
+            solicitud.numero = 1
+            
+            estudiante=Estudiante.objects.get(id=pk)
+            family=estudiante.Familia
+
+            solicitud.Familia=family
+            
+            solicitud.save()
+        
+        lista=Lista.objects.get(sesion=object)
+        lista.numero=2
+        lista.save()
+    
+        object.save()
+        # Retornamos el objeto
+        url = reverse(('bitacora:fechas'), kwargs={ 'dia': lista.fecha.day,'mes':lista.fecha.month})
+        return HttpResponseRedirect(url)     
+
+        
+        
+            
+            
+            #url = reverse(('alumno:familia'), kwargs={ 'pk': estudiante.id })
+            #return HttpResponseRedirect(url)
+        #else:
+        #    return self.render_to_response(self.get_context_data(form=form))
+    
+            
+
+
+
+
+
+#Modificar una sesion de dupla
 class RegistrarSesionUpdate(UpdateView):
     model = Intervencion_sesion
     form_class = Intervencion_asistencia_sesionForm

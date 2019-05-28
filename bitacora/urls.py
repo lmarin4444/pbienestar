@@ -33,6 +33,8 @@ urlpatterns = [
     url(r'^eliminar_contingencia/(?P<pk>\d+)/$', login_required(views.eliminar_contingencia.as_view()), name='eliminar_contingencia'),
     # Ingresar la asistencia de una sesion ya planificada 
     url(r'^RegistrarSesionUpdate/(?P<pk>\d+)/$', login_required(views.RegistrarSesionUpdate.as_view()), name='RegistrarSesionUpdate'),
+    url(r'^RegistrarSesion/(?P<pk>\d+)/$', login_required(views.RegistrarSesion.as_view()), name='RegistrarSesion'),
+
     url(r'^anular_sesion/(?P<pk>\d+)/$', login_required(views.anular_sesion), name='anular_sesion'),
     # Ver suceso de contingencia 
     url(r'^ver_sucesos/(?P<pk>\d+)/$',login_required(views.ver_sucesos), name='ver_sucesos'),

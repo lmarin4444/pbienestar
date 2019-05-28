@@ -608,7 +608,6 @@ class Intervencion_casosCrear(CreateView):
 	template_name = 'dupla/crear_intervencion_casos.html'
 	success_url = reverse_lazy('alumno:listar_estudiantes_establecimiento')
 	
-	
 	    
 	def get_context_data(self, **kwargs):
         # Llamamos ala implementacion primero del  context
