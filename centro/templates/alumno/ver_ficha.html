@@ -97,8 +97,9 @@
        </td>
        <td>
        <h5>Programas </h5>
-         <h5>Pertenece a  P.I.E.: {{ficha.pie }} 
-         <h5>Pertenece a habilidades para la vida:{{ ficha.habilidades }}
+         <h5>¿Pertenece a  P.I.E.? {% if ficha.pie == "True" %} Sí {% else %} No {% endif %}
+      
+      <h5>¿Pertenece a habilidades para la vida? {% if  ficha.habilidades == "True" %} Sí {% else %} No {% endif %}
       
      </td> 
      <td>
