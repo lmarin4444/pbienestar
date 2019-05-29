@@ -2096,7 +2096,7 @@ def fichaderivacion_pdf_report(request,pk):
     
 
 
-    if ficha.pie:
+    if ficha.pie == "True":
         data.append((
           
         Paragraph('<font size=10>%s</font>' % "¿Pertence al programa P.I.E.?:", estilo['Normal']),
@@ -2109,7 +2109,7 @@ def fichaderivacion_pdf_report(request,pk):
         Paragraph('<font size=10>%s</font>' % "No", estilo['Normal']),   
         ))      
       
-    if ficha.anio_pie==0:
+    if ficha.anio_pie == "True":
         data.append((
           
         Paragraph('<font size=10>%s</font>' % "Año de pertencia programa P.I.E.?:", estilo['Normal']),
@@ -2200,7 +2200,7 @@ def fichaderivacion_pdf_report(request,pk):
     data.append((
       
     Paragraph('<font size=10>%s</font>' % "Curso (Ficha):", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % "ficha.curso"+" "+"ficha.letra", estilo['Normal']),   
+    Paragraph('<font size=10>%s</font>' % ficha.curso+" "+ficha.letra, estilo['Normal']),   
     ))
     data.append((
       
