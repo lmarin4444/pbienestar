@@ -1331,7 +1331,7 @@ def historia(request,ficha,pk):
 	
 	ficha_id=Ficha_derivacion.objects.get(pk=ficha,estado=1)
 	try:
-		sesiones = sesion.objects.filter(Estudiante__id=pk)
+		sesiones = sesion.objects.filter(Estudiante__id=pk).order_by('fecha')
 	except sesion.DoesNotExist:
 		sesiones=None
 
