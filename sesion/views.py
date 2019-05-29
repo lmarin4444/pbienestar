@@ -347,10 +347,10 @@ def Intervenidos_sesiones(request,pk):
 	except agenda.DoesNotExist:
 		agendado=None
 	
-	try:
-		registrado=Registro.objects.get(agenda=agendado)
-	except Registro.DoesNotExist:
-		registrado=None
+	#try:
+	#	registrado=Registro.objects.get(agenda=agendado)
+	#except Registro.DoesNotExist:
+#		registrado=None
 	
 
 	#dalumnos={}
@@ -369,7 +369,7 @@ def Intervenidos_sesiones(request,pk):
 
 	contexto = {'sesion':listado,
 				'dato':dato,
-				'registrado':registrado,
+				#'registrado':registrado,
 				'agendado':agendado,
 							}
 
