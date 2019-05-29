@@ -805,8 +805,7 @@ class SesionUpdate(UpdateView):
 	form_class = SesionModificarForm
 	#template_name = 'sesion/sesion_form.html'
 	template_name = 'sesion/sesion_crear_form.html'
-	success_url = reverse_lazy('sesion:sesion_listar')
-
+	
 	def get_context_data(self, **kwargs):
 		context = super(SesionUpdate, self).get_context_data(**kwargs)
 		pk = self.kwargs.get('pk')
@@ -818,6 +817,35 @@ class SesionUpdate(UpdateView):
 
 		return context
 	
+	def post(self,request,*args,**kwargs):
+	
+		pk = self.kwargs.get('pk')
+		Sesion=sesion.objects.get(pk=pk)
+		
+		form = self.form_class(request.POST,request.FILES)
+		estudiante=Sesion.Estudiante
+		if form.is_valid():
+			
+			estudiante=Sesion.Estudiante
+			form.instance= form.save(commit=False)
+			form.instance.usuario = self.request.user
+			form.instance.fecha=Sesion.fecha
+			form.instance.horario_i=Sesion.horario_i
+			form.instance.numero=Sesion.numero
+			form.instance.Estudiante=estudiante
+
+			form.instance.save()
+			
+			
+				
+				
+			url = reverse(('sesion:intervencion_listar'), kwargs={ 'pk': estudiante.id })
+			return HttpResponseRedirect(url)
+
+		else:
+			mensaje="Error"
+			return self.render_to_response(self.get_context_data(form=form))
+
 
 class SesionDelete(DeleteView):
 	model = sesion
