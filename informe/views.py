@@ -660,10 +660,15 @@ def informe1_pdf_report(request,pk):
     estiloHoja = getSampleStyleSheet()
     cabecera = estiloHoja['Heading4']
     Elements.append(Spacer(0,8))
-    imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg',width=490,height=40)
+    #imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg',width=490,height=40)
 
-    Elements.append(imagen_logo)
+    #Elements.append(imagen_logo)
     
+    Elements.append(Spacer(0,8))
+    Elements.append(Spacer(0,8))
+
+    Elements.append(Spacer(0,8))
+    Elements.append(Spacer(0,8))
     
     parrafo = Paragraph("",cabecera)
     Elements.append(parrafo)
