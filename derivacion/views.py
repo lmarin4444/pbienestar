@@ -153,7 +153,17 @@ class EntradasRetornoDuplaList(ListView):
 	
 	def get_queryset(self):
 		queryset = super(EntradasRetornoDuplaList, self).get_queryset()
-		return queryset.filter((Q(pasada=4) | Q(pasada=7)) & Q(estado= 1) & Q(usuario=self.request.user))
+		return queryset.filter((Q(pasada=4) | Q(pasada=7)) & Q(estado= 1))
+
+
+	def get_context_data(self, **kwargs):
+		context = super(EntradasRetornoDuplaList, self).get_context_data(**kwargs)
+		intervenidos = Intervenidos.objects.all()
+		context['intervenidos'] = intervenidos
+		return context
+
+
+
 
 #Grabar la primera intervencion
 class asignar_intervencion(CreateView):

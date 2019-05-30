@@ -43,6 +43,11 @@ Listado de estudiantes a egresar
 	<tbody>
 		{% if object_list %}
 		{% for mascota in object_list %}
+		
+
+
+
+
 		<tr>
 					
 			<td>{{ mascota.fecha_derivacion|date:"d-m-Y "}}</td>
@@ -57,12 +62,16 @@ Listado de estudiantes a egresar
 			
 			<td>
 
+			{% if intervenidos %}
+					{% for intervencion  in intervenidos  %}
+
+						{% if intervencion.Estudiante == mascota.Estudiante and intervencion.usuario == user   %}
 			
 			
-			
-			<a class="btn btn-danger btn-xs" href="{% url 'historia:ir_historia' mascota.Estudiante.id %}">Egresar</a>
-			
-			
+						<a class="btn btn-danger btn-xs" href="{% url 'historia:ir_historia' mascota.Estudiante.id %}">Egresar</a>
+						{% endif %}
+					{% endfor  %}
+			{% endif %}
 			
 			
 			</td>
