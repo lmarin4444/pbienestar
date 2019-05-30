@@ -165,9 +165,10 @@
     <button class="btn btn-danger" type="submit">Guardar</button>
     <a class= "btn btn-info" href="{% url 'derivacion:intervencion_listar' %}">Cancelar</a>
 
-    <a title="Informe en pdf - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:pdf_evaluacion1' estudiante.id %}"></a>/
+   
     
   
-{% endif %}   
+{% endif %} 
+   <a title="Informe en pdf - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:pdf_evaluacion1' estudiante.id %}"></a>/
 </form>
 {% endblock %}
