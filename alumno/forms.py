@@ -468,7 +468,7 @@ class EscolaridadActualizaFormCentro(forms.ModelForm):
 			
 		]
 		labels = {
-			'anno':'Año',
+			'anno':'Ingresar el año actual',
 			'fecha_inicio':'Fecha de incio del período escolar(Solo si es por período)',
 			'fecha_termino':'Fecha de término del período escolar (Solo si es por período)',
 			'conducta':'Breve descripción de la conducta del estudiante',
@@ -480,8 +480,9 @@ class EscolaridadActualizaFormCentro(forms.ModelForm):
 		}
 		widgets = {
 			'anno': forms.TextInput(attrs={'class':'form-control'}),
-			'fecha_incio':forms.TextInput(attrs={'"format": "DD-MM-YYYY",class':'datepicker','placeholder':'Ingresar Fecha '}),
-			'fecha_termino':forms.TextInput(attrs={'"format": "DD-MM-YYYY",class':'datepicker','placeholder':'Ingresar Fecha '}),
+			'fecha_incio':forms.TextInput(attrs={'"format": "DD-MM-YYYY",class':'datepicker'}),
+			'fecha_termino':forms.TextInput(attrs={'"format": "DD-MM-YYYY",class':'datepicker'}),
+			
 			'conducta':forms.Textarea(attrs={'class':'form-control'}),
 			'rendimiento':forms.Textarea(attrs={'class':'form-control'}),
 			'establecimiento': forms.Select(attrs={'class':'form-control'}),
