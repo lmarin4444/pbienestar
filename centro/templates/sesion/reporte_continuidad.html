@@ -17,7 +17,21 @@
 <div class="alert alert-success">Modificar Informe</div>
 {% endif %}
 <h3>Reporte de continuidad de: {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h3>
-<h4>Objetivo de intervención: {{objetivo|capfirst}}</h4>
+
+<h4>Objetivo de intervención: {{objetivo.objetivo_particular|capfirst}}</h4>
+<h4> <strong>Tématicas</strong> </h4>
+<h5>
+	{% if objetivo %}
+		{% for temas in objetivo.Tematicas.all %}
+		<td><li>{{temas.nombre}}</li></td>
+		{% endfor %}
+	{% endif %}	
+
+</h5>
+
+
+
+
 <form method="post">
   {% csrf_token %}
   {{ formulario|crispy }}
