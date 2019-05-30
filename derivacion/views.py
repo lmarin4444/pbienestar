@@ -83,12 +83,18 @@ class EntradasFicha(ListView):
         '''listar todos los estudiantes intervenidos'''
 	model = Ficha_derivacion
 	template_name = 'derivacion/entradas_totales.html'
-	paginate_by = 6
+	paginate_by = 100
 #muestra a todas las derivaciones realizadas   
 	
 	def get_queryset(self):
 		queryset = super(EntradasFicha, self).get_queryset()
 		return queryset.filter(derivado=2,estado=1)
+
+	def get_context_data(self, **kwargs):
+		context = super(EntradasFicha, self).get_context_data(**kwargs)
+		intervenidos = Intervenidos.objects.all()
+		context['intervenidos'] = intervenidos
+		return context		
 
 
 #Ver a todas las fichas intervenidas

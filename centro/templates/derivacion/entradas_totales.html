@@ -25,8 +25,6 @@
 </p>
 </ul>
 
-
-
 <table id="example" class="table table-bordered" fontsize =10px>
 	<thead>
 		<tr>
@@ -93,15 +91,21 @@
 			{% if estado == 1   %}
 			
 			{% else %}
-				{% if mascota.usuario == user   %}
-				<a class="btn btn-info btn-xs" href="{% url 'alumno:reporte_caso' mascota.Estudiante.id %}">1</a>
-				<a class="btn btn-success btn-xs" href="{% url 'sesion:reporte_continuidad_solo' mascota.Estudiante.id %}">2</a>
-				<a title="Ver Informes de Continuidad" class="glyphicon glyphicon-book" href="{% url 'sesion:ver_reporte_continuidad' mascota.Estudiante.id %}"></a>/
-				<a class="btn btn-danger btn-xs" href="{% url 'sesion:Ficha_egreso' mascota.Estudiante.id %}">3</a> -
 				
-				<a title="Ver Escolaridad" class="glyphicon glyphicon-education" href="{% url 'alumno:ver_escolaridad_centro' mascota.Estudiante.id %}"></a>/
-				<a title="Modificar Escolaridad" class="glyphicon glyphicon-list-alt" href="{% url 'alumno: actualizar_escolaridad_centro' mascota.Estudiante.id %}"></a> 
-				{% endif %}	
+				{% if intervenidos %}
+					{% for intervencion  in intervenidos  %}
+
+						{% if intervencion.Estudiante == mascota.Estudiante and intervencion.usuario == user   %}
+						<a class="btn btn-info btn-xs" href="{% url 'alumno:reporte_caso' mascota.Estudiante.id %}">1</a>
+						<a class="btn btn-success btn-xs" href="{% url 'sesion:reporte_continuidad_solo' mascota.Estudiante.id %}">2</a>
+						<a title="Ver Informes de Continuidad" class="glyphicon glyphicon-book" href="{% url 'sesion:ver_reporte_continuidad' mascota.Estudiante.id %}"></a>/
+						<a class="btn btn-danger btn-xs" href="{% url 'sesion:Ficha_egreso' mascota.Estudiante.id %}">3</a> -
+						
+						<a title="Ver Escolaridad" class="glyphicon glyphicon-education" href="{% url 'alumno:ver_escolaridad_centro' mascota.Estudiante.id %}"></a>/
+						<a title="Modificar Escolaridad" class="glyphicon glyphicon-list-alt" href="{% url 'alumno: actualizar_escolaridad_centro' mascota.Estudiante.id %}"></a> 
+						{% endif %}	
+					{% endfor %}
+				{% endif %}		
 			{% endif %}	
 			{% endwith %}	
 			</td>
