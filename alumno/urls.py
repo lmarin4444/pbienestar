@@ -49,7 +49,7 @@ urlpatterns = [
     url(r'^ver_escolaridad/(?P<pk>\d+)/(?P<escolari>\d+)$', login_required(ver_escolaridad), name='ver_escolaridad'),
     #Ver la escolaridad para el centro
     url(r'^ver_escolaridad_centro/(?P<pk>\d+)/$', login_required(ver_escolaridad_centro), name='ver_escolaridad_centro'),
-    url(r'^ actualizar_escolaridad_centro/(?P<pk>\d+)/$', login_required( actualizar_escolaridad_centro), name=' actualizar_escolaridad_centro'),
+    url(r'^actualizar_escolaridad_centro/(?P<pk>\d+)/$', login_required( actualizar_escolaridad_centro), name=' actualizar_escolaridad_centro'),
     url(r'^search/(?P<pk>\d+)/$',login_required(search),name='search'),
     url(r'^search_estudiante/(?P<pk>\d+)/$',login_required(search_estudiante),name='search_estudiante'),
     

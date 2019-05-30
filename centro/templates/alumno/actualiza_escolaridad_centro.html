@@ -1,80 +1,26 @@
-{% extends 'base/base_centro.html' %}
+
+{% extends 'base/base_datos_agenda.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h3> Proceso de ingreso de información de estudiante  {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h3>
+
+<div class="alert alert-success">
+  <h3> Proceso de cambio de establecimiento al estudiante: {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h3>
+<li><strong>Establecimiento actual: {{escolar.establecimiento.nombre}}</strong></li>
+<li><strong>Curso actual: {{escolar.get_curso}} {{escolar.get_Letra}}</strong></li>
+
+</div>
+
+
 <form method="post">
 	{% csrf_token %}
 	
-	<form method="get">
-	{% csrf_token %}
-		<div class="row">
+		<form method="get">
 
-		<div  class="col-xs-3 col-md-offset-3"">
-		  <strong>Año de la escolaridad:</strong>
-		    <label for="{{form.anno.name}}"></label>
+	{{ form.as_p }}
 				
-				{{form.anno}}
-		  </div>
-
-		  
-		  <div class="col-xm-3 ">
-		  		<strong>Fecha  inicio </strong><strong>__ </strong>
-				<label for="{{form.fecha_inicio.name}}"></label>
-				{{form.fecha_inicio}}
-		  </div>
-		  <div class="col-xm-3 ">
-		  	<strong>Fecha término</strong>
-				<label for="{{form.fecha_termino.name}}"></label>
-				{{form.fecha_termino}}
-		  </div>
-		</div>
-
-
-		<div class="col-md-10 col-md-offset-1">
-			<div class="form-group">
-				<label for="{{form.rendimiento.name}}">{{form.rendimiento.label}}</label>
-				{{form.rendimiento}}
-			</div>
-		</div>
-
-		<div class="col-md-10 col-md-offset-1">
-			<div class="form-group">
-				<label for="{{form.conducta.name}}">{{form.conducta.label}}</label>
-				{{form.conducta}}
-			</div>
-		</div>
-
-		<div class="col-md-10 col-md-offset-1">
-			<div class="form-group">
-				<label for="{{form.curso.name}}">{{form.curso.label}}</label>
-				{{form.curso}}
-			</div>
-		</div>	
-
-		
-		<div class="col-md-10 col-md-offset-1">
-			<div class="form-group">
-				<label for="{{form.Letra.name}}">{{form.Letra.label}}</label>
-				{{form.Letra}}
-			</div>
-		</div>
-		<div class="col-md-10 col-md-offset-1">
-			<div class="form-group">
-				<label for="{{form.establecimiento.name}}">{{form.establecimiento.label}}</label>
-				{{form.establecimiento}}
-			</div>
-		</div>
-		
-
-
-		<div class="col-md-8 col-md-offset-1">
-			<div class="form-group">
-				
-				<button type="submit" class="btn btn-info">Registrar</button>
-			</div>
-		</div>
-
-
+		<button type="submit" class="btn btn-info">Registrar</button>
+	</div>
+	</div>
 	</div>
 	
 </form>

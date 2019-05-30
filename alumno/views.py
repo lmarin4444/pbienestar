@@ -1666,6 +1666,8 @@ def actualizar_escolaridad_centro(request,pk):
 	context = {
         "form": form,
         "dato":dato,
+        "escolar":escolar,
+
     }
 
 	
