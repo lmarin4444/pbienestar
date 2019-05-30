@@ -103,19 +103,27 @@
 						
 						<a title="Ver Escolaridad" class="glyphicon glyphicon-education" href="{% url 'alumno:ver_escolaridad_centro' mascota.Estudiante.id %}"></a>/
 						<a title="Modificar Escolaridad" class="glyphicon glyphicon-list-alt" href="{% url 'alumno: actualizar_escolaridad_centro' mascota.Estudiante.id %}"></a> 
+						
+						<td>
+			
+			
+						<a class="btn btn-primary btn-xs" href="{% url 'derivacion:centro_derivacion_editar' mascota.id %}">Editar </a>
+				
+						
+
+
 						{% endif %}	
 					{% endfor %}
-				{% endif %}		
+					
+				{% endif %}	
+					<a class="btn btn-default btn-xs" href="{% url 'alumno:Ficha_centro' mascota.Estudiante.id %}">Ver</a>
+						<a title="Ficha derivación - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:fichaderivacion_pdf_report' mascota.Estudiante.id %}"></a>/
 			{% endif %}	
 			{% endwith %}	
-			</td>
+	
+
 			
-			<td>
-			{% if mascota.usuario == user   %}
-			<a class="btn btn-primary btn-xs" href="{% url 'derivacion:centro_derivacion_editar' mascota.id %}">Editar </a>
-			{% endif %}
-			<a class="btn btn-default btn-xs" href="{% url 'alumno:Ficha_centro' mascota.Estudiante.id %}">Ver</a>
-			<a title="Ficha derivación - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:fichaderivacion_pdf_report' mascota.Estudiante.id %}"></a>/
+		
 			
 			</td>
 		
