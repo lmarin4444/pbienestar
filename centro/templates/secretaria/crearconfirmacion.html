@@ -5,8 +5,8 @@
 {% block content %}
 
 
-       <h3>Proceso de conformación  para el estudiante :{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.nombres.last_name|capfirst}}</h3>
-        <h4>El dia :{{agendo.fecha}} a las {{ agendo.horario_i}}</h4>
+       <h3>Proceso de confirmación  para el estudiante :{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.nombres.last_name|capfirst}}</h3>
+        <h4>El dia :{{agendo.fecha}} a las {{ agendo.get_horario_i}}</h4>
           <form method="post">
 				{% csrf_token %}
 				

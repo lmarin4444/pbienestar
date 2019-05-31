@@ -25,6 +25,7 @@
 </p>
 </ul>
 
+
 <table id="example" class="table table-bordered" fontsize =10px>
 	<thead>
 		<tr>
@@ -93,6 +94,7 @@
 			{% else %}
 				
 				{% if intervenidos %}
+				
 					{% for intervencion  in intervenidos  %}
 
 						{% if intervencion.Estudiante == mascota.Estudiante and intervencion.usuario == user   %}
@@ -114,6 +116,7 @@
 
 						{% endif %}	
 					{% endfor %}
+
 					
 				{% endif %}	
 					<a class="btn btn-default btn-xs" href="{% url 'alumno:Ficha_centro' mascota.Estudiante.id %}">Ver</a>
