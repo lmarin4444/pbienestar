@@ -600,8 +600,8 @@ def ver_impresa(request):
     
     # Obtener todos los usuarios que son profesionales centro de bienestar
 
-    profesionales=Profesional.objects.filter(tipo_profesional =0)
-    print profesionales
+    profesionales=Profesional.objects.filter(tipo_profesional =2)
+
     date = datetime.date.today()
     start_week = date - datetime.timedelta(date.weekday())
     print start_week
@@ -611,7 +611,7 @@ def ver_impresa(request):
     print end_week
     #fechas = agenda.objects.filter(Q(fecha__gte=start_week), Q(fecha__lte=end_week)) 
     fechas = agenda.objects.filter(fecha__range=[start_week, end_week]).order_by('horario_i')
-    
+    print fechas
     
     dias = timedelta(days=1)
     
