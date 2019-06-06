@@ -11,14 +11,25 @@
   <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' colegio.id %}"data-toggle="tooltip" title="Listado de establecimientos">Volver lista</a></li>
   
   
+{% if estado == "modificar" %}
 
+<li class="active">Modificar plan de intervención de casos Establecimiento {{colegio.nombre}} </li> 
+{% else %}
   <li class="active">Crear plan de intervención de casos Establecimiento {{colegio.nombre}} </li> 
+{% endif %}
+
 </ul>
 {% if mensaje %}
 <div class="alert alert-danger">{{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}}{{mensaje}}</div>
 {% else %}
 
-<div class="alert alert-success"><h4>Ingresar plan de intervención: {{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}} </h4></div>
+<div class="alert alert-success"><h4>
+{% if estado == "modificar" %}Modificar plan de intervención {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}} </h4></div>{%else%} Plan de intervención {{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}} </h4></div>{%endif%}
+
+ 
+
+
+
 {% endif %}
 	<form method="post">
   

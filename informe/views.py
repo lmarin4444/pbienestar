@@ -2231,25 +2231,22 @@ def fichaderivacion_pdf_report(request,pk):
     Paragraph('<font size=10>%s</font>' % ficha.Red_apoyo_obs, estilo['Normal']),   
     ))
 
+    data.append((
+      
+    Paragraph('<font size=10>%s</font>' % "Familiares", estilo['Normal']),
+    Paragraph('<font size=10>%s</font>' % "Integrantes de la familia", estilo['Normal']),    
+    
+    ))    
     
     for motivo in familia:
 
         data.append((
-        Paragraph('<font size=10>%s</font>' % "Familia ", estilo['Normal']),    
+        Paragraph('<font size=10>%s</font>' % "", estilo['Normal']),
         Paragraph('<font size=10>%s</font>' % motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m+" / "+motivo.parentesco, estilo['Normal']),
    
     ))
     
-    data.append((
-      
-    Paragraph('<font size=10>%s</font>' % "Fecha de la derivación:", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.fecha_derivacion.strftime('%d/%m/%Y'), estilo['Normal']),   
-    ))
-
-
-
-
-
+    
 
     
     table = Table(

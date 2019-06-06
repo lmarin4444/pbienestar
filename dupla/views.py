@@ -764,6 +764,7 @@ def PlanCasosUpdate(request,pk):
 # modificar un indicador el cual depende de una base de un plan para un establceimiento
 	
 	mensaje=""
+	
 	estudiante= get_object_or_404(Estudiante, pk=pk)
 	try:
 		casos=Intervencion_casos.objects.get(estudiante=estudiante)
@@ -803,6 +804,7 @@ def PlanCasosUpdate(request,pk):
 		"dato":estudiante,
 		"mensaje":mensaje,
 		"colegio":colegio,
+		"estado":"modificar",
 
 
 		 }
