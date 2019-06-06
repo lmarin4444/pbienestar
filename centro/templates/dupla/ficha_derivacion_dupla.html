@@ -11,14 +11,17 @@
   <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Volver a la lista</a></li>
   
   
-
-  <li class="active">Listado familiares</li> 
+{% if estado == "modificar" %}
+  <li class="active">Modificar ficha de derivación</li> 
+{% else %}
+<li class="active">Ingresar ficha de derivación</li> 
+{% endif %}  
 </ul>
 {% if mensaje %}
 <div class="alert alert-danger">{{mensaje}}</div>
 {% else %}
 
-<div class="alert alert-success">Ingresar Ficha de derivación</div>
+<div class="alert alert-success">Ficha de derivación</div>
 {% endif %}
 <h4> Ficha de derivación de  {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}  del  {{escuela.nombre}} cursando {{dato.curso.get_numero}} {{dato.curso.get_letra}}.</h4>
 
