@@ -1997,7 +1997,7 @@ def fichaderivacion_pdf_report(request,pk):
     nivel=escolar.get_curso()
     letra=escolar.get_Letra()
     ficha=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
-    family=Familia.objects.get(estudiante=estudiante)
+    family=estudiante.Familia
     familia=Parentesco.objects.filter(Familia=family)
     
 
@@ -2236,7 +2236,8 @@ def fichaderivacion_pdf_report(request,pk):
 
         data.append((
         Paragraph('<font size=10>%s</font>' % "Familia ", estilo['Normal']),    
-        Paragraph('<font size=10>%s</font>' % motivo.nombre, estilo['Normal']),
+        Paragraph('<font size=10>%s</font>' % motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m+" / "+motivo.parentesco, estilo['Normal']),
+   
     ))
     
     data.append((
