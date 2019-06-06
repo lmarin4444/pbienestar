@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from secretaria.forms import MascotaRAForm
 from secretaria.models import MascotaRA
-from alumno.models import Estudiante,Escolaridad
+from alumno.models import Estudiante,Escolaridad,Familia,Parentesco
 from derivacion.models import Ficha_derivacion
 from sesion.models import Intervenidos,Diagnostico,objetivo_intervencion,Ficha_de_egreso,Reporte_continuidad
 from usuario.models import Profile
@@ -1997,6 +1997,8 @@ def fichaderivacion_pdf_report(request,pk):
     nivel=escolar.get_curso()
     letra=escolar.get_Letra()
     ficha=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+    family=Familia.objects.get(estudiante=estudiante)
+    familia=Parentesco.objects.filter(Familia=family)
     
 
     filename="Ficha_derivacion_"+estudiante.nombres+"_"+estudiante.firs_name+".pdf"
@@ -2230,6 +2232,22 @@ def fichaderivacion_pdf_report(request,pk):
     ))
 
     
+    for motivo in familia:
+
+        data.append((
+        Paragraph('<font size=10>%s</font>' % "Familia ", estilo['Normal']),    
+        Paragraph('<font size=10>%s</font>' % motivo.nombre, estilo['Normal']),
+    ))
+    
+    data.append((
+      
+    Paragraph('<font size=10>%s</font>' % "Fecha de la derivación:", estilo['Normal']),
+    Paragraph('<font size=10>%s</font>' % ficha.fecha_derivacion.strftime('%d/%m/%Y'), estilo['Normal']),   
+    ))
+
+
+
+
 
 
     
@@ -2698,7 +2716,7 @@ def fichaderivacion_dupla_pdf_report(request,pk):
     cabecera = estiloHoja['Heading4']
         
     #imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/logo_formacion_convivencia.jpg',width=490,height=40)
-    
+    #<img src='{% static "img/logo-convivencia-escolar.gif" %}'
     #Elements.append(imagen_logo)
     # cambie para el proceso del logo
     parrafo = Paragraph("",cabecera)

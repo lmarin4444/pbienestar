@@ -63,6 +63,8 @@ class Ficha_derivacion_duplas(CreateView):
 		indice = self.kwargs.get('establecimiento')
 		escuela=establecimiento.objects.get(pk=indice)
 		context['escuela']=escuela
+		context['estado']="ingresar"
+
 		return context
 		
 	
@@ -113,6 +115,7 @@ def FichaderivacionduplaUpdate(request,pk):
 # modificar un indicador el cual depende de una base de un plan para un establecimiento
 	
 	mensaje=""
+	estado="modificar"
 	estudiante= get_object_or_404(Estudiante, pk=pk)
 	try:
 		ficha=Ficha_derivacion_dupla.objects.get(Estudiante=estudiante,estado=1)
@@ -151,6 +154,8 @@ def FichaderivacionduplaUpdate(request,pk):
 		"ficha":ficha,
 		"dato":estudiante,
 		"mensaje":mensaje,
+		"estado":estado,
+
 
 
 		 }
