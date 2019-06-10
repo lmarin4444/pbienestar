@@ -31,6 +31,8 @@ TIPO_ACCION = (
             (3,'Coordinación especial'),
             (4,'Gestión especial'),
             (5,'Reuniones'),
+            (6,'Audencia Judiciales (Tribunales - Fiscalía)'),
+            (7,'Capacitaciones'),
             
             
             )
