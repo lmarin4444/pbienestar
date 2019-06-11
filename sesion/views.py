@@ -850,7 +850,7 @@ class SesionUpdate(UpdateView):
 class SesionDelete(DeleteView):
 	model = sesion
 	template_name = 'sesion/sesion_delete.html'
-	success_url = reverse_lazy('sesion:sesion_listar')	
+	
 
 	def get_context_data(self, **kwargs):
 		context=super(SesionDelete,self).get_context_data(**kwargs)
@@ -904,7 +904,11 @@ class SesionDelete(DeleteView):
 			intervenido.save()						
 		object.delete()
         # Retornamos el objeto
-		return HttpResponseRedirect(self.get_success_url()) 
+		
+		url = reverse(('sesion:intervencion_listar'), kwargs={ 'pk': dato.id })
+		return HttpResponseRedirect(url)	
+
+
 
 
 #Area de manejo de tematicas 
