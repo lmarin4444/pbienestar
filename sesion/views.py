@@ -798,7 +798,7 @@ class intervencionesList(ListView):
 	
 	def get_queryset(self):
 		queryset = super(intervencionesList, self).get_queryset()
-		return queryset.filter(usuario=self.request.user,derivado=2,pasada=3,estado=1)
+		return queryset.filter(derivado=2,pasada=3,estado=1)
 
 class SesionUpdate(UpdateView):
 	model = sesion
