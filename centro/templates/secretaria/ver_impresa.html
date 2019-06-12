@@ -42,8 +42,10 @@
 				<td>{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }}  </td>
 			
 				<td><small>{{ estudio.Estudiante.curso.establecimiento.nombre}} /</small>{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }}</td>
-				
-
+				{% else estudio.horario_i == 7 %}
+				<td>{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }}  </td>
+			
+				<td><small>{{ estudio.Estudiante.curso.establecimiento.nombre}} /</small>{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }}</td>
 
 
 
