@@ -211,12 +211,12 @@ class ReporteEstudiantePDF_certificado(View):
            
             
             
-            archivo_imagen=Image(settings.MEDIA_ROOT + '/logo.png')
+            #archivo_imagen=Image(settings.MEDIA_ROOT + '/logo.png')
             #archivo_imagen2=Image(settings.MEDIA_ROOT + '/encabezadocabildo.jpg', width=550, height=30)
 
 
             #Definimos el tamaño de la imagen a cargar y las coordenadas correspondientes
-            pdf.drawImage(archivo_imagen, 50, 750, 70, 70,preserveAspectRatio=True)
+            #pdf.drawImage(archivo_imagen, 50, 750, 70, 70,preserveAspectRatio=True)
             #pdf.drawImage(archivo_imagen2, 330, 750, 220, 90,preserveAspectRatio=True)
 
             #Establecemos el tamaño de letra en 16 y el tipo de letra Helvetica
@@ -316,7 +316,7 @@ class ReporteEstudiantePDF_certificado(View):
         p.drawString(60,440,nombre_mes)
         p.drawString(60+len(nombre_mes)+40,440,"del")
         p.drawString(60+len(nombre_mes)+60,440,str(anio))
-        p.drawString(60,410,"Quién(es) se presenta(n) a esta prestación es la/el mencionado, junto a su")
+        p.drawString(60,410,"Quién(es) se presenta(n) a esta prestación es la/él mencionado, junto a su")
         
         p.drawString(252,390,"la Sr.(a) ")
         p.line(60,390,250,390)
