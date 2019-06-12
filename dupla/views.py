@@ -862,21 +862,21 @@ def Dupla_casos_centro(request,pk):
 	
 	try:
 		ficha=Ficha_derivacion_dupla.objects.get(Estudiante=dato,estado=1)
-		#try:
-		#	plan_caso=Intervencion_casos.objects.get(ficha_derivacion_dupla=ficha)
-		#	try:
+		try:
+			plan_caso=Intervencion_casos.objects.get(ficha_derivacion_dupla=ficha)
+			try:
 				
-		#		sesiones=Intervencion_sesion.objects.filter(intervencion_casos=plan_caso)
-		#	except Intervencion_sesion.DoesNotExist:	
-		#		sesiones=None
+				sesiones=Intervencion_sesion.objects.filter(intervencion_casos=plan_caso)
+			except Intervencion_sesion.DoesNotExist:	
+				sesiones=None
 			
-		#except Intervencion_casos.DoesNotExist:
-		#	plan_caso=None
-		#	sesiones=None
+		except Intervencion_casos.DoesNotExist:
+			plan_caso=None
+			sesiones=None
 	except Ficha_derivacion_dupla.DoesNotExist:
 		ficha=None
-		#sesiones=None
-		#plan_caso=None
+		sesiones=None
+		plan_caso=None
 
 	
 	try:
@@ -890,9 +890,9 @@ def Dupla_casos_centro(request,pk):
 		 context={
 	     'estudiante':dato,
 	     'ficha':ficha,
-	     #'sesiones':sesiones,
+	     'sesiones':sesiones,
 	     'retorno':retorno,
-       	 #'plan_caso':plan_caso,
+       	 'plan_caso':plan_caso,
          
           
         		 
