@@ -295,11 +295,6 @@ def FichaEstudianteDetailView(request,pk):
         		 'colegio':colegio	}
     )
 
-
-
-
-
-
 def Reportedecaso(request,pk):
     
 	estudiante_id=Estudiante.objects.get(pk=pk)

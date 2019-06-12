@@ -11,8 +11,6 @@
 	<thead>
 		 <tr class="success">
 		
-
-
 		<tr class="warning">
 		
 		<td>Hora</td>
@@ -27,21 +25,20 @@
 		</tr>
 	</thead>
 	<tbody>
-		<td>9:30 - 9:00</td>
+		<td>8:15 - 9:00</td>
 		<td>Planificación</td>
 		<td>Planificación</td>
 		<td>Planificación</td>
 		<td>Planificación</td>
 		<td>Planificación</td>	
 
-		<tr><td>9:30 - 9:00</td></tr>
 
 	{% if fechas %}
 		{% for estudio in fechas %}
 		<tr class="info">
 			{% if estudio.fecha == fecha_inicio %}
 				{% if estudio.horario_i == 6 %}
-				<td>Lunes {{fecha_inicio |date:"d"}}</td>
+				<td>{{fecha_inicio |date:"d"}}</td>
 				{% endif %}		
 			{% endif %}	
 			{% if estudio.fecha == martes %}
