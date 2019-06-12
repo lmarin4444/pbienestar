@@ -21,10 +21,8 @@ import datetime
 def ir_historia(request,pk):
 	dato=Estudiante.objects.get(id=pk)
 	context={'dato':dato}
-	
+	date = datetime.date.today()
 	if request.method=='POST':
-		date = datetime.date.today()
-		
 		
 		try:
 			ficha=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
@@ -40,13 +38,13 @@ def ir_historia(request,pk):
 
 		
 		# primero analizar si hay historia anterior ingresada 	
-		try:
-			history=Historia.objects.get(Estudiante=dato)
-			history.observacion=history.observacion+"-Con fecha :"+date+"Historia de centro de bienestar"
-		except Historia.DoesNotExist:	
-			history=Historia.objects.create(fecha=date,Estudiante=dato,Ficha_derivacion=ficha,objetivo_intervencion=objeto,observacion="Con fecha :"+date+"Historia desde el centro de bienestar")
-		
-
+		#try:
+		#	history=Historia.objects.get(Estudiante=dato)
+			#history.observacion=history.observacion+"-Con fecha :"+date+"Historia de centro de bienestar"
+		#except Historia.DoesNotExist:	
+			#history=Historia.objects.create(fecha=date,Estudiante=dato,Ficha_derivacion=ficha,objetivo_intervencion=objeto,observacion="Con fecha :"+date+"Historia desde el centro de bienestar")
+		history=Historia.objects.create(fecha="2019/06/13",Estudiante=dato,Ficha_derivacion=ficha,objetivo_intervencion=objeto,observacion="Con fecha : 13/06/2019 Historia desde el centro de bienestar")	
+	#		
 	#Todos los datos de la ficha de derivacion
 		fecha_derivacion 		=ficha.fecha_derivacion
 		pie 					=ficha.pie
