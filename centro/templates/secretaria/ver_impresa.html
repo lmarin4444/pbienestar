@@ -37,8 +37,16 @@
 		{% for estudio in fechas %}
 		<tr class="info">
 			{% if estudio.fecha == fecha_inicio %}
+				<td>9:00 - 10:00 </td>
 				{% if estudio.horario_i == 6 %}
-				<td>{{fecha_inicio |date:"d"}}</td>
+				<td>{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }}  </td>
+			
+				<td><small>{{ estudio.Estudiante.curso.establecimiento.nombre}} /</small>{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }}</td>
+				
+
+
+
+
 				{% endif %}		
 			{% endif %}	
 			{% if estudio.fecha == martes %}
@@ -55,9 +63,8 @@
 			{% endif %}	
 			<td>{{estudio.fecha|date:"d"}} /{{estudio.fecha|date:"m"}}</td>
 			<td>{{ estudio.get_horario_i}}</td> 
-			<td>{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }}  </td>
 			
-			 <td><small>{{ estudio.Estudiante.curso.establecimiento.nombre}} /</small>{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }}</td>  
+			   
  
 
 			<td>{{ estudio.usuario.first_name}} {{ estudio.usuario.last_name}}</td> 
