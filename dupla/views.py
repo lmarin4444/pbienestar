@@ -854,6 +854,55 @@ def Dupla_casos(request,pk):
 	})
 
 
+#----
+# Listar una intervencion de casos  para el centro de bienestar
+def Dupla_casos_centro(request,pk):
+	mensaje=""
+	dato = get_object_or_404(Estudiante, pk=pk)
+	
+	try:
+		ficha=Ficha_derivacion_dupla.objects.get(Estudiante=dato,estado=1)
+		try:
+			plan_caso=Intervencion_casos.objects.get(ficha_derivacion_dupla=ficha)
+			try:
+				sesiones=Intervencion_sesion.objects.filter(intervencion_casos=plan_caso)
+			except Intervencion_sesion.DoesNotExist:	
+				sesiones=None
+			
+		except Intervencion_casos.DoesNotExist:
+			plan_caso=None
+			sesiones=None
+	except Ficha_derivacion_dupla.DoesNotExist:
+		ficha=None
+		sesiones=None
+		plan_caso=None
+
+	
+	try:
+		retorno=Derivacion_Ficha_derivacion_dupla.objects.get(ficha_derivacion_dupla=ficha,ficha_derivacion_dupla__estado=1)
+	except Derivacion_Ficha_derivacion_dupla.DoesNotExist:
+		retorno=None
+
+	return render(
+		request,
+		'dupla/casos_dupla_centro.html',
+		 context={
+	     'estudiante':dato,
+	     'ficha':ficha,
+	     'sesiones':sesiones,
+	     'retorno':retorno,
+       	 'plan_caso':plan_caso,
+         
+          
+        		 
+        		 
+	})
+#----
+
+
+
+
+
 
 #Modificar una sesion de intervencion
 

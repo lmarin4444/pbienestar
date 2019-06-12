@@ -38,6 +38,11 @@ urlpatterns = [
 	# Listado de infirmacion de un plan de casos
 	url(r'^Dupla_casos/(?P<pk>\d+)/$', login_required(views.Dupla_casos), name='Dupla_casos'),
 
+	#Mostrar la situacion de intervencion de un estudiante desde el centro de Bienestar
+
+	url(r'^Dupla_casos_centro/(?P<pk>\d+)/$', login_required(views.Dupla_casos_centro), name='Dupla_casos_centro'),
+	
+
 	#Modificar Derivacion ficha derivacion dupla
 	url(r'^ModificarRetornoDefinitivo/(?P<pk>\d+)/$',login_required(views.ModificarRetornoDefinitivo), name='ModificarRetornoDefinitivo'),
 
