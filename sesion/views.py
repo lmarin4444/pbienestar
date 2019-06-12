@@ -142,10 +142,10 @@ def ModificarCita(request,pk,age):
 			instance = formulario.save(commit=False)
 			try:
  			 
-	 			hoy=agenda.objects.get(Q(fecha=instance.fecha) & Q(horario_i=instance.horario_i) & Q(usuario=request.user))
-	 			instance.usuario=request.user
+				hoy=agenda.objects.get(Q(fecha=instance.fecha) & Q(horario_i=instance.horario_i) & Q(usuario=request.user))
+				instance.usuario=request.user
 	 			
-	 			instance.save()
+				instance.save()
 	 			
 	
 			except agenda.DoesNotExist:
