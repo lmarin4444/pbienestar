@@ -790,7 +790,7 @@ def RetornoUpdateView(request,pk):
 	
 	dato = get_object_or_404(Estudiante, pk=pk)
 	
-	ficha_derivacion=Ficha_derivacion.objects.get(Estudiante_id=dato,estado=1)
+	ficha_derivacion=Ficha_derivacion.objects.get(Estudiante_id=dato.id,estado=1)
 	
 	ficha_id=ficha_derivacion.id
 	
