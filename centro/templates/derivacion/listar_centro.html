@@ -35,7 +35,7 @@
 			<a class="btn btn-danger btn-xs" href="{% url 'derivacion:sesion' mascota.id %}">Intervención</a>
 			
 			<a class="btn btn-default btn-xs" href="{% url 'alumno:Ficha' mascota.Estudiante.id %}">Ver</a>
-			<a class="btn btn btn-primary btn-xs" href="{% url 'derivacion:derivacion_pasada_retorno' mascota.Estudiante.id %}">Retorno Falta Info</a>
+			<a class="btn btn btn-primary btn-xs" href="{% url 'derivacion:derivacion_pasada_retorno' mascota.id %}">Retorno Falta Info</a>
 			{% elif estado == 2 %}
 	 		
 			<a class="btn btn-primary btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Editar</a>
@@ -44,7 +44,7 @@
 			{% elif estado == 3 %}
 			
 			<a class="btn btn-info btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Editar</a>
-			<a class="btn btn-danger btn-xs" href="{% url 'derivacion:derivacion_pasada_retorno' mascota.Estudiante.id %}">Retorno</a>
+			<a class="btn btn-danger btn-xs" href="{% url 'derivacion:derivacion_pasada_retorno' mascota.id %}">Retorno</a>
 			<a class="btn btn-info btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Historia</a>
 
 			Estudiante en intervención
