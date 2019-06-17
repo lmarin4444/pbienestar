@@ -30,14 +30,13 @@ def show_calendar(request,ano=None,mes=None):
     
     #peticiones = Peticion.objects.filter((Q(creado_fecha__month=hoy.month) | Q(inicio_fecha__month=hoy.month) | Q(terminado_fecha__month=hoy.month) | Q(completo_fecha__month=hoy.month)), (Q(creado_fecha__year=hoy.year) | Q(inicio_fecha__year=hoy.year) | Q(terminado_fecha__year=hoy.year) | Q(completo_fecha__year=hoy.year))) if request.user.is_superuser else Peticion.objects.filter((Q(creado_fecha__month=hoy.month) | Q(inicio_fecha__month=hoy.month) | Q(terminado_fecha__month=hoy.month) | Q(completo_fecha__month=hoy.month)), (Q(asignado_a=request.user)|Q(creado_por=request.user)), (Q(creado_fecha__year=hoy.year) | Q(inicio_fecha__year=hoy.year) | Q(terminado_fecha__year=hoy.year) | Q(completo_fecha__year=hoy.year)))
     #peticiones = Peticion.objects.filter((Q(creado_fecha__month=hoy.month) | Q(inicio_fecha__month=hoy.month) | Q(terminado_fecha__month=hoy.month) | Q(completo_fecha__month=hoy.month)), (Q(creado_fecha__year=hoy.year) | Q(inicio_fecha__year=hoy.year) | Q(terminado_fecha__year=hoy.year) | Q(completo_fecha__year=hoy.year))) if request.user.is_superuser else Peticion.objects.filter((Q(creado_fecha__month=hoy.month) | Q(inicio_fecha__month=hoy.month) | Q(terminado_fecha__month=hoy.month) | Q(completo_fecha__month=hoy.month)), (Q(asignado_a=request.user)|Q(creado_por=request.user)), (Q(creado_fecha__year=hoy.year) | Q(inicio_fecha__year=hoy.year) | Q(terminado_fecha__year=hoy.year) | Q(completo_fecha__year=hoy.year)))
-    print ano
-    print mes
+
     hoydia = hoy 
     ano_pasado = hoydia.year - 1
 
 
 
-    peticiones = Lista.objects.filter(Q(fecha__month=hoy.month) & Q(fecha__year=hoy.year)).order_by('horario')  
+    peticiones = Lista.objects.filter(Q(fecha__month=hoy.month) & Q(fecha__year=hoy.year) & Q(usuario=request.user)).order_by('horario')  
     return render(
         request,
         "bitacora/calendario.html",
