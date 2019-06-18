@@ -2025,7 +2025,7 @@ class duplicar_plancillo(CreateView):
 				print plan_plancillo
 				print actividades_copiadas
 				for activo in actividades_copiadas:
-					Actividades.objects.create(fecha=None,horario=1,mes=activo.mes,
+					Actividades.objects.create(fecha=None,horario=0,mes=activo.mes,
 						nombre=activo.nombre,tipo=activo.tipo,descripcion=activo.descripcion,ejecutores=activo.ejecutores,
 						inicio=activo.inicio,desarrollo=activo.desarrollo,cierre=activo.cierre,participantes=activo.participantes,
 						numero=activo.numero,letra=activo.letra,responsable=activo.responsable,cantidad_convocada=activo.cantidad_convocada,
