@@ -760,9 +760,7 @@ class ingresar_Actividad_plan(CreateView):
 								
 				instance = form.save(commit=False)
 				instance.usuario=self.request.user
-				#Numero 4 indica que la actividad esta solo creada no planificadad
-				#por lo cual se puede modificar sino no
-				instance.numero=4
+			
 				instance.plancillo=plancillo
 
 

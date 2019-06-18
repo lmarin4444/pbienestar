@@ -80,7 +80,8 @@ PARTICIPANTES = (
              
             )
 ESTADO = (
-            (0,'Planificado'),
+            (0,'Definido'),
+
             (1,'Realizado'),
             (2,'Re agendado'),
             (3,'Postergado - Justificado'),
@@ -88,6 +89,7 @@ ESTADO = (
             (5,'Suspendido por actividades del establecimiento'),
             (6,'Suspendido por mal tiempo'),
             (7,'Suspendido por problemas de fuerza mayor'),
+            (8,'Planificado'),
            
              
             )
