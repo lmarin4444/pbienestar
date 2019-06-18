@@ -760,7 +760,7 @@ class ingresar_Actividad_plan(CreateView):
 								
 				instance = form.save(commit=False)
 				instance.usuario=self.request.user
-			
+
 				instance.plancillo=plancillo
 
 
@@ -2025,7 +2025,7 @@ class duplicar_plancillo(CreateView):
 				print plan_plancillo
 				print actividades_copiadas
 				for activo in actividades_copiadas:
-					Actividades.objects.create(fecha=activo.fecha,horario=activo.horario,mes=activo.mes,
+					Actividades.objects.create(fecha=None,horario=None,mes=activo.mes,
 						nombre=activo.nombre,tipo=activo.tipo,descripcion=activo.descripcion,ejecutores=activo.ejecutores,
 						inicio=activo.inicio,desarrollo=activo.desarrollo,cierre=activo.cierre,participantes=activo.participantes,
 						numero=activo.numero,letra=activo.letra,responsable=activo.responsable,cantidad_convocada=activo.cantidad_convocada,
