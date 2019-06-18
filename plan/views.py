@@ -724,13 +724,13 @@ class ingresar_Actividad_plan(CreateView):
 			plancito = self.kwargs.get('pk') # El mismo nombre que en tu URL
 			
 			plancillo=Plancillo.objects.get(id=plancito)
-			print plancillo
+			
 			accion=plancillo.accion
-			print accion
+			
 			base=accion.base
-			print base
+			
 			plan=base.plan
-			print plan
+			
 			context['plancito']=plancillo
 			context['accion']=accion
 			context['base']=base
@@ -759,9 +759,10 @@ class ingresar_Actividad_plan(CreateView):
 			if form.is_valid():
 								
 				instance = form.save(commit=False)
-				#verificar si la actividad ya existe 
-	
 				instance.usuario=self.request.user
+				#Numero 4 indica que la actividad esta solo creada no planificadad
+				#por lo cual se puede modificar sino no
+				instance.numero=4
 				instance.plancillo=plancillo
 
 
