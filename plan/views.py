@@ -969,11 +969,9 @@ class eliminar_base(DeleteView):
 		
 def modificar_accion(request,pk):
 # Realizar un retorno de una ficha de derivacion a la dupla 
-	
 	accion= get_object_or_404(Accion, pk=pk)
 	base=accion.base 
 	plan=base.plan
-
 	escuela=plan.establecimiento
 	colegio=escuela.id
 	if request.method=='POST':
@@ -996,10 +994,7 @@ def modificar_accion(request,pk):
 		"escuela":escuela,
 		"base":base,
 		"accion":accion,
-
-
 		"colegio":colegio,
-
 		 }
 	return render(request, 'plan/plan_accion_form.html', context)	
 
@@ -2059,7 +2054,7 @@ def modificar_actividad_plan(request,pk):
 	
 	actividad = get_object_or_404(Actividades, pk=pk)
 	plancillo=actividad.plancillo
-	print plancillo
+
 	accion=plancillo.accion
 	base=accion.base
 	plan=base.plan
@@ -2076,7 +2071,7 @@ def modificar_actividad_plan(request,pk):
 			instance.usuario = request.user
 				
 			instance.save()
-			formulario.save_m2m()
+			#formulario.save_m2m()
 				
 				
 			url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancillo.id})
