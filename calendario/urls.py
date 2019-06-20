@@ -11,7 +11,7 @@ urlpatterns = [
  	url(r'^show/calendar/$',views.show_calendar,name='calendar-ano-mes'),
  	url(r'^show/calendar/$',views.show_secre,name='calendar-secre'),
  	url(r'^show_secretaria_mes/(?P<ano>\d+)/(?P<mes>\d+)/$',views.show_secretaria_mes,name='show_secretaria_mes'),
-
+ 	url(r'^show_secretaria_semana/(?P<ano>\d+)/(?P<mes>\d+)/$',views.show_secretaria_semana,name='show_secretaria_semana'),
 
 
 

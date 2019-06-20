@@ -93,4 +93,26 @@ def show_secretaria_mes(request,ano=None,mes=None):
         }
         )
 
+def show_secretaria_semana(request,ano=None,mes=None):
+    hoy = datetime.date.today() if ano is None and mes is None else datetime.date(year=int(ano),month=int(mes),day=1)
+    #peticiones = Peticion.objects.filter((Q(creado_fecha__month=hoy.month) | Q(inicio_fecha__month=hoy.month) | Q(terminado_fecha__month=hoy.month) | Q(completo_fecha__month=hoy.month)), (Q(creado_fecha__year=hoy.year) | Q(inicio_fecha__year=hoy.year) | Q(terminado_fecha__year=hoy.year) | Q(completo_fecha__year=hoy.year))) if request.user.is_superuser else Peticion.objects.filter((Q(creado_fecha__month=hoy.month) | Q(inicio_fecha__month=hoy.month) | Q(terminado_fecha__month=hoy.month) | Q(completo_fecha__month=hoy.month)), (Q(asignado_a=request.user)|Q(creado_por=request.user)), (Q(creado_fecha__year=hoy.year) | Q(inicio_fecha__year=hoy.year) | Q(terminado_fecha__year=hoy.year) | Q(completo_fecha__year=hoy.year)))
+    #peticiones = Peticion.objects.filter((Q(creado_fecha__month=hoy.month) | Q(inicio_fecha__month=hoy.month) | Q(terminado_fecha__month=hoy.month) | Q(completo_fecha__month=hoy.month)), (Q(creado_fecha__year=hoy.year) | Q(inicio_fecha__year=hoy.year) | Q(terminado_fecha__year=hoy.year) | Q(completo_fecha__year=hoy.year))) if request.user.is_superuser else Peticion.objects.filter((Q(creado_fecha__month=hoy.month) | Q(inicio_fecha__month=hoy.month) | Q(terminado_fecha__month=hoy.month) | Q(completo_fecha__month=hoy.month)), (Q(asignado_a=request.user)|Q(creado_por=request.user)), (Q(creado_fecha__year=hoy.year) | Q(inicio_fecha__year=hoy.year) | Q(terminado_fecha__year=hoy.year) | Q(completo_fecha__year=hoy.year)))
+    date = datetime.date.today()
+    start_week = date - datetime.timedelta(date.weekday())
+    end_week = start_week + datetime.timedelta(4)
+  
+    peticiones = agenda.objects.filter(fecha__range=[start_week, end_week]).order_by('fecha')
+    
+    #peticiones = agenda.objects.filter(Q(fecha__month=hoy.month) & Q(fecha__year=hoy.year)).order_by('horario_i') 
+    return render(
+        request,
+        "calendario/calendario_secretaria_semana.html",
+        {
+            'hoy':hoy,
+            'peticiones':peticiones,
+            'anio':hoy.year,
+            'start_week':start_week,
+            'end_week':end_week,
+        }
+        )
 

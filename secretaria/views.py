@@ -642,7 +642,7 @@ def ver_dia(request,fecha=None):
 
     date = datetime.datetime.now()
     fechas = agenda.objects.filter(fecha=date).order_by('horario_i')
-    print fechas            
+           
         #fechas=agenda.objects.filter(fecha=current_week)  
     return render(
         request,
