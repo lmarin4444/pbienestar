@@ -2053,47 +2053,47 @@ def modificar_actividad_plan(request,pk):
 # Modificar un plan  
 	
 	actividad = get_object_or_404(Actividades, pk=pk)
-	plancillo=actividad.plancillo
+	#plancillo=actividad.plancillo
 
-	accion=plancillo.accion
-	base=accion.base
-	plan=base.plan
-	escuela=plan.establecimiento
-	colegio=escuela
+	#accion=plancillo.accion
+	#base=accion.base
+	#plan=base.plan
+	#escuela=plan.establecimiento
+	#colegio=escuela
 
 	
-	if request.method=='POST':
-		formulario = Base_ActividadesPlan(request.POST or None, instance=actividad)
- 		if formulario.is_valid():
-			instance = formulario.save(commit=False)
+	#if request.method=='POST':
+	#	formulario = Base_ActividadesPlan(request.POST or None, instance=actividad)
+ 	#	if formulario.is_valid():
+	#		instance = formulario.save(commit=False)
 			
-			instance.plancillo=plancillo
-			instance.usuario = request.user
+	#		instance.plancillo=plancillo
+	#		instance.usuario = request.user
 				
-			instance.save()
+	#		instance.save()
 			#formulario.save_m2m()
 				
 				
-			url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancillo.id})
-			return HttpResponseRedirect(url)
+	#		url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancillo.id})
+	#		return HttpResponseRedirect(url)
 				
 			
 				
-		formulario = Base_ActividadesPlan(request.POST or None, instance=actividad)
-	else:
+	#	formulario = Base_ActividadesPlan(request.POST or None, instance=actividad)
+	#else:
 
 
 				
 		formulario = Base_ActividadesPlan(request.POST or None, instance=actividad)
 	context = {
 		"form": formulario,
-		"plan":plan,
-		"base":base,
-		"accion":accion,
-		"plancillo":plancillo,
+	#	"plan":plan,
+	#	"base":base,
+	#	"accion":accion,
+	#	"plancillo":plancillo,
 
-		"escuela":escuela,
-		"colegio":colegio,
+	#	"escuela":escuela,
+	#	"colegio":colegio,
 
 		 }
 	return render(request, 'plan/actividades_form.html', context)	
