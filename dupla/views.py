@@ -130,19 +130,12 @@ def FichaderivacionduplaUpdate(request,pk):
 		formulario = derivacionduplaForm(request.POST or None, instance=ficha)
  		if formulario.is_valid():
 			instance = formulario.save(commit=False)
-			
 			instance.usuario = request.user
-				
 			instance.save()
 			formulario.save_m2m()
-		
-				
-				
 			url = reverse(('alumno:listar_estudiantes_establecimiento'), kwargs={ 'pk': colegio.id})
 			return HttpResponseRedirect(url)
-				
-			
-				
+						
 		formulario = derivacionduplaForm(request.POST or None, instance=ficha)
 	else:
 
