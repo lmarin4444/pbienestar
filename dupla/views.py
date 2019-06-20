@@ -250,8 +250,8 @@ class Estudiante_listar_fichas_duplas(ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super(Estudiante_listar_fichas_duplas, self).get_context_data(**kwargs)
-
-		colegio=establecimiento.objects.get(id=self.kwargs['pk'])
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		colegio=establecimiento.objects.get(id=pk)
 		usuario=self.request.user
 		profesional=Profesional.objects.get(usuario=usuario)
 		estado=profesional.tipo_profesional
