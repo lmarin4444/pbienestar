@@ -41,17 +41,21 @@
 
 
 
-    	<h4 align="justify">El presente certificado se extiende a </h4><h2><strong>{{ object.nombres |capfirst}} {{ object.firs_name|capfirst }} {{ object.last_name|capfirst }} </strong></h2>
-    	<p align="justify">El centro de bienestar del Departamento de Educación de Cabildo, certifica que el estudiante {{ object.nombres }} {{ object.firs_name }} {{ object.last_name }} Rut:
+    	<h4 align="justify">El presente certificado se extiende a </h4><h4><strong>{{ object.nombres |capfirst}} {{ object.firs_name|capfirst }} {{ object.last_name|capfirst }} </strong></h4>
+
+    
+
+
+    	<h5><p align="justify" >El centro de bienestar del Departamento de Educación de Cabildo, certifica que el estudiante {{ object.nombres }} {{ object.firs_name }} {{ object.last_name }} Rut:
     	{{object.rut}}  del establecimiento 
     	
       {{ object.curso.establecimiento.nombre}}
       cursando actualmete el {{ object.curso.get_numero}} {{ object.curso.get_letra}}. 
-    	Asistio el día ____________ a las ________________ regularmente a las sesiones indicadas por la Psicóloga o Psicólogo tratante del Centro de Bienestar. </p>
+    	Asistio el día ____________ a las ________________  a la sesión indicada por _________________________________ profesional tratante del Centro de Bienestar. </p></h5>
     
 		<br>
 		<p class="text-justify">
-			Se extiende el presente certificado a petición del interesado.
+			Se extiende el presente certificado para ser presentado en el Establecimiento.
 		</p>
 
   </div>
