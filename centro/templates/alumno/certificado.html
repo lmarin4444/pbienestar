@@ -22,7 +22,7 @@
   <div class="col-md-8 col-md-offset-3">
 
 <h3 >
-    Certificado de simple  
+    Certificado  Simple  
     <span class="label label-default">Centro Bienestar</span>
 </h3>
   </div>
@@ -44,17 +44,17 @@
 
 
 
-    	<h4>El presente certificado se extiende a </h4><h2><strong>{{ object.nombres |capfirst}} {{ object.firs_name|capfirst }} {{ object.last_name|capfirst }} </strong></h2>
-    	<p>El centro de bienestar del Departamento de educación de Cabildo, certifica que el estudiante {{ object.nombres }} {{ object.firs_name }} {{ object.last_name }} Rut:
+    	<h4 align="justify">El presente certificado se extiende a </h4><h2><strong>{{ object.nombres |capfirst}} {{ object.firs_name|capfirst }} {{ object.last_name|capfirst }} </strong></h2>
+    	<p align="justify">El centro de bienestar del Departamento de Educación de Cabildo, certifica que el estudiante {{ object.nombres }} {{ object.firs_name }} {{ object.last_name }} Rut:
     	{{object.rut}}  del establecimiento 
     	
       {{ object.curso.establecimiento.nombre}}
       cursando actualmete el {{ object.curso.get_numero}} {{ object.curso.get_letra}} . 
-    	asiste regularmente a las sesiones indicadas por la Psicóloga tratante del Centro de Bienestar. </p>
+    	asiste regularmente a las sesiones indicadas por la Psicóloga o Psicólogo tratante del Centro de Bienestar. </p>
     
 		<br>
 		<p class="text-justify">
-			Se extiende el presente certificado a peticion del interesado.
+			Se extiende el presente certificado a petición del interesado.
 		</p>
 
   </div>

@@ -110,12 +110,10 @@ def CambioCreateView(request,pk):
 
 			instance.save()
 			usuario=formulario.instance.usuario
-
-			print usuario
 			
 			infoarchivo2 = Intervenidos.objects.get(id = intervenido_id)
 			infoarchivo2.usuario=usuario
-			infoarchivo2.Profesional=usuario.first_name+ " "+usuario.last_name
+			#infoarchivo2.Profesional=usuario.first_name+ " "+usuario.last_name
 			infoarchivo2.numero = 2
 			infoarchivo2.save()
 
