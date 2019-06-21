@@ -242,7 +242,7 @@ class ParentescoForm(forms.ModelForm):
 			'apellido_p': 'Apellido Paterno',
 			'apellido_m': 'Apellido Materno',
 			'parentesco': 'Parentesco',
-			'edad':'Edad',
+			'edad':'Edad, si el integrante de la familia tiene menos de un año ingresar 0',
 			'ocupacion':'Ocupación',
 			'Escolaridad':'Escolaridad',
 			'opcion':'Indique SÍ -> si el familiar vive con el niño o niña en la misma casa y NO -> si el familia no vive en la misma casa',
