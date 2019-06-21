@@ -701,13 +701,8 @@ class IntervencionUpdateView(UpdateView):
 	def post(self,request,*args,**kwargs):
 	
 		id_ficha = kwargs['pk']
-		
-		
 		ficha_derivacion = self.model.objects.get(id=id_ficha)
-		
 		estudiante = self.second_model.objects.get(id=ficha_derivacion.Estudiante_id)
-		
-		
 		x=ficha_derivacion.fecha_derivacion
 		fecha_derivacion=x
 		
