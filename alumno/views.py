@@ -1205,7 +1205,7 @@ class EstablecimientoListsupervisor(ListView):
 # se establecen acciones exclusivas para el encargado de convivencia y se determina en base al tipo de
 # cargo que tiene en el establecimiento y este es desde el numero 6 -7-8 -9	
 	model = Cargo
-	template_name = 'alumno/establecimiento_profesional.html'
+	template_name = 'alumno/establecimiento_profesional_supervisor.html'
 	success_url = reverse_lazy('alumno:establecimiento_listar')	
 
 	def get_context_data(self, **kwargs):
