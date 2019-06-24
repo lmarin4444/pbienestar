@@ -77,7 +77,7 @@ $( ".datepicker" ).datepicker("option", "dateFormat","yy-mm-dd");
 							                        	</ul>
 							                         </li>
 							                         <li class="dropdown">
-					                        		<a href="{% url 'secretaria:secretaria_listar' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estadísticas  <span class="caret"></span></a>
+					                        		<a href="{% url 'secretaria:secretaria_listar' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Centro Bienestar  <span class="caret"></span></a>
 							                        <ul class="dropdown-menu" role="menu">
 							                        	<li><a href="{% url 'historia:listar_EstudiantevsTematicas' %}">Listado de Estudiantes por Temáticas </a></li>
 							                        	<li><a href="{% url 'historia:listar_Listadointervenidos' %}">Listado de Estudiantes intervendos </a></li>
@@ -92,8 +92,9 @@ $( ".datepicker" ).datepicker("option", "dateFormat","yy-mm-dd");
 						                      		</li>
 							                         
 							                      <li class="dropdown">
-					                        		<a href="{% url 'secretaria:secretaria_listar' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Listados PsicoSocial<span class="caret"></span></a>
+					                        		<a href="{% url 'secretaria:secretaria_listar' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Área PsicoSocial<span class="caret"></span></a>
 							                        <ul class="dropdown-menu" role="menu">
+							                        <li><a href="{% url 'alumno:EstablecimientoListsupervisor' %}">Establecimientos </a></li>
 							                        	<li><a href="{% url 'usuario:Planes_externosEstablecimientoList' %}">Programación por Planes externos </a></li>
 							                        	<li><a href="{% url 'historia:listar_Listadointervenidos' %}">Listado de indicadores comunales </a></li>
 							                        	

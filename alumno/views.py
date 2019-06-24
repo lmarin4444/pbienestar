@@ -1198,6 +1198,30 @@ class EstablecimientoList(ListView):
 		except Profesional.DoesNotExist:
 			return context
 		
+#Mostrar los establecmientos creados al suprvisor
+#Mostrar establecimientos asignados a cada profesinal
+class EstablecimientoListsupervisor(ListView):
+# en el acceso de las aciiones con los establecimientos 
+# se establecen acciones exclusivas para el encargado de convivencia y se determina en base al tipo de
+# cargo que tiene en el establecimiento y este es desde el numero 6 -7-8 -9	
+	model = Cargo
+	template_name = 'alumno/establecimiento_profesional.html'
+	success_url = reverse_lazy('alumno:establecimiento_listar')	
+
+	def get_context_data(self, **kwargs):
+        # Llamamos ala implementacion primero del  context
+		context = super(EstablecimientoListsupervisor, self).get_context_data(**kwargs)
+		try:
+			dup=Profesional.objects.get(usuario=self.request.user)
+			context['profesional']=Cargo.objects.filter(profesional=dup)
+
+		
+			return context
+		except Profesional.DoesNotExist:
+			return context
+
+
+
 
 #Mostrar establecimientos asignados a cada profesinal pie 
 class EstablecimientoListPie(ListView):

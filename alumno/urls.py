@@ -12,7 +12,8 @@ from alumno.views import EstablecimientoList, EstablecimientoCreate, Establecimi
     HermanoList,HermanoCreate,HermanoUpdate,HermanoDelete,ver_estudiante_rut,EstablecimientoList,listar_estudiantes_establecimiento, \
     ingresar_estudiantes_establecimiento,actualizar_escolaridad,ver_escolaridad,ver_escolaridad_centro,actualizar_escolaridad_centro, \
     search,asignar_familia,agregar_familia,FichaCentroDetailView,estado_estudiantes_establecimiento,busqueda_estudiante, \
-    buscar_estudiantes,search_estudiante,EstudianteListEstablecimiento,EstablecimientoListPie,EstudianteListpie
+    buscar_estudiantes,search_estudiante,EstudianteListEstablecimiento,EstablecimientoListPie,EstudianteListpie, \
+    EstablecimientoListsupervisor
    
 
 urlpatterns = [
@@ -28,6 +29,8 @@ urlpatterns = [
     
     url(r'^nuevo$', login_required(EstablecimientoCreate.as_view()), name='establecimiento_crear'),
     url(r'^listar', login_required(EstablecimientoList.as_view()), name='establecimiento_listar'),
+    url(r'^EstablecimientoListsupervisor', login_required(EstablecimientoListsupervisor.as_view()), name='EstablecimientoListsupervisor'),
+
     url(r'^EstablecimientoListPie', login_required(EstablecimientoListPie.as_view()), name='EstablecimientoListPie'),
 
     url(r'^editar/(?P<pk>\d+)/$', login_required(EstablecimientoUpdate.as_view()), name='establecimiento_editar'),
