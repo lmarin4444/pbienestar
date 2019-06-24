@@ -40,9 +40,6 @@ urlpatterns = [
    #urls de alumnos de pie
     url(r'^EstudianteListpie', login_required(EstudianteListpie.as_view()), name='EstudianteListpie'),
    
-    
-
-
     # Listado de estudiantes derivados al centro de bienestar de un establecimiento en particular
     url(r'^EstudianteListEstablecimiento/(?P<pk>\d+)/$',login_required(EstudianteListEstablecimiento.as_view()),name='EstudianteListEstablecimiento'),
 
