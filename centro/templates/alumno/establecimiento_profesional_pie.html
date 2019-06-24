@@ -1,0 +1,62 @@
+{% extends 'base/base_pie.html' %}
+{% block content %}
+
+<h3>Listado de establecimientos asignados a : <strong> {{ user.first_name|capfirst}} {{ user.last_name|capfirst}}</strong></h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			
+			<td>Establecimiento </td>
+			<td>Cargo</td>
+			<td>Opciones</td>
+	
+
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if profesional %}
+
+		<tr>
+		
+		
+		{% for escuela in profesional %}
+			
+		<td>
+		{{ escuela.escuela.nombre|truncatewords:15|make_list|slice:":25"|join:"" }}
+				{% if escuela.escuela.nombre|truncatewords:15|make_list|slice:":25"|length_is:"25" %} ...{% endif %}
+
+		
+		<td>{{ escuela.get_profesional |title|truncatewords:'2'}} </td>
+		
+			<td>
+			
+
+				<a class="btn btn-success btn-xs" href="{% url 'alumno:ingresar_estudiantes_establecimiento' escuela.escuela.id %}"><small>Ing. Estudiante</small></a>
+				
+				<a class="btn btn-primary btn-xs" href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.escuela.id %}"><small>Act. PIE</small></a>
+				
+			
+			{% if escuela.tipo_profesional == 6 or escuela.tipo_profesional == 7 or escuela.tipo_profesional == 8 or escuela.tipo_profesional == 9 %}
+				<a class="btn btn-warning btn-xs" href="{% url 'dupla:listar_convivencia_escolar' escuela.escuela.id %}"><small>Encargado</small></a>
+				
+
+			{% endif %}
+			</td>
+			
+			
+			
+			
+			
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros relacionados</h1>
+		{% endif %}
+	</tbody>
+</table> 
+{% endblock%}
