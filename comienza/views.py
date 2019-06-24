@@ -73,7 +73,7 @@ def entrar_centro(request):
 def entrar_dupla(request):
     try:
         perfil=Profile.objects.get(user=request.user)
-        if perfil.area ==1 or perfil.area== 4:
+        if perfil.area ==1 or perfil.area == 4:
             cantidad = Ficha_derivacion.objects.filter(estado=1)
             retorno=Ficha_derivacion.objects.filter(Q(pasada=5) & Q(derivado=2) &  Q(estado=1) & Q(usuario=request.user))
             inst=Ficha_derivacion.objects.filter((Q(pasada=4) | Q(pasada=7)) & Q(derivado=2) & Q(estado=1) &  Q(usuario=request.user))
@@ -90,7 +90,7 @@ def entrar_dupla(request):
 def entrar_pie(request):
     try:
         perfil=Profile.objects.get(user=request.user)
-        if perfil.area == 1 or perfil.area== 5:
+        if perfil.area == 1 or perfil.area == 5:
             cantidad = Ficha_derivacion.objects.filter(estado=1)
             retorno=Ficha_derivacion.objects.filter(Q(pasada=5) & Q(derivado=2) &  Q(estado=1) & Q(usuario=request.user))
             inst=Ficha_derivacion.objects.filter((Q(pasada=4) | Q(pasada=7)) & Q(derivado=2) & Q(estado=1) &  Q(usuario=request.user))
