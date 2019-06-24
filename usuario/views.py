@@ -36,7 +36,7 @@ class RegistroUsuario(CreateView):
 class ListarUsuario(ListView):
     model = User 
     template_name = 'usuario/usuario_listar.html'
-    paginate_by = 25
+    paginate_by = 100
 
         
 
