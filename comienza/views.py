@@ -97,7 +97,7 @@ def entrar_pie(request):
 
             context = {'retorno':retorno,
                     'inst':inst}
-            return render (request,"comienza/entrar_pie.html",context)
+            return render (request,"comienza/entrar_dupla.html",context)
         else:
             return redirect('index')
     except Profile.DoesNotExist:
