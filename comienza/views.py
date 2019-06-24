@@ -86,6 +86,23 @@ def entrar_dupla(request):
     except Profile.DoesNotExist:
         return redirect('index')
 
+
+def entrar_pie(request):
+    try:
+        perfil=Profile.objects.get(user=request.user)
+        if perfil.area ==1 or perfil.area== 5:
+            cantidad = Ficha_derivacion.objects.filter(estado=1)
+            retorno=Ficha_derivacion.objects.filter(Q(pasada=5) & Q(derivado=2) &  Q(estado=1) & Q(usuario=request.user))
+            inst=Ficha_derivacion.objects.filter((Q(pasada=4) | Q(pasada=7)) & Q(derivado=2) & Q(estado=1) &  Q(usuario=request.user))
+
+            context = {'retorno':retorno,
+                    'inst':inst}
+            return render (request,"comienza/entrar_pie.html",context)
+        else:
+            return redirect('index')
+    except Profile.DoesNotExist:
+        return redirect('index')
+
 def Planes_externosList(request):
 #Listar la planificacion de los programas externos 
     try:

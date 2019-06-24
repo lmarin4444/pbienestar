@@ -530,7 +530,7 @@ def certifica(request, ):
 		return redirect('secretaria:secretaria_listar')
 	return render(request, 'secretaria/mascotara_form.html', {'form':form})
 
-#Views de establecimietos
+#Views las fichas de derivacion 
 
 class EstudianteList(ListView):
 	model =Estudiante
@@ -541,6 +541,21 @@ class EstudianteList(ListView):
 		return Ficha_derivacion.objects.filter(usuario=self.request.user,estado=1)
 	#def get_queryset(self, *args, **kwargs):
 	#	return Ficha_derivacion.objects.filter(usuario=self.request.user,pasada=3)
+
+#Listado de fichas de un profesional pie
+
+class EstudianteListpie(ListView):
+	model =Estudiante
+	template_name = 'alumno/estudiante_list.html'
+	paginate_by = 100
+
+	def get_queryset(self, *args, **kwargs):
+		return Ficha_derivacion.objects.filter(usuario=self.request.user,estado=1,pie='True')
+	#def get_queryset(self, *args, **kwargs):
+	#	return Ficha_derivacion.objects.filter(usuario=self.request.user,pasada=3)
+
+
+
 
 #Mustra a todos los estudiantes ingresados por mi 
 
@@ -1161,6 +1176,7 @@ class EstablecimientoDelete(DeleteView):
 	model = establecimiento
 	template_name = 'alumno/establecimiento_delete.html'
 	success_url = reverse_lazy('alumno:establecimiento_listar')	
+
 #Mostrar establecimientos asignados a cada profesinal
 class EstablecimientoList(ListView):
 # en el acceso de las aciiones con los establecimientos 
@@ -1169,7 +1185,7 @@ class EstablecimientoList(ListView):
 	model = Cargo
 	template_name = 'alumno/establecimiento_profesional.html'
 	success_url = reverse_lazy('alumno:establecimiento_listar')	
-	paginate_by = 10
+
 	def get_context_data(self, **kwargs):
         # Llamamos ala implementacion primero del  context
 		context = super(EstablecimientoList, self).get_context_data(**kwargs)
@@ -1182,6 +1198,32 @@ class EstablecimientoList(ListView):
 		except Profesional.DoesNotExist:
 			return context
 		
+
+#Mostrar establecimientos asignados a cada profesinal pie 
+class EstablecimientoListPie(ListView):
+# en el acceso de las aciiones con los establecimientos 
+# se establecen acciones exclusivas para el encargado de convivencia y se determina en base al tipo de
+# cargo que tiene en el establecimiento y este es desde el numero 6 -7-8 -9	
+	model = Cargo
+	template_name = 'alumno/establecimiento_profesional_pie.html'
+	success_url = reverse_lazy('alumno:establecimiento_listar')	
+	
+	def get_context_data(self, **kwargs):
+        # Llamamos ala implementacion primero del  context
+		context = super(EstablecimientoListPie, self).get_context_data(**kwargs)
+		try:
+			dup=Profesional.objects.get(usuario=self.request.user)
+			context['profesional']=Cargo.objects.filter(profesional=dup)
+
+		
+			return context
+		except Profesional.DoesNotExist:
+			return context
+		
+
+
+
+
 
 
 #Mostrar todas las acciones asociadas a un establecimiento

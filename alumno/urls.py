@@ -12,7 +12,7 @@ from alumno.views import EstablecimientoList, EstablecimientoCreate, Establecimi
     HermanoList,HermanoCreate,HermanoUpdate,HermanoDelete,ver_estudiante_rut,EstablecimientoList,listar_estudiantes_establecimiento, \
     ingresar_estudiantes_establecimiento,actualizar_escolaridad,ver_escolaridad,ver_escolaridad_centro,actualizar_escolaridad_centro, \
     search,asignar_familia,agregar_familia,FichaCentroDetailView,estado_estudiantes_establecimiento,busqueda_estudiante, \
-    buscar_estudiantes,search_estudiante,EstudianteListEstablecimiento
+    buscar_estudiantes,search_estudiante,EstudianteListEstablecimiento,EstablecimientoListPie,EstudianteListpie
    
 
 urlpatterns = [
@@ -28,12 +28,21 @@ urlpatterns = [
     
     url(r'^nuevo$', login_required(EstablecimientoCreate.as_view()), name='establecimiento_crear'),
     url(r'^listar', login_required(EstablecimientoList.as_view()), name='establecimiento_listar'),
+    url(r'^EstablecimientoListPie', login_required(EstablecimientoListPie.as_view()), name='EstablecimientoListPie'),
+
     url(r'^editar/(?P<pk>\d+)/$', login_required(EstablecimientoUpdate.as_view()), name='establecimiento_editar'),
     url(r'^eliminar/(?P<pk>\d+)/$', login_required(EstablecimientoDelete.as_view()), name='establecimiento_eliminar'),
     #url(r'^listado', listadousuarios, name="listado"),
 
     #urls de alumnos
     url(r'^Estudiantelistar', login_required(EstudianteList.as_view()), name='estudiante_listar'),
+   
+   #urls de alumnos de pie
+    url(r'^EstudianteListpie', login_required(EstudianteListpie.as_view()), name='EstudianteListpie'),
+   
+    
+
+
     # Listado de estudiantes derivados al centro de bienestar de un establecimiento en particular
     url(r'^EstudianteListEstablecimiento/(?P<pk>\d+)/$',login_required(EstudianteListEstablecimiento.as_view()),name='EstudianteListEstablecimiento'),
 

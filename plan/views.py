@@ -1119,6 +1119,7 @@ def modificar_plancillo(request,pk):
 	plancillo= get_object_or_404(Plancillo, pk=pk)
 	accion=plancillo.accion
 	base=accion.base
+	print base
 	plan=base.plan 
 	escuela=plan.establecimiento
 
@@ -1150,7 +1151,7 @@ def modificar_plancillo(request,pk):
 	context = {
 		"form": formulario,
 		"indicador":accion,
-		"accion_base":base,
+		"base":base,
 
 		"plan":plan,
 		"escuela":escuela,
