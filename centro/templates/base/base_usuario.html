@@ -38,7 +38,7 @@ $( ".datepicker" ).datepicker("option", "dateFormat","yy-mm-dd");
 <body>
 
 
-<h3 class="text-center" > {% block encabezado %} Área sistema {% endblock %} <small>{% block encabezadop %}Programas de  Bienestar{% endblock %}</small></h1>
+<h3 class="text-center" > {% block encabezado %} Área Sistemas {% endblock %} <small>{% block encabezadop %}Programas de  Bienestar{% endblock %}</small></h1>
 <div class="container">
 
 	{% block navbar %}
@@ -56,7 +56,9 @@ $( ".datepicker" ).datepicker("option", "dateFormat","yy-mm-dd");
 					                      		<li class="dropdown">
 					                        		<a href="{% url 'secretaria:secretaria_listar' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Usuarios  <span class="caret"></span></a>
 							                        <ul class="dropdown-menu" role="menu">
+							                        <!--     
 							                        	<li><a href="{% url 'usuario:registrar' %}">Registrar Usuario</a></li>
+							                        -->	
 							                        	<li><a href="{% url 'usuario:usuario_listar' %}">Listar Usuarios</a></li>
 							                        	
 				                   

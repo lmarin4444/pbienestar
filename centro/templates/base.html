@@ -113,7 +113,7 @@ Termina código -->
                         method="post" accept-charset="utf-8">
                       <div class="form-group">
                       
-                        <input type="text" placeholder="Nombre de usuario" class="form-control" name="username">
+                    <input type="text" placeholder="Nombre de usuario" class="form-control" name="username">
                     <input type="password" placeholder="Contraseña" class="form-control" name="password">
                         
                       {% csrf_token %}
@@ -140,14 +140,14 @@ Termina código -->
     
  
             <h1>Programas de Bienestar </h1>
-            <h3>Red PsicoSocial &amp; Red convivencia</h3>
+            <h3>Red PsicoSocial &amp; Red Convivencia</h3>
             
             <div class="container-fluid">
             <div class="row">
               
            
                <div class="col-sm-4">
-                 <img src='{% static "img/logo-convivencia-escolar.gif" %}' %}' alt="100x100" src="data:image/p" style="width: 160px; height: 220px;">
+                 <img src='{% static "img/logo-convivencia-escolar.gif" %}' alt="100x100" src="data:image/p" style="width: 160px; height: 220px;">
                </div>
                  <div class="col-sm-4">
                  <img  src='{% static "img/logodem.gif" %}' alt="100x100" src="data:image/p" style="width: 200px; height: 200px;">
@@ -208,7 +208,7 @@ Termina código -->
                                 <h4>
                                     <strong>Programa PsicoSocial</strong>
                                 </h4>
-                                <p>Programa Convivencia Escolar</p>
+                                <p>Programa Convivencia Escolar.</p>
                                 <!--<a href="{% url 'comienza:convivencia' %}" class="btn btn-light">Leer más </a>-->
                                 <a href="{% url 'comienza:construye' %}" class="btn btn-light">Leer más... </a>
                             </div>
@@ -222,7 +222,7 @@ Termina código -->
 
                             </span>
                                 <h4>
-                                    <strong>Centro de Bienestar</strong>
+                                    <strong>Centro de Bienestar.</strong>
                                 </h4>
                                 <p>Funciones  Centro de Bienestar.</p>
                                 <a  href="{% url 'comienza:ver_centro' %}" class="btn btn-light">Leer más...</a>
@@ -238,7 +238,7 @@ Termina código -->
                                 <h4>
                                     <strong>H.P.V.  I y II</strong>
                                 </h4>
-                                <p>Habilidades para la Vida </p>
+                                <p>Habilidades para la Vida. </p>
                                 
                                 <!--<a href="{% url 'comienza:convivencia' %}" class="btn btn-light">Leer más </a>-->
                                 <a href="{% url 'comienza:construye' %}" class="btn btn-light">Leer más... </a>
@@ -312,7 +312,7 @@ Termina código -->
                     
                     
                     {% if perms.profesional.add_profesional %}
-                    <a href="{% url 'usuario:registrar' %}" class="btn btn-lg btn-dark">Supervisor</a>
+                    <a href="{% url 'usuario:usuario_listar' %}" class="btn btn-lg btn-dark">Supervisor</a>
                     {% endif %}
                     <a href="{% url 'admin:index' %}" class="btn btn-lg btn-dark">Administrador</a>
                 </div>
