@@ -5,6 +5,63 @@
 
 
 <table id="example" class="table table-bordered">
+<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">¿Cómo crear un nuevo usuario?</button>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog"> 
+
+
+    <!-- Modal content-->
+    <div class="modal-content"> 
+      <div class="modal-header"> 
+        <button type="button" class="close" data-dismiss="modal">&times;</button> 
+        <h3>Información de creación nuevo usuario </h3> 
+        
+      </div> 
+      <div class="modal-body"> 
+       
+
+        <form method="post">
+  
+  
+ <section>
+ 	<h4><FONT face="Tahoma"> ¿Cómo crear un nuevo usuario?</FONT> </h4>
+
+ 	<MENU>
+ 	<h5>Para crear un nuevo usuario debe: ingresar a www.bienestardemcabildo/admin e ingresar usuario y contraseña </h5>
+<LI><strong>1: </strong>Presionar en  administrador, del área de supervisión .-
+<LI><strong>2: </strong>En el itéms AUTENTICACIÓN Y AUTORIZACIÓN, en la opción "Usuarios" Crear el nuevo usuario -> AÑADIR USUARIO ( Nombre de usuario /la contraseña y Nombre  /correo elctrónico ).- 
+<LI><strong>3: </strong>Ir a la opción "Profiles " del apartado USUARIO, crear el Profile para dijo usuario ingresando:
+usuario (selecionarlo de la lista) creado en el paso anterior, Dirección (Adress) Ciudad en Location , Fecha de nacimiento ( Birth date), Área: ( Indica que sector 
+del menú podrá accionar 2: Secretaria 3: Centro Bienestar 4 : Dupla 5 : Profesional Pie.-
+<LI><strong>4: </strong>Ir al apartado profesional y crear Profesionals En donde se debe ingresar: Rut - 
+Adress ( Dirección ) - Phone - Email - Tipo de profesional ( Seleccionar de la lista) - Seleccionar el usuario creado anteriormente - 
+Selecionar por medio de la tecla control él o los establecimientos en los cuales, el profesional trabaja sino trabaja en ningun
+establecimiento como es el caso de los profesionales del Centro de Bienestar, se ingresa SA.- 
+<LI><strong>5: </strong>Ingresar el cargo, debido que un profesional pude trabajar en más de un establecimiento
+con más de un cargo se debe ingresar para cada usuario :Seleccionar el profesional, Seleccionar el establecimiento,
+Seleccionar el tipo de profesional en dicho establecimiento y la cantidad de horas asignadas sino tiene dicha información 
+ingrese 0 
+
+
+</MENU>
+
+ </section>
+ <FONT COLOR="#800000">
+Realice la creación de nuevos usuario en el botón -> Administrador
+</FONT>
+  
+
+  
+</form>
+
+
+    
+
+      <div class="modal-footer">  
+        <button type="submit" class="btn btn-primary btn-default pull-left" data-dismiss="modal">
+          <span class="glyphicon glyphicon-add"></span> Aceptar
+        </button> 
 	<thead>
 		<tr>
 			<td>#</td>
@@ -12,6 +69,7 @@
 			<td>Nombres</td>
 			<td>Apellidos</td>
 			<td>Email</td>
+			
 			
 		
 		</tr>
@@ -35,6 +93,7 @@
 			
 			</td>
 			-->
+
 		</tr>
 		{% endfor %}
 		
@@ -43,6 +102,10 @@
 		{% endif %}
 	</tbody>
 </table> 
+
+
+
+
 <ul class="pager">
 	<li>
 		{% if page_obj.has_previous %}
@@ -57,7 +120,7 @@
 </ul>
 
 
-{{ mascota.Estudiante.firs_name }} {{ mascota.Estudiante.last_name }}
+
 
 
 
