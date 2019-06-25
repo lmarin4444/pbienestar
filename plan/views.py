@@ -2112,13 +2112,13 @@ class ActividadUpdate_plan(UpdateView):
 		pk = self.kwargs.get('pk')
 		actividad=Actividades.objects.get(id=pk)
 		plancillo=actividad.plancillo
-		accion=plancillo.plan
+		accion=plancillo.accion
 		base=accion.base
 		plan=base.plan
 		escuela=plan.establecimiento
 		colegio=escuela
 		
-		context['form'] = form_class
+		
 		context['plan'] = plan
 		context['base'] = base
 		context['accion'] = accion
@@ -2133,7 +2133,7 @@ class ActividadUpdate_plan(UpdateView):
 		
 		actividad=Actividades.objects.get(id=pk)
 		plancillo=actividad.plancillo
-		accion=plancillo.plan
+		accion=plancillo.accion
 		base=accion.base
 		plan=base.plan
 		escuela=plan.establecimiento
@@ -2143,17 +2143,19 @@ class ActividadUpdate_plan(UpdateView):
 		if request.method=='POST':
 			form = Base_ActividadesPlan(request.POST or None, instance=actividad)
 			if form.is_valid():
-				instance = form.save(commit=False)
-				instance.plancillo=plancillo
-				instance.usuario=request.user
-				instance.save()
+				form.instance = form.save(commit=False)
+				form.instance.plancillo=plancillo
+				form.instance.usuario=request.user
+				form.instance.save()
+				form.save_m2m()
+
+
+				url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancillo.id })
+				return HttpResponseRedirect(url)	
 				
-
-
-
-				return super(ActividadUpdate_plan, self).form_valid(form)
+				
 		else:
-			return super(ActividadUpdate_plan, self).form_invalid(form)
+			return self.render_to_response(self.get_context_data(form=form))
 
 
 
