@@ -2105,14 +2105,19 @@ def modificar_actividad_plan_dos(request,pk):
 # Modificar un plan  
 	
 	actividad = get_object_or_404(Actividades, pk=pk)
+	print actividad
 	plancillo=actividad.plancillo
-
+	print plancillo
 	accion=plancillo.accion
+	print accion
 	base=accion.base
+	print base
 	plan=base.plan
+	print plan
 	escuela=plan.establecimiento
+	print escuela
 	colegio=escuela
-
+	print colegio
 	
 	if request.method=='POST':
 		formulario = Base_ActividadesPlan(request.POST or None, instance=actividad)
