@@ -2129,8 +2129,10 @@ class ActividadUpdate_plan(UpdateView):
 
 		return context
 	def post(self, request, *args,**kwargs):
-		pk = self.kwargs.get('pk')
 		
+		self.object = self.get_object
+		form = self.form_class(request.POST)
+		pk = self.kwargs.get('pk')
 		actividad=Actividades.objects.get(id=pk)
 		plancillo=actividad.plancillo
 		accion=plancillo.accion
@@ -2138,7 +2140,6 @@ class ActividadUpdate_plan(UpdateView):
 		plan=base.plan
 		escuela=plan.establecimiento
 		colegio=escuela
-		form = self.get_form()
 
 		if request.method=='POST':
 			form = Base_ActividadesPlan(request.POST, instance=actividad)
