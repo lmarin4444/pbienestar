@@ -1,0 +1,276 @@
+{% extends 'base/base_usuario.html' %}
+
+{% block content %}
+
+<form method="post">
+  {% csrf_token %}
+<center>
+  <table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  <TR class="headt" >
+    <TH COLSPAN=4  bgcolor="#E1F8FA" style="text-align:center;" >IDENTIFICACION DEL ESTUDIANTE en Proceso de Intervención</TH>
+    
+  </TR>
+  <TR>
+    <TD COLSPAN=1>{{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}}</TD>
+    <TD COLSPAN=1>{{ estudiante.curso.establecimiento.nombre|capfirst}}</TD>
+    <TD COLSPAN=1>{{ estudiante.curso.get_numero}} {{ estudiante.curso.get_letra}}</TD>
+    <TD COLSPAN=1>Edad:{{ estudiante.edad}} años</TD>
+  </TR>
+<TR>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >FICHA DE DERIVACIÓN</TH>
+    
+</TR>
+  <TR>
+    <TD COLSPAN=1>FECHA DE LA DERIVACIÓN</TD>
+    <TD COLSPAN=1>FECHA DE LA LISTA DE ESPERA</TD>
+    <TD COLSPAN=1>FECHA DE INCIO DE LA INTERVENCIÓN</TD>
+    <TD COLSPAN=1>FECHA RETORNO</TD>
+  </TR>
+  <TR>
+    <TD COLSPAN=1>{{ficha.fecha_derivacion  |date:"d-m-Y"}} </TD>
+    <TD COLSPAN=1>
+   {% if ficha.fecha_espera %} 
+    {{ficha.fecha_espera |date:"d-m-Y"}} </TD>
+    {% else %}
+    No ha pasado por la lista de espera
+    {% endif %}
+    <TD COLSPAN=1>{{intervenido.fecha_intervencion |date:"d-m-Y"}}</TD>
+    <TD COLSPAN=1>
+    {% if retorno.fecha_retorno %} 
+    {{retorno.fecha_retorno  |date:"d-m-Y"}} </TD>
+    {% else %}
+    Actualmente activo
+    {% endif %}
+
+      </TD>
+  </TR>  
+    
+<TR>
+    <TH COLSPAN=1  >OBJETIVO DE LA INTERVENCIÓN</TH>
+    <TH COLSPAN=3  >{{objetivo.objetivo_particular}}</TH>
+    
+    
+    
+</TR>
+
+
+<TR>
+    <TD COLSPAN=1>FASE</TD>
+    <TD COLSPAN=1>FECHA INCIO INTERVENCIÓN</TD>
+    <TD COLSPAN=1>Nº TOTAL</TD>
+    <TD COLSPAN=1>Nª ESTUDIANTE</TD>
+  </TR>
+  <TR>
+    <TD COLSPAN=1>
+
+  {{intervenido.estado}}
+     </TD>
+    <TD COLSPAN=1>{{intervenido.fecha_intervencion |date:"d-m-Y"}}
+   
+    <TD COLSPAN=1> 
+    <ul class = "nav nav-pills">
+    <li class = "active" ><a>ESTUDIANTE <span class ="badge">{{ultimo.numero}}</span></a></li>
+    </ul>
+    </TD>
+    <TD COLSPAN=1>
+     <ul class = "nav nav-pills">
+    
+    {% with total=sesiones.count %} 
+          
+                  <li class = "active"><a> TOTAL <span class ="badge" >{{total}}</span></a></li>
+                
+    {% endwith %}
+                
+                
+   
+   
+   
+</ul>
+
+      </TD>
+  </TR>  
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >SESIONES ASISTIDAS</TH>
+    
+  </TR>
+  
+  
+
+
+  <TR>
+    
+{% for sesion in sesiones.all %}
+    
+   </TR>
+ <TR  bgcolor="#E5F3CF">
+   <TD COLSPAN=1>FECHA: {{sesion.fecha |date:"d-m-Y" }}  </TD>
+    <TD COLSPAN=1>HORA: {{sesion.get_horario_i}} hrs. </TD>
+    <TD COLSPAN=1>
+      Participantes : {{sesion.get_participantes }}
+
+
+    </TD>
+    <TD COLSPAN=1>
+    {{sesion.tipo_sesion.nombre }}
+
+      </TD>
+  </TR>  
+<TD COLSPAN=4>
+    <dd><span class="glyphicon glyphicon-list-alt"></span> OBJETIVO : {{sesion.observacion }}</dd>
+    <dd><span class="glyphicon glyphicon-eye-open"></span> PÚBLICO :{{sesion.publico }}</dd>
+    <dd><span class="glyphicon glyphicon-lock"></span>PRIVADO :{{sesion.privado }}</dd>
+    
+    <dd><span class="glyphicon glyphicon-briefcase"></span>PROFESIONAL :user {{sesion.usuario.username }} -- {{sesion.usuario.first_name }} {{sesion.usuario.last_name }} </dd>
+    
+    
+   </TD>
+{% endfor %}
+<TR>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >RESUMEN DE SESIONES</TH>
+    
+  </TR>
+<TR>
+    <TD COLSPAN=1>FECHA y HORARIO AGENDADO </TD>
+    <TD COLSPAN=1>FECHA REGISTRO</TD>
+    <TD COLSPAN=1>SITUACIÓN</TD>
+    
+
+    
+    <TD COLSPAN=1>OBSERVACIONES </TD>
+  </TR>
+  
+{% for registro in asiste.all %}
+
+  <TR>
+    <TD COLSPAN=1>{{registro.agenda.fecha |date:"d-m-Y" }} a las {{registro.agenda.get_horario_i}} </TD>
+    <TD COLSPAN=1>{{registro.fecha |date:"d-m-Y" }}</TD>
+
+    <TD COLSPAN=1>
+    {{ registro.get_situacion }}
+    
+    
+   </TD>
+    <TD COLSPAN=1>
+    <li> {{registro.obs }} </li>
+    {% if registro.otros %}
+      <li>{{registro.otros }}</li>
+     {% else%} 
+     Sin registro
+     {% endif %}
+
+      
+    </TD>
+    
+    
+
+    
+  </TR>  
+
+{% endfor %}
+
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >RESUMEN CONFIRMACIONES</TH>
+    
+  </TR>
+<TR>
+    <TD COLSPAN=1>FECHA y HORARIO / Fecha confirmación</TD>
+    <TD COLSPAN=1> 1ª LLAMADA</TD>
+    <TD COLSPAN=1> 2ª LLAMDADA</TD>    
+    <TD COLSPAN=1> 3ª Y OBSERVACIONES </TD>
+  </TR>
+  
+{% for registro in confirma.all %}
+
+  <TR>
+    <TD COLSPAN=1>{{registro.agenda.fecha |date:"d-m-Y"}} a las {{registro.agenda.horario_i}} /
+    {{registro.fecha_confirma  |date:"d-m-Y"}}</TD>
+
+    <TD COLSPAN=1>{{registro.get_estado1 }}</TD>
+    <TD COLSPAN=1>{{registro.get_estado2 }}</TD>
+    <TD COLSPAN=1>{{registro.get_estado3 }}
+    {{registro.obs }}</TD>
+
+    </TD>
+
+    
+  </TR>  
+
+{% endfor %}
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#F7E0E9" style="text-align:center;" >INFORMACIÓN DE EGRESO</TH>
+    
+  </TR>
+{% if retorno  %}
+
+<TR>
+    <TD COLSPAN=1>SITUACIÓN DE EGRESO</TD>
+    <TD COLSPAN=3>DOCUMENTACIÓN ADJUNTA AL EGRESO</TD>
+  </TR>
+  
+  <TR>
+    <TD COLSPAN=1><dd>Fecha egresado  : {{retorno.fecha_retorno  |date:"d-m-Y"}}</dd>
+                  <dd>Motivo término  :{{retorno.get_motivo_termino }}</dd>
+                    <dd>Observación   :{{retorno.observacion_termino }} </dd></TD>
+
+    </TD>
+    <TD COLSPAN=3>
+    {% if retorno.docfile1.url !=  None %}
+       <li><a href="{{ retorno.docfile1.url }}"><span class="glyphicon glyphicon-floppy-save"></span> </a>{{ retorno.filename1 }} 
+       {% if retorno.opcion1 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span>
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span></li>
+        {% endif %} 
+    {% endif %} 
+    {% if retorno.docfile2.url !=  None %}  
+       <li><a href="{{ retorno.docfile2.url }}"><span class="glyphicon glyphicon-floppy-save"></span>  </a> {{ retorno.filename2 }}
+       {% if retorno.opcion2 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span>
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span></li>
+        {% endif %} 
+    {% endif %}
+    {% if retorno.docfile3.url !=  None %}      
+       <li><a href="{{ retorno.docfile3.url }}"> <span class="glyphicon glyphicon-floppy-save"></span>  </a> {{ retorno.filename3 }}
+       {% if retorno.opcion3 == 0 %}
+        <span title="Archivo habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-open"></span>
+        {% else %}
+          <span title="Archivo No habilitado para el área PsicoSocial" class="glyphicon glyphicon-eye-close"></span></li>
+        {% endif %} 
+      {% endif %}
+
+            
+      </TD>
+  </TR>  
+{% endif %}
+
+    <tr>
+     
+      <td><ul><strong>NOMBRE/PSICÓLOGO </strong></ul>
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul></td>
+      <TD COLSPAN=3>
+   
+  
+    </tr>
+    <tr></tr>
+    
+    
+  </thead>
+  <tbody>
+
+    
+    
+    
+    
+  </tbody>
+</table> 
+</center>
+  
+  
+</form>
+{% endblock %}
