@@ -55,14 +55,14 @@
 			
 			{% elif estado == 3 %}
 			
-			<a class="btn btn-info btn-xs" href="{% url 'sesion:historia' mascota.id mascota.Estudiante.id  %}">Historia</a>
-			<a class="btn btn-success btn-xs" href="{% url 'dupla:Dupla_casos_centro' mascota.Estudiante.id  %}">Historia Centro</a>
+			<a class="btn btn-info btn-xs" href="{% url 'sesion:historia_supervisor' mascota.id mascota.Estudiante.id  %}">Historia</a>
+			<a class="btn btn-success btn-xs" href="{% url 'dupla:Dupla_casos_supervisor' mascota.Estudiante.id  %}">Historia Centro</a>
 
 			En intervención
 			
 			{% elif estado == 4 %}
 			<strong>Otra institución</strong>
-			<a class="btn btn-info btn-xs" href="{% url 'sesion:historia' mascota.id mascota.Estudiante.id  %}">Historia</a>
+			<a class="btn btn-info btn-xs" href="{% url 'sesion:historia_supervisor' mascota.id mascota.Estudiante.id  %}">Historia</a>
 			
 			{% elif estado == 5 %}
 			<strong>Retorno</strong>Por falta de información
@@ -74,7 +74,7 @@
 
 			{% elif estado == 7 %}
 			<strong>Estudiante en lista de egreso</strong>
-			<a class="btn btn-info btn-xs" href="{% url 'sesion:historia' mascota.id mascota.Estudiante.id  %}">Historia</a>
+			<a class="btn btn-info btn-xs" href="{% url 'sesion:historia_supervisor' mascota.id mascota.Estudiante.id  %}">Historia</a>
 			{% endif %}
 
 		

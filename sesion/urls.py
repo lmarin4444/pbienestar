@@ -12,7 +12,7 @@ from sesion.views import listadousuarios, SesionList,SesionCreate,SesionDelete,S
     Motivo_egresoDelete,Motivo_egresoList,historia,historia_dupla,VerObjetivo,VerObjetivohistorico,Ficha_egresoModificar, \
     ReportecontinuidadModificar,CrearSeguimiento,ListarSeguimiento,ver_registro,ModificarRegistro,confirma_ver, \
     confirma_modificar,SeguimeintoDelete,SeguimientoUpdate,VerReportecontinuidad,ReportecontinuidadModificar, \
-    Reportecontinuidad_solo,CrearCitaProfesional
+    Reportecontinuidad_solo,CrearCitaProfesional,historia_supervisor
 
  
 
@@ -123,8 +123,10 @@ urlpatterns = [
     url(r'^Motivo_egreso_list', login_required(Motivo_egresoList.as_view()), name='Motivo_egreso_list'),
     url(r'^Motivo_egreso_editar/(?P<pk>\d+)/$', login_required(Motivo_egresoUpdate.as_view()), name='Motivo_egreso_editar'),
     url(r'^Motivo_egreso_eliminar/(?P<pk>\d+)/$', login_required(Motivo_egresoDelete.as_view()), name='Motivo_egreso_eliminar'),
+    
+
     url(r'^historia_centro/(?P<ficha>\d+)/(?P<pk>\d+)/$', login_required(historia), name='historia'),
     url(r'^historia_dupla/(?P<ficha>\d+)/(?P<pk>\d+)/$', login_required(historia_dupla), name='historia_dupla'),
-
+    url(r'^historia_supervisor/(?P<ficha>\d+)/(?P<pk>\d+)/$', login_required(historia_supervisor), name='historia_supervisor'),
     
 ]

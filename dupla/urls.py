@@ -41,7 +41,8 @@ urlpatterns = [
 	#Mostrar la situacion de intervencion de un estudiante desde el centro de Bienestar
 
 	url(r'^Dupla_casos_centro/(?P<pk>\d+)/$', login_required(views.Dupla_casos_centro), name='Dupla_casos_centro'),
-	
+	url(r'^Dupla_casos_supervisor/(?P<pk>\d+)/$', login_required(views.Dupla_casos_supervisor), name='Dupla_casos_supervisor'),
+
 
 	#Modificar Derivacion ficha derivacion dupla
 	url(r'^ModificarRetornoDefinitivo/(?P<pk>\d+)/$',login_required(views.ModificarRetornoDefinitivo), name='ModificarRetornoDefinitivo'),

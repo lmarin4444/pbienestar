@@ -1439,6 +1439,93 @@ def historia(request,ficha,pk):
         		 
 	})
 
+def historia_supervisor(request,ficha,pk):
+	
+	mensaje=""
+	ultimo=""
+	
+	dato = get_object_or_404(Estudiante, pk=pk)
+	
+	ficha_id=Ficha_derivacion.objects.get(pk=ficha,estado=1)
+	try:
+		sesiones = sesion.objects.filter(Estudiante__id=pk).order_by('fecha')
+	except sesion.DoesNotExist:
+		sesiones=None
+
+	# Ultimo numero registrado en las sesiones	
+	try:
+		#ultimo = sesion.objects.latest('dato')
+		ultimo=sesion.objects.filter(Estudiante__id=pk).latest('numero')
+		
+	except sesion.DoesNotExist:
+		ultimo=None
+	try:
+		hoy= objetivo_intervencion.objects.get(Estudiante=dato,activo=1)
+	except objetivo_intervencion.DoesNotExist:
+		hoy=None
+ 
+	try:
+ 		viejos=	objetivo_intervencionhistoria.objects.filter(Estudiante__id=pk)	
+ 	except viejos.DoesNotExist:
+		viejos=None				
+	
+
+	try:
+ 		retorno=Motivo_Retorno_Ficha_derivacion.objects.get(Ficha_derivacion=ficha_id)
+ 		
+	except Motivo_Retorno_Ficha_derivacion.DoesNotExist:
+		retorno=None				
+	try:
+		intervenido=Intervenidos.objects.get(Estudiante__id=pk)
+	except Intervenidos.DoesNotExist:
+		intervenido=None
+	
+	try:
+ 		pasos=Pasos_intervencion.objects.filter(Intervenidos=intervenido)
+	except Pasos_intervencion.DoesNotExist:
+		pasos=None				
+	try:
+		estado=Estado.objects.filter(Estudiante__id=pk)
+	except Estado.DoesNotExist:
+		estado=None
+		
+	try:
+		modelito= objetivo_intervencion.objects.filter(Estudiante=dato,activo=1)		
+	except objetivo_intervencion.DoesNotExist:
+		modelito=None
+	try:
+		confirma=Confirma.objects.filter(Estudiante=dato)
+	except Confirma.DoesNotExist:
+		confirma=None
+	try:
+		asiste=Registro.objects.filter(Estudiante=dato)
+	except Registro.DoesNotExist:
+		asiste=None
+		
+	
+	return render(
+		request,
+		'sesion/historia_supervisor.html',
+		 context={
+	     'estudiante':dato,
+	     'ficha':ficha_id,
+       	 'objetivo':hoy,
+          'mensaje':mensaje,
+          'viejos':viejos,
+          'intervenido':intervenido,
+          'sesiones':sesiones,
+          'retorno':retorno,
+          'pasos':pasos,
+          'estado':estado,
+          'ultimo':ultimo,
+          'confirma':confirma,
+          'asiste':asiste,
+        		 
+        		 
+	})
+
+
+
 def historia_dupla(request,ficha,pk):
 	mensaje=""
 	dato = get_object_or_404(Estudiante, pk=pk)
