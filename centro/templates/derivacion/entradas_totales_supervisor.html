@@ -84,22 +84,22 @@
 			<td>{{ mascota.Estudiante.nombres|title|truncatewords:'1'}} {{ mascota.Estudiante.firs_name|title|truncatewords:'1'}} </td>
 			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}} {{ mascota.Estudiante.curso.establecimiento.nombre}}
 
-			 {{mascota.usuario}}</td>
+			 </td>
 
 			
 			 
 			<td>
-
+				{{mascota.usuario.first_name}} {{mascota.usuario.last_name}}
 			
 				
 				{% if intervenidos %}
 				
 					{% for intervencion  in intervenidos  %}
 
-						{% if intervencion.Estudiante == mascota.Estudiante and intervencion.usuario == user   %}
+						{% if intervencion.Estudiante == mascota.Estudiante    %}
 						<p style="color:#FF0000";> 1-{{intervencion.usuario.first_name}} {{intervencion.usuario.last_name}}</p>
 						
-						<p class="bg-success">2-{{intervencion.Profesional}} </p>
+						
 						
 						
 
