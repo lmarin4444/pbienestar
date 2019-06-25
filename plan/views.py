@@ -2099,6 +2099,60 @@ def modificar_actividad_plan(request,pk):
 		 }
 	return render(request, 'plan/actividades_form.html', context)	
 
+#Modificar actividad con otra opcion 
+
+class ActividadUpdate_plan(UpdateView):
+	model = Actividades
+	form_class = Base_ActividadesPlan
+	template_name = 'plan/actividades_form.html'
+	success_url = reverse_lazy('derivacion:intervencion_listar')
+
+	def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+		
+		context = super(ActividadUpdate_plan, self).get_context_data(**kwargs)
+		pk = self.kwargs.get('pk')
+		actividad=Actividades.objects.get(id=pk)
+		plancillo=actividad.plancillo
+		accion=plancillo.plan
+		base=accion.base
+		plan=base.plan
+		escuela=plan.establecimiento
+		colegio=escuela
+		
+		context['form'] = form_class
+		context['plan'] = plan
+		context['base'] = base
+		context['accion'] = accion
+		context['plancillo'] = plancillo
+		
+		context['colegio'] = colegio
+		context['escuela'] = escuela
+
+		return context
+	def post(self, request, *args,**kwargs):
+		pk = self.kwargs.get('pk')
+		ficha=Ficha_derivacion.objects.get(id=pk)
+		estudiante=ficha.Estudiante
+		form = self.get_form()
+
+		if request.method=='POST':
+			form = derivacionForm(request.POST, request.FILES)
+			if form.is_valid():
+				instance = form.save(commit=False)
+				instance.Estudiante=estudiante
+				
+				instance.usuario=request.user
+				instance.save()
+
+
+
+				return super(MascotaUpdate_centro, self).form_valid(form)
+		else:
+			return super(MascotaUpdate_centro, self).form_invalid(form)
+
+
+
 
 #Modificar una actividad igual al anterior con otro nombre
 def modificar_actividad_plan_dos(request,pk):
@@ -2126,7 +2180,6 @@ def modificar_actividad_plan_dos(request,pk):
 			
 			instance.plancillo=plancillo
 			instance.usuario = request.user
-				
 			instance.save()
 			formulario.save_m2m()
 				
@@ -2148,7 +2201,6 @@ def modificar_actividad_plan_dos(request,pk):
 		"base":base,
 		"accion":accion,
 		"plancillo":plancillo,
-
 		"escuela":escuela,
 		"colegio":colegio,
 
