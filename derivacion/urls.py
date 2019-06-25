@@ -7,7 +7,7 @@ from derivacion.views import listadousuarios, index, mascota_view, mascota_list,
     IntervencionUpdateView,seguimientocentroListView,MascotaseguimientoList,EntradasBitacora,AsignarUpdateView, \
     BusquedaAjaxView,asignar_intervencion,EntradasFicha,gracias,EntradasList,EntradasOtrasList,EntradasRetornoDuplaList,historia_retorno, \
     ModificarFicha,RetornoDefinitivo,RetornoInstList,MascotaCreate_Prueba,MascotaUpdate_centro,ModificarRetornoDefinitivo, \
-    ReporteIntervenidos,PDFPrueba
+    ReporteIntervenidos,PDFPrueba,EntradasFichaSupervisor,ReporteIntervenidosSupervisor
     
 
     
@@ -22,6 +22,8 @@ urlpatterns = [
     url(r'^centro_listar$',login_required(seguimientoListView.as_view()), name='centro_listar'),
 #listados de fichas de derivacion 
     url(r'^intervencion_listar$',login_required(EntradasFicha.as_view()), name='intervencion_listar'),
+    url(r'^EntradasFichaSupervisor$',login_required(EntradasFichaSupervisor.as_view()), name='EntradasFichaSupervisor'),
+    
     url(r'^intervencion_list$',login_required(EntradasList.as_view()), name='intervencion_list'),
     url(r'^intervencion_otrar$',login_required(EntradasOtrasList.as_view()), name='intervencion_otrar'),
     url(r'^intervencion_retorno$',login_required(EntradasRetornoDuplaList.as_view()), name='intervencion_retorno'),
@@ -73,7 +75,13 @@ urlpatterns = [
     
     url(r'^listar_retorno/(?P<ficha>\d+)/(?P<pk>\d+)/$', login_required(historia_retorno), name='listar_retorno'),
     # Ver todos los intervenidos actuales 
-    url(r'^ReporteIntervenidos', login_required(ReporteIntervenidos.as_view()), name='ReporteIntervenidos'),
+    url(r'^ReporteIntervenidos/$', login_required(ReporteIntervenidos.as_view()), name='ReporteIntervenidos'),
+    #Muestra todos los intervenidos actuales para que los pueda ver el supervisor
+    url(r'^ReporteIntervenidosSupervisor/$', login_required(ReporteIntervenidosSupervisor.as_view()), name='ReporteIntervenidosSupervisor'),
+    
+
+
+
     # Imprimir desde template 
     url(r'^PDFPrueba', login_required(PDFPrueba.as_view()), name='PDFPrueba'),
 

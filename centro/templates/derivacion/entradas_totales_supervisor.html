@@ -1,0 +1,158 @@
+{% extends 'base/base_usuario.html' %}
+
+{% block content %}
+
+
+<!-- Used to open the Modal -->
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menú inicial centro!">Menu </a></li>
+  </li>
+  
+
+  <li class="active"> Listado </li> 
+</ul>
+<h3><strong>Listado de todas las fichas derivadas</strong>
+ <span class="label label-danger">Al {% now "SHORT_DATE_FORMAT" %} a las {% now "TIME_FORMAT"  %} </span></h3>
+
+<p>Listado de todos los estudiantes derivados  al centro de bienestar --
+
+	<strong> Informes : 1 Evaluación - 2 Seguimiento - 3 Egreso</strong> 
+	Modificar Informes--><a title="Modificar Informes" class="glyphicon glyphicon-list-alt" href="{% url 'derivacion:modificar_informes' %}"></a>/
+</p>
+</ul>
+
+
+<table id="example" class="table table-bordered" fontsize =10px>
+	<thead>
+		<tr>
+		
+			<td>Nª:</td>
+			<td>Derivado el /Estado:</td>
+			<td>Estudiante</td>
+			<td>Curso Establecimiento</td>
+			<td>Informes - Escolaridad</td>
+			<td>Opciones sobre Ficha</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for mascota in object_list %}
+		<tr>
+					
+			<td>Nª {{mascota.id}}<td>
+			<dd><small>{{ mascota.fecha_derivacion|date:"d-m-Y "}}</small></dd>
+			{% with estado=mascota.pasada %} 
+			{% if estado == 1 %}
+
+			Ficha en bandega de entrada
+			
+			{% elif estado == 2 %}
+	 		
+			
+			 Espera desde {{ mascota.fecha_espera|date:"d-m-Y "}}
+			
+			{% elif estado == 3 %}
+			
+			<a class="btn btn-info btn-xs" href="{% url 'sesion:historia' mascota.id mascota.Estudiante.id  %}">Historia</a>
+			<a class="btn btn-success btn-xs" href="{% url 'dupla:Dupla_casos_centro' mascota.Estudiante.id  %}">Historia Centro</a>
+
+			En intervención
+			
+			{% elif estado == 4 %}
+			<strong>Otra institución</strong>
+			<a class="btn btn-info btn-xs" href="{% url 'sesion:historia' mascota.id mascota.Estudiante.id  %}">Historia</a>
+			
+			{% elif estado == 5 %}
+			<strong>Retorno</strong>Por falta de información
+			
+			
+			{% elif estado == 6 %}
+			<strong>Estudiante dado de alta</strong>
+			
+
+			{% elif estado == 7 %}
+			<strong>Estudiante en lista de egreso</strong>
+			<a class="btn btn-info btn-xs" href="{% url 'sesion:historia' mascota.id mascota.Estudiante.id  %}">Historia</a>
+			{% endif %}
+
+		
+			</td>
+			
+			
+			<td>{{ mascota.Estudiante.nombres|title|truncatewords:'1'}} {{ mascota.Estudiante.firs_name|title|truncatewords:'1'}} </td>
+			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}} {{ mascota.Estudiante.curso.establecimiento.nombre}}</td>
+			
+			 
+			<td>
+
+			
+				
+				{% if intervenidos %}
+				
+					{% for intervencion  in intervenidos  %}
+
+						{% if intervencion.Estudiante == mascota.Estudiante and intervencion.usuario == user   %}
+						<a class="btn btn-info btn-xs" href="{% url 'alumno:reporte_caso' mascota.Estudiante.id %}">1</a>
+						<a class="btn btn-success btn-xs" href="{% url 'sesion:reporte_continuidad_solo' mascota.Estudiante.id %}">2</a>
+						<a title="Ver Informes de Continuidad" class="glyphicon glyphicon-book" href="{% url 'sesion:ver_reporte_continuidad' mascota.Estudiante.id %}"></a>/
+						<a class="btn btn-danger btn-xs" href="{% url 'sesion:Ficha_egreso' mascota.Estudiante.id %}">3</a> -
+						
+						<a title="Ver Escolaridad" class="glyphicon glyphicon-education" href="{% url 'alumno:ver_escolaridad_centro' mascota.Estudiante.id %}"></a>/
+						<a title="Modificar Escolaridad" class="glyphicon glyphicon-list-alt" href="{% url 'alumno: actualizar_escolaridad_centro' mascota.Estudiante.id %}"></a> 
+						
+						<td>
+			
+			
+						<a class="btn btn-primary btn-xs" href="{% url 'derivacion:centro_derivacion_editar' mascota.id %}">Editar </a>
+				
+						<a class="btn btn-default btn-xs" href="{% url 'alumno:Ficha_centro' mascota.Estudiante.id %}">Ver</a>
+						<a title="Ficha derivación - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:fichaderivacion_pdf_report' mascota.Estudiante.id %}"></a>/
+
+
+						{% endif %}	
+					{% endfor %}
+
+
+					
+			{% endif %}	
+			{% endwith %}	
+	
+
+			
+		
+			
+			</td>
+		
+		</td>
+	
+
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de intervenciones </h1>
+		{% endif %}
+	</tbody>
+</table> 
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+
+
+
+{% endblock%}
+

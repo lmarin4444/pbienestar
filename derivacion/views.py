@@ -98,6 +98,28 @@ class EntradasFicha(ListView):
 		return context		
 
 
+#Ver a todos los intervenidos  por el supervisor
+class EntradasFichaSupervisor(ListView):
+        '''listar todos los estudiantes intervenidos'''
+	model = Ficha_derivacion
+	template_name = 'derivacion/entradas_totales_supervisor.html'
+	paginate_by = 100
+#muestra a todas las derivaciones realizadas   
+	
+	def get_queryset(self):
+		queryset = super(EntradasFichaSupervisor, self).get_queryset()
+		return queryset.filter(derivado=2,estado=1)
+
+	def get_context_data(self, **kwargs):
+		context = super(EntradasFichaSupervisor, self).get_context_data(**kwargs)
+		intervenidos = Intervenidos.objects.all()
+		
+		context['intervenidos'] = intervenidos
+		return context		
+
+
+
+
 #Ver a todas las fichas intervenidas
 class ModificarFicha(ListView):
         '''listar todos los estudiantes intervenidos'''
@@ -1087,6 +1109,87 @@ class ReporteIntervenidos(ListView):
 
 
 		return context	
+
+# Ver todos los intervenidos por el supervisor 
+#Ver a todos los intervenidos 
+class ReporteIntervenidosSupervisor(ListView):
+        '''listar todos los estudiantes intervenidos'''
+	model = Ficha_derivacion
+	template_name = 'derivacion/reporte_entradas_totales_supervisor.html'
+	paginate_by = 10
+#muestra a todas las derivaciones realizadas   
+	
+	
+	def get_context_data(self, **kwargs):
+		
+		context = super(ReporteIntervenidosSupervisor, self).get_context_data(**kwargs)
+		intervenido = Intervenidos.objects.filter(usuario=self.request.user)
+		diccionario=[]
+		
+		
+		for intervencion in intervenido:
+			dato=intervencion.Estudiante
+			print 'intervenido', dato
+			try:
+				ficha=Ficha_derivacion.objects.get(Estudiante=dato,estado=1,usuario=self.request.user)
+			except Ficha_derivacion.DoesNotExist:
+				ficha=None
+			estado=intervencion.estado
+			try:
+				sesion_est=sesion.objects.filter(Estudiante=dato)
+				print sesion_est
+				ultimo=sesion_est.latest('numero')
+							
+				apoderado=0
+				dupla=0
+				pie=0
+				profesores=0
+
+				for asistido in sesion_est:
+					
+					if asistido.participantes == 1 or asistido.participantes == 9:
+						apoderado=apoderado+1
+					if asistido.participantes == 10:
+						dupla=dupla+1
+					if asistido.participantes == 11:
+						pie=pie+1
+					if asistido.participantes == 12:
+						profesores=profesores+1
+				insubid = {
+				        "estudiante" : dato, 
+				        "estado" : estado,
+				        "ultimo" : ultimo.numero,
+				        "apoderado" : apoderado,
+				        "dupla" : dupla,
+				        "pie" : pie,
+				        "profesores" :profesores,
+				        
+
+				    }
+				diccionario.append(insubid)		
+
+							
+		    		
+			except sesion.DoesNotExist:
+				ultimo=0
+				apoderado=0
+				dupla=0
+				pie=0
+				profesores=0
+
+		context['intervenido'] = intervenido
+		context['ficha'] = ficha
+		context['diccionario'] = diccionario
+
+
+		return context	
+
+
+
+
+
+
+
 
 def search(request):
 

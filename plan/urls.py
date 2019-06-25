@@ -44,6 +44,7 @@ urlpatterns = [
 	
 
 	url(r'^modificar_actividad_plan/(?P<pk>\d+)/', login_required(views.modificar_actividad_plan), name='modificar_actividad_plan'),
+	url(r'^modificar_actividad_plan_dos/(?P<pk>\d+)/', login_required(views.modificar_actividad_plan_dos), name='modificar_actividad_plan_dos'),
 	url(r'^modificar_actividad_planificada/(?P<pk>\d+)/', login_required(views.modificar_actividad_planificada), name='modificar_actividad_planificada'),
 
 	url(r'^ver_actividades/(?P<pk>\d+)/$', login_required(views.ver_actividades.as_view()), name='ver_actividades'),
