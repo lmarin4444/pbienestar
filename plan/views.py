@@ -758,13 +758,13 @@ class ingresar_Actividad_plan(CreateView):
 		        #codigo
 			if form.is_valid():
 								
-				instance = form.save(commit=False)
-				instance.usuario=self.request.user
+				form.instance = form.save(commit=False)
+				form.instance.usuario=self.request.user
 
-				instance.plancillo=plancillo
+				form.instance.plancillo=plancillo
 
 
-				instance.save()
+				form.instance.save()
 				form.save_m2m()
 				
 				url = reverse(('plan:ver_actividades'), kwargs={ 'pk': pk })
