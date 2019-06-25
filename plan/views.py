@@ -2141,7 +2141,7 @@ class ActividadUpdate_plan(UpdateView):
 		form = self.get_form()
 
 		if request.method=='POST':
-			form = Base_ActividadesPlan(request.POST or None, instance=actividad)
+			form = Base_ActividadesPlan(request.POST, instance=actividad)
 			if form.is_valid():
 				form.instance = form.save(commit=False)
 				form.instance.plancillo=plancillo
