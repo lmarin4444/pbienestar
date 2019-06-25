@@ -782,8 +782,6 @@ class ingresar_Actividad_plan(CreateView):
 
 
 
-
-
 class ver_actividades(ListView):
 	model = Actividades	
 	
@@ -2132,24 +2130,30 @@ class ActividadUpdate_plan(UpdateView):
 		return context
 	def post(self, request, *args,**kwargs):
 		pk = self.kwargs.get('pk')
-		ficha=Ficha_derivacion.objects.get(id=pk)
-		estudiante=ficha.Estudiante
+		
+		actividad=Actividades.objects.get(id=pk)
+		plancillo=actividad.plancillo
+		accion=plancillo.plan
+		base=accion.base
+		plan=base.plan
+		escuela=plan.establecimiento
+		colegio=escuela
 		form = self.get_form()
 
 		if request.method=='POST':
-			form = derivacionForm(request.POST, request.FILES)
+			form = Base_ActividadesPlan(request.POST or None, instance=actividad)
 			if form.is_valid():
 				instance = form.save(commit=False)
-				instance.Estudiante=estudiante
-				
+				instance.plancillo=plancillo
 				instance.usuario=request.user
 				instance.save()
+				
 
 
 
-				return super(MascotaUpdate_centro, self).form_valid(form)
+				return super(ActividadUpdate_plan, self).form_valid(form)
 		else:
-			return super(MascotaUpdate_centro, self).form_invalid(form)
+			return super(ActividadUpdate_plan, self).form_invalid(form)
 
 
 
