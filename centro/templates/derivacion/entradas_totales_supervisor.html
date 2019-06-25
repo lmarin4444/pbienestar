@@ -82,7 +82,10 @@
 			
 			
 			<td>{{ mascota.Estudiante.nombres|title|truncatewords:'1'}} {{ mascota.Estudiante.firs_name|title|truncatewords:'1'}} </td>
-			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}} {{ mascota.Estudiante.curso.establecimiento.nombre}}</td>
+			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}} {{ mascota.Estudiante.curso.establecimiento.nombre}}
+
+			 {{mascota.usuario}}</td>
+
 			
 			 
 			<td>
