@@ -18,8 +18,7 @@
 
 <p>Listado de todos los estudiantes derivados  al centro de bienestar --
 
-	<strong> Informes : 1 Evaluación - 2 Seguimiento - 3 Egreso</strong> 
-	Modificar Informes--><a title="Modificar Informes" class="glyphicon glyphicon-list-alt" href="{% url 'derivacion:modificar_informes' %}"></a>/
+	
 </p>
 </ul>
 
@@ -32,8 +31,8 @@
 			<td>Derivado el /Estado:</td>
 			<td>Estudiante</td>
 			<td>Curso Establecimiento</td>
-			<td>Informes - Escolaridad</td>
-			<td>Opciones sobre Ficha</td>
+			<td>1:Derivado / 2:Atendido</td>
+
 		</tr>
 		
 	</thead>
@@ -95,21 +94,11 @@
 					{% for intervencion  in intervenidos  %}
 
 						{% if intervencion.Estudiante == mascota.Estudiante and intervencion.usuario == user   %}
-						<a class="btn btn-info btn-xs" href="{% url 'alumno:reporte_caso' mascota.Estudiante.id %}">1</a>
-						<a class="btn btn-success btn-xs" href="{% url 'sesion:reporte_continuidad_solo' mascota.Estudiante.id %}">2</a>
-						<a title="Ver Informes de Continuidad" class="glyphicon glyphicon-book" href="{% url 'sesion:ver_reporte_continuidad' mascota.Estudiante.id %}"></a>/
-						<a class="btn btn-danger btn-xs" href="{% url 'sesion:Ficha_egreso' mascota.Estudiante.id %}">3</a> -
+						<p style="color:#FF0000";> 1-{{intervencion.usuario.first_name}} {{intervencion.usuario.last_name}}</p>
 						
-						<a title="Ver Escolaridad" class="glyphicon glyphicon-education" href="{% url 'alumno:ver_escolaridad_centro' mascota.Estudiante.id %}"></a>/
-						<a title="Modificar Escolaridad" class="glyphicon glyphicon-list-alt" href="{% url 'alumno: actualizar_escolaridad_centro' mascota.Estudiante.id %}"></a> 
+						<p class="bg-success">2-{{intervencion.Profesional}} </p>
 						
-						<td>
-			
-			
-						<a class="btn btn-primary btn-xs" href="{% url 'derivacion:centro_derivacion_editar' mascota.id %}">Editar </a>
-				
-						<a class="btn btn-default btn-xs" href="{% url 'alumno:Ficha_centro' mascota.Estudiante.id %}">Ver</a>
-						<a title="Ficha derivación - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:fichaderivacion_pdf_report' mascota.Estudiante.id %}"></a>/
+						
 
 
 						{% endif %}	
