@@ -1129,7 +1129,7 @@ class ReporteIntervenidosSupervisor(ListView):
 		
 		for intervencion in intervenido:
 			dato=intervencion.Estudiante
-			print 'intervenido', dato
+			
 			try:
 				ficha=Ficha_derivacion.objects.get(Estudiante=dato,estado=1,usuario=self.request.user)
 			except Ficha_derivacion.DoesNotExist:
