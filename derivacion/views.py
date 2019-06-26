@@ -1137,7 +1137,7 @@ class ReporteIntervenidosSupervisor(ListView):
 			estado=intervencion.estado
 			try:
 				sesion_est=sesion.objects.filter(Estudiante=dato)
-				print sesion_est
+				
 				ultimo=sesion_est.latest('numero')
 							
 				apoderado=0
