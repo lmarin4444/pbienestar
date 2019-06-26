@@ -1197,6 +1197,52 @@ class eliminar_plancillo(DeleteView):
 		url = reverse(('plan:ver_plancillo'), kwargs={ 'pk': accion.id,'base':base.id})
 		return HttpResponseRedirect(url)
 
+# Eliminar una actividades
+class eliminar_actividad(DeleteView):
+	model = Actividades
+	template_name = 'plan/eliminar_actividad.html'
+
+	        
+
+	def get_context_data(self, **kwargs):
+        # Llamamos ala implementacion primero del  context
+		context = super(eliminar_actividad, self).get_context_data(**kwargs)
+		
+		#pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		p=self.kwargs.get('pk') # El mismo nombre que en tu URL
+		actividad=Actividades.objects.get(id=p)
+		plancito=actividad.plancillo
+		accion=plancito.accion
+		base=accion.base
+		plan=base.plan
+
+		context['actividad']=actividad
+		context['plancito']=plancito
+		context['accion']=accion
+		context['base']=base
+		context['plan']=plan
+		
+
+		return context
+
+	def post(self,request,*args,**kwargs):	        
+		self.object=self.get_object
+
+		object = super(eliminar_actividad, self).get_object()
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		actividad=Actividades.objects.get(pk=pk)
+		plancito=actividad.plancillo
+		accion=plancito.accion
+		base=accion.base
+		
+		object.delete()
+		
+        # Retornamos el objeto
+		url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancito.id})
+		return HttpResponseRedirect(url)
+
+
+
 def ActividadesListView(request,pk):
 #Registrar los bases para cada plan
 

@@ -68,16 +68,14 @@
 		{% if plancillo.fecha %}
 		{% if plancillo.estado == 0 %}		
 		<a class="btn btn-success btn-sm" href="{% url 'plan:ActividadUpdate_plan' plancillo.id %}"><small>Modificar</small></a>
-			
-				
-			<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
+		<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
+		<a class="btn btn-danger btn-sm" href="{% url 'plan:eliminar_actividad' plancillo.id %}"><small>Eliminar actividad</small></a>
 		{% endif %}	
 		{% else %}
 		{% if plancillo.estado == 0 %}
 		<a class="btn btn-success btn-sm" href="{% url 'plan:ActividadUpdate_plan' plancillo.id %}"><small>Modificar</small></a>
-		
-		
 		<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
+		<a class="btn btn-danger btn-sm" href="{% url 'plan:eliminar_actividad' plancillo.id %}"><small>Eliminar actividad</small></a>
 		{% endif %}
 		{% endif %}
 				

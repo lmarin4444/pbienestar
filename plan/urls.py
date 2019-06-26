@@ -30,6 +30,8 @@ urlpatterns = [
 	url(r'^modificar_plancillo/(?P<pk>\d+)/$', login_required(views.modificar_plancillo), name='modificar_plancillo'),
 	url(r'^eliminar_plancillo/(?P<pk>\d+)/$', login_required(views.eliminar_plancillo.as_view()), name='eliminar_plancillo'),
 	
+
+
 	url(r'^ingresar_indicador/(?P<pk>\d+)/(?P<colegio>\d+)/$', login_required(views.ingresar_indicador.as_view()), name='ingresar_indicador'),
 	url(r'^modificar_indicador/(?P<pk>\d+)/$', login_required(views.modificar_indicador), name='modificar_indicador'),
 	url(r'^eliminar_indicador/(?P<pk>\d+)/$', login_required(views.eliminar_indicador.as_view()), name='eliminar_indicador'),
@@ -37,7 +39,7 @@ urlpatterns = [
 	url(r'^ingresar_acciones/(?P<pk>\d+)/(?P<colegio>\d+)/$', login_required(views.ingresar_acciones.as_view()), name='ingresar_acciones'),
 
 	url(r'^ingresar_Actividad/(?P<pk>\d+)/', login_required(views.ingresar_Actividad.as_view()), name='ingresar_Actividad'),
-	
+	url(r'^eliminar_actividad/(?P<pk>\d+)/$', login_required(views.eliminar_actividad.as_view()), name='eliminar_actividad'),
 	#Ingresar una actividad en el plan solo la medular
 
 	url(r'^ingresar_Actividad_plan/(?P<pk>\d+)/', login_required(views.ingresar_Actividad_plan.as_view()), name='ingresar_Actividad_plan'),
