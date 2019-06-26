@@ -1996,9 +1996,17 @@ def fichaderivacion_pdf_report(request,pk):
     escolar=Escolaridad.objects.get(Estudiante__id=pk)
     nivel=escolar.get_curso()
     letra=escolar.get_Letra()
-    ficha=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+    try:
+        ficha=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+    except Ficha_derivacion.DoesNotExist:
+        ficha=None
+    
     family=estudiante.Familia
-    familia=Parentesco.objects.filter(Familia=family)
+    try:
+        familia=Parentesco.objects.filter(Familia=family)
+    except Parentesco.DoesNotExist:
+        familia=None
+    
     
 
     filename="Ficha_derivacion_"+estudiante.nombres+"_"+estudiante.firs_name+".pdf"
