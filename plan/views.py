@@ -2410,6 +2410,88 @@ class duplicar_Actividad_plan(CreateView):
 				return self.render_to_response(self.get_context_data(Base_ActividadesPlan=form))
 				
 
+#Modificar una actividad en base a la duplicidad
+
+# Duplicar una actividad 
+class modificar_duplicar_Actividad_plan(CreateView):
+	model = Actividades	
+
+	form_class = Base_ActividadesPlan
+	template_name = 'plan/Actividades_form.html'
+	success_url = reverse_lazy('comienza:ver_dupla')
+
+	def get_context_data(self, **kwargs):
+	        # Llamamos ala implementacion primero del  context
+			context = super(modificar_duplicar_Actividad_plan, self).get_context_data(**kwargs)
+			pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+			actividad=Actividades.objects.get(pk=pk)
+			plancillo = actividad.plancillo
+			form = Base_ActividadesPlan(instance=actividad)
+			
+			accion=plancillo.accion
+			base=accion.base
+			plan=base.plan
+			actividad=Actividades.objects.get(pk=pk)
+			
+			context['plancito']=plancillo
+			context['accion']=accion
+			context['base']=base
+			context['plan']=plan
+			context['form']=form
+
+
+			context['mensaje']=""
+			
+			return context
+			
+		
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+			
+		if request.method == 'POST':
+			form = Base_ActividadesPlan(request.POST)
+		        #codigo
+			if form.is_valid():
+				
+				#Verificar si el plan existe 
+				
+				actividad=Actividades.objects.get(id=pk)
+				plancito=actividad.plancillo
+				accion=plancito.accion
+				base=accion.base
+				plan=base.plan	
+				
+				instance = form.save(commit=False)
+				#Crear la actvidad en base a una ya creada
+	
+				
+				instance.plancillo=plancito
+
+				Actividades.objects.create(fecha=form.instance.fecha,horario=form.instance.horario,mes=form.instance.mes,
+							nombre=form.instance.nombre,tipo=form.instance.tipo,descripcion=form.instance.descripcion,
+							ejecutores=form.instance.ejecutores,inicio=form.instance.inicio,desarrollo=form.instance.desarrollo,
+							cierre=form.instance.cierre,participantes=form.instance.participantes,
+							numero=form.instance.numero,letra=form.instance.letra,responsable=form.instance.responsable,
+							cantidad_convocada=form.instance.cantidad_convocada,
+
+							
+							observaciones=form.instance.observaciones,planes_externos=form.instance.planes_externos,
+							evaluacion=form.instance.evaluacion,
+							estado=form.instance.estado,plancillo=plancito,usuario=self.request.user)
+
+
+	
+				#Borra la actividad b
+				actividad.delete()			
+				url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancito.id })
+				return HttpResponseRedirect(url)
+			else:
+				return self.render_to_response(self.get_context_data(Base_ActividadesPlan=form))
+				
+
+
 
 
 

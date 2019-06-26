@@ -94,6 +94,8 @@ urlpatterns = [
     url(r'^duplicar_plancillo/(?P<pk>\d+)/(?P<base>\d+)/(?P<plancillo>\d+)/$', login_required(views.duplicar_plancillo.as_view()), name='duplicar_plancillo'),
 
     url(r'^duplicar_Actividad_plan/(?P<pk>\d+)/', login_required(views.duplicar_Actividad_plan.as_view()), name='duplicar_Actividad_plan'),
+    url(r'^modificar_duplicar_Actividad_plan/(?P<pk>\d+)/', login_required(views.modificar_duplicar_Actividad_plan.as_view()), name='modificar_duplicar_Actividad_plan'),
     
-    
+
+
     ]
