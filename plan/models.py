@@ -579,7 +579,7 @@ class Actividades(models.Model):
     cantidad_convocada 			= models.IntegerField(default=0)
     
     	
-    verificadores               = models.ManyToManyField(Verificadores,blank=True)
+    verificadores               = models.ManyToManyField(Verificadores,default=1)
     
     observaciones 		 		= models.TextField(default=0)
     planes_externos 	 		= models.ForeignKey(Planes_externos,blank=True, null=True)
