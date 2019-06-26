@@ -178,6 +178,33 @@ def FichaDuplaDetailView(request,pk):
         		 'ficha':ficha_id,
         		 'colegio':colegio	}
     )
+# ver ficha de deribacion dupla
+#Ficha de un estudiante desde la dupla
+def FichaDuplaDetailView_supervisor(request,pk):
+
+
+	try:
+		estudiante_id=Estudiante.objects.get(pk=pk)
+		colegio=Escolaridad.objects.get(Estudiante__id=pk)
+	except Estudiante.DoesNotExist:
+		estudiante_id=None
+	try:
+		ficha_id=Ficha_derivacion_dupla.objects.get(Estudiante__id=pk)
+	except Ficha_derivacion_dupla.DoesNotExist:
+		ficha_id=None		
+		
+
+    #book_id=get_object_or_404(Book, pk=pk)
+	return render(
+        request,
+        'dupla/dupla_ver_ficha_supervisor.html',
+        context={'estudiante':estudiante_id,
+        		 'ficha':ficha_id,
+        		 'colegio':colegio	}
+    )
+
+
+
 
 # Modificar una ficha de ingreso parte del proceso de las duplas 
 def FichaingresonduplaUpdate(request,pk):
@@ -347,6 +374,92 @@ class entrevista_ingreso_dupla(CreateView):
 			mensaje="Ficha ya existe"
 			return self.render_to_response(self.get_context_data(form=form))
 
+
+# Ficha de ingreso para verla en el supervisor 
+
+class entrevista_ingreso_dupla_supervisor(CreateView):
+	model = Entrevista_ingreso_dupla	
+	form_class = Entrevista_ingreso_duplaForm
+	template_name = 'dupla/Entrevista_ingreso_dupla_supervisor.html'
+	
+	    
+	def get_context_data(self, **kwargs):
+        # Llamamos ala implementacion primero del  context
+		context = super(entrevista_ingreso_dupla_supervisor, self).get_context_data(**kwargs)
+		if 'form' not in context:
+			context['form'] = self.form_class(self.request.GET,request.FILES)
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		mensaje=""
+		try:
+			dato=Estudiante.objects.get(id=pk)
+			ficha_dupla=Ficha_derivacion_dupla.objects.get(Estudiante=dato,estado=1)# Ficha de derivacion activa
+			profe_jefe=ficha_dupla.profe_jefe
+			try:
+				entrevista_ingreso=Entrevista_ingreso_dupla.objects.get(ficha_derivacion_dupla=ficha_dupla)
+			except Entrevista_ingreso_dupla.DoesNotExist:
+				entrevista_ingreso=None
+		except Ficha_derivacion_dupla.DoesNotExist:
+			profe_jefe=None
+			ficha_derivacion_dupla=None
+			ficha_dupla=None
+			mensaje='Estudiante sin ficha de derivación '
+			try:
+				entrevista_ingreso=Entrevista_ingreso_dupla.objects.get(ficha_derivacion_dupla=ficha_dupla)
+			except Entrevista_ingreso_dupla.DoesNotExist:
+				entrevista_ingreso=None
+
+		
+		context['dato']=Estudiante.objects.get(id=pk)
+		context['mensaje']=mensaje
+		establecimiento=Estudiante.objects.get(id=pk)
+		escuela=establecimiento.curso.establecimiento.nombre
+		colegio=establecimiento.curso.establecimiento
+		context['escuela']=escuela
+		context['colegio']=colegio
+
+		context['ficha_dupla']=ficha_dupla
+		context['entrevista_ingreso']=entrevista_ingreso
+		context['profe_jefe']=profe_jefe
+
+		return context
+		
+	
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		form = self.form_class(request.POST,request.FILES)
+		
+		if form.is_valid():
+			pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+			estudiante=Estudiante.objects.get(id=pk)
+			ficha_derivacion_dupla=Ficha_derivacion_dupla.objects.get(Estudiante__id=pk)	
+			form.instance= form.save(commit=False)
+				#motivos=form.instance.Motivo_derivacion
+				#for motivo in motivos:
+
+				#	form.intance.Motivo_derivacion.add(motivo)
+			form.instance.usuario = self.request.user
+			form.instance.quien_deriva=self.request.user.username+" "+self.request.user.first_name+" "+self.request.user.last_name
+
+				
+			form.instance.ficha_derivacion_dupla=ficha_derivacion_dupla
+			
+				#Campos para registrar valores al moemnto de crear la ficha
+				
+			form.instance.save()
+			
+			
+				
+				
+			url = reverse(('alumno:listar_estudiantes_establecimiento'), kwargs={ 'pk': estudiante.curso.establecimiento.id })
+			return HttpResponseRedirect(url)
+
+		else:
+			mensaje="Ficha ya existe"
+			return self.render_to_response(self.get_context_data(form=form))
+
+
+
+
 #visualizar una entrevista de ingreso
 def Ver_entrevista_ingreso(request,pk):
     
@@ -458,7 +571,28 @@ def DiagnosticoListView_Ver_todos(request,pk,anio):
         		 'diagnostico':diagnostico,
         		 'logros':logros,}
     )
+# Ver para el supervisor
+def DiagnosticoListView_Ver_todos_supervisor(request,pk,anio):
+#Registrar los logros de cada uno,  para cada diagnostico
 
+
+	try:
+		colegio=establecimiento.objects.get(id=pk)
+		diagnostico=DiagnosticoI.objects.get(establecimiento=colegio,annio=anio)
+		print diagnostico
+		logros=Logros.objects.filter(diagnostico=diagnostico)
+	except DiagnosticoI.DoesNotExist:
+		diagnostico=None
+		logros=''
+
+	
+	return render(
+        request,
+        'dupla/diagnostico_ver_ficha_todos_supervisor.html',
+        context={'colegio':colegio,
+        		 'diagnostico':diagnostico,
+        		 'logros':logros,}
+    )
 
 
 def DiagnosticoListViewTodos(request,pk):
@@ -485,6 +619,30 @@ def DiagnosticoListViewTodos(request,pk):
         		 'logros':logros,}
     )
 
+# ver la lista de diagnosticos 
+def DiagnosticoListViewTodos_supervisor(request,pk):
+#Registrar los logros de cada uno,  para cada diagnostico
+
+	
+		
+	colegio=establecimiento.objects.get(id=pk)
+			
+			
+	try:
+		diagnostico=DiagnosticoI.objects.filter(establecimiento=colegio)
+		logros=Logros.objects.filter(diagnostico=diagnostico)
+	except DiagnosticoI.DoesNotExist:
+		diagnostico=None
+	
+		
+	return render(
+        request,
+        'dupla/diagnostico_todos_supervisor.html',
+        context={'colegio':colegio,
+        		 'diagnostico':diagnostico,
+        		 
+        		 'logros':logros,}
+    )
 
 
 class ingresar_diagnostico(CreateView):
@@ -846,6 +1004,48 @@ def Dupla_casos(request,pk):
         		 
 	})
 
+# Listar una intervencion de casos 
+def Dupla_casos_supervisor(request,pk):
+	mensaje=""
+	dato = get_object_or_404(Estudiante, pk=pk)
+	
+	try:
+		ficha=Ficha_derivacion_dupla.objects.get(Estudiante=dato,estado=1)
+		try:
+			plan_caso=Intervencion_casos.objects.get(ficha_derivacion_dupla=ficha)
+			try:
+				sesiones=Intervencion_sesion.objects.filter(intervencion_casos=plan_caso)
+			except Intervencion_sesion.DoesNotExist:	
+				sesiones=None
+			
+		except Intervencion_casos.DoesNotExist:
+			plan_caso=None
+			sesiones=None
+	except Ficha_derivacion_dupla.DoesNotExist:
+		ficha=None
+		sesiones=None
+		plan_caso=None
+
+	
+	try:
+		retorno=Derivacion_Ficha_derivacion_dupla.objects.get(ficha_derivacion_dupla=ficha,ficha_derivacion_dupla__estado=1)
+	except Derivacion_Ficha_derivacion_dupla.DoesNotExist:
+		retorno=None
+
+	return render(
+		request,
+		'dupla/casos_duplas_supervisor.html',
+		 context={
+	     'estudiante':dato,
+	     'ficha':ficha,
+	     'sesiones':sesiones,
+	     'retorno':retorno,
+       	 'plan_caso':plan_caso,
+         
+          
+        		 
+        		 
+	})
 
 #----
 # Listar una intervencion de casos  para el centro de bienestar
@@ -2263,7 +2463,29 @@ class ListarSeguimiento(ListView):
 		
 		return context
 
+# Forma de modificar un seguimiento de modo que no se repitan los reistros
 
+class ListarSeguimiento_supervisor(ListView):
+	model = Seguimiento
+	template_name = 'dupla/listar_seguimiento_supervisor.html'
+	paginate_by = 50
+
+		
+	def get_context_data(self, **kwargs):
+
+		context=super( ListarSeguimiento_supervisor,self).get_context_data(**kwargs)
+		
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		estudiante= Estudiante.objects.get(id=pk)
+		seguir=Seguimiento.objects.filter(Estudiante=estudiante)
+		escuela=estudiante.curso.establecimiento
+		context['dato'] = estudiante
+		context['seguir'] = seguir
+		context['escuela'] = escuela
+		context['estudiante'] = estudiante
+
+		
+		return context
 # Ver todas las acciones que se realizaran en el plan de gestion 
 # Listado de planes externos por establecimiento 
 def PlanesMostrarEscuelaListView(request,pk):
@@ -2417,6 +2639,53 @@ def PlanesAntiguoMostrarEscuelaListView(request,pk,fecha):
                  }
     ) 
 
+# Mostrar los planes al supervisor
+def PlanesAntiguoMostrarEscuelaListView_supervisor(request,pk,fecha):
+#Registrar los logros de cada uno de las dimensiones de logros para cada diagnostico
+
+
+    try:
+        
+       
+        annio=fecha
+        escuela=establecimiento.objects.get(id=pk)
+        plan=Plan.objects.get(annio=annio,establecimiento=escuela)
+        
+        base=Base.objects.filter(plan=plan)
+        indicador_base=Indicador_base.objects.filter(base__plan=plan)
+        accion=Accion.objects.filter(base__plan=plan)
+        plancillo=Plancillo.objects.filter(accion__base__plan=plan)
+        actividades=Actividades.objects.filter(plancillo__accion__base__plan=plan).order_by('fecha')
+        
+        hecho_a=Hecho_Actividades.objects.filter(actividades__plancillo__accion__base__plan=plan).order_by('fecha')
+        mensaje="Plan presente en la planificación de los establecimientos"
+        
+    except Actividades.DoesNotExist:
+        plan =None
+        base=None
+        indicador_base=None
+        accion=None
+        plancillo=None
+        actividades=None
+        hecho_a=None
+        mensaje="Plan externo sin planificación"
+    
+    return render(
+        request,
+        'dupla/ver_planes_total_anterior_supervisor.html',
+        context={
+                 
+                 'plan':plan,
+                 'base':base,
+                 'indicador_base':indicador_base,
+				 'accion':accion,
+                 'plancillo':plancillo,
+                 'actividades':actividades,
+                 'hecho_a':hecho_a,
+				 'mensaje':mensaje,
+
+                 }
+    ) 
 
 # Eliminar un plan de intervencion de un estudiante 
 
@@ -2781,6 +3050,37 @@ def FichaEstudianteegresoDetailView(request,pk):
 	return render(
         request,
         'dupla/ver_derivacion_dupla.html',
+        context={'estudiante':estudiante_id,
+        		 'ficha':ficha_id,
+        		 'deriva':deriva,
+        		 
+        		 'colegio':colegio	}
+    )
+
+def FichaEstudianteegresoDetailView_supervisor(request,pk):
+
+	estudiante_id=Estudiante.objects.get(pk=pk)
+	colegio=Escolaridad.objects.get(Estudiante__id=pk)
+
+	try:
+		ficha_id=Ficha_derivacion_dupla.objects.get(Estudiante__id=pk,estado=1)
+		try:
+			deriva=Derivacion_Ficha_derivacion_dupla.objects.get(ficha_derivacion_dupla=ficha_id)
+		except Derivacion_Ficha_derivacion_dupla.DoesNotExist:
+			deriva=None
+			
+	except Ficha_derivacion_dupla.DoesNotExist:
+		ficha_id=None	
+		try:
+			deriva=Derivacion_Ficha_derivacion_dupla.objects.get(ficha_derivacion_dupla=ficha_id)
+		except Derivacion_Ficha_derivacion_dupla.DoesNotExist:
+			deriva=None
+			
+
+    #book_id=get_object_or_404(Book, pk=pk)
+	return render(
+        request,
+        'dupla/ver_derivacion_dupla_supervisor.html',
         context={'estudiante':estudiante_id,
         		 'ficha':ficha_id,
         		 'deriva':deriva,

@@ -26,6 +26,7 @@ SECRET_KEY = '7nn-$!t8r$eedv5xuwb79z=$k#$o@68fvoppr47ukxj$%$d^v$'
 DEBUG = False
 
 
+
 ALLOWED_HOSTS = ['*']
 
 #from django.core.urlresolvers import reverse_lazy

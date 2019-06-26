@@ -13,8 +13,13 @@ urlpatterns = [
 	url(r'^FichaderivacionduplaUpdate/(?P<pk>\d+)/$',login_required(views.FichaderivacionduplaUpdate), name='FichaderivacionduplaUpdate'),
 	
 	url(r'^Ver_Ficha_derivacion_dupla/(?P<pk>\d+)/$',login_required(views.FichaDuplaDetailView), name='dupla_ver_ficha'),
+	url(r'^FichaDuplaDetailView_supervisor/(?P<pk>\d+)/$',login_required(views.FichaDuplaDetailView_supervisor), name='FichaDuplaDetailView_supervisor'),
+
 	url(r'^Estudiante_listar_fichas_duplas/(?P<pk>\d+)/$', login_required(views.Estudiante_listar_fichas_duplas.as_view()), name='Estudiante_listar_fichas_duplas'),
 	url(r'^entrevista_ingreso_dupla/(?P<pk>\d+)/$', login_required(views.entrevista_ingreso_dupla.as_view()), name='entrevista_ingreso_dupla'),
+	
+	url(r'^entrevista_ingreso_dupla_supervisor/(?P<pk>\d+)/$', login_required(views.entrevista_ingreso_dupla_supervisor.as_view()), name='ingreso_dupla_supervisor'),
+	
 	# Ver la entrevista de ingreso 
 	url(r'^Ver_entrevista_ingreso/(?P<pk>\d+)/$', login_required(views.Ver_entrevista_ingreso), name='Ver_entrevista_ingreso'),
 	# Modificar entrevista de ingreso
@@ -27,8 +32,12 @@ urlpatterns = [
 	url(r'^indicador_auto/$', login_required(views.indicador_auto.as_view()), name='indicador_auto'),
 	url(r'^DiagnosticoListView/(?P<pk>\d+)/$', login_required(views.DiagnosticoListView), name='DiagnosticoListView'),
 	url(r'^DiagnosticoListViewTodos/(?P<pk>\d+)/$', login_required(views.DiagnosticoListViewTodos), name='DiagnosticoListViewTodos'),
+	url(r'^DiagnosticoListViewTodos_supervisor/(?P<pk>\d+)/$', login_required(views.DiagnosticoListViewTodos_supervisor), name='DiagnosticoListViewTodos_supervisor'),
+
 
 	url(r'^DiagnosticoListView_Ver_todos/(?P<pk>\d+)/(?P<anio>\d+)$', login_required(views.DiagnosticoListView_Ver_todos), name='DiagnosticoListView_Ver_todos'),
+	url(r'^DiagnosticoListView_Ver_todos_supervisor/(?P<pk>\d+)/(?P<anio>\d+)$', login_required(views.DiagnosticoListView_Ver_todos_supervisor), name='DiagnosticoListView_Ver_todos_supervisor'),
+
 
 	url(r'^modificar_diagnostico/(?P<pk>\d+)/$', login_required(views.modificar_diagnostico), name='modificar_diagnostico'),
 	
@@ -94,6 +103,8 @@ urlpatterns = [
 	url(r'^listar_estudiantes_seguimiento/(?P<pk>\d+)/', login_required(views.listar_estudiantes_seguimiento), name='listar_estudiantes_seguimiento'),
 	url(r'^CrearSeguimiento/(?P<pk>\d+)/', login_required(views.CrearSeguimiento), name='CrearSeguimiento'),
 	url(r'^ListarSeguimiento/(?P<pk>\d+)/', login_required(views.ListarSeguimiento.as_view()), name='ListarSeguimiento'),
+	url(r'^ListarSeguimiento_supervisor/(?P<pk>\d+)/', login_required(views.ListarSeguimiento_supervisor.as_view()), name='ListarSeguimiento_supervisor'),
+
 	url(r'^SeguimientoUpdate/(?P<pk>\d+)/', login_required(views.SeguimientoUpdate), name='SeguimientoUpdate'),
 	url(r'^SeguimeintoDelete/(?P<pk>\d+)/', login_required(views.SeguimeintoDelete.as_view()), name='SeguimeintoDelete'),
 # Modificar las mediaciones de lo encargados de convivencia
@@ -112,7 +123,13 @@ urlpatterns = [
 	url(r'^EntradasRetornoCasoDuplaList/(?P<pk>\d+)/', login_required(views.EntradasRetornoCasoDuplaList.as_view()), name='EntradasRetornoCasoDuplaList'),
 #Proceso para ver los planes anteriores 
 url(r'^PlanesAntiguoMostrarEscuelaListView/(?P<pk>\d+)/(?P<fecha>\d+)/', login_required(views.PlanesAntiguoMostrarEscuelaListView), name='PlanesAntiguoMostrarEscuelaListView'),
+url(r'^PlanesAntiguoMostrarEscuelaListView_supervisor/(?P<pk>\d+)/(?P<fecha>\d+)/', login_required(views.PlanesAntiguoMostrarEscuelaListView_supervisor), name='PlanesAntiguoMostrarEscuelaListView_supervisor'),
+
 # ver la ficha de derivacion de un estudiante
     url(r'^FichaEstudianteegresoDetailView/(?P<pk>\d+)/$',login_required(views.FichaEstudianteegresoDetailView), name='FichaEstudianteegresoDetailView'),
+    url(r'^FichaEstudianteegresoDetailView_supervisor/(?P<pk>\d+)/$',login_required(views.FichaEstudianteegresoDetailView_supervisor), name='FichaEstudianteegresoDetailView_supervisor'),
+
+
+
 
     ]

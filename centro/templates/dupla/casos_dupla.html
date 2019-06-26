@@ -5,14 +5,11 @@
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
   <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
-
   <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Establecimientos</a></li>
   <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' estudiante.curso.establecimiento.id %}"data-toggle="tooltip" title="Listado de establecimientos">Volver lista</a></li>
   
   
-  
-
-  <li class="active">Informe Intervención de casos</li> 
+<li class="active">Informe Intervención de casos</li> 
 </ul>
 <form method="post">
   {% csrf_token %}

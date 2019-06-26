@@ -104,6 +104,30 @@ def ver_familia(request,pk):
 	return render(request, 'alumno/ver_familia.html', contexto)
 
 
+def ver_familia_supervisor(request,pk):
+	
+	estudiante = Estudiante.objects.get(id=pk)
+	colegio=Escolaridad.objects.get(Estudiante__id=pk)
+
+	
+	family=estudiante.Familia
+	familia=Parentesco.objects.filter(Familia=family)
+
+	#pag = Paginate(request, familia , 3)
+	
+	contexto = {
+	'estudiante':estudiante,
+	'familia':familia,
+	'colegio':colegio,
+	
+
+	}
+
+	return render(request, 'alumno/ver_familia_supervisor.html', contexto)
+
+
+
+
 def buscar_familia(request):
 	if request.is_ajax:
 		termino=request.GET.get('term','')
@@ -1862,6 +1886,68 @@ def actualizar_escolaridad_centro(request,pk):
 			return HttpResponseRedirect(url)
 
 	return render(request, template, context)	
+
+
+def actualizar_escolaridad_supervisor(request,pk):
+	
+	
+	escolar=Escolaridad.objects.get(Estudiante__id=pk)
+	dato=Estudiante.objects.get(pk=pk)
+	form = EscolaridadActualizaFormCentro(request.POST or None, instance=escolar)
+	template = 'alumno/actualiza_escolaridad_supervisor.html'
+	context = {
+        "form": form,
+        "dato":dato,
+        "escolar":escolar,
+
+    }
+
+	
+	if request.method == 'POST':
+		if form.is_valid():
+
+			
+			escolaridad=form.save(commit=False)
+			
+			estudiando=Estudiante.objects.get(pk=pk)
+			escuela=escolaridad.establecimiento
+			#ir a buscar el curso
+
+			try:
+				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
+			except curso.DoesNotExist:
+				curso.objects.create(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
+				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
+
+				
+	        #codigo
+		
+			estudiando.curso=etapa
+			estudiando.save()
+		
+			escolaridad.establecimiento=escuela
+			escolaridad.Estudiante=estudiando
+			escolar=Escolaridad.objects.get(Estudiante__id=pk)
+			escolaridad.save()
+			print escolar
+			anno=escolar.anno
+			fecha_inicio=escolar.fecha_inicio
+			fecha_termino=escolar.fecha_termino
+			rendimiento=escolar.rendimiento
+			conducta=escolar.conducta
+			nivel=escolar.curso
+			Letra=escolar.Letra
+			establecimiento=escolar.establecimiento
+			escuela=escolar.establecimiento
+			EscolaridadAnterior.objects.create(anno=anno,fecha_inicio=fecha_inicio,fecha_termino=fecha_termino,rendimiento=rendimiento,conducta=conducta,curso=nivel,Letra=Letra,establecimiento=establecimiento,Estudiante=dato)	
+
+			
+			
+
+
+
+	return render(request, template, context)	
+
 
 # Busqueda de estudiantes por nombre 
 

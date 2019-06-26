@@ -1,0 +1,62 @@
+{% extends 'base/base_usuario.html' %}
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'alumno:EstablecimientoListsupervisor'  %}"data-toggle="tooltip" title="Ir menu inicial dupla!">Volver</a></li>
+ 
+  <li class="active">Planes por años</li> 
+</ul>
+
+<h3>Listado de planes de gestión de : <strong> {{colegio.nombre}}</strong></h3>
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			
+			<td>Año </td>
+			<td>Responsables</td>
+			<td>Obj. General</td>
+			<td>Obj. Especificos</td>
+			<td>Acciones</td>
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if planes %}
+
+		<tr>
+		
+		
+		{% for escuela in planes %}
+			
+		<td>{{ escuela.annio }} </td>
+		<td>{{ escuela.responsable }} </td>
+		<td><li>{{ escuela.objetivo_general }}</li></td>
+		<td><li>{{ escuela.objetivo_especificos }}</li></td>
+		 
+
+		
+			<td>
+			
+
+				
+				<button type="button" class="btn btn-success btn-xs">
+				<a href="{% url 'dupla:PlanesAntiguoMostrarEscuelaListView_supervisor' colegio.id escuela.annio %}" data-toggle="tooltip" title="ingresar indicadores">
+    <span class="glyphicon glyphicon-eye-open"></span> Ver Detalles...
+  </button>
+				
+			
+			
+			</td>
+			
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros relacionados</h1>
+		{% endif %}
+	</tbody>
+</table> 
+{% endblock%}

@@ -16,7 +16,7 @@ Listado de acciones :
 <a  class="btn btn-primary btn-xs" href="{% url 'dupla:EntradasRetornoCasoDuplaList' escuela.id %}"><small>Estudiantes a ser egresado  </small></a>
 
 -->
-<a  class="btn btn-success btn-xs" href="{% url 'dupla:ListarCasos' escuela.id %}"><small>Listado intervenciones / Continuidad</small></a>
+
 <table id="example" class="table table-bordered">
 	<thead>
 		<tr>
@@ -55,6 +55,7 @@ Listado de acciones :
 					
 				<a title="Ver Ficha de derivación" class="glyphicon glyphicon-eye-open" href="{% url 'alumno:FichaEstudianteDetailView_supervisor' estudio.Estudiante.id %}"></a>
 				<strong> Ficha derivación C.B.] </strong>
+				<strong> [ </strong><a title="Ver Familia" class="glyphicon glyphicon-home " href="{% url 'alumno:ver_familia_supervisor' estudio.Estudiante.id %}"></a><strong> Familia]</strong>
 				
 				
 				
@@ -69,16 +70,16 @@ Listado de acciones :
 				<small><strong> DUPLA PSICOSOCIAL  [ </strong></small> 
 				
 				
-				<a title="Ver Ficha derivación" class="glyphicon glyphicon-eye-open" href="{% url 'dupla:dupla_ver_ficha' estudio.Estudiante.id %}"></a>
+				<a title="Ver Ficha derivación" class="glyphicon glyphicon-eye-open" href="{% url 'dupla:FichaDuplaDetailView_supervisor' estudio.Estudiante.id %}"></a>
 				 /
-				<a title="Crear Ficha Ingreso " class="glyphicon glyphicon-pencil" href="{% url 'dupla:entrevista_ingreso_dupla' estudio.Estudiante.id  %}"></a> /
+				<a title="Crear Ficha Ingreso " class="glyphicon glyphicon-pencil" href="{% url 'dupla:ingreso_dupla_supervisor' estudio.Estudiante.id  %}"></a> /
 				  
 				
 				<strong>]</strong>
 				<small><strong> ATENCIÓN CASOS [ </strong></small> 
 				
-				<a title="Ver plan de intervención de casos" class="glyphicon glyphicon-eye-open" href="{% url 'dupla:IntervencionCasosDetailView' estudio.Estudiante.id %}"></a>
-				<a title="Ver historia estudiante" class="glyphicon glyphicon-search" href="{% url 'dupla:Dupla_casos' estudio.Estudiante.id  %}"></a> /
+				
+				<a title="Ver historia estudiante" class="glyphicon glyphicon-search" href="{% url 'dupla:Dupla_casos_supervisor' estudio.Estudiante.id  %}"></a> 
 				
 				
 				<strong>]</strong>
@@ -87,24 +88,21 @@ Listado de acciones :
 			
 				<small><strong> EGRESO Y/O DERIV. OTRA INST [ </strong></small> 
 				
-				<a title="Ver Ficha derivación" class="glyphicon glyphicon-eye-open" href="{% url 'dupla:FichaEstudianteegresoDetailView' estudio.Estudiante.id %}"></a>
+				<a title="Ver Ficha derivación" class="glyphicon glyphicon-eye-open" href="{% url 'dupla:FichaEstudianteegresoDetailView_supervisor' estudio.Estudiante.id %}"></a>
 				
 				
-				<a title="Imprimir Ficha de egreso" class="glyphicon glyphicon-print" href="{% url 'informe:fichaegreso_dupla_pdf_report' estudio.Estudiante.id %}"></a>
+				
 				<strong>]</strong>
 				
 
 				<small><strong> SEGUIMIENTO  [ </strong></small> 
 				
-				<a title="Ver Seguimiento" class="glyphicon glyphicon-eye-open" href="{% url 'dupla:ListarSeguimiento' estudio.Estudiante.id %}"></a>
-				
+				<a title="Ver Seguimiento" class="glyphicon glyphicon-eye-open" href="{% url 'dupla:ListarSeguimiento_supervisor' estudio.Estudiante.id %}"></a>
+				<strong>]</strong>	
 				
 				
 					
-				<small><strong> HISTORIA [ </strong></small> 
-				<a title="Crear Ficha" class="glyphicon glyphicon-list-alt" href="{% url 'dupla:historia_dupla' estudio.Estudiante.id %}"></a> /
-		
-				<strong>]</strong>	
+					
 				{% if ficha %}
 					{% for fichas in ficha %}
 						{% if fichas.Estudiante == estudio.Estudiante %}

@@ -75,6 +75,8 @@ urlpatterns = [
 
 	# Mostrar todos los planes de años anteriores
 	url(r'^PlanListViewTodos/(?P<pk>\d+)/', login_required(views.PlanListViewTodos), name='PlanListViewTodos'),
+	url(r'^PlanListViewTodos_supervisor/(?P<pk>\d+)/', login_required(views.PlanListViewTodos_supervisor), name='PlanListViewTodos_supervisor'),
+
 	url(r'^PlanListViewMineduc/(?P<pk>\d+)/', login_required(views.PlanListViewMineduc), name='PlanListViewMineduc'),
 
 	#Modificar plan del año actual

@@ -1,0 +1,29 @@
+
+{% extends 'base/base_usuario.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="alert alert-success">
+  <h3> Proceso de cambio de establecimiento al estudiante: {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h3>
+<li><strong>Establecimiento actual: {{escolar.establecimiento.nombre}}</strong></li>
+<li><strong>Curso actual: {{escolar.get_curso}} {{escolar.get_Letra}}</strong></li>
+
+</div>
+
+
+<form method="post">
+	{% csrf_token %}
+	
+	<form method="get">
+
+	{{ form.as_p }}
+				
+		<button type="submit" class="btn btn-info">Registrar</button>
+	</div>
+	</div>
+	</div>
+	
+</form>
+
+
+{% endblock %}

@@ -47,13 +47,11 @@
 			{% endif %}
 			</td>
 			<td>
-			<a class="btn btn-info btn-xs" href="{% url 'dupla:ingresar_diagnostico' escuela.escuela.id  %}"><small>D</small></a>
-			<a class="btn btn-info btn-xs" href="{% url 'dupla:DiagnosticoListViewTodos' escuela.escuela.id  %}"><small>DX</small></a>
 
-			<a class="btn btn-success btn-xs" href="{% url 'plan:ingresar_plan' escuela.escuela.id  %}"><small>P</small></a>
-			<a class="btn btn-success btn-xs" href="{% url 'plan:PlanListViewTodos' escuela.escuela.id  %}"><small>XP</small></a>
-			<a class="btn btn-warning btn-xs" href="{% url 'plan:ingresar_plan_mineduc' escuela.escuela.id  %}"><small>PM</small></a>
-			<a class="btn btn-warning btn-xs" href="{% url 'plan:PlanListViewMineduc' escuela.escuela.id  %}"><small>PMX</small></a>
+			<a class="btn btn-info btn-xs" href="{% url 'dupla:DiagnosticoListViewTodos_supervisor' escuela.escuela.id  %}"><small>Diagnósticos</small></a>
+
+			
+			<a class="btn btn-success btn-xs" href="{% url 'plan:PlanListViewTodos_supervisor' escuela.escuela.id  %}"><small>Planes</small></a>
 			
 			
 		

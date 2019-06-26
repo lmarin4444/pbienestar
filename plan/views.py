@@ -1810,6 +1810,29 @@ def PlanListViewTodos(request,pk):
         		 
         		 }
     )
+# Ver los planes por el area de supervision 
+def PlanListViewTodos_supervisor(request,pk):
+#Llistar todos los planes anteriores 
+
+	
+	colegio=establecimiento.objects.get(id=pk)
+	try:
+		planes=Plan.objects.filter(establecimiento=colegio)
+		
+	except Plan.DoesNotExist:
+		planes=None
+	
+		
+	return render(
+        request,
+        'plan/plan_todos_supervisor.html',
+        context={'colegio':colegio,
+        		 'planes':planes,
+        		 
+        		 }
+    )
+
+
 # Ver todos los planes mineduc de un establecimiento
 
 def PlanListViewMineduc(request,pk):

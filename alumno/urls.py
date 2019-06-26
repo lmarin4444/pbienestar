@@ -13,7 +13,8 @@ from alumno.views import EstablecimientoList, EstablecimientoCreate, Establecimi
     ingresar_estudiantes_establecimiento,actualizar_escolaridad,ver_escolaridad,ver_escolaridad_centro,actualizar_escolaridad_centro, \
     search,asignar_familia,agregar_familia,FichaCentroDetailView,estado_estudiantes_establecimiento,busqueda_estudiante, \
     buscar_estudiantes,search_estudiante,EstudianteListEstablecimiento,EstablecimientoListPie,EstudianteListpie, \
-    EstablecimientoListsupervisor,listar_estudiantes_establecimiento_supervisor,FichaEstudianteDetailView_supervisor,ver_escolaridad_supervisor
+    EstablecimientoListsupervisor,listar_estudiantes_establecimiento_supervisor,FichaEstudianteDetailView_supervisor,ver_escolaridad_supervisor, \
+    actualizar_escolaridad_supervisor,ver_familia_supervisor
    
 
 urlpatterns = [
@@ -61,6 +62,8 @@ urlpatterns = [
     #Ver la escolaridad para el centro
     url(r'^ver_escolaridad_centro/(?P<pk>\d+)/$', login_required(ver_escolaridad_centro), name='ver_escolaridad_centro'),
     url(r'^actualizar_escolaridad_centro/(?P<pk>\d+)/$', login_required( actualizar_escolaridad_centro), name=' actualizar_escolaridad_centro'),
+    url(r'^escolaridad_supervisor/(?P<pk>\d+)/$', login_required( actualizar_escolaridad_supervisor), name='escolaridad_supervisor'),
+
     url(r'^search/(?P<pk>\d+)/$',login_required(search),name='search'),
     url(r'^search_estudiante/(?P<pk>\d+)/$',login_required(search_estudiante),name='search_estudiante'),
     
@@ -120,6 +123,7 @@ urlpatterns = [
 
     #Mostrar la familia de un estudiate 
     url(r'^familia/(?P<pk>\d+)/$',login_required(ver_familia), name='familia'),
+    url(r'^ver_familia_supervisor/(?P<pk>\d+)/$',login_required(ver_familia_supervisor), name='ver_familia_supervisor'),
     # informes 
     url(r'^reporte_caso/(?P<pk>\d+)/$',login_required(Reportedecaso), name='reporte_caso'),
     url(r'^reporte_caso_modificar/(?P<pk>\d+)/$',login_required(ReportedecasoModificar), name='reporte_caso_modificar'),

@@ -1,0 +1,96 @@
+{% extends 'base/base_usuario.html' %}
+
+{% block content %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'alumno:listar_estudiantes_establecimiento_supervisor' estudiante.curso.establecimiento.id %}"data-toggle="tooltip" title="Ir menu inicial dupla!">Volver</a></li>
+  
+
+  <li class="active">Listado familiares</li> 
+</ul>
+
+<h3>Familiares Para el estudiante {{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}}</h3>
+	
+<table id="example" class="table table-bordered">
+	<thead>
+		<tr>
+			
+			<td> Familiar</td>
+			<td> Parentesco</td>
+			<td> Edad</td>
+			<td> Escolaridad</td>
+			<td> Ocupación</td>
+			<td> Dirección</td>	
+			<td> Teléfono</td>	
+			
+
+		
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if familia %}
+
+			{% for estudio in familia %}
+			<tr>
+			
+				{% if estudio.opcion == 0%}
+				 <td><span title="Familiar vive con el estudiante en la misma casa" class="glyphicon glyphicon-home"></span>  {{ estudio.nombre }} {{ estudio.apellido_p }} {{ estudio.apellido_m }}  </td>
+				 {% else %}
+				 <td><span title="Familiar no vive con el estudiante en la misma casa" class="glyphicon glyphicon-remove-circle"></span>  {{ estudio.nombre }} {{ estudio.apellido_p }} {{ estudio.apellido_m }}  </td>
+				 {% endif %}
+				 <td>{{ estudio.parentesco}} </td>  
+				 <td>{{ estudio.edad}} </td> 
+				 <td>{{ estudio.get_escolaridad}} </td>  
+				 <td>{{ estudio.ocupacion}} </td> 
+				 <td style="color:#ff0000"><strong>{{ estudio.apoderado.domicilio}}</strong> </td> 
+				 <td style="color:#ff0000">{{ estudio.apoderado.telefono}} </td> 
+				
+				
+			</tr>
+
+			{% endfor %}
+	
+
+		{% else %}
+		<h1>No se registra antedecentes familiares</h1>
+		{% endif %}
+
+		
+	</tbody>
+</table> 
+<div>
+	<tr>
+	<strong> Valores con color rojo indica apoderado del estudiante</strong></tr>
+</div>
+
+
+<!--  paguinacion  
+
+<div class="pagination pagination-right">
+     <ul>
+         <li> 
+             {% if paginator.has_prev %}
+                  <a href="/alumno/familia/?page={{ paginator.firstPage }}"> << </a>
+                  <a href="/alumno/familia/?page={{ paginator.prev_page }}"> < </a>
+              {% else %}
+                  <a style="color:gray; cursor:not-allowed"> << </a>
+                  <a style="color:gray; cursor:not-allowed"> < </a>
+              {% endif %}                  
+              {% if paginator.has_next %}
+                  <a href="/alumno/familia/?page={{ paginator.next_page }}"> > </a>
+                  <a href="/alumno/familia/?page={{ paginator.pages }}"> >> </a>
+              {% else %}
+                  <a style="color:gray; cursor:not-allowed"> > </a>
+                  <a style="color:gray; cursor:not-allowed"> >> </a>
+              {% endif %}
+         </li>
+         <p>Página <{{paginator.page}} de {{paginator.pages}}> </p>
+     </ul>
+</div>
+
+-->
+
+
+{% endblock%}
