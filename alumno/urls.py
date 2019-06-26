@@ -13,7 +13,7 @@ from alumno.views import EstablecimientoList, EstablecimientoCreate, Establecimi
     ingresar_estudiantes_establecimiento,actualizar_escolaridad,ver_escolaridad,ver_escolaridad_centro,actualizar_escolaridad_centro, \
     search,asignar_familia,agregar_familia,FichaCentroDetailView,estado_estudiantes_establecimiento,busqueda_estudiante, \
     buscar_estudiantes,search_estudiante,EstudianteListEstablecimiento,EstablecimientoListPie,EstudianteListpie, \
-    EstablecimientoListsupervisor
+    EstablecimientoListsupervisor,listar_estudiantes_establecimiento_supervisor,FichaEstudianteDetailView_supervisor,ver_escolaridad_supervisor
    
 
 urlpatterns = [
@@ -28,8 +28,8 @@ urlpatterns = [
     #url(r'^$', index, name='index'),
     
     url(r'^nuevo$', login_required(EstablecimientoCreate.as_view()), name='establecimiento_crear'),
-    url(r'^listar', login_required(EstablecimientoList.as_view()), name='establecimiento_listar'),
-    url(r'^EstablecimientoListsupervisor', login_required(EstablecimientoListsupervisor.as_view()), name='EstablecimientoListsupervisor'),
+    url(r'^listar$', login_required(EstablecimientoList.as_view()), name='establecimiento_listar'),
+    url(r'^EstablecimientoListsupervisor$', login_required(EstablecimientoListsupervisor.as_view()), name='EstablecimientoListsupervisor'),
 
     url(r'^EstablecimientoListPie', login_required(EstablecimientoListPie.as_view()), name='EstablecimientoListPie'),
 
@@ -56,6 +56,8 @@ urlpatterns = [
     #para actualizar la escolaridad de un estudiante
     url(r'^actuescolaridad/(?P<pk>\d+)/(?P<escolari>\d+)$', login_required(actualizar_escolaridad), name='actualizar_escolaridad'),
     url(r'^ver_escolaridad/(?P<pk>\d+)/(?P<escolari>\d+)$', login_required(ver_escolaridad), name='ver_escolaridad'),
+    url(r'^ver_escolaridad_supervisor/(?P<pk>\d+)/(?P<escolari>\d+)$', login_required(ver_escolaridad_supervisor), name='ver_escolaridad_supervisor'),
+
     #Ver la escolaridad para el centro
     url(r'^ver_escolaridad_centro/(?P<pk>\d+)/$', login_required(ver_escolaridad_centro), name='ver_escolaridad_centro'),
     url(r'^actualizar_escolaridad_centro/(?P<pk>\d+)/$', login_required( actualizar_escolaridad_centro), name=' actualizar_escolaridad_centro'),
@@ -112,7 +114,9 @@ urlpatterns = [
     url(r'^buscar_familia$',buscar_familia, name='buscar_familia'),#lista los estableciientos en la paguina principal
     #url(r'^buscar_familia$',detail_ficha , name='detalle_familia'),
     url(r'^Ver_ficha/(?P<pk>\d+)/$',login_required(FichaEstudianteDetailView), name='ver_ficha'),
-    
+    url(r'^FichaEstudianteDetailView_supervisor/(?P<pk>\d+)/$',login_required(FichaEstudianteDetailView_supervisor), name='FichaEstudianteDetailView_supervisor'),
+
+
 
     #Mostrar la familia de un estudiate 
     url(r'^familia/(?P<pk>\d+)/$',login_required(ver_familia), name='familia'),
@@ -124,6 +128,7 @@ urlpatterns = [
     
     url(r'^estableciprofe', login_required(EstablecimientoList.as_view()), name='profesinal_establecimiento_listar'),
     url(r'^estudianteestable/(?P<pk>\d+)/$', login_required(listar_estudiantes_establecimiento), name='listar_estudiantes_establecimiento'),
+    url(r'^listar_estudiantes_establecimiento_supervisor/(?P<pk>\d+)/$', login_required(listar_estudiantes_establecimiento_supervisor), name='listar_estudiantes_establecimiento_supervisor'),
     url(r'^estado_estudiantes_establecimiento/(?P<pk>\d+)/$', login_required(estado_estudiantes_establecimiento), name='estado_estudiantes_establecimiento'),
 
     url(r'^ingestudianteestable/(?P<pk>\d+)/$', login_required(ingresar_estudiantes_establecimiento), name='ingresar_estudiantes_establecimiento'),

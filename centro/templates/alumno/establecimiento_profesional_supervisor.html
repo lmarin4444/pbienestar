@@ -11,7 +11,7 @@
 			
 			<td>Opciones</td>
 			<td>Planes</td>
-			<td>Contingencia</td>
+		
 
 
 		</tr>
@@ -35,13 +35,13 @@
 			<td>
 			
 
-				<a class="btn btn-success btn-xs" href="{% url 'alumno:ingresar_estudiantes_establecimiento' escuela.escuela.id %}"><small>Ing. Estudiante</small></a>
+		
 				
-				<a class="btn btn-primary btn-xs" href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.escuela.id %}"><small>Act. Dupla</small></a>
+				<a class="btn btn-primary btn-xs" href="{% url 'alumno:listar_estudiantes_establecimiento_supervisor' escuela.escuela.id %}"><small>Act. Dupla</small></a>
 				
 			
 			{% if escuela.tipo_profesional == 6 or escuela.tipo_profesional == 7 or escuela.tipo_profesional == 8 or escuela.tipo_profesional == 9 %}
-				<a class="btn btn-warning btn-xs" href="{% url 'dupla:listar_convivencia_escolar' escuela.escuela.id %}"><small>Encargado</small></a>
+				<a class="btn btn-warning btn-xs" href="{% url 'dupla:listar_convivencia_escolar_supervisor' escuela.escuela.id %}"><small>Encargado</small></a>
 				
 
 			{% endif %}
@@ -56,10 +56,7 @@
 			<a class="btn btn-warning btn-xs" href="{% url 'plan:PlanListViewMineduc' escuela.escuela.id  %}"><small>PMX</small></a>
 			
 			
-			<td>
-				
-			<a class="btn btn-danger btn-xs" href="{% url 'bitacora:bitacora_crear' escuela.escuela.id  %}"><small>Suceso</small></a>	
-			</td>
+		
 			
 			</td>
 		</tr>

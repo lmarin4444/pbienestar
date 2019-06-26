@@ -295,6 +295,48 @@ def FichaEstudianteDetailView(request,pk):
         		 'colegio':colegio	}
     )
 
+
+#Ficha de un estudiante desde la dupla
+def FichaEstudianteDetailView_supervisor(request,pk):
+
+	try:
+		estudiante_id=Estudiante.objects.get(pk=pk)
+		family=estudiante_id.Familia
+		colegio=Escolaridad.objects.get(Estudiante__id=pk)
+		
+	except Estudiante.DoesNotExist:
+		estudiante_id=None
+	try:
+		ficha_id=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+	except Ficha_derivacion.DoesNotExist:
+		ficha_id=None		
+		
+	try:
+		parentesco_id=Parentesco.objects.filter(Familia=family).order_by('id')
+	except Parentesco.DoesNotExist:
+		parentesco_id=None
+
+	try:
+		apoderado_id=apoderado.objects.filter(Familia=family)
+        
+
+	except apoderado.DoesNotExist:
+		apoderado_id=None
+
+		
+
+    #book_id=get_object_or_404(Book, pk=pk)
+	return render(
+        request,
+        'alumno/ver_grupo_supervisor.html',
+        context={'estudiante':estudiante_id,
+        		 'ficha':ficha_id,
+        		 'parentesco':parentesco_id,
+        		 'apoderado':apoderado_id,
+        		 'colegio':colegio	}
+    )
+
+
 def Reportedecaso(request,pk):
     
 	estudiante_id=Estudiante.objects.get(pk=pk)
@@ -1290,6 +1332,32 @@ def listar_estudiantes_establecimiento(request,pk):
 
 	return render(request, 'alumno/estudiante_establecimiento.html', contexto)
 
+
+
+
+
+
+# Listado del area de las duplas para el supervisor
+#Listado de estudiantes por establecimiento- dado que cada profesional tiene asignados un grupo de establecimientos
+def listar_estudiantes_establecimiento_supervisor(request,pk):
+		
+	estudiando=Escolaridad.objects.filter(establecimiento__id=pk)
+	escuela=establecimiento.objects.get(id=pk)
+	ficha=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=pk) & Q(estado=1) )
+	
+	casos=Intervencion_casos.objects.filter(estudiante__curso__establecimiento__id=pk)
+	
+
+	contexto = {'estudiando':estudiando,
+				'escuela':escuela,
+				 'ficha':ficha,
+				 'casos':casos,
+				 }
+
+	return render(request, 'alumno/estudiante_establecimiento_supervisor.html', contexto)
+
+
+
 def digito_verificador(rut):
 	if rut.isdigit(): 
 		reversed_digits = map(int, reversed(str(rut)))
@@ -1688,6 +1756,25 @@ def ver_escolaridad(request,pk,escolari):
         "anterior":anterior,
     }
 	return render(request, template, context)	
+
+
+
+def ver_escolaridad_supervisor(request,pk,escolari):
+	
+	
+	escolar=Escolaridad.objects.get(Estudiante__id=pk)
+	dato=Estudiante.objects.get(pk=pk)
+	anterior=EscolaridadAnterior.objects.filter(Estudiante__id=pk)
+	print anterior
+	
+	template = 'alumno/ver_escolaridad_supervisor.html'
+	context = {
+        "escolar":escolar,
+        "dato":dato,
+        "anterior":anterior,
+    }
+	return render(request, template, context)
+
 
 def ver_escolaridad_centro(request,pk):
 	

@@ -53,6 +53,8 @@ urlpatterns = [
 	url(r'^eliminar_cita/(?P<pk>\d+)/$', login_required(views.eliminar_cita.as_view()), name='eliminar_cita'),
 
 	url(r'^listar_convivencia_escolar/(?P<pk>\d+)/$', login_required(views.listar_convivencia_escolar), name='listar_convivencia_escolar'),
+	url(r'^listar_convivencia_escolar_supervisor/(?P<pk>\d+)/$', login_required(views.listar_convivencia_escolar_supervisor), name='listar_convivencia_escolar_supervisor'),
+
 	url(r'^indicador_convivencia/(?P<pk>\d+)/$', login_required(views.indicador_convivencia.as_view()), name='indicador_convivencia'),
 	url(r'^indicador_convivencia_mediacion/(?P<pk>\d+)/$', login_required(views.indicador_convivencia_mediacion.as_view()), name='indicador_convivencia_mediacion'),
 	

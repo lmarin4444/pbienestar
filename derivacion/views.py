@@ -1116,7 +1116,7 @@ class ReporteIntervenidosSupervisor(ListView):
         '''listar todos los estudiantes intervenidos'''
 	model = Ficha_derivacion
 	template_name = 'derivacion/reporte_entradas_totales_supervisor.html'
-	paginate_by = 10
+	paginate_by = 100
 #muestra a todas las derivaciones realizadas   
 	
 	
