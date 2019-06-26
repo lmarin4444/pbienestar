@@ -1123,7 +1123,11 @@ class ReporteIntervenidosSupervisor(ListView):
 	def get_context_data(self, **kwargs):
 		
 		context = super(ReporteIntervenidosSupervisor, self).get_context_data(**kwargs)
-		intervenido = Intervenidos.objects.filter(usuario=self.request.user)
+		try:
+			intervenido = Intervenidos.objects.filter(usuario=self.request.user)
+		except Intervenidos.DoesNotExist:
+			intervenido=None
+		
 		diccionario=[]
 		
 		
