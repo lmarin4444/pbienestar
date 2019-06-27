@@ -26,6 +26,7 @@
 			
 			
 			<td>Mes</td>
+			<td>Curso</td>
 			<td>Fecha</td>
 			<td>Nombre</td>
 			<td>Estado</td>
@@ -45,6 +46,7 @@
 		
 		{% for plancillo in actividades %}
 		<td>{{ plancillo.get_mes }} </td>
+		<td>{{ plancillo.get_numero}} {{ plancillo.get_letra}} </td>
 		{% if plancillo.fecha  %}
 		<td>{{ plancillo.fecha |date:"d-m-Y" }} - [{{plancillo.get_horario }}] </td>
 		{% else %}
