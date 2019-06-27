@@ -683,7 +683,7 @@ class ingresar_Actividad(CreateView):
 						
 						form.instance.usuario=self.request.user
 						form.instance.plancillo=plancito
-						form.instance.estado=0# ACCION SOLO PLANIFICADA
+						form.instance.estado=1# ACCION SOLO PLANIFICADA
 						form.instance.save()
 						form.save_m2m()
 						#Crear una entrada en la bitacora de accion
@@ -2384,7 +2384,7 @@ class duplicar_Actividad_plan(CreateView):
 				
 				instance = form.save(commit=False)
 				#Crear la actvidad en base a una ya creada
-	
+				
 				
 				instance.plancillo=plancito
 

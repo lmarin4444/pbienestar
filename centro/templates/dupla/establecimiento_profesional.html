@@ -38,7 +38,8 @@
 				    </button>
 				    <ul class="dropdown-menu">
 				    	
-					      <li><a href="{% url 'dupla:EntradasDerivadas' escuela.escuela.id %}">Centro de Bienestar</a></li>
+
+					      <li><a href="{% url 'dupla:Estudiante_listar_fichas_duplas' escuela.escuela.id %}">Fichas derivadas DUPLA</a></li>
 					      <li><a href="{% url 'dupla:EntradasDerivadasIntitucion' escuela.escuela.id %}">Derivados Instituciones externas</a></li>
 					    
 					    	<li><a href="{% url 'alumno:EstudianteListEstablecimiento' escuela.escuela.id %}">Derivados establecimiento</a></li>
