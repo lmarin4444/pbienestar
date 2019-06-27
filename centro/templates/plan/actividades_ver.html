@@ -1,4 +1,4 @@
-{% extends 'base/base_centro.html' %}
+{% extends 'base/base_datos_agenda_dupla.html' %}
 {% block content %}
 
 <ul class="breadcrumb" >
@@ -68,9 +68,11 @@
 		
 			
 		{% if plancillo.fecha %}
-			{% if plancillo.estado == 0 %}		
+			{% if plancillo.estado == 0 %}	
+			<div class="btn-group-vertical">	
 			<a class="btn btn-success btn-sm" href="{% url 'plan:modificar_duplicar_Actividad_plan' plancillo.id %}"><small>Modificar</small></a>
 			<a class="btn btn-warning btn-sm" href="{% url 'plan:duplicar_Actividad_plan' plancillo.id %}"><small>Duplicar actividad</small></a>
+			</div>
 			<!--     
 
 			<a class="btn btn-danger btn-sm" href="{% url 'plan:eliminar_actividad' plancillo.id %}"><small>Eliminar actividad</small></a>

@@ -796,7 +796,7 @@ class ver_actividades(ListView):
 			accion=plancito.accion
 			
 			try:
-				actividades=Actividades.objects.filter(plancillo=plancito)
+				actividades=Actividades.objects.filter(plancillo=plancito).order_by('mes')
 				context['plan']=plancito
 				context['actividades']=actividades
 				context['accion']=accion
