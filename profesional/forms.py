@@ -125,6 +125,7 @@ class Acciones_profesionalForm(forms.ModelForm):
 		model = Acciones_profesional
 		fields = [
 			
+			'fecha',
 			'tipo_accion',
 			'objetivo',
 			'descripcion',
@@ -135,7 +136,7 @@ class Acciones_profesionalForm(forms.ModelForm):
 		]
 		labels = {
 			
-			
+			'fecha':'Ingresar la fecha en que ocurre la actividad',
 			'tipo_accion':'Seleccione tipo de acción profesional a realizar',
 			'objetivo':'Objetivo',	
 			'descripcion':'Aspectos Relevantes y/o Sistematizacón',	
@@ -145,6 +146,7 @@ class Acciones_profesionalForm(forms.ModelForm):
 		}
 		widgets = {
 			
+			'fecha':forms.TextInput(attrs={'"format": "DD-MM-YYYY",class':'datepicker','placeholder':'Ingresar Fecha '}),
 			'tipo_accion':forms.Select(attrs={'class':'form-control'}),
 			'objetivo':forms.TextInput(attrs={'class':'form-control'}),
 			'descripcion':forms.TextInput(attrs={'class':'form-control'}),
