@@ -683,7 +683,7 @@ class ingresar_Actividad(CreateView):
 						
 						form.instance.usuario=self.request.user
 						form.instance.plancillo=plancito
-						form.instance.estado=1# ACCION SOLO PLANIFICADA
+						form.instance.estado=8# ACCION SOLO PLANIFICADA
 						form.instance.save()
 						form.save_m2m()
 						#Crear una entrada en la bitacora de accion
@@ -704,8 +704,10 @@ class ingresar_Actividad(CreateView):
 
 					return HttpResponseRedirect(url)						
 			else:
-				form = Base_ActividadesForm(request.POST or None, instance=actividad_activa)
-				return self.render_to_response(self.get_context_data(Base_ActividadesForm=form))
+				#form = Base_ActividadesForm(request.POST or None, instance=actividad_activa)
+				#return self.render_to_response(self.get_context_data(Base_ActividadesForm=form))
+				return render(request, '404.html')
+
 	
 	def get_success_message(self, cleaned_data):
 	            print (cleaned_data)
