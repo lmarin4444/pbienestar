@@ -342,7 +342,7 @@ class ingresar_acciones(CreateView):
 				indicadores=Accion.objects.filter(base=accion_base).count()
 				
 				indicadores_lista=Accion.objects.filter(base=accion_base)
-				cantidad_indicadores_base=accion_base.cantidad_indicadores
+				cantidad_indicadores_base=accion_base.cantidad_acciones
 
 				
 				if (cantidad_indicadores_base > indicadores):
