@@ -2415,7 +2415,7 @@ class duplicar_Actividad_plan(CreateView):
 #Modificar una actividad en base a la duplicidad
 
 # Duplicar una actividad 
-class modificar_duplicar_Actividad_plan(CreateView):
+class modificar_duplicar_Actividad_plan(UpdateView):
 	model = Actividades	
 
 	form_class = Base_ActividadesPlan
