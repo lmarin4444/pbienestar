@@ -2334,7 +2334,7 @@ def modificar_actividad_planificada(request,pk):
 	return render(request, 'plan/actividades_form.html', context)	
 
 # Duplicar una actividad 
-class duplicar_Actividad_plan(CreateView):
+class duplicar_Actividad_plan(UpdateView):
 	model = Actividades	
 
 	form_class = Base_ActividadesPlan
@@ -2370,7 +2370,8 @@ class duplicar_Actividad_plan(CreateView):
 		self.object = self.get_object
 		
 		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
-			
+		actividad=Actividades.objects.get(id=pk)
+		plancito=actividad.plancillo
 		if request.method == 'POST':
 			form = Base_ActividadesPlan(request.POST)
 		        #codigo
@@ -2409,7 +2410,10 @@ class duplicar_Actividad_plan(CreateView):
 				url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancito.id })
 				return HttpResponseRedirect(url)
 			else:
-				return self.render_to_response(self.get_context_data(Base_ActividadesPlan=form))
+				url = reverse(('plan:duplicar_Actividad_plan'), kwargs={ 'pk': plancito.id })
+				return HttpResponseRedirect(url)
+
+
 				
 
 #Modificar una actividad en base a la duplicidad
