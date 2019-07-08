@@ -462,7 +462,7 @@ class entrevista_ingreso_dupla_supervisor(CreateView):
 
 #visualizar una entrevista de ingreso
 def Ver_entrevista_ingreso(request,pk):
-    
+	mensaje=""
 	estudiante_id=Estudiante.objects.get(pk=pk)
 	try:
 		ficha=Ficha_derivacion_dupla.objects.get(Estudiante__id=pk,estado=1)
@@ -473,10 +473,7 @@ def Ver_entrevista_ingreso(request,pk):
 	
 	
 	ficha_id=Entrevista_ingreso_dupla.objects.all()
-	form = Entrevista_ingreso_duplaForm(instance=ficha_id or None)
-
-	form = Entrevista_ingreso_duplaForm()
-	
+	form = Entrevista_ingreso_duplaForm(instance=ficha or None)
 
 					
 	return render(
@@ -2347,10 +2344,10 @@ def CrearContinuidad(request,pk):
 	if request.method=='POST':
 		form = ContinuidadForm(request.POST)
  		if form.is_valid():
-			instance = form.save(commit=False)
-			instance.ficha_derivacion_dupla=ficha
-			instance.usuario = request.user
-			instance.save()
+			form.instance = form.save(commit=False)
+			form.instance.ficha_derivacion_dupla=ficha
+			form.instance.usuario = request.user
+			form.instance.save()
 			form.save_m2m()
 			
 			

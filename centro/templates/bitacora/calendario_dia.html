@@ -74,16 +74,23 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			El numero 1 es solo para los ambitos 1 y 2 dado que las acciones de Contingencia y convivencia escolar
 			solo se ingresan no se agendan, van en las acciones posteriores 
 				-->
-			<li><i class="fa-li fa fa-spinner fa-spin"></i>Acción sin ejecutar :{{mascota.sesion.intervencion_casos.estudiante.nombres|capfirst }} {{mascota.sesion.intervencion_casos.estudiante.firs_name|capfirst }}
 			
-			{% if mascota.ambito == 1 %}
-				<a class="btn btn-primary btn-xs" href="{% url 'plan:ingresar_hecho_actividades' mascota.id mascota.actividad.id  %}">Registrar </a>
-				<a class="btn btn-success btn-xs" href="{% url 'plan:justificar_hecho_actividades' mascota.id mascota.actividad.id  %}">Justificar </a>
-				<a class="btn btn-warning btn-xs" href="{% url 'plan:reagendar_hecho_actividades' mascota.id mascota.actividad.id  %}">Re Agendar </a>
-				
-				<a class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}"><small>Ver</small> </a>
+			{% if valor == 2 %}
+				<a class="btn btn-danger btn-xs" href="{% url 'plan:justificar_hecho_actividades' mascota.id mascota.actividad.id  %}">Fuera de plazo</a>
+			{% else %}
+				<li><i class="fa-li fa fa-spinner fa-spin"></i>Acción sin ejecutar :{{mascota.sesion.intervencion_casos.estudiante.nombres|capfirst }} {{mascota.sesion.intervencion_casos.estudiante.firs_name|capfirst }}
 
+				{% if mascota.ambito == 1 %}
+					<a class="btn btn-primary btn-xs" href="{% url 'plan:ingresar_hecho_actividades' mascota.id mascota.actividad.id  %}">Registrar </a>
+					<a class="btn btn-success btn-xs" href="{% url 'plan:justificar_hecho_actividades' mascota.id mascota.actividad.id  %}">Justificar </a>
+					<a class="btn btn-warning btn-xs" href="{% url 'plan:reagendar_hecho_actividades' mascota.id mascota.actividad.id  %}">Re Agendar </a>
+					
+					<a class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}"><small>Ver</small> </a>
+
+					{% endif %}
 			{% endif %}
+
+
 			{% if mascota.ambito == 2 %}
 				<a class="btn btn-success btn-xs" href="{% url 'bitacora:RegistrarSesion' mascota.sesion.id %}">Aistencia </a>
 				<a class="btn btn-danger btn-xs" href="{% url 'bitacora:anular_sesion' mascota.id %}">Inasistencia </a>

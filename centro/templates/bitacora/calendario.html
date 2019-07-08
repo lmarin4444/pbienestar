@@ -85,11 +85,6 @@
             <a class="btn btn-success btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=11 %}">11</a>
             <a class="btn btn-danger btn-xs" href="{% url 'bitacora:calendar2' ano=hoy.year  mes=12 %}">12</a>
 
-   
-
-
-    
-
 
 
         <div class='navegar'>
@@ -103,9 +98,9 @@
         <tr>
             <th>Lunes</th>
             <th>Martes</th>
-            <th>Miercoles</th>
+            <th>Miércoles</th>
             <th>Jueves</th>
-            <th>Vienes</th>
+            <th>Viernes</th>
             <th>Sábado</th>
             <th>Domingo</th>        
         </tr>           
@@ -124,14 +119,15 @@
                             {% for peticion in peticiones|get_peticiones:day.day %}
                                 <div class='peticion'  >
                                             {% with numero=peticion.numero %} 
-                                            {% if numero == 1 %}
+                                            {% if numero ==  1 %}
                                             <span >
                                            
                                                 <strong> </strong>({{ peticion.get_horario }}){{ peticion.nombre|title|truncatewords:'1'}} {{peticion.establecimiento.nombre|title|truncatewords:'5'}}
                                                 
-                                                <strong>De:[</strong><small> {{ peticion.get_ambito|upper}} -{{ peticion.get_curso|upper}} {{ peticion.get_tipo_letras|upper}} ] </small>
+                                                <strong>De:[</strong><small> {{ peticion.get_ambito|upper}}-{{ peticion.get_curso|upper}} {{ peticion.get_tipo_letras|upper}} ] </small>
    
                                             </span>
+                                           
 
                                             {% elif numero == 2 %}
                                                 <span style="color: #04B431;">
@@ -141,15 +137,33 @@
    
                                             </span>
 
-                                            {% else%}
+                                            
+
+                                            {% elif numero == 3 %}
                                             <span style="color: red;">
                                                 <strong> </strong>({{ peticion.get_horario }}){{ peticion.nombre|title|truncatewords:'1'}} {{peticion.establecimiento|title|truncatewords:'3'}}
                                                 
                                                 <strong>Por:[</strong>{{ peticion.usuario.first_name|first|upper}} {{ peticion.usuario.last_name|first|upper}} ]
    
                                             </span>
+
+                                            {% else %}
+                                            <span style="color: red;">
+                                                <strong> </strong>({{ peticion.get_horario }}){{ peticion.nombre|title|truncatewords:'1'}} {{peticion.establecimiento|title|truncatewords:'3'}}
+                                                
+                                                <strong>Por:[</strong>{{ peticion.usuario.first_name|first|upper}} {{ peticion.usuario.last_name|first|upper}} ]
+   
+                                            </span>
+
+
+
+
+
+
+
+
                                             {% endif %}
-                                            {% endwith %}
+                                        {% endwith %}
                                         
                                 </div>
                             {% endfor %}
