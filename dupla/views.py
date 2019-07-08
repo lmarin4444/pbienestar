@@ -2357,8 +2357,8 @@ def CrearContinuidad(request,pk):
 		else:
 			form = ContinuidadForm(request.POST)
 	
-	form = ContinuidadForm()
 	
+	form = ContinuidadForm(request.POST or None, instance=continuidad)
 	context = {
 		"form": form,
 		"dato": dato,
