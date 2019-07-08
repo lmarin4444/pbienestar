@@ -798,7 +798,7 @@ class ver_actividades(ListView):
 			accion=plancito.accion
 			
 			try:
-				actividades=Actividades.objects.filter(plancillo=plancito).order_by('mes')
+				actividades=Actividades.objects.filter(plancillo=plancito).order_by('mes','fecha')
 				context['plan']=plancito
 				context['actividades']=actividades
 				context['accion']=accion
@@ -2410,7 +2410,7 @@ class duplicar_Actividad_plan(UpdateView):
 				url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancito.id })
 				return HttpResponseRedirect(url)
 			else:
-				url = reverse(('plan:duplicar_Actividad_plan'), kwargs={ 'pk': plancito.id })
+				url = reverse(('plan:duplicar_Actividad_plan'), kwargs={ 'pk': pk})
 				return HttpResponseRedirect(url)
 
 
@@ -2455,7 +2455,8 @@ class modificar_duplicar_Actividad_plan(UpdateView):
 		self.object = self.get_object
 		
 		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
-			
+		actividad=Actividades.objects.get(pk=pk)
+		plancito=actividad.plancillo	
 		if request.method == 'POST':
 			form = Base_ActividadesPlan(request.POST)
 		        #codigo
@@ -2494,7 +2495,8 @@ class modificar_duplicar_Actividad_plan(UpdateView):
 				url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancito.id })
 				return HttpResponseRedirect(url)
 			else:
-				return self.render_to_response(self.get_context_data(Base_ActividadesPlan=form))
+				url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancito.id })
+				return HttpResponseRedirect(url)
 				
 
 
