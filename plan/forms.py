@@ -549,8 +549,10 @@ class Base_ActividadesPlan(forms.ModelForm):
 			
 			'planes_externos': forms.Select(attrs={'class':'form-control'}),
 			'planes_mineduc': forms.CheckboxSelectMultiple(),
-			'verificadores': forms.CheckboxSelectMultiple(),
+			'verificadores': forms.CheckboxSelectMultiple(), 
 			
+
+        
 			}
 
 

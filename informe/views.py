@@ -3214,7 +3214,12 @@ def fichaegreso_dupla_pdf_report(request,pk):
     nivel=escolar.get_curso()
     letra=escolar.get_Letra()
     ficha=Ficha_derivacion_dupla.objects.get(Estudiante__id=pk,estado=1)
-    egreso=Derivacion_Ficha_derivacion_dupla.objects.get(ficha_derivacion_dupla=ficha,estado=1)
+    
+    try:
+        egreso=Derivacion_Ficha_derivacion_dupla.objects.get(ficha_derivacion_dupla=ficha,estado=1)
+    except Derivacion_Ficha_derivacion_dupla.DoesNotExist:
+        egreso=None
+    
     
 
     filename="Ficha_egreso"+estudiante.nombres+"_"+estudiante.firs_name+".pdf"
@@ -3294,24 +3299,30 @@ def fichaegreso_dupla_pdf_report(request,pk):
     Paragraph('<font size=10>%s</font>' % ficha.usuario.first_name+" "+ficha.usuario.last_name, estilo['Normal']),
     ))
     
-    data.append((
-      
-    Paragraph('<font size=10>%s</font>' % "Fecha:", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % egreso.fecha_derivacion.strftime('%d/%m/%Y'), estilo['Normal']),   
-    ))
-
+    if egreso == None:
+        data.append((
+          
+        Paragraph('<font size=10>%s</font>' % "Fecha:", estilo['Normal']),
+        Paragraph('<font size=10>%s</font>' % 'Sin información - Sin ficha de derivación', estilo['Normal']),   
+        ))
+    else:
+        data.append((
+          
+        Paragraph('<font size=10>%s</font>' % "Fecha:", estilo['Normal']),
+        Paragraph('<font size=10>%s</font>' % egreso.fecha_derivacion.strftime('%d/%m/%Y'), estilo['Normal']),   
+        ))
     
-    data.append((
-      
-    Paragraph('<font size=10>%s</font>' % "Observaciones", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % egreso.observacion_termino, estilo['Normal']),   
-    ))
+        data.append((
+          
+        Paragraph('<font size=10>%s</font>' % "Observaciones", estilo['Normal']),
+        Paragraph('<font size=10>%s</font>' % egreso.observacion_termino, estilo['Normal']),   
+        ))
     
-    data.append((
-    
-    Paragraph('<font size=10>%s</font>' % "Motivo ", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % egreso.motivo, estilo['Normal']),   
-    ))
+        data.append((
+        
+        Paragraph('<font size=10>%s</font>' % "Motivo ", estilo['Normal']),
+        Paragraph('<font size=10>%s</font>' % egreso.motivo, estilo['Normal']),   
+        ))
 
     table = Table(
         data,
