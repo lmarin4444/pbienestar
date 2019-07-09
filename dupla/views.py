@@ -2335,7 +2335,11 @@ def CrearContinuidad(request,pk):
 	mensaje=""
 	dato = get_object_or_404(Estudiante, pk=pk)
 	escuela=dato.curso.establecimiento
-	ficha=Ficha_derivacion_dupla.objects.get(Estudiante=dato, estado=1)
+	try:
+		ficha=Ficha_derivacion_dupla.objects.get(Estudiante=dato, estado=1)
+	except Ficha_derivacion_dupla.DoesNotExist:
+		ficha=None
+	
 	try:
 		continuidad=Continuidad_dupla.objects.get(ficha_derivacion_dupla=ficha)
 	except Continuidad_dupla.DoesNotExist:
