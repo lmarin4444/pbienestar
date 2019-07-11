@@ -119,6 +119,8 @@ urlpatterns = [
 	url(r'^eliminar_caso_dupla/(?P<pk>\d+)/', login_required(views.eliminar_caso_dupla.as_view()), name='eliminar_caso_dupla'),
 #Crear continuidad de un estudiante
 	url(r'^CrearContinuidad/(?P<pk>\d+)/', login_required(views.CrearContinuidad), name='CrearContinuidad'),
+	url(r'^ContinuidadUpdate/(?P<pk>\d+)/', login_required(views.ContinuidadUpdate.as_view()), name='ContinuidadUpdate'),
+
 #Proceso de envio de estudiante de caso a hostoria
 	url(r'^EntradasRetornoCasoDuplaList/(?P<pk>\d+)/', login_required(views.EntradasRetornoCasoDuplaList.as_view()), name='EntradasRetornoCasoDuplaList'),
 #Proceso para ver los planes anteriores 

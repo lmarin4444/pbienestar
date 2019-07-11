@@ -58,7 +58,8 @@ Listado de estudiantes en intervención  {{escuela.nombre}}
 			{% for continuar in continuidad %}
 				{% if continuar.ficha_derivacion_dupla == mascota %}
 					<a title="Imprimir Ficha continuidad" class="glyphicon glyphicon-print" href="{% url 'informe:fichacontinuidad_dupla_pdf_report' mascota.Estudiante.id %}"></a> Ficha continuidad 
-					<a class="btn btn-success btn-xs" href="">Modificar </a>
+
+					<a class="btn btn-success btn-xs" href="{% url 'dupla:ContinuidadUpdate' continuar.id %}">Modificar </a>
 				{% endif %}
 			{% endfor %}	
 			

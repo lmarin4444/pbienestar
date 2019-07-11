@@ -1723,6 +1723,59 @@ class ListarCasos(ListView):
 			
 			return context			
 
+#Modificar una ficha de continuidad duplas
+class ContinuidadUpdate(UpdateView):
+	model = Continuidad_dupla
+	form_class = ContinuidadForm
+	template_name = 'dupla/continuidad_update.html'
+	
+
+	def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+		
+		context = super(ContinuidadUpdate, self).get_context_data(**kwargs)
+		pk = self.kwargs.get('pk')
+		continuidad=Continuidad_dupla.objects.get(id=pk)
+		context['continuidad'] = continuidad
+		ficha=continuidad.ficha_derivacion_dupla
+		escuela=ficha.establecimiento
+		dato=ficha.Estudiante
+		
+		context['escuela']=dato.curso.establecimiento
+		context['dato']=dato
+		
+		return context
+	def post(self, request, *args,**kwargs):
+		pk = self.kwargs.get('pk')
+		continuidad=Continuidad_dupla.objects.get(id=pk)
+		ficha=continuidad.ficha_derivacion_dupla
+		escuela=ficha.establecimiento
+		dato=ficha.Estudiante
+		
+		form = self.get_form()
+
+		if request.method=='POST':
+			form = ContinuidadForm(request.POST)
+			if form.is_valid():
+				instance = form.save(commit=False)
+				
+				
+				instance.usuario=request.user
+				instance.ficha_derivacion_dupla=ficha
+				instance.save()
+
+
+				url = reverse(('dupla:ListarCasos'), kwargs={ 'pk': escuela.id })
+				return HttpResponseRedirect(url)
+
+
+				
+
+		else:
+			return super(MascotaUpdate_centro, self).form_invalid(form)
+
+
+
 class EntradasDerivadasIntitucion(ListView):
         '''listar todos los estudiantes derivados a otra institucion '''
 	model = Ficha_derivacion_dupla
