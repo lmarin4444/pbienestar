@@ -207,7 +207,7 @@
      <td><strong>Listado de  acciones pilares del  plan de equipo convivencia escolar. </strong>
      <ul>{% for motivo in base %}
         <li>
-          {{motivo.nombre}} - {{motivo.dimension.nombre}}  - <a href="{% url 'plan:ingresar_indicador' motivo.id colegio.id  %}" data-toggle="tooltip" title="ingresar indicadores">indicadores: </a> {{motivo.cantidad_indicadores}}  - <a href="{% url 'plan:ingresar_acciones' motivo.id colegio.id  %}" data-toggle="tooltip" title="Abrir acciones">Acciones: </a>{{motivo.get_acciones}} 
+          {{motivo.nombre}} - {{motivo.dimension.nombre}}  - <a href="{% url 'plan:ingresar_indicador' motivo.id colegio.id  %}" data-toggle="tooltip" title="ingresar indicadores">indicadores: </a> {{motivo.cantidad_indicadores}}  - <a href="{% url 'plan:ingresar_acciones' motivo.id colegio.id  %}" data-toggle="tooltip" title="Abrir acciones">Acciones: </a>{{motivo.cantidad_acciones}} 
 
 <div class="btn-group btn-group-justified">    
   <a class="btn btn-info btn-lg" href="{% url 'plan:ver_bases' motivo.id %}"><small>Ver Componente</small></a>
