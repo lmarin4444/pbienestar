@@ -1748,6 +1748,7 @@ class ContinuidadUpdate(UpdateView):
 	def post(self, request, *args,**kwargs):
 		pk = self.kwargs.get('pk')
 		continuidad=Continuidad_dupla.objects.get(id=pk)
+		object = super(ContinuidadUpdate, self).get_object()
 		ficha=continuidad.ficha_derivacion_dupla
 		escuela=ficha.establecimiento
 		dato=ficha.Estudiante

@@ -19,7 +19,7 @@
     <TD COLSPAN=2> 
     <dd><span class="glyphicon glyphicon-asterisk"></span><strong> Responsables :</strong> {{plan.responsable}}</dd>
     <dd><span class="glyphicon glyphicon-asterisk"></span> <strong> Objetivo general  :</strong>{{plan.objetivo_general}}</dd>
-    <dd><span class="glyphicon glyphicon-cog"></span> <strong>Objetivo especifico  :</strong>{{plan.objetivo_especificos}}</dd>
+    <dd><span class="glyphicon glyphicon-cog"></span> <strong>Objetivo especifíco  :</strong>{{plan.objetivo_especificos}}</dd>
 
    
   
@@ -89,7 +89,9 @@
                               <li>{{plancillo_activo.nombre}}
                               {% if plancillo_activo.numero < 5 %}    
                                 Curso: {{plancillo_activo.get_numero}} {{plancillo_activo.get_letra}}  </li>
-                              {% endif %}  
+                              
+                              {% endif %} 
+
                             {% endif %}
                         {% endfor %}
                       {% endif %} 
@@ -116,6 +118,7 @@
                                     {% for hecho_activo in hecho_a %}
                                         {% if hecho_activo.actividades == actividad_activa %}
                                            <ul style="color:blue"> {{hecho_activo.get_estado}}/{{hecho_activo.fecha|date:"d-m-Y "}}/ {{ hecho_activo.usuario.first_name}} {{ hecho_activo.usuario.last_name}}</ul></li>
+                                          
                                         {% endif %}
 
 
@@ -141,7 +144,18 @@
                                  </p>
                               
                                  
-                                {% endif%}
+                                 {% for hecho_activo in hecho_a %}
+                                        {% if hecho_activo.actividades == actividad_activa %}
+                                           <ul style="color:blue"> -/- </ul></li>
+                                         
+                                        {% endif %}
+
+
+                                    {% endfor %} 
+                                
+
+                              {% endif%}
+                    
                             {% endfor %}
                           
                             {% endif %}
