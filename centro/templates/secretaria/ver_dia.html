@@ -4,7 +4,7 @@
 <h3>Listado de estudiates Para el día : {{date}} hora actual.</h3>
 
 <li><a href="{% url 'secretaria:ver_calandario_mes' %}"data-toggle="tooltip" title="Ir ver clandario mes">Ver citas por mes</a></li>
-{{profesionales}}
+
 {% if profesionales %}
 		{% for mascota in profesionales %}
 		<li><a href="{% url 'secretaria:ver_impresa' %}">Impreso {{mascota.usuario.first_name}} {{mascota.usuario.last_name}}</a></li>
