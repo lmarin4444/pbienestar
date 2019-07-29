@@ -587,9 +587,7 @@ class Actividades(models.Model):
     planes_mineduc              = models.ManyToManyField(Planes_mineduc)
     
     evaluacion  				= models.IntegerField(choices=EVALUACION,default=0)
-        
     estado                      = models.IntegerField(choices=ESTADO,default=0)    
-        
     plancillo                   = models.ForeignKey(Plancillo)
     usuario                     = models.ForeignKey(User)
 	

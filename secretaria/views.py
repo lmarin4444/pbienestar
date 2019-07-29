@@ -642,6 +642,7 @@ def ver_dia(request,fecha=None):
 
     date = datetime.datetime.now()
     fechas = agenda.objects.filter(fecha=date).order_by('horario_i')
+    profesionales=Profesional.objects.filter(tipo_profesional=2)
            
         #fechas=agenda.objects.filter(fecha=current_week)  
     return render(
@@ -649,6 +650,7 @@ def ver_dia(request,fecha=None):
         'secretaria/ver_dia.html',
          context={
          'fechas':fechas,
+         'profesionales':profesionales,
          
          'date':date,
         

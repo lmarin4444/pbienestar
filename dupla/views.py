@@ -2596,7 +2596,6 @@ def PlanesMostrarEscuelaListView(request,pk):
 def PlanesMostrarEscuelaConvivenciaescolarListView(request,pk):
 
 
-
     try:
         
         x= datetime.date.today() 
