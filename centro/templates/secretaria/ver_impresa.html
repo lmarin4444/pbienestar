@@ -139,9 +139,9 @@
 
     </tr>
 
-    <tr>
+<tr>
 
-      <th>11:00 -12:00</th>
+      <th>10:00 -11:00</th>
 
       <td>
       	{% for estudio in fechas %}
@@ -221,11 +221,13 @@
 
     </tr>
 
+
     <tr>
 
-      <th>12:00 -13:00</th>
+      <th>11:00 -12:00</th>
 
-      <td>{% for estudio in fechas %}
+      <td>
+      	{% for estudio in fechas %}
       	{% if estudio.horario_i >= 18 and estudio.horario_i <= 23%}
 				{% if estudio.fecha == fecha_inicio %}
 					
@@ -238,7 +240,8 @@
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
-			{%endfor%}	</td>
+			{%endfor%}	
+      </td>
 
       <td>{% for estudio in fechas %}
       	{% if estudio.horario_i >= 18 and estudio.horario_i <= 23%}
@@ -253,7 +256,7 @@
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
-			{%endfor%}</td>
+			{%endfor%}	</td>
 
       <td>{% for estudio in fechas %}
       	{% if estudio.horario_i >= 18 and estudio.horario_i <= 23%}
@@ -268,7 +271,7 @@
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
-			{%endfor%}</td>
+			{%endfor%}	</td>
 
       <td>{% for estudio in fechas %}
       	{% if estudio.horario_i >= 18 and estudio.horario_i <= 23%}
@@ -283,9 +286,89 @@
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
+			{%endfor%}	</td>
+        <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 18 and estudio.horario_i <= 23%}
+				{% if estudio.fecha == fecha_termino %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
+					
+						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+
+    </tr>
+
+    <tr>
+
+      <th>12:00 -13:00</th>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 24 and estudio.horario_i <= 29%}
+				{% if estudio.fecha == fecha_inicio %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
+					
+						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 24 and estudio.horario_i <= 29%}
+				{% if estudio.fecha == martes %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
+					
+						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 24 and estudio.horario_i <= 29%}
+				{% if estudio.fecha == miercoles %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
+					
+						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 24 and estudio.horario_i <= 29%}
+				{% if estudio.fecha == jueves %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
+					
+						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
+				{% endif %}
+			{% endif %}
 			{%endfor%}</td>
       <td>{% for estudio in fechas %}
-      	{% if estudio.horario_i >= 18 and estudio.horario_i <= 23%}
+      	{% if estudio.horario_i >= 24 and estudio.horario_i <= 29%}
 				{% if estudio.fecha == fecha_termino %}
 					
 					
