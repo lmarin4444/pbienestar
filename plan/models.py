@@ -568,9 +568,9 @@ class Actividades(models.Model):
     tipo 						= models.IntegerField(default=0,choices=TIPO_ACTIVIDAD)
     descripcion					= models.TextField()
     ejecutores 					= models.IntegerField(default=0,choices=EJECUTORES)
-    inicio 	 					= models.CharField(max_length=400,blank=True, null=True)
-    desarrollo 	 				= models.CharField(max_length=400,blank=True, null=True)
-    cierre 	 					= models.CharField(max_length=400,blank=True, null=True)
+    inicio 	 					= models.TextField(blank=True, null=True)
+    desarrollo 	 				= models.TextField(blank=True, null=True)
+    cierre 	 					= models.TextField(blank=True, null=True)
     	
     participantes 				= models.IntegerField(default=2,choices=PARTICIPANTES)
     numero                      = models.IntegerField(choices=TIPO_NUMERO)
