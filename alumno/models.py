@@ -108,6 +108,7 @@ class establecimiento(models.Model):
 	horas_ps 	= models.IntegerField(blank=True, null=True)
 	horas_ts 	= models.IntegerField(blank=True, null=True)
 	horas_ec 	= models.IntegerField(blank=True, null=True)
+	alias 		= models.CharField(max_length=50,blank=True, null=True)
 
 
 	def __unicode__(self):
