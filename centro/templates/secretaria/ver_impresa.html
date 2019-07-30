@@ -62,10 +62,9 @@
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
-							
-						{{ estudio.Estudiante.curso.establecimiento.nombre|title|slice:"7:30"}}
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
 						
-						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"8"}} {{estudio.usuario.last_name|title|slice:"8"}}]
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small> 
 						<br>
 				{% endif %}
@@ -84,8 +83,11 @@
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -101,8 +103,11 @@
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -118,9 +123,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}}  
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -133,9 +141,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}}
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -156,8 +167,11 @@
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -172,8 +186,11 @@
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -186,9 +203,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}}  
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -202,8 +222,11 @@
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -216,8 +239,11 @@
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -238,9 +264,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}}  
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -255,8 +284,11 @@
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -270,8 +302,11 @@
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -284,9 +319,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}}  
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -299,8 +337,11 @@
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -319,9 +360,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}}  
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -334,9 +378,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}}  
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -349,9 +396,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}}  
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -365,8 +415,11 @@
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -379,7 +432,11 @@
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small><br>
 				{% endif %}
 			{% endif %}
@@ -399,9 +456,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]</small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -416,9 +476,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -432,9 +495,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -448,9 +514,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -464,9 +533,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -486,9 +558,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -501,9 +576,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -516,9 +594,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -531,9 +612,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -546,9 +630,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -567,9 +654,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -582,9 +672,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -597,9 +690,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -612,9 +708,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -627,9 +726,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -647,9 +749,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -662,9 +767,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -677,9 +785,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -692,9 +803,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -707,9 +821,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -727,9 +844,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -742,9 +862,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -757,9 +880,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -772,9 +898,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -787,9 +916,12 @@
 					
 					<small>
 						<strong>{{estudio.get_horario_i}}</strong>
-						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} {{ estudio.Estudiante.last_name|capfirst }} 
-					
-						{{ estudio.Estudiante.curso.establecimiento.nombre}} /{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} </small>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]</small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}<br>
 				{% endif %}
 			{% endif %}
@@ -803,10 +935,7 @@
 
     <tr>
 
-      <th>Profesional</th>
-
-      <td colspan="5">{{usuario.first_name}} {{usuario.last_name}}</td>
-
+      
       
 
     </tr>
