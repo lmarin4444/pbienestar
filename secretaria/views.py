@@ -604,14 +604,14 @@ def ver_impresa(request,pk):
     
     date = datetime.date.today()
     start_week = date - datetime.timedelta(date.weekday())
-    print start_week
+    
     end_week = start_week + datetime.timedelta(7)
     #start_week=end_week
     end_week = start_week + datetime.timedelta(4)
-    print end_week
+   
     #fechas = agenda.objects.filter(Q(fecha__gte=start_week), Q(fecha__lte=end_week)) 
     fechas = agenda.objects.filter(fecha__range=[start_week, end_week]).order_by('horario_i')
-    print fechas
+  
     
     dias = timedelta(days=1)
     
@@ -621,7 +621,7 @@ def ver_impresa(request,pk):
     miercoles=start_week+dias
     dias = timedelta(days=3)
     jueves=start_week+dias
-    print fechas
+   
     #BUSCAR LOS PSICOLOGOS DE LA PROXIMA SEMANA 
 
     return render(
