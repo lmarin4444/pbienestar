@@ -601,7 +601,7 @@ def ver_impresa(request,pk):
     # Obtener todos los usuarios que son profesionales centro de bienestar
 
     profesionales=Profesional.objects.get(id=pk)
-
+    
     date = datetime.date.today()
     start_week = date - datetime.timedelta(date.weekday())
     print start_week
