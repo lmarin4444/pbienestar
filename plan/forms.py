@@ -621,8 +621,8 @@ class Justificar_ActividadesForm(forms.ModelForm):
 		labels = {
 			
 			
-			'observacion':'Observación  de la actividad',
-			'estado':'Razón de la justificación '
+			'observacion':'Observación',
+			'estado':'Estado '
 		}
 		widgets = {
 

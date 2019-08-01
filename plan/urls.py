@@ -23,7 +23,8 @@ urlpatterns = [
 	url(r'^ingresar_hecho_actividades/(?P<agenda>\d+)/(?P<pk>\d+)/$', login_required(views.ingresar_hecho_actividades.as_view()), name='ingresar_hecho_actividades'),
 	url(r'^justificar_hecho_actividades/(?P<agenda>\d+)/(?P<pk>\d+)/$', login_required(views.justificar_hecho_actividades.as_view()), name='justificar_hecho_actividades'),
 	url(r'^reagendar_hecho_actividades/(?P<agenda>\d+)/(?P<pk>\d+)/$', login_required(views.reagendar_hecho_actividades.as_view()), name='reagendar_hecho_actividades'),
-
+# REGISTRAR UNA ACCION CUANDO ESTA FUERA DE PLAZO
+url(r'^justificar_hecho_actividades_fueradeplazo/(?P<agenda>\d+)/(?P<pk>\d+)/$', login_required(views.justificar_hecho_actividades_fueradeplazo.as_view()), name='justificar_hecho_actividades_fueradeplazo'),
 
 	url(r'^ver_plancillo/(?P<pk>\d+)/(?P<base>\d+)/$', login_required(views.ver_plancillo.as_view()), name='ver_plancillo'),
 	url(r'^ingresar_plancillo/(?P<pk>\d+)/(?P<base>\d+)/$', login_required(views.ingresar_plancillo.as_view()), name='ingresar_plancillo'),

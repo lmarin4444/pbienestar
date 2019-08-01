@@ -91,6 +91,7 @@ ESTADO = (
             (6,'Suspendido por mal tiempo'),
             (7,'Suspendido por problemas de fuerza mayor'),
             (8,'Planificado'),
+            (9,'NO REALIZADA - FUERA DE PLAZO'),
            
              
             )

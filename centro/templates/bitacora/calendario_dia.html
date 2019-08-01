@@ -46,7 +46,7 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 		<tr>
 			
 	{% with numero=mascota.numero %} 
-     <!-- El valor 1 es cuando las acciones de bitacora aun no se realizan por o tanto es 
+     <!-- El valor 1 es cuando las acciones de bitacora aun no se realizan por lo tanto es 
      solo para los ambitos 1 y 2  -->
      {% if numero == 1 %}
    		<span >
@@ -69,18 +69,19 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			<td>
 
 			<!-- Para la accion Ambito 1 y 2 que es 
-				1: Plan de gestion 
+				1: Plan de gestión 
 				2: Atencion de casos
 			El numero 1 es solo para los ambitos 1 y 2 dado que las acciones de Contingencia y convivencia escolar
 			solo se ingresan no se agendan, van en las acciones posteriores 
 				-->
 			
 			{% if valor == 2 %}
-				<a class="btn btn-danger btn-xs" href="{% url 'plan:justificar_hecho_actividades' mascota.id mascota.actividad.id  %}">Fuera de plazo</a>
+				<a class="btn btn-danger btn-xs" href="{% url 'plan:justificar_hecho_actividades_fueradeplazo' mascota.id mascota.actividad.id  %}">Fuera de plazo</a>
 			{% else %}
 				<li><i class="fa-li fa fa-spinner fa-spin"></i>Acción sin ejecutar :{{mascota.sesion.intervencion_casos.estudiante.nombres|capfirst }} {{mascota.sesion.intervencion_casos.estudiante.firs_name|capfirst }}
 
 				{% if mascota.ambito == 1 %}
+
 					<a class="btn btn-primary btn-xs" href="{% url 'plan:ingresar_hecho_actividades' mascota.id mascota.actividad.id  %}">Registrar </a>
 					<a class="btn btn-success btn-xs" href="{% url 'plan:justificar_hecho_actividades' mascota.id mascota.actividad.id  %}">Justificar </a>
 					<a class="btn btn-warning btn-xs" href="{% url 'plan:reagendar_hecho_actividades' mascota.id mascota.actividad.id  %}">Re Agendar </a>
@@ -196,13 +197,12 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			 <td>-</td>
 			{% endif %}		
 
-			{% if mascota.ambito == 1 %}<!--Ambiti: Plan de gestion -->
+			{% if mascota.ambito == 1 %}<!--Ambito: Plan de gestión -->
 
-				{% if valor == 2 %}<!-- Accion de plan fuera de plazo -->
-				<a class="btn btn-info btn-xs" href="">Re agendar </a>
-				<a  class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}"><small>Ver</small> </a>
 				
-				{% endif %}
+				
+				
+				
 			{% endif %}
 			{% if mascota.ambito == 2 %}<!-- Ambito: atencion de casos -->
 				
@@ -224,11 +224,14 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			{% endif %}
 			{% if mascota.ambito == 1 %}<!-- Ambito: Plan de gestón -->
 			<td>
-
+			{% if valor == 2 %} <i class="glyphicon glyphicon glyphicon-remove-sign" style="font-size:28px;color:red"></i>Fuera de plazo
+			<a class="btn btn-danger btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}" >Ver</a>
+				
+			{% else %}	
 			<i class="glyphicon glyphicon-ban-circle" style="font-size:28px;color:red"></i>Justificado (No realizado)
 			<a class="btn btn-warning btn-xs" href="{% url 'plan:reagendar_hecho_actividades' mascota.id mascota.actividad.id  %}">Re Agendar </a>
 			<a class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}" >ver </a>
-			
+			{% endif %}			
    			</td>
 
 			{% endif %}

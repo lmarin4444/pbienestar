@@ -53,7 +53,32 @@ class Formconfirma(forms.ModelForm):
 
 		}
 
+class Formconfirmadia(forms.ModelForm):
+	class Meta:
+		model = Confirma
 
+		fields = [
+			
+
+			'obs',
+			
+		
+		]
+		labels = {
+		
+
+			'obs': 'Observación',
+
+			
+		}
+		widgets = {
+			
+
+			'obs': forms.TextInput(attrs={'class':'form-control'}),
+			
+			
+
+		}
 class Formagenda(forms.ModelForm):
 	class Meta:
 		model = agenda 

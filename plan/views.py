@@ -1697,6 +1697,73 @@ class justificar_hecho_actividades(CreateView):
 			else:
 				return self.render_to_response(self.get_context_data(form=form))
 
+#Registrar una actividad fuera de plazo
+# Justificar una actividad desde la bitacora
+class justificar_hecho_actividades_fueradeplazo(CreateView):
+	model = Hecho_Actividades	
+	form_class = Justificar_ActividadesForm
+	template_name = 'plan/justificar_actividades_form.html'
+	success_url = reverse_lazy('comienza:ver_dupla')
+
+	def get_context_data(self, **kwargs):
+	        # Llamamos ala implementacion primero del  context
+			context = super(justificar_hecho_actividades_fueradeplazo, self).get_context_data(**kwargs)
+			a = self.kwargs.get('pk') # El mismo nombre que en tu URL
+			actividad_activa=Actividades.objects.get(id=a)
+			plancillo=actividad_activa.plancillo
+			accion=plancillo.accion
+			base=accion.base
+			plan=base.plan
+			context['actividad']=actividad_activa
+			context['plancillo']=plancillo
+			context['accion']=accion
+			context['base']=base
+			context['plan']=plan
+
+			return context
+			
+		
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		#form = self.form_class(request.POST)
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		agenda = self.kwargs.get('agenda') # El mismo nombre que en tu URL
+			
+		if request.method == 'POST':
+			form = Justificar_ActividadesForm(request.POST)
+		        #codigo
+			if form.is_valid():
+				
+				actividad_activa=Actividades.objects.get(id=pk)
+				dia=actividad_activa.fecha.day
+				mes=actividad_activa.fecha.month
+				instance = form.save(commit=False)
+					
+
+				instance.estado=9
+					
+				instance.usuario=self.request.user
+				instance.actividades=actividad_activa
+				x= datetime.date.today()
+				instance.fecha=x
+				# Validar que no se ingrese un estado de justificacion euivocado
+				if instance.estado == 0 or instance.estado == 1 or instance.estado == 2:
+					instance.estado == 3
+				instance.save()
+				
+				actividad_activa.save()
+				# Actualizar la bitacora
+				agendado=Lista.objects.get(id=agenda)
+				agendado.numero=9
+				agendado.save()
+				url = reverse(('bitacora:fechas'), kwargs={ 'dia': dia , 'mes':mes })
+				return HttpResponseRedirect(url)
+			else:
+				return self.render_to_response(self.get_context_data(form=form))
+
+
+
+
 # Reagendar  una actividad desde la bitacora
 class reagendar_hecho_actividades(CreateView):
 	model = Hecho_Actividades	
