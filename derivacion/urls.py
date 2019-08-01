@@ -10,8 +10,6 @@ from derivacion.views import listadousuarios, index, mascota_view, mascota_list,
     ReporteIntervenidos,PDFPrueba,EntradasFichaSupervisor,ReporteIntervenidosSupervisor
     
 
-    
-
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^nuevo/(?P<pk>\d+)/(?P<establecimiento>\d+)$', login_required(MascotaCreate.as_view()), name='derivacion_crear'),
