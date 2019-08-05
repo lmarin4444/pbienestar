@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from secretaria.forms import MascotaRAForm
 from secretaria.models import MascotaRA
-from alumno.models import Estudiante,Escolaridad,Familia,Parentesco
+from alumno.models import Estudiante,Escolaridad,Familia,Parentesco,apoderado,hermano
 from derivacion.models import Ficha_derivacion
 from sesion.models import Intervenidos,Diagnostico,objetivo_intervencion,Ficha_de_egreso,Reporte_continuidad
 from usuario.models import Profile
@@ -920,7 +920,7 @@ def informe1_pdf_report_historico(request,pk,historia):
     Paragraph('<font size=10>%s</font>' % estudiante.nombres.capitalize()+" "+estudiante.firs_name.capitalize()+" "+estudiante.last_name.capitalize(), estilo['Normal']),
     
             
-            ))
+    ))
 
     data.append((
     Paragraph('<font size=10>%s</font>' % "Establecimiento:", estilo['Normal']), 
@@ -1973,7 +1973,32 @@ def fichaderivacion_pdf_report(request,pk):
         canvas.line(100, inch+10 ,500,inch+10)
         canvas.restoreState()
 
-
+    def pencil(canvas, text="lapiz"):
+        from reportlab.lib.colors import yellow, red, black,white
+        from reportlab.lib.units import inch
+        u = inch/10.0
+        canvas.setStrokeColor(black)
+        canvas.setLineWidth(4)
+         # draw erasor
+        canvas.setFillColor(red)
+        canvas.circle(30*u, 5*u, 5*u, stroke=1, fill=1)
+         # draw all else but the tip (mainly rectangles with different fills)
+        canvas.setFillColor(yellow)
+        canvas.rect(10*u,0,20*u,10*u, stroke=1, fill=1)
+        canvas.setFillColor(black)
+        canvas.rect(23*u,0,8*u,10*u,fill=1)
+        canvas.roundRect(14*u, 3.5*u, 8*u, 3*u, 1.5*u, stroke=1, fill=1)
+        canvas.setFillColor(white)
+        canvas.rect(25*u,u,1.2*u,8*u, fill=1,stroke=0)
+        canvas.rect(27.5*u,u,1.2*u,8*u, fill=1, stroke=0)
+        canvas.setFont("Times-Roman", 3*u)
+        canvas.drawCentredString(18*u, 4*u, text)
+         # now draw the tip
+        penciltip(canvas,debug=0)
+         # draw broken lines across the body.
+        canvas.setDash([10,5,16,10],0)
+        canvas.line(11*u,2.5*u,22*u,2.5*u)
+        canvas.line(22*u,7.5*u,12*u,7.5*u)
     
     Title = "FICHA DE DERIVACIÓN"
     pageinfo = "Centro de Bienestar     Correo electónico: bienestardemcabildo@gmail.com. "
@@ -2004,6 +2029,14 @@ def fichaderivacion_pdf_report(request,pk):
     family=estudiante.Familia
     try:
         familia=Parentesco.objects.filter(Familia=family)
+        try:
+            adulto=apoderado.objects.get(Familia=family)
+        except apoderado.DoesNotExist:
+            adulto=None
+        try:
+            herm=hermano.objects.filter(Familia=family)
+        except hermano.DoesNotExist:             
+            herm=None                        
     except Parentesco.DoesNotExist:
         familia=None
     
@@ -2040,8 +2073,8 @@ def fichaderivacion_pdf_report(request,pk):
     estiloHoja = getSampleStyleSheet()
     cabecera = estiloHoja['Heading4']
     
-    #imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg',width=490,height=40)
-
+    
+    #imagen_logo = settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg'
     #Elements.append(imagen_logo)
     
     parrafo = Paragraph("",cabecera)
@@ -2052,7 +2085,7 @@ def fichaderivacion_pdf_report(request,pk):
 
     Elements.append(Spacer(0,8))
     Elements.append(Spacer(0,8))
-
+  
 
 
 
@@ -2194,7 +2227,7 @@ def fichaderivacion_pdf_report(request,pk):
     data.append((
       
     Paragraph('<font size=10>%s</font>' % "Historia familiar (Antecedentes relevantes - Comportamiento figura de cuidado del estudiante - Situación social ej: vulneración de derecho, VIF, Presencia de  alcohol y/o droga )", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.seis, estilo['Normal']),   
+    Paragraph('<font size=10>%s</font>' %  ficha.seis, estilo['Normal']),   
     ))
    # if ficha.observacion != "Sin observación":
    #     data.append((
@@ -2248,18 +2281,38 @@ def fichaderivacion_pdf_report(request,pk):
     
     for motivo in familia:
 
-        data.append((
-        Paragraph('<font size=10>%s</font>' % "", estilo['Normal']),
-        Paragraph('<font size=10>%s</font>' % motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m+" / "+motivo.parentesco, estilo['Normal']),
-   
-    ))
-    
-    
+        if adulto.id == motivo.id :        
+            data.append((
+            Paragraph('<font size=10>%s</font>' % motivo.parentesco, estilo['Normal']),
+            Paragraph('<font size=10>%s</font>' % "ADULTO RESPONSABLE " + motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m+" / DIRECCIÓN: "+adulto.domicilio +" / TELEFONO: "+adulto.telefono, estilo['Normal']),
+       
+            ))
+            
+         
+        else:
+            soy = 1
+            for hermanitos in herm:
 
-    
+                if motivo.id == hermanitos.id:
+                    soy = 2
+                    data.append((
+                    Paragraph('<font size=10>%s</font>' % motivo.parentesco, estilo['Normal']),
+                    Paragraph('<font size=10>%s</font>' % motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m+" / "+hermanitos.establecimiento.nombre +"/ Centro Bienestar :" + hermanitos.get_pertenece() , estilo['Normal']),
+                       
+                    ))
+            if soy ==1:
+                data.append((
+                Paragraph('<font size=10>%s</font>' % motivo.parentesco, estilo['Normal']),
+                Paragraph('<font size=10>%s</font>' %  motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m, estilo['Normal']),
+           
+                ))
+                        
+           
+                                        
+   
     table = Table(
         data,
-        #colWidths=250 # Valor del ancho de las columnas
+            #colWidths=250 # Valor del ancho de las columnas
         colWidths=[130,390]
     )
     table.setStyle(
@@ -2272,28 +2325,9 @@ def fichaderivacion_pdf_report(request,pk):
 
 
     Elements.append(table)
+       
+
    
-
-    Elements.append(Spacer(0,15))
-    data = [ [ 'PSICÓLOGO'+" "+ request.user.first_name+" "+request.user.last_name , 'FIRMA'   ] ,
-        
-        
-        [ 'NOMBRE / QUIEN RECIBE EL INFORME' , 'FIRMA'   ] ,
-  ] 
-    t = Table ( data,30 * [ 3.599 * inch ] , 2 * [ 0.6 * inch ] ) 
-    t. setStyle ( TableStyle ( [ ( 'VALIGN' , ( 1 , 1 ) , ( -2 , -2 ) , 'TOP' ) ,
-                        ( 'VALIGN' , ( 0 , 0 ) , ( -1 , -1 ) , 'TOP' ) ,
-                        ( 'TEXTCOLOR' , ( 0 , 0 ) , ( 0 , -1 ) , colors.black) ,
-                        
-                        
-                        
-                       
-                        ( 'INNERGRID' , ( 0 , 0 ) , ( -1, -1 ) , 0.25 , colors.black ) ,
-                        ( 'BOX' , ( 0 , 0 ) , ( -1 , -1 ) , 0.25 , colors.black ) ,
-                        ] ) )
- 
-    Elements. append ( t )     
-
     
     
     
@@ -2301,6 +2335,7 @@ def fichaderivacion_pdf_report(request,pk):
     #Elements.append(table2)
     Elements.append(Spacer(0,20))
     doc.build(Elements, onFirstPage = myFirstPage, onLaterPages = myLaterPages)
+
     return response
 
 def fichaderivacion_pdf_report_historica(request,pk):

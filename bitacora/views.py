@@ -460,8 +460,12 @@ class RegistrarSesion(CreateView):
         if form.is_valid():
             solicitud = form.save(commit=False)
             solicitud.numero = 1
+            mensaje=""
+            pk = self.kwargs.get('pk')
+            sesion_lista = Lista.objects.get(pk=pk)
+            estudiante=sesion_lista.estudiante
+            sesion=sesion_lista.sesion
             
-            estudiante=Estudiante.objects.get(id=pk)
             family=estudiante.Familia
 
             solicitud.Familia=family
@@ -529,11 +533,11 @@ def anular_sesion(request,pk):
 
     #group_required = 'puede_administrar_encuestas
     mensaje=""
-    print pk
+   
     sesion_lista = get_object_or_404(Lista, pk=pk)
-    print sesion_lista
+    
     sesion=sesion_lista.sesion
-    print sesion
+    
     #plan_caso=sesion.intervencion_casos
     #estudiante=plan_caso.estudiante
     
