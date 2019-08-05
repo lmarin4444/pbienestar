@@ -1973,32 +1973,7 @@ def fichaderivacion_pdf_report(request,pk):
         canvas.line(100, inch+10 ,500,inch+10)
         canvas.restoreState()
 
-    def pencil(canvas, text="lapiz"):
-        from reportlab.lib.colors import yellow, red, black,white
-        from reportlab.lib.units import inch
-        u = inch/10.0
-        canvas.setStrokeColor(black)
-        canvas.setLineWidth(4)
-         # draw erasor
-        canvas.setFillColor(red)
-        canvas.circle(30*u, 5*u, 5*u, stroke=1, fill=1)
-         # draw all else but the tip (mainly rectangles with different fills)
-        canvas.setFillColor(yellow)
-        canvas.rect(10*u,0,20*u,10*u, stroke=1, fill=1)
-        canvas.setFillColor(black)
-        canvas.rect(23*u,0,8*u,10*u,fill=1)
-        canvas.roundRect(14*u, 3.5*u, 8*u, 3*u, 1.5*u, stroke=1, fill=1)
-        canvas.setFillColor(white)
-        canvas.rect(25*u,u,1.2*u,8*u, fill=1,stroke=0)
-        canvas.rect(27.5*u,u,1.2*u,8*u, fill=1, stroke=0)
-        canvas.setFont("Times-Roman", 3*u)
-        canvas.drawCentredString(18*u, 4*u, text)
-         # now draw the tip
-        penciltip(canvas,debug=0)
-         # draw broken lines across the body.
-        canvas.setDash([10,5,16,10],0)
-        canvas.line(11*u,2.5*u,22*u,2.5*u)
-        canvas.line(22*u,7.5*u,12*u,7.5*u)
+    
     
     Title = "FICHA DE DERIVACIÓN"
     pageinfo = "Centro de Bienestar     Correo electónico: bienestardemcabildo@gmail.com. "
@@ -2071,7 +2046,7 @@ def fichaderivacion_pdf_report(request,pk):
 
     estilo = getSampleStyleSheet()
     estiloHoja = getSampleStyleSheet()
-    cabecera = estiloHoja['Heading4']
+    cabecera = estiloHoja['Heading6']
     
     
     #imagen_logo = settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg'
@@ -2079,6 +2054,12 @@ def fichaderivacion_pdf_report(request,pk):
     
     parrafo = Paragraph("",cabecera)
     Elements.append(parrafo)
+
+    parrafo = Paragraph("Departamento de educación Ilustre Municidad de Cabildo",cabecera)
+    Elements.append(parrafo)
+    parrafo = Paragraph("Centro de Bienestar",cabecera)
+    Elements.append(parrafo)
+    
    
     Elements.append(Spacer(0,24))
     Elements.append(Spacer(0,24))
@@ -2279,33 +2260,40 @@ def fichaderivacion_pdf_report(request,pk):
     
     ))    
     
-    for motivo in familia:
+    if familia:
+        for motivo in familia:
 
-        if adulto.id == motivo.id :        
-            data.append((
-            Paragraph('<font size=10>%s</font>' % motivo.parentesco, estilo['Normal']),
-            Paragraph('<font size=10>%s</font>' % "ADULTO RESPONSABLE " + motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m+" / DIRECCIÓN: "+adulto.domicilio +" / TELEFONO: "+adulto.telefono, estilo['Normal']),
-       
-            ))
-            
-         
-        else:
-            soy = 1
-            for hermanitos in herm:
-
-                if motivo.id == hermanitos.id:
-                    soy = 2
-                    data.append((
-                    Paragraph('<font size=10>%s</font>' % motivo.parentesco, estilo['Normal']),
-                    Paragraph('<font size=10>%s</font>' % motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m+" / "+hermanitos.establecimiento.nombre +"/ Centro Bienestar :" + hermanitos.get_pertenece() , estilo['Normal']),
-                       
-                    ))
-            if soy ==1:
+            if adulto.id == motivo.id :        
                 data.append((
                 Paragraph('<font size=10>%s</font>' % motivo.parentesco, estilo['Normal']),
-                Paragraph('<font size=10>%s</font>' %  motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m, estilo['Normal']),
+                Paragraph('<font size=10>%s</font>' % "ADULTO RESPONSABLE " + motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m+" / DIRECCIÓN: "+adulto.domicilio +" / TELEFONO: "+adulto.telefono, estilo['Normal']),
            
                 ))
+                
+             
+            else:
+                soy = 1
+                for hermanitos in herm:
+
+                    if motivo.id == hermanitos.id:
+                        soy = 2
+                        data.append((
+                        Paragraph('<font size=10>%s</font>' % motivo.parentesco, estilo['Normal']),
+                        Paragraph('<font size=10>%s</font>' % motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m+" / "+hermanitos.establecimiento.nombre +"/ Centro Bienestar :" + hermanitos.get_pertenece() , estilo['Normal']),
+                           
+                        ))
+                if soy ==1:
+                    data.append((
+                    Paragraph('<font size=10>%s</font>' % motivo.parentesco, estilo['Normal']),
+                    Paragraph('<font size=10>%s</font>' %  motivo.nombre +" "+motivo.apellido_p+" "+motivo.apellido_m, estilo['Normal']),
+               
+                    ))
+    else:
+        data.append((
+                    Paragraph('<font size=10>%s</font>' % "Sin antecedentes familiares", estilo['Normal']),
+
+               
+                    ))                  
                         
            
                                         
@@ -2324,8 +2312,18 @@ def fichaderivacion_pdf_report(request,pk):
     )
 
 
-    Elements.append(table)
+ 
        
+ 
+
+    
+    Elements.append(table)
+    Elements.append(Spacer(0,15))
+
+
+
+
+
 
    
     
