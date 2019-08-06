@@ -4,6 +4,7 @@
 
 
 <h3>Listado de estudiantes con Ficha de derivación al centro de Bienestar</h3>
+<h4>Por usuario derivante: {{user.first_name|capfirst}} {{user.last_name|capfirst}}</h4>
 <table id="example" class="table table-bordered">
 	<thead>
 		<tr>
@@ -31,7 +32,8 @@
 			
 			<td>
 				<a class="btn btn-info btn-sm" href="{% url 'alumno:estudiante_editar' estudio.Estudiante.id estudio.Estudiante.curso.establecimiento.id %}">Editar</a>
-				<a  class="btn btn-danger btn-sm" href="{% url 'alumno:estudiante_eliminar' estudio.Estudiante.id %}">Eliminar</a>
+				<!--    
+				<a  class="btn btn-danger btn-sm" href="{% url 'alumno:estudiante_eliminar' estudio.Estudiante.id %}">Eliminar</a> -->
 
 				
 				
