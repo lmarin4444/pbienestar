@@ -8,7 +8,7 @@
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Ir menu personal !">Establecimientos</a></li>
+  <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Ir listado de Establecimientos!">Establecimientos</a></li>
   <li><i class="fa fa-calendar" style="font-size:12px;color:black"></i><a href="{% url 'bitacora:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">  Calendario </a></li>
 
 
@@ -17,14 +17,14 @@
 
 </ul>
 <h3><strong>Actividades planificadas </strong>
- <span class="label label-danger">para el día {{dia}}/{{mes}}/{{anio}}</span> HORA ACTUAL  {% now "TIME_FORMAT"  %} </span></h3>
+ <span class="label label-danger">para el día {{dia}}/{{mes}}/{{anio}}</span> HORA ACTUAL  {% now "TIME_FORMAT"  %} </h3>
 
 {% if valor == 1 %}
 Actividades dentro del plazo de acción
 {% else %}
 Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión 
 {% endif %}
-</ul>
+
 
 <table id="example" class="table table-bordered" fontsize =10px>
 	<thead>
@@ -35,7 +35,7 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			<td>Actividad</td>
 			<td>Curso</td>
 			<td>Tipo</td>
-			<td>Acción</td>
+			<td>Establecimiento</td>
 			<td>Acciones</td>
 		</tr>
 		
@@ -60,11 +60,10 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			{% endif %}
 
 			 <td>{{ mascota.get_ambito}}</td>
-			 {% if mascota.get_tipo_actividad %}
-			 <td>{{ mascota.get_tipo_actividad}}</td>
-			 {% else %}
-			 <td>-</td>
-			{% endif %}			 
+			 
+			 <td>{{ mascota.establecimiento.alias}}</td>
+			 
+				 
 			
 			<td>
 
@@ -78,7 +77,7 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			{% if valor == 2 %}
 				<a class="btn btn-danger btn-xs" href="{% url 'plan:justificar_hecho_actividades_fueradeplazo' mascota.id mascota.actividad.id  %}">Fuera de plazo</a>
 			{% else %}
-				<li><i class="fa-li fa fa-spinner fa-spin"></i>Acción sin ejecutar :{{mascota.sesion.intervencion_casos.estudiante.nombres|capfirst }} {{mascota.sesion.intervencion_casos.estudiante.firs_name|capfirst }}
+				<i class="fa-li fa fa-spinner fa-spin"></i>Acción sin ejecutar :{{mascota.sesion.intervencion_casos.estudiante.nombres|capfirst }} {{mascota.sesion.intervencion_casos.estudiante.firs_name|capfirst }}
 
 				{% if mascota.ambito == 1 %}
 
@@ -121,21 +120,17 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			{% endif %}
 
 			 <td>{{ mascota.get_ambito}}</td>
-			 {% if mascota.get_tipo_actividad %}
-			 <td>{{ mascota.get_tipo_actividad}}</td>
-			 {% else %}
-			 <td>-</td>
-			{% endif %}		
+			 <td>{{ mascota.establecimiento.alias}}</td>	
 
 			<td>
 
-			<span class="fa fa-check-square-o " style="font-size:15px;color: #04B431;"></i>Ingresado o Realizado {{mascota.sesion.intervencion_casos.estudiante.nombres|capfirst }} {{mascota.sesion.intervencion_casos.estudiante.firs_name|capfirst }}
-			
+			<span class="fa fa-check-square-o " style="font-size:15px;color: #04B431;"></i>Ingresado o Realizado {{mascota.sesion.intervencion_casos.estudiante.nombres|capfirst }} {{mascota.sesion.intervencion_casos.estudiante.firs_name|capfirst }}</span>
+			 
 
 
 			{% if mascota.ambito == 1 %}
 				
-				<a class="btn btn-info btn-xs" href="">Modificar </a>
+				<a class="btn btn-success btn-xs" href="">Modificar </a>
 				<a  class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}"><small>Ver</small> </a>
 				{% if valor == 2 %}
 				<a class="btn btn-info btn-xs" href="">Modificar </a>
@@ -191,11 +186,7 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			{% endif %}
 
 			 <td>{{ mascota.get_ambito}}</td>
-			 {% if mascota.get_tipo_actividad %}
-			 <td>{{ mascota.get_tipo_actividad }}</td>
-			 {% else %}
-			 <td>-</td>
-			{% endif %}		
+			 <td>{{ mascota.establecimiento.alias}}</td>	
 
 			{% if mascota.ambito == 1 %}<!--Ambito: Plan de gestión -->
 
@@ -208,7 +199,7 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 				
 			<td>
 
-			<i class="fa fa-close" style="font-size:18px;color:red"></i>No asistio
+			<i class="fa fa-close" style="font-size:12px;color:red"></i>No asistio
 			<a class="btn btn-info btn-xs" href="{% url 'dupla:IntervencionCasosDetailView' mascota.sesion.intervencion_casos.estudiante.id%}" >ver </a>
    			</td>
 			
@@ -217,18 +208,18 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			{% if mascota.ambito == 0 %}<!-- Ambito: Contingencia -->
 			<td>
 
-			<i class="fa fa-close" style="font-size:18px;color:red"></i>Anulado
+			<i class="fa fa-close" style="font-size:12px;color:red"></i>Anulado
 			<a class="btn btn-info btn-xs" href="{% url 'dupla:IntervencionCasosDetailView' mascota.sesion.intervencion_casos.estudiante.id%}" >ver </a>
    			</td>
 
 			{% endif %}
 			{% if mascota.ambito == 1 %}<!-- Ambito: Plan de gestón -->
 			<td>
-			{% if valor == 2 %} <i class="glyphicon glyphicon glyphicon-remove-sign" style="font-size:28px;color:red"></i>Fuera de plazo
-			<a class="btn btn-danger btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}" >Ver</a>
+			{% if valor == 2 %} <i class="glyphicon glyphicon glyphicon-remove-sign" style="font-size:12px;color:red"></i>Fuera de plazo
+			<a  class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}" >Ver</a>
 				
 			{% else %}	
-			<i class="glyphicon glyphicon-ban-circle" style="font-size:28px;color:red"></i>Justificado (No realizado)
+			<i class="glyphicon glyphicon-ban-circle" style="font-size:12px;color:red"></i>Justificado (No realizado)
 			<a class="btn btn-warning btn-xs" href="{% url 'plan:reagendar_hecho_actividades' mascota.id mascota.actividad.id  %}">Re Agendar </a>
 			<a class="btn btn-info btn-xs" href="{% url 'plan:ver_bitacora_actividad' mascota.id  %}" >ver </a>
 			{% endif %}			

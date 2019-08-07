@@ -86,7 +86,7 @@ ESTADO = (
             (1,'Realizado'),
             (2,'Re agendado'),
             (3,'Postergado - Justificado'),
-            (4,'Suspendido por ordenes del director'),
+            (4,'Suspendido por órdenes del director'),
             (5,'Suspendido por actividades del establecimiento'),
             (6,'Suspendido por mal tiempo'),
             (7,'Suspendido por problemas de fuerza mayor'),

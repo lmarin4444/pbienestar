@@ -8,7 +8,7 @@
   <li><a href="{% url 'plan:PlanListView' plan.establecimiento.id %}"data-toggle="tooltip" title="Ir menu inicial centro!">Volver</a></li>
  
 
-  <li class="active"> Deglose de plan</li> 
+  <li class="active"> Deglose plan</li> 
   </ul>
 <form method="post">
   {% csrf_token %}
@@ -35,7 +35,7 @@
  
 
 <TR>
-    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >BASES</TH>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >COMPONENTES</TH>
     
   </TR>
   
@@ -71,7 +71,7 @@
    
 {% endfor %}
 <TR>
-    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >Plan de Gestión de Convivencia Escolar</TH>
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;" >DEGLOSE: Plan de Gestión de Convivencia Escolar</TH>
     
   </TR>
 <TR>
@@ -92,7 +92,10 @@
                             <ul>  
                             {% for actividad_activa in actividades %}
                               {% if actividad_activa.plancillo == plancillo_activo %}
-                            <li class="store_item">Actividad: {{actividad_activa.nombre}}  </li>
+                            <li class="store_item">Actividad: {{actividad_activa.nombre}} -/- {{actividad_activa.descripcion}}-/-
+                            <strong>{{actividad_activa.get_ejecutores}}</strong> 
+                             {{actividad_activa.get_estado}}
+                            </li>
                                {% endif%}
                             {% endfor %}      
                            </ul>  
@@ -118,8 +121,8 @@
       
       <TD COLSPAN=4>  
       
-      <ul><strong>NOMBRE/PSICÓLOGO PSICÓLOGA </strong></ul>
-      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
+      <ul><strong>RESUMEN </strong></ul>
+      <ul>Profesional: {{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
       </TD>
    
   
