@@ -581,7 +581,11 @@ def ver_semana(request):
     end_week = start_week + datetime.timedelta(4)
     print end_week
     #fechas = agenda.objects.filter(Q(fecha__gte=start_week), Q(fecha__lte=end_week)) 
-    fechas = agenda.objects.filter(fecha__range=[start_week, end_week]).order_by('horario_i')
+    try:
+        fechas = agenda.objects.filter(fecha__range=[start_week, end_week]).order_by('horario_i')
+    except agenda.DoesNotExist:
+        fechas=None
+    
     
     
     dias = timedelta(days=1)
