@@ -1255,6 +1255,16 @@ def ActividadesListView(request,pk):
 		accion=Accion.objects.all()
 		plancillo=Plancillo.objects.all()
 		actividades=Actividades.objects.all()
+		try:
+			act_creadas = actividades.objects.filter(estado=0).count()
+			act_ejecutadas = actividades.objects.filter(estado=1).count()
+			act_reagendadas = actividades.objects.filter(estado=2).count()
+			act_justificadas = actividades.objects.filter(estado=3).count()
+			act_planificadas = actividades.objects.filter(estado=8).count()
+			act_fuera_plazo = actividades.objects.filter(estado=9).count()
+		except actividades.DoesNotExist:
+			act_creadas=""	
+
 		cantidad_bases=base.count()
 	except Plan.DoesNotExist:
 		plan=""

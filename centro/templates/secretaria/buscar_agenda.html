@@ -10,7 +10,7 @@
 
   <li class="active">Listado agenda</li> 
   </ul>
-Listado de atenciones para el estudiante <strong>{{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</strong>
+Listado de atenciones para el estudiante <strong>{{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}-/- Apoderado {{adulto}}</strong>
 <table id="example" class="table table-bordered">
 	<thead>
 		<tr>
@@ -31,7 +31,7 @@ Listado de atenciones para el estudiante <strong>{{dato.nombres|capfirst}} {{dat
 			
 	
 				<tr>
-					<td>{{ mascota.fecha }}</td>
+					<td>{{ mascota.fecha|date:"d-m-Y "}}</td>
 					
 					<td>{{ mascota.get_horario_i }}</td>
 					<td>{{ mascota.participantes }}</td>

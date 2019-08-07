@@ -30,6 +30,8 @@ ESTADO    = (
             (9,'Devuelve el llamado otra persona o confirma'),
             (10,'Devuelve el llamado otra persona no sabe'),
             (11,'No se realizó el llamado'),
+            (11,'LLama el adulto responsable al Centro de Bienestar'),
+
 
 
             )

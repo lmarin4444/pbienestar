@@ -16,7 +16,7 @@ from django.utils.decorators import method_decorator
 from secretaria.forms import MascotaRAForm,FormPregunta,Formagenda,FormagendaCalendario,Formconfirma,FormFechas
 from secretaria.models import MascotaRA,Pregunta,agenda,Confirma,Registro
 from sesion.models import Intervenidos,sesion
-from alumno.models import apoderado
+from alumno.models import apoderado,Parentesco
 from profesional.models import Profesional
 from django.http import HttpResponse,HttpResponseRedirect
 from alumno.models import Estudiante
@@ -403,13 +403,24 @@ def buscar_agenda(request,pk):
     
     #group_required = 'puede_administrar_encuestas
     dato = get_object_or_404(Estudiante, pk=pk)
-    print dato
+    familia=dato.Familia
+    try:
+        parientes=Parentesco.objects.filter(Familia=familia)
+        adulto=apoderado.objects.get(Familia=familia)
+    except apoderado.DoesNotExist:
+        adulto="Sin apoderado ingresado"
+    
+    
+    
     atencion= agenda.objects.filter(Estudiante__id=pk).order_by('fecha')
-    print atencion
+    
 
     context = {
         "dato": dato,
+        "parientes": parientes,
+        "adulto": adulto,
         "agenda":atencion,
+
        
          }
     return render(request, 'secretaria/buscar_agenda.html', context)  
@@ -488,7 +499,14 @@ def ConfirmacionModificar(request,pk,age):
     
     agendo=agenda.objects.get(id=age)
     
-    confirma=Confirma.objects.get(agenda=agendo)
+    try:
+        confirma=Confirma.objects.get(agenda=agendo)
+    except Confirma.DoesNotExist:
+        url = reverse(('secretaria:confirmacion_crear'), kwargs={ 'pk': dato.id, 'age':agendo.id })
+        return HttpResponseRedirect(url)
+
+               
+    
     
     x = datetime.date.today()
     
