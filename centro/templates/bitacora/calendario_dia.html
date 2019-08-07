@@ -93,7 +93,7 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 
 
 			{% if mascota.ambito == 2 %}
-				<a class="btn btn-success btn-xs" href="{% url 'bitacora:RegistrarSesion' mascota.sesion.id %}">Aistencia </a>
+				<a class="btn btn-success btn-xs" href="{% url 'bitacora:RegistrarSesion' mascota.id %}">Aistencia </a>
 				<a class="btn btn-danger btn-xs" href="{% url 'bitacora:anular_sesion' mascota.id %}">Inasistencia </a>
 
 				<a class="btn btn-info btn-xs" href="{% url 'dupla:IntervencionCasosDetailView' mascota.sesion.intervencion_casos.estudiante.id%}" >ver </a>

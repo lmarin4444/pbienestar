@@ -208,7 +208,7 @@ class Lista(models.Model):
     
         
     def __unicode__(self):
-        return '{} {} {} {} {}'.format(self.tipo_actividad,self.id,self.fecha,self.nombre,self.horario)  
+        return '{} {} {} {} {} {}'.format(self.sesion,self.tipo_actividad,self.id,self.fecha,self.nombre,self.horario)  
     
            
 

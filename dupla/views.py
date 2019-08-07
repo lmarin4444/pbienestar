@@ -867,7 +867,7 @@ def IntervencionCasosDetailView(request,pk):
 				form.objetivo_especifico=""
 				form.tematicas=""
 				form.observacion=""
-				form.participantes=""
+				
 				form.numero=0
 				form.instance.save()
 				form.save_m2m()
@@ -1208,8 +1208,8 @@ def ModificarCita(request,pk,colegio):
 				agendado=Lista.objects.get(Q(fecha=instance.fecha) & Q(horario=instance.horario)& Q(usuario=request.user))
 				
 				agendado.delete()
-				if instance == 1:
-					numero=1
+				numero = instance.numero 
+				
 
 	 			Lista.objects.create(fecha=instance.fecha,horario=instance.horario,nombre='Atención de caso',
 						curso=estudiante.curso.numero,tipo_letras=estudiante.curso.letra,

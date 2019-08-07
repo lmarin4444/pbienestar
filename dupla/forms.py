@@ -397,6 +397,8 @@ class Intervencion_sesioninicialForm(forms.ModelForm):
 			
 
 			'area_intervencion',
+			'participantes',
+
 			
 			
 		]
@@ -406,7 +408,7 @@ class Intervencion_sesioninicialForm(forms.ModelForm):
 			'horario':'Seleccionar horario de la sesión ',
 			
 			'area_intervencion':'Áreas de intervención a ser tratadas',
-			
+			'participantes':'Participantes a la sesión',
 		
 		}
 		widgets = {
@@ -415,6 +417,7 @@ class Intervencion_sesioninicialForm(forms.ModelForm):
 			'horario':forms.Select(attrs={'class':'form-control'}),
 			
 			'area_intervencion': forms.CheckboxSelectMultiple(),
+			'participantes':forms.Select(attrs={'class':'form-control'}),
 			
 			}
 

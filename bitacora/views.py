@@ -445,11 +445,16 @@ class RegistrarSesion(CreateView):
     def get_context_data(self, **kwargs):
         context = super(RegistrarSesion, self).get_context_data(**kwargs)
         pk = self.kwargs.get('pk')
-        Sesion=Intervencion_sesion.objects.get(pk=pk)
+        sesion_lista = Lista.objects.get(pk=pk)
+        print sesion_lista
+        sesion=sesion_lista.sesion
+        print sesion
+        caso=sesion.intervencion_casos
+        dato=caso.estudiante
 
-        dato=Sesion.intervencion_casos.estudiante
+        
         context['dato'] = dato
-        context['agenda'] = Sesion
+        context['agenda'] = sesion_lista
 
         return context
 
@@ -459,26 +464,35 @@ class RegistrarSesion(CreateView):
 
         if form.is_valid():
             solicitud = form.save(commit=False)
-            solicitud.numero = 1
             mensaje=""
             pk = self.kwargs.get('pk')
             sesion_lista = Lista.objects.get(pk=pk)
-            estudiante=sesion_lista.estudiante
             sesion=sesion_lista.sesion
-            
-            family=estudiante.Familia
+            caso=sesion.intervencion_casos
+            estudiante=caso.estudiante
 
-            solicitud.Familia=family
+
+
+            solicitud.fecha=sesion_lista.fecha
+            solicitud.horario=sesion_lista.horario
+            solicitud.numero = 1
+            solicitud.intervencion_casos=caso
+            solicitud.usuario=request.user
+
+            
+
+            
+
             
             solicitud.save()
         
-        lista=Lista.objects.get(sesion=object)
-        lista.numero=2
-        lista.save()
+        
+        sesion_lista.numero=2
+        sesion_lista.save()
     
-        object.save()
+     
         # Retornamos el objeto
-        url = reverse(('bitacora:fechas'), kwargs={ 'dia': lista.fecha.day,'mes':lista.fecha.month})
+        url = reverse(('bitacora:fechas'), kwargs={ 'dia': sesion_lista.fecha.day,'mes':sesion_lista.fecha.month})
         return HttpResponseRedirect(url)     
 
         

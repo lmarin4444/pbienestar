@@ -271,7 +271,7 @@ ESTADO_SESION = (
         (0,'Planificada'),
         (1,'Realizada'),
         (2,'No asiste '),
-        (3,'Cambiada'),        
+        (3,'Re-agendada'),        
         )
 
 CANTIDAD = (
@@ -587,7 +587,7 @@ class Intervencion_sesion(models.Model):
 # 0: Creada y planificada  - Agendada
 # 1: Realizada
 # 2: Eliminada
-# 3: Suspendidad o cancelada - cambiada de día
+# 3: Suspendida o cancelada - cambiada de día
     intervencion_casos          = models.ForeignKey(Intervencion_casos)
     usuario 					= models.ForeignKey(User)
     	
@@ -605,7 +605,7 @@ class Intervencion_sesion(models.Model):
 
 
     def __unicode__(self):
-        return '{} {} {}'.format(self.id,self.fecha,self.horario)	
+        return '{} {} {} {}'.format(self.intervencion_casos,self.id,self.fecha,self.horario)	
 
 #crear seguiniento de una causa
 class Derivacion_Ficha_derivacion_dupla(models.Model):

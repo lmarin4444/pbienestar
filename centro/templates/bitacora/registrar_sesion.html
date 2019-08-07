@@ -10,7 +10,7 @@
   <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver Establecimientos</a></li>
   
   
-  <li class="active">Registar sesión del {{sesion_lista.fecha}} a las {{sesion_lista.get_horario}} </li> 
+  <li class="active">Registar sesión del {{agenda.fecha}} a las {{agenda.get_horario}} </li> 
 </ul>
 {% if mensaje %}
 <div class="alert alert-danger">{{mensaje}}</div>
