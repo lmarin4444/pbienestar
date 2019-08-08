@@ -728,12 +728,11 @@ def ver_dia(request,fecha=None):
 
 #Para ver a los apoderado de cada uno de los estudiante
 def ver_apoderado(request,pk,fami):
-    print pk
+  
     estudiante = Estudiante.objects.get(id=pk)
-    
-    print estudiante
+
     familia=apoderado.objects.filter(Familia__id=fami)
-    print familia
+
 
     contexto = {
     'estudiante':estudiante,
@@ -772,13 +771,14 @@ def Intervenidos_sesiones(request,pk):
     # ir a buscar la informacion de la agenda
     try:
         agendado=agenda.objects.filter(Estudiante=dato).order_by('fecha')
+        try:
+            registrado=Registro.objects.get(agenda=agendado).order_by('fecha')
+        except Registro.DoesNotExist:
+            registrado=None
     except agenda.DoesNotExist:
         agendado=None
     
-    try:
-        registrado=Registro.objects.get(agenda=agendado)
-    except Registro.DoesNotExist:
-        registrado=None
+    
     
 
     #dalumnos={}
