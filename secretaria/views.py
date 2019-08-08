@@ -667,7 +667,7 @@ def ver_impresa_profesional(request,pk):
 
     
     profesionales=Profesional.objects.get(usuario__id=pk)
-    print profesionales
+
     date = datetime.date.today()
     start_week = date - datetime.timedelta(date.weekday())
     
@@ -764,20 +764,35 @@ def Intervenidos_sesiones(request,pk):
     dato = get_object_or_404(Estudiante, pk=pk)
     
     try:
-        listado = sesion.objects.filter(Estudiante=dato).order_by('fecha')
+        listado = sesion.objects.filter(Estudiante__id=pk).order_by('fecha')
     except sesion.DoesNotExist:
         listado=None
     
     # ir a buscar la informacion de la agenda
     try:
         agendado=agenda.objects.filter(Estudiante=dato).order_by('fecha')
-        try:
-            registrado=Registro.objects.get(agenda=agendado).order_by('fecha')
-        except Registro.DoesNotExist:
-            registrado=None
     except agenda.DoesNotExist:
         agendado=None
     
+    try:
+        registrado=Registro.objects.filter(agenda=agendado).order_by('fecha')
+    except Registro.DoesNotExist:
+        registrado=None
+    
+
+    #dalumnos={}
+    #for agendadar in agendado:
+#       bandera=0
+    #   for i in range (agendado):
+    #       print i
+    #       for x in range (listado):
+    #           if i.fecha == x.fecha and i.horario_i==x.horario_i:
+    #               dalumnos=({i:[x.numero,x.fecha,x.horario_i,x.observacion,x.privado]})
+    #               bandera=1
+    #       if bandera == 0:
+    #               porque=Registro.objects.get(agenda=i,Estudiante=dato)
+    #               dalumnos.append({i:['NN',i.fecha,i.horario_i,'Sesion no reliazada',i.porque]})          
+    #   print dalumnos
 
     contexto = {'sesion':listado,
                 'dato':dato,
@@ -785,4 +800,6 @@ def Intervenidos_sesiones(request,pk):
                 'agendado':agendado,
                             }
 
-    return render(request, 'secretaria/sesion_list.html', contexto)
+    return render(request, 'sesion/sesion_list.html', contexto)
+
+   
