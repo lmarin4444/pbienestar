@@ -20,34 +20,27 @@ Para el estudiante {{dato.nombres}} {{ dato.firs_name }} {{ dato.last_name }} / 
 		</tr>
 	</thead>
 	
-<div class="modal fade" id="myModal" role="dialog"> 
-  <div class="modal-dialog">     
+<div > 
+  <div >     
 	<tbody>
 		
-	{% if sesion %}
-		{% for mascota in sesion %}
-		
-		<tr>
-			<td>{{ forloop.counter }}</td>
-			<td>{{ mascota.numero }}</td>
+		{% if sesion %}
+			{% for mascota in sesion %}
 			
-			<td>{{ mascota.fecha}}</td>
-			<td>{{ mascota.get_horario_i}}</td>
-		
-		
-			<td>{{ mascota.get_participantes}}</td>
-		
-			<td>{{ mascota.tipo_sesion}}</td>
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ mascota.numero }}</td>
+				<td>{{ mascota.fecha}}</td>
+				<td>{{ mascota.get_horario_i}}</td>
+				<td>{{ mascota.get_participantes}}</td>
+				<td>{{ mascota.tipo_sesion}}</td>
 
-	
-				
-			
-		</tr>
+			</tr>
 
-		{% endfor %}
+			{% endfor %}
 		
 		{% else %}
-		<h1>No hay registros de asistencia</h1>
+			<h1>No hay registros de asistencia</h1>
 		{% endif %}
 	</tbody>
 </table> 
@@ -55,7 +48,7 @@ Para el estudiante {{dato.nombres}} {{ dato.firs_name }} {{ dato.last_name }} / 
 
 <table id="example" class="table table-bordered">
 	<thead>
-<h4>Resumen general de asistencias de {{dato.nombres}} {{dato.firs_name}} {{dato.last_name}}</h4>
+<h4>Resumen general de asistencias de {{dato.nombres|capfirst }} {{dato.firs_name|capfirst }} {{dato.last_name|capfirst }}</h4>
 <thead>
 		<tr>
 			<td>Nª  </td>

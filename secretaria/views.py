@@ -778,22 +778,6 @@ def Intervenidos_sesiones(request,pk):
     except agenda.DoesNotExist:
         agendado=None
     
-    
-    
-
-    #dalumnos={}
-    #for agendadar in agendado:
-#       bandera=0
-    #   for i in range (agendado):
-    #       print i
-    #       for x in range (listado):
-    #           if i.fecha == x.fecha and i.horario_i==x.horario_i:
-    #               dalumnos=({i:[x.numero,x.fecha,x.horario_i,x.observacion,x.privado]})
-    #               bandera=1
-    #       if bandera == 0:
-    #               porque=Registro.objects.get(agenda=i,Estudiante=dato)
-    #               dalumnos.append({i:['NN',i.fecha,i.horario_i,'Sesion no reliazada',i.porque]})          
-    #   print dalumnos
 
     contexto = {'sesion':listado,
                 'dato':dato,
