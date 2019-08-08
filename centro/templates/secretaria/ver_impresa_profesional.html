@@ -123,7 +123,7 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 6 %} {% else %}{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1329,7 +1329,9 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>
+						{% if estudio.horario_i == 60 %} {% else %}{{estudio.get_horario_i}}{% endif %}
+						</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
