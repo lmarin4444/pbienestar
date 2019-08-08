@@ -112,7 +112,7 @@ class establecimiento(models.Model):
 
 
 	def __unicode__(self):
-		return self.nombre
+		return '{} {}'.format(self.nombre, self.alias)
 	
 
 class Profesor(models.Model):

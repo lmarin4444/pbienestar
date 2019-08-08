@@ -32,7 +32,7 @@ class EstudianteAdmin(admin.ModelAdmin):
 			return obj.usuario
 
 class establecimientoAdmin(admin.ModelAdmin):
-	list_display = ('id','Rbd','nombre')
+	list_display = ('id','Rbd','nombre','alias')
 	search_fields = ['establecimiento']
 	list_per_page = 25
 	list_max_show_all = 30

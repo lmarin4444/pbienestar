@@ -58,7 +58,8 @@
 					
 					
 					<small>
-						<strong>{% if estudio.horario_i == 6 %} {% else %}{{estudio.get_horario_i}}{% endif %}</strong>
+						<strong>{% if estudio.horario_i == 6 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
@@ -127,9 +128,10 @@
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
-						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						/{{ estudio.Estudiante.curso.establecimiento.alias|title}}/
 						
-						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{{estudio.participantes|title}} 
+						[{{estudio.tipo_actividad.nombre|title}}] 
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
                                                     <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
                                                 {% endif %} 
@@ -280,7 +282,7 @@
 						
 						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
 						
-						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						[{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
                                                     <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
                                                 {% endif %} 
