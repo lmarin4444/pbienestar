@@ -574,12 +574,12 @@ def ver_semana(request):
     
     date = datetime.date.today()
     start_week = date - datetime.timedelta(date.weekday())
-    print start_week
+    
     end_week = start_week + datetime.timedelta(7)
     
     #start_week=end_week
     end_week = start_week + datetime.timedelta(4)
-    print end_week
+   
     #fechas = agenda.objects.filter(Q(fecha__gte=start_week), Q(fecha__lte=end_week)) 
     try:
         fechas = agenda.objects.filter(fecha__range=[start_week, end_week]).order_by('horario_i')
@@ -587,7 +587,7 @@ def ver_semana(request):
         fechas=None
     
     
-    
+
     dias = timedelta(days=1)
     
     martes=start_week+dias
@@ -599,7 +599,7 @@ def ver_semana(request):
     dias = timedelta(days=3)
     
     jueves=start_week+dias
-    print fechas
+
     #BUSCAR LOS PSICOLOGOS DE LA PROXIMA SEMANA 
 
     return render(
@@ -762,7 +762,7 @@ def Intervenidos_sesiones(request,pk):
     dato = get_object_or_404(Estudiante, pk=pk)
     
     try:
-        listado = sesion.objects.filter(Estudiante__id=pk).order_by('fecha')
+        listado = sesion.objects.filter(Estudiante=dato).order_by('fecha')
     except sesion.DoesNotExist:
         listado=None
     
