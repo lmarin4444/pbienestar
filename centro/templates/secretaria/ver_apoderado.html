@@ -4,14 +4,14 @@
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_secretaria' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
-  <li><a href="{% url 'secretaria:secretaria_listar' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Volver lista</a></li>
+  <li><a href="{% url 'comienza:entrar_secretaria' %}"data-toggle="tooltip" title="Ir menú inicial !">Menu </a></li>
+  <li><a href="{% url 'secretaria:secretaria_listar' %}"data-toggle="tooltip" title="Volver lista anterior!">Volver lista</a></li>
   
 
   <li class="active">Listado familiares</li> 
 </ul>
 
-<h3>Listado de apoderados para el estudiante {{estudiante.nombres}} {{estudiante.firs_name}} {{estudiante.last_name}}</h3>
+<h3>Listado de apoderados para el estudiante {{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}}</h3>
 	
 <table id="example" class="table table-bordered">
 	<thead>
@@ -37,12 +37,12 @@
 			<tr>
 			
 
-				<td>{{ estudio.nombre }} {{ estudio.apellido_p }} {{ estudio.apellido_m }}  </td>
+				<td>{{ estudio.nombre|capfirst }} {{ estudio.apellido_p|capfirst }} {{ estudio.apellido_m|capfirst }}  </td>
 				 <td>{{ estudio.parentesco}} </td>  
 				 <td>{{ estudio.edad}} </td> 
 				 <td>{{ estudio.get_escolaridad}} </td>  
 				 <td>{{ estudio.ocupacion}} </td> 
-				 <td style="color:#ff0000"><strong>{{ estudio.apoderado.domicilio}}</strong> </td> 
+				 <td style="color:#ff0000"><strong>{{ estudio.apoderado.domicilio|capfirst}}</strong> </td> 
 				 <td style="color:#ff0000">{{ estudio.apoderado.telefono}} </td> 
 				
 				
