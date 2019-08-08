@@ -800,6 +800,6 @@ def Intervenidos_sesiones(request,pk):
                 'agendado':agendado,
                             }
 
-    return render(request, 'secretaria/sesion_list.html', contexto)
+    return render(request, 'secretaria/sesion_list_secretaria.html', contexto)
 
    
