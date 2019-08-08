@@ -257,7 +257,7 @@ class tipo_actividad(models.Model):
     Definicion = models.CharField(max_length=100)
     nombre     = models.CharField(max_length=50)
     def __str__(self):
-        return '{} {}'.format(self.id,self.nombre)
+        return '{} '.format(self.nombre)
 
 
 
