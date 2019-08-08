@@ -666,7 +666,7 @@ def ver_impresa_profesional(request,pk):
    # Obtener todos los usuarios que son profesionales centro de bienestar
 
     
-    
+    profesionales=Profesional.objects.get(usuario__id=pk)
     date = datetime.date.today()
     start_week = date - datetime.timedelta(date.weekday())
     
@@ -699,6 +699,7 @@ def ver_impresa_profesional(request,pk):
          'martes':martes,
          'miercoles':miercoles,
          'jueves':jueves,
+         'profesionales':profesionales,
          
                     
     })
