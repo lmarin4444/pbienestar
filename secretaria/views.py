@@ -663,8 +663,10 @@ def ver_impresa(request):
 # ver el listado por profesional
 def ver_impresa_profesional(request):
     
-    # Obtener todos los usuarios que son profesionales centro de bienestar
+   # Obtener todos los usuarios que son profesionales centro de bienestar
 
+    
+    
     date = datetime.date.today()
     start_week = date - datetime.timedelta(date.weekday())
     
@@ -673,11 +675,8 @@ def ver_impresa_profesional(request):
     end_week = start_week + datetime.timedelta(4)
    
     #fechas = agenda.objects.filter(Q(fecha__gte=start_week), Q(fecha__lte=end_week)) 
-    try:
-        fechas = agenda.objects.filter(fecha__range=[start_week, end_week]).order_by('horario_i')
-    except agenda.DoesNotExist:
-        fechas=None
-    
+    fechas = agenda.objects.filter(fecha__range=[start_week, end_week]).order_by('horario_i')
+  
     
     dias = timedelta(days=1)
     
@@ -692,7 +691,7 @@ def ver_impresa_profesional(request):
 
     return render(
         request,
-        'secretaria/ver_impresa_profesional.html',
+        'secretaria/ver_impresa.html',
          context={
          'fechas':fechas,
          'fecha_inicio':start_week,
@@ -703,7 +702,6 @@ def ver_impresa_profesional(request):
          
                     
     })
-
 
 
 
