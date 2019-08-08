@@ -667,6 +667,7 @@ def ver_impresa_profesional(request,pk):
 
     
     profesionales=Profesional.objects.get(usuario__id=pk)
+    print profesionales
     date = datetime.date.today()
     start_week = date - datetime.timedelta(date.weekday())
     
@@ -691,7 +692,7 @@ def ver_impresa_profesional(request,pk):
 
     return render(
         request,
-        'secretaria/ver_impresa.html',
+        'secretaria/ver_impresa_profesional.html',
          context={
          'fechas':fechas,
          'fecha_inicio':start_week,
