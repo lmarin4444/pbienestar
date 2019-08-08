@@ -60,7 +60,7 @@ urlpatterns = [
     # Ver un calendario por mes
     url(r'^ver_calandario_mes', login_required(views.ver_calandario_mes), name='ver_calandario_mes'),
     # Ver las sesiones de un estudiante 
-    url(r'^Intervenidos_sesiones/(?P<pk>\d+)/$', login_required(views.Intervenidos_sesiones), name='Intervenidos_sesiones'),
+    url(r'^Intervenidos_sesiones_secretaria/(?P<pk>\d+)/$', login_required(views.Intervenidos_sesiones_secretaria), name='Intervenidos_sesiones_secretaria'),
 
     ]
 

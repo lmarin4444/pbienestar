@@ -60,7 +60,7 @@
 			<td>{{ estudio.Estudiante.curso.establecimiento.correo}}</td> 
 
 			<td>{{ estudio.usuario.first_name}} {{ estudio.usuario.last_name}}</td> 
-			<td><a class="btn btn-info btn-xs" href="{% url 'secretaria:Intervenidos_sesiones' estudio.Estudiante.id %}">Ver </a></td>
+			<td><a class="btn btn-info btn-xs" href="{% url 'secretaria:Intervenidos_sesiones_secretaria' estudio.Estudiante.id %}">Ver </a></td>
 		</tr>
 		{% endfor %}
 		
