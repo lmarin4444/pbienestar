@@ -1,0 +1,24 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  
+  <li><a href="{% url 'plan:ver_plancillo' accion.id base.id %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Volver  </a></li>
+  
+
+  <li class="active">Eliminar Actividad :{{actividad.nombre}} /{{plancito.nombre|capfirst}} de la acción {{accion.nombre|capfirst}} de la base {{base.nombre|capfirst}} del plan {{plan.nombre|capfirst}}</li> 
+</ul>
+<h1> Se eliminará automáticamente toda la información
+relacionada a dicha actividad y no hay forma alguna de revertir dicho proceso.</h1>
+<form method="post">
+	{% csrf_token %}
+	<h3>¿Esta realmente segura o seguro de eliminar la actividad  :{{actividad.nombre}} / {{plancito.nombre}}  de la acción {{accion.nombre|capfirst}}  ?</h3>	
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info" href="{% url 'plan:ver_actividades' plancito.id %}">Cancelar</a>
+
+</form>
+{% endblock %}

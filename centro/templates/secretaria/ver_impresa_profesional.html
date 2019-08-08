@@ -1,0 +1,1448 @@
+{% extends 'base/base_secre.html' %}
+{% block content %}
+    
+<h4>Listado de estudiantes semana actual.<br>{{profesionales.usuario.first_name}} {{profesionales.usuario.last_name}}
+
+	
+		<span class="glyphicon glyphicon-calendar"></span> Desde  :{{fecha_inicio |date:"d-m-Y"}} -- <span class="glyphicon glyphicon-calendar"></span> Hasta : {{fecha_termino |date:"d-m-Y"}}
+
+		</h4>
+
+<table id="example" class="table table-bordered">
+	<thead>
+		 <tr class="success">
+		
+		<tr class="warning">
+		
+		<td>Hora</td>
+		<td>Lunes {{fecha_inicio |date:"d"}}</td>
+
+		<td>Martes {{martes |date:"d"}}</td>
+		<td>Miercoles {{miercoles |date:"d"}}</td>
+		<td>Jueves {{jueves |date:"d"}}</td>
+		<td>Viernes {{fecha_termino|date:"d"}}</td>
+		
+
+		</tr></tr>
+	</thead>
+    <tr>
+
+  
+      <th colspan="1">08:15 - 09:00</th>
+      <th colspan="1">Planificación</th>
+      <th colspan="1">Planificación</th>
+	  <th colspan="1">Planificación</th>
+	  <th colspan="1">Planificación</th>
+	  <th colspan="1">Planificación</th>
+
+      
+
+    </tr>
+
+   
+  </thead>
+
+  <tbody>
+
+    <tr>
+
+      <th>09:00 - 10:00 </th>
+
+      <td>
+
+      	{% if fechas %}
+			{% for estudio in fechas %}
+			
+			{% if estudio.horario_i >= 6 and estudio.horario_i <= 11%}
+				{% if estudio.fecha == fecha_inicio %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] 
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>
+						
+												{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %} <br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}		
+					    			
+			
+		</td>
+
+      <td>
+      	{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 6 and estudio.horario_i <= 11%}
+				{% if estudio.fecha == martes %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}		
+      </td>
+
+      <td>
+      	{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 6 and estudio.horario_i <= 11%}
+				{% if estudio.fecha == miercoles %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	
+
+      </td>
+
+      <td>
+      	{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 6 and estudio.horario_i <= 11%}
+				{% if estudio.fecha == jueves %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	
+      </td>
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 6 and estudio.horario_i <= 11%}
+				{% if estudio.fecha == fecha_termino %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+
+    </tr>
+
+<tr>
+
+      <th>10:00 -11:00</th>
+
+      <td>
+      	{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 12 and estudio.horario_i <= 17%}
+				{% if estudio.fecha == fecha_inicio %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	
+      </td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 12 and estudio.horario_i <= 17%}
+				{% if estudio.fecha == martes %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 12 and estudio.horario_i <= 17%}
+				{% if estudio.fecha == miercoles %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 12 and estudio.horario_i <= 17%}
+				{% if estudio.fecha == jueves %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+        <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 12 and estudio.horario_i <= 17%}
+				{% if estudio.fecha == fecha_termino %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+
+    </tr>
+
+
+    <tr>
+
+      <th>11:00 -12:00</th>
+
+      <td>
+      	{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 18 and estudio.horario_i <= 23%}
+				{% if estudio.fecha == fecha_inicio %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	
+      </td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 18 and estudio.horario_i <= 23%}
+				{% if estudio.fecha == martes %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 18 and estudio.horario_i <= 23%}
+				{% if estudio.fecha == miercoles %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 18 and estudio.horario_i <= 23%}
+				{% if estudio.fecha == jueves %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+        <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 18 and estudio.horario_i <= 23%}
+				{% if estudio.fecha == fecha_termino %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+
+    </tr>
+
+    <tr>
+
+      <th>12:00 -13:00</th>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 24 and estudio.horario_i <= 29%}
+				{% if estudio.fecha == fecha_inicio %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}	</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 24 and estudio.horario_i <= 29%}
+				{% if estudio.fecha == martes %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 24 and estudio.horario_i <= 29%}
+				{% if estudio.fecha == miercoles %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 24 and estudio.horario_i <= 29%}
+				{% if estudio.fecha == jueves %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 24 and estudio.horario_i <= 29%}
+				{% if estudio.fecha == fecha_termino %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+    </tr>
+
+    <tr class="success">
+
+      <th>13:30 - 14:30 </th>
+
+      <td>Almuerzo
+      	{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 33 and estudio.horario_i <= 39%}
+				{% if estudio.fecha == fecha_inicio %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>
+
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}
+      </td>
+
+      <td>Almuerzo
+      {% for estudio in fechas %}
+      	{% if estudio.horario_i >= 33 and estudio.horario_i <= 39%}
+				{% if estudio.fecha == martes %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] 
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}
+						<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>Almuerzo
+      {% for estudio in fechas %}
+      	{% if estudio.horario_i >= 33 and estudio.horario_i <= 39%}
+				{% if estudio.fecha == miercoles %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] 
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}
+						<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>Almuerzo
+      {% for estudio in fechas %}
+      	{% if estudio.horario_i >= 33 and estudio.horario_i <= 39%}
+				{% if estudio.fecha == jueves %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] 
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}
+						<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>Almuerzo
+      {% for estudio in fechas %}
+      	{% if estudio.horario_i >= 33 and estudio.horario_i <= 39%}
+				{% if estudio.fecha == fecha_termino %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] 
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}
+						<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+    </tr>
+
+
+     <tr>
+
+      <th>15:00 -16:00</th>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 42 and estudio.horario_i <= 47%}
+				{% if estudio.fecha == fecha_inicio %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] 
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 42 and estudio.horario_i <= 47%}
+				{% if estudio.fecha == martes %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] 
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}</small>
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}
+						<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 42 and estudio.horario_i <= 47%}
+				{% if estudio.fecha == miercoles %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 42 and estudio.horario_i <= 47%}
+				{% if estudio.fecha == jueves %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 42 and estudio.horario_i <= 47%}
+				{% if estudio.fecha == fecha_termino %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+    </tr>
+
+    <tr>
+
+      <th>16:00 -17:00</th>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 48 and estudio.horario_i <= 53%}
+				{% if estudio.fecha == fecha_inicio %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 48 and estudio.horario_i <= 53%}
+				{% if estudio.fecha == martes %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 48 and estudio.horario_i <= 53%}
+				{% if estudio.fecha == miercoles %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 48 and estudio.horario_i <= 53%}
+				{% if estudio.fecha == jueves %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 48 and estudio.horario_i <= 53%}
+				{% if estudio.fecha == fecha_termino %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+    </tr>
+    <tr>
+
+      <th>17:00 -18:00</th>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 54 and estudio.horario_i <= 59%}
+				{% if estudio.fecha == fecha_inicio %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 54 and estudio.horario_i <= 59%}
+				{% if estudio.fecha == martes %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 54 and estudio.horario_i <= 59%}
+				{% if estudio.fecha == miercoles %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 54 and estudio.horario_i <= 59%}
+				{% if estudio.fecha == jueves %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 54 and estudio.horario_i <= 59%}
+				{% if estudio.fecha == fecha_termino %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+    </tr>
+<tr>
+
+      <th>18:00 -19:00</th>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 60 and estudio.horario_i <= 65%}
+				{% if estudio.fecha == fecha_inicio %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 60 and estudio.horario_i <= 65%}
+				{% if estudio.fecha == martes %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 60 and estudio.horario_i <= 65%}
+				{% if estudio.fecha == miercoles %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 60 and estudio.horario_i <= 65%}
+				{% if estudio.fecha == jueves %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+      <td>{% for estudio in fechas %}
+      	{% if estudio.horario_i >= 60 and estudio.horario_i <= 65%}
+				{% if estudio.fecha == fecha_termino %}
+					
+					
+					<small>
+						<strong>{{estudio.get_horario_i}}</strong>
+						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
+						
+						
+						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
+						
+						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}]</small>
+						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
+						{% if estudio.furgon == 1 %}
+                                                    <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
+                                                {% endif %} 
+                                           
+                                                {% if estudio.tipo_actividad.nombre == "Atención nutricionista"%}
+                                                     <span class="glyphicon glyphicon-apple" style="color:#7203E1; width:12; height:12;"></span>  
+                                                {% endif %} 
+                                                {% if estudio.tipo_actividad.nombre == "Arteterapia Floral"%}
+
+                                                <span class="glyphicon glyphicon-grain" style="color:#138002; width:16; height:16;"></span>
+                                                {% endif %}<br>
+				{% endif %}
+			{% endif %}
+			{%endfor%}</td>
+
+    </tr>
+    {%endif%}
+  </tbody>
+
+  <tfoot>
+
+    <tr>
+
+      
+      
+
+    </tr>
+
+  </tfoot>
+
+</table>
+
+
+
+
+
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+       	 <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+		{% endif %}
+        </li>
+	<li>
+		{% if page_obj.has_next %}
+     	 <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+    	{% endif %}
+    </li>
+</ul>
+
+
+{% endblock%}
