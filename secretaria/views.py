@@ -771,13 +771,14 @@ def Intervenidos_sesiones(request,pk):
     # ir a buscar la informacion de la agenda
     try:
         agendado=agenda.objects.filter(Estudiante=dato).order_by('fecha')
+        try:
+            registrado=Registro.objects.filter(agenda=agendado).order_by('fecha')
+        except Registro.DoesNotExist:
+            registrado=None
     except agenda.DoesNotExist:
         agendado=None
     
-    try:
-        registrado=Registro.objects.filter(agenda=agendado).order_by('fecha')
-    except Registro.DoesNotExist:
-        registrado=None
+    
     
 
     #dalumnos={}
