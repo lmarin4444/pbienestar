@@ -821,13 +821,18 @@ def RetornoUpdateView(request,pk):
 			instance.motivo_termino=0
 			instance.Red_apoyo=Red_apoyo.objects.get(nombre='No es derivado a otra institución')
 			instance.save()
-			infoarchivo2 = Ficha_derivacion.objects.get(id = ficha_id)
-			infoarchivo2.pasada= 5 #porque pasa a otra institucion
-			infoarchivo2.derivado = 2 # porque ya fue vista por el centro
-			infoarchivo2.estado = 1 # porque aun sigue activa dentro del centro 
-			infoarchivo2.save()
+			ficha_derivacion.pasada=5
+			ficha_derivacion.derivado=2
+			ficha_derivacion.save()
 
-			return redirect('derivacion:centro_listar')
+			#infoarchivo2 = Ficha_derivacion.objects.get(id = ficha_id)
+			#infoarchivo2.pasada= 5 #porque pasa a otra institucion
+			#infoarchivo2.derivado = 2 # porque ya fue vista por el centro
+			#infoarchivo2.estado = 1 # porque aun sigue activa dentro del centro 
+			#infoarchivo2.save()
+
+			#return redirect('derivacion:centro_listar')
+			return HttpResponseRedirect('/derivacion/centro_listar')
 			
 	else:
 		formulario = RetornoFaltainfoForm()

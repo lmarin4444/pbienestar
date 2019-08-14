@@ -191,7 +191,7 @@ class RetornoFaltainfoForm(forms.ModelForm):
 			}
 	widgets = {
 			
-			'observacion_termino': forms.TextInput(attrs={'class':'form-control'}),			 
+			'observacion_termino': forms.Textarea(attrs={'class':'form-control'}),
 						
 		}
 
