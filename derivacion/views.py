@@ -832,7 +832,7 @@ def RetornoUpdateView(request,pk):
 			#infoarchivo2.save()
 
 			#return redirect('derivacion:centro_listar')
-			return HttpResponseRedirect('/derivacion/centro_listar')
+			#return HttpResponseRedirect('/derivacion/centro_listar')
 			
 	else:
 		formulario = RetornoFaltainfoForm()
