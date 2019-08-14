@@ -41,7 +41,7 @@
 				{% if derivado == 1 %}
 				<div class="btn-group-vertical">
 					<a class="btn btn-success btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Editar </a>
-					<a class="btn btn-warning btn-xs" href="{% url 'derivacion:derivacion_eliminar' mascota.id %}">Borrar</a>
+					<a class="btn btn-danger btn-xs" href="{% url 'derivacion:derivacion_eliminar' mascota.id %}">Eliminar</a>
 					<a class="btn btn-info btn-xs" href="{% url 'derivacion:derivacion_centro' mascota.id %}">Enviar al centro</a>
 				</div>	
 				{% else %}
@@ -67,7 +67,7 @@
 						<strong>Retorno</strong>
 						
 						<a class="btn btn-success btn-xs" href="{% url 'derivacion:derivacion_editar' mascota.id %}">Editar</a>
-						<a class="btn btn-danger btn-xs" href="{% url 'derivacion:derivacion_centro' mascota.id %}">Enviar a centro</a>		
+						<a class="btn btn-info btn-xs" href="{% url 'derivacion:derivacion_centro' mascota.id %}">Enviar a centro</a>		
 					<div>	
 					{% elif estado == 6 %}
 						<strong>Estudiante dado de alta</strong>

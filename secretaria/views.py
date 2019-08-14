@@ -777,6 +777,12 @@ def Intervenidos_sesiones(request,pk):
             registrado=None
     except agenda.DoesNotExist:
         agendado=None
+    try:
+        confirmado = Confirma.objects.filter(Estudiante__id=pk).order_by('fecha')
+    except Confirma.DoesNotExist:
+        confirmado=None
+
+
     
     
     
@@ -799,8 +805,10 @@ def Intervenidos_sesiones(request,pk):
                 'dato':dato,
                 'registrado':registrado,
                 'agendado':agendado,
+                'confirmado':confirmado,
+
                             }
 
-    return render(request, 'secretaria/secretaria_list.html', contexto)
+    return render(request,'secretaria/secretaria_list.html', contexto)
 
    

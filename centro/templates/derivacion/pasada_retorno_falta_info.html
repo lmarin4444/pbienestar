@@ -15,31 +15,21 @@
 
 
 
-	<table  class="table table-bordered" fontsize =10px>
-
-	<tbody>
-		
-		<tr>
-		
-			<td><div class="col-md-8 col-md-offset-2">
-			
-				<label for="{{formulario.observacion_termino.name}}">{{formulario.observacion_termino.label}}:</label>
-				</td><td>
-				{{formulario.observacion_termino}}</td>
-
-
-			
-		</div></td>
-			
-			</tr>	
-			 
-			
-		
-	</tbody>
-</table> 
-
-	<button class="btn btn-danger" type="submit">Sí, enviar</button>
+	<div class="panel-body">
+                <form role="form" method="post">
+                    {% csrf_token %}
+                   
+                        {{ formulario.as_p }}                         
+                       
+                   
+                       
+                        <button class="btn btn-danger" type="submit">Sí, enviar</button>
 	<a class= "btn btn-info" href="{% url 'derivacion:centro_listar' %}">Cancelar</a>
+                  
+                </form>           
+            </div>
+
+	
 
 </form>
 {% endblock %}
