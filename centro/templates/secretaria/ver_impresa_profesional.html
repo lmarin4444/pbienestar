@@ -91,10 +91,10 @@
       	{% for estudio in fechas %}
       	{% if estudio.horario_i >= 6 and estudio.horario_i <= 11%}
 				{% if estudio.fecha == martes %}
+					<strong>{% if estudio.horario_i == 6 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 					
 					
-					<small>
-						<strong>{% if estudio.horario_i == 6 %} {% else %}{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -124,7 +124,8 @@
 					
 					
 					<small>
-						<strong>{% if estudio.horario_i == 6 %} {% else %}{{estudio.get_horario_i}}{% endif %}</strong>
+						<strong>{% if estudio.horario_i == 6 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -156,7 +157,8 @@
 					
 					
 					<small>
-						<strong>{% if estudio.horario_i == 6 %} {% else %}{{estudio.get_horario_i}}{% endif %}</strong>
+						<strong>{% if estudio.horario_i == 6 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -184,7 +186,8 @@
 					
 					
 					<small>
-						<strong>{% if estudio.horario_i == 6 %} {% else %}{{estudio.get_horario_i}}{% endif %}</strong>
+						<strong>{% if estudio.horario_i == 6 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -219,7 +222,9 @@
 					
 					
 					<small>
-						<strong>{% if estudio.horario_i == 12 %} {% else %}{{estudio.get_horario_i}}{% endif %}</strong>
+						
+						<strong>{% if estudio.horario_i == 12 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -248,7 +253,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 12 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -276,7 +282,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 12 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -304,7 +311,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 12 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -331,7 +339,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 12 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -367,7 +376,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 18 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -396,7 +406,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 18 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -424,7 +435,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 18 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -452,7 +464,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 18 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -479,7 +492,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 18 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -513,7 +527,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 24 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -541,7 +556,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 24 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -569,7 +585,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 24 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -597,7 +614,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 24 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -624,7 +642,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 24 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -652,14 +671,19 @@
 
       <th>13:30 - 14:30 </th>
 
-      <td>Almuerzo
+      <td> 
+      <p><font size="2" face="Georgia, Arial" color="#990000">ALMUERZO</font></p>	
+
+
+
       	{% for estudio in fechas %}
       	{% if estudio.horario_i >= 33 and estudio.horario_i <= 39%}
 				{% if estudio.fecha == fecha_inicio %}
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>
+						<span style="color: red;">{{estudio.get_horario_i}}</span></strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -684,14 +708,16 @@
 			{%endfor%}
       </td>
 
-      <td>Almuerzo
+      
+      <td><p><font size="2" face="Georgia, Arial" color="#990000">ALMUERZO</font></p>	
       {% for estudio in fechas %}
       	{% if estudio.horario_i >= 33 and estudio.horario_i <= 39%}
 				{% if estudio.fecha == martes %}
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>
+						<span style="color: red;">{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -715,14 +741,15 @@
 			{% endif %}
 			{%endfor%}</td>
 
-      <td>Almuerzo
+      <td><p><font size="2" face="Georgia, Arial" color="#990000">ALMUERZO</font></p>
       {% for estudio in fechas %}
       	{% if estudio.horario_i >= 33 and estudio.horario_i <= 39%}
 				{% if estudio.fecha == miercoles %}
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>
+						<span style="color: red;">{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -746,14 +773,15 @@
 			{% endif %}
 			{%endfor%}</td>
 
-      <td>Almuerzo
+       <td><p><font size="2" face="Georgia, Arial" color="#990000">ALMUERZO</font></p>
       {% for estudio in fechas %}
       	{% if estudio.horario_i >= 33 and estudio.horario_i <= 39%}
 				{% if estudio.fecha == jueves %}
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>
+						<span style="color: red;">{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -777,14 +805,15 @@
 			{% endif %}
 			{%endfor%}</td>
 
-      <td>Almuerzo
+ 	  <td><p><font size="2" face="Georgia, Arial" color="#990000">ALMUERZO</font></p>
       {% for estudio in fechas %}
       	{% if estudio.horario_i >= 33 and estudio.horario_i <= 39%}
 				{% if estudio.fecha == fecha_termino %}
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>
+						<span style="color: red;">{{estudio.get_horario_i}}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -821,7 +850,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 42 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -850,7 +880,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 42 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -880,7 +911,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 42 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -909,7 +941,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 42 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -938,7 +971,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 42 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -973,7 +1007,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 48 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1002,7 +1037,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 48 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1031,7 +1067,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 48 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1060,7 +1097,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 48 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1089,7 +1127,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 48 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1123,7 +1162,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 54 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1152,7 +1192,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 54 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1181,7 +1222,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 54 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1210,7 +1252,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 54 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1239,7 +1282,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 54 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1273,7 +1317,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 60 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1302,7 +1347,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 60 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1331,9 +1377,8 @@
 					
 					
 					<small>
-						<strong>
-						{% if estudio.horario_i == 60 %} {% else %}{{estudio.get_horario_i}}{% endif %}
-						</strong>
+						<strong>{% if estudio.horario_i == 60 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1362,7 +1407,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 60 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
@@ -1391,7 +1437,8 @@
 					
 					
 					<small>
-						<strong>{{estudio.get_horario_i}}</strong>
+						<strong>{% if estudio.horario_i == 60 %} {% else %}
+						<span style="color: red;">{{estudio.get_horario_i}}{% endif %}</strong>
 						{{ estudio.Estudiante.nombres|capfirst }} {{ estudio.Estudiante.firs_name |capfirst}} 
 						
 						
