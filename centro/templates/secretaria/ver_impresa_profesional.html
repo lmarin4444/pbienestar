@@ -1289,7 +1289,7 @@
 						
 						{{ estudio.Estudiante.curso.establecimiento.alias|title}}
 						
-						{{ estudio.Estudiante.curso.get_numero }} {{ estudio.Estudiante.curso.get_letra }} [{{estudio.usuario.first_name|title|slice:"1"}} {{estudio.usuario.last_name|title|truncatewords:'1'}}] </small>
+						 [{{estudio.participantes|title}} /{{estudio.tipo_actividad.nombre|title}}] </small>
 						{% if estudio.furgon == 1%}<span style="color: red;">FURGÓN</span>{%endif%}
 						{% if estudio.furgon == 1 %}
                                                     <span class="glyphicon glyphicon-bed" style="color:#FD1603; width:12; height:12;"> </span>
