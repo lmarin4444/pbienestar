@@ -1,8 +1,6 @@
 {% extends 'base/base_centro.html' %}
 
 
-
-
 {% block content %}
 <form method="post">
 	{% csrf_token %}
@@ -12,17 +10,12 @@
 	<h3>¿Desea realizar el egreso de {{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}?</h3>	
 
 	
-
-
-
 	<div class="panel-body">
                 <form role="form" method="post">
                     {% csrf_token %}
                    
                         {{ formulario.as_p }}                         
-                       
-                   
-                       
+                                   
                         <button class="btn btn-danger" type="submit">Sí, enviar</button>
 	<a class= "btn btn-info" href="{% url 'derivacion:centro_listar' %}">Cancelar</a>
                   
