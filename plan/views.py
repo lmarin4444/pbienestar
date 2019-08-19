@@ -516,11 +516,14 @@ class ingresar_plancillo(CreateView):
 def ActividadesListView(request,pk):
 #Registrar los logros de cada uno de las dimensiones de logros para cada diagnostico
 
-
+	colegio=establecimiento.objects.get(id=pk)
 	try:
-		colegio=establecimiento.objects.get(id=pk)
+		
 		plan=Plan.objects.get(establecimiento=colegio)
-		base=Base.objects.filter(plan=plan)
+		try:
+			base=Base.objects.filter(plan=plan)
+		except Base.DoesNotExist:
+			base=None	
 		
 	except Plan.DoesNotExist:
 		plan =None
@@ -1263,7 +1266,14 @@ def ActividadesListView(request,pk):
 			act_planificadas = actividades.objects.filter(estado=8).count()
 			act_fuera_plazo = actividades.objects.filter(estado=9).count()
 		except actividades.DoesNotExist:
-			act_creadas=""	
+			act_creadas=None
+			act_ejecutadas=None
+			act_reagendadas=None
+			act_justificadas=None
+			act_planificadas=None
+			act_fuera_plazo=None
+
+
 
 		cantidad_bases=base.count()
 	except Plan.DoesNotExist:
