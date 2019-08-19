@@ -14,7 +14,7 @@
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú </a></li>
   
   <li><a href="{% url 'derivacion:intervencion_listar' %}"data-toggle="tooltip" title="Ir listado de Fichas estudiantes !">Listado de fichas estudiantes </a></li>
   <li><a href="{% url 'derivacion:intervencion_retorno' %}"data-toggle="tooltip" title="Ir listado de estudiantes a ser egresados!">Listado estudiantes a ser egresados </a></li>
@@ -37,6 +37,7 @@
 	<thead>
 		<tr>
 		
+			<td>#</td>
 			<td>Nª:</td>
 			<td>Estudiante</td>
 			<td>Edad</td>
@@ -61,7 +62,9 @@
 	<tbody>
 		{% if object_list %}
 		{% for mascota in object_list %}
+
 		<tr>
+			<td>{{ forloop.counter }}</td>
 			{% if mascota.estado != 1%}
 				<td>Nª {{mascota.id}} Ficha antigua</td>
 			{% else %}
