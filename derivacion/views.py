@@ -1103,18 +1103,14 @@ class ReporteIntervenidos(ListView):
 					pie=0
 					profesores=0
 
-
-		
-					
-
-		
+			context['intervenido'] = intervenido
+			context['ficha'] = ficha
+			context['diccionario'] = diccionario
 
 
-			
-
-		context['intervenido'] = intervenido
-		context['ficha'] = ficha
-		context['diccionario'] = diccionario
+		context['intervenido'] = ""	
+		context['ficha'] = ""
+		context['diccionario'] = ""
 
 
 		return context	
