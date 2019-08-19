@@ -1052,56 +1052,56 @@ class ReporteIntervenidos(ListView):
 		
 		diccionario=[]
 		
-		
-		for intervencion in intervenido:
-			dato=intervencion.Estudiante
-			#print 'intervenido', dato
-			try:
-				ficha=Ficha_derivacion.objects.get(Estudiante=dato,estado=1,usuario=self.request.user)
-			except Ficha_derivacion.DoesNotExist:
-				ficha=None
-			estado=intervencion.estado
-			try:
-				sesion_est=sesion.objects.filter(Estudiante=dato)
-				
-				ultimo=sesion_est.latest('numero')
-							
-				apoderado=0
-				dupla=0
-				pie=0
-				profesores=0
-
-				for asistido in sesion_est:
+		if intervenido:
+			for intervencion in intervenido:
+				dato=intervencion.Estudiante
+				#print 'intervenido', dato
+				try:
+					ficha=Ficha_derivacion.objects.get(Estudiante=dato,estado=1,usuario=self.request.user)
+				except Ficha_derivacion.DoesNotExist:
+					ficha=None
+				estado=intervencion.estado
+				try:
+					sesion_est=sesion.objects.filter(Estudiante=dato)
 					
-					if asistido.participantes == 1 or asistido.participantes == 9:
-						apoderado=apoderado+1
-					if asistido.participantes == 10:
-						dupla=dupla+1
-					if asistido.participantes == 11:
-						pie=pie+1
-					if asistido.participantes == 12:
-						profesores=profesores+1
-				insubid = {
-				        "estudiante" : dato, 
-				        "estado" : estado,
-				        "ultimo" : ultimo.numero,
-				        "apoderado" : apoderado,
-				        "dupla" : dupla,
-				        "pie" : pie,
-				        "profesores" :profesores,
-				        
+					ultimo=sesion_est.latest('numero')
+								
+					apoderado=0
+					dupla=0
+					pie=0
+					profesores=0
 
-				    }
-				diccionario.append(insubid)		
+					for asistido in sesion_est:
+						
+						if asistido.participantes == 1 or asistido.participantes == 9:
+							apoderado=apoderado+1
+						if asistido.participantes == 10:
+							dupla=dupla+1
+						if asistido.participantes == 11:
+							pie=pie+1
+						if asistido.participantes == 12:
+							profesores=profesores+1
+					insubid = {
+					        "estudiante" : dato, 
+					        "estado" : estado,
+					        "ultimo" : ultimo.numero,
+					        "apoderado" : apoderado,
+					        "dupla" : dupla,
+					        "pie" : pie,
+					        "profesores" :profesores,
+					        
+
+					    }
+					diccionario.append(insubid)		
 
 							
 		    		
-			except sesion.DoesNotExist:
-				ultimo=0
-				apoderado=0
-				dupla=0
-				pie=0
-				profesores=0
+				except sesion.DoesNotExist:
+					ultimo=0
+					apoderado=0
+					dupla=0
+					pie=0
+					profesores=0
 
 
 		
