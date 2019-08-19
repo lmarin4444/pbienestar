@@ -132,7 +132,7 @@ def buscar_familia(request):
 	if request.is_ajax:
 		termino=request.GET.get('term','')
 		pariente=Parentesco.objects.filter(Estudiante__id=termino)
-		print paciente
+		
 		data=serializers.serialize('json',pariente,fields=('nombre','apellido_p','apellido_m','parentesco'))
 		
 	else:
@@ -148,7 +148,7 @@ def ver_estudiante_rut(request):
 	except Estudiante.DoesNotExist:
 		estudiante=None
 	
-	print estudiante
+	
 
 	if request.method == 'POST':
 		if estudiante == None:
@@ -715,7 +715,7 @@ def EstudianteUpdate(request,pk,escuela):
  			instance = form.save(commit=False)
  			
 			edad_formulario=instance.fecha_nacimiento
-			print instance.fecha_nacimiento
+		
 			diff = (datetime.date.today() - edad_formulario).days
 
 			years = str(int(diff/365))	

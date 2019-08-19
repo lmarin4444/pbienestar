@@ -1251,27 +1251,55 @@ class eliminar_actividad(DeleteView):
 def ActividadesListView(request,pk):
 #Registrar los bases para cada plan
 
-
+	
 	try:
 		plan=Plan.objects.get(id=pk)
 		base=Base.objects.filter(plan=plan)
+		indicadores=Indicador_base.objects.all()
 		accion=Accion.objects.all()
 		plancillo=Plancillo.objects.all()
 		actividades=Actividades.objects.all()
+		actividad_plan=0
 		try:
-			act_creadas = actividades.objects.filter(estado=0).count()
-			act_ejecutadas = actividades.objects.filter(estado=1).count()
-			act_reagendadas = actividades.objects.filter(estado=2).count()
-			act_justificadas = actividades.objects.filter(estado=3).count()
-			act_planificadas = actividades.objects.filter(estado=8).count()
-			act_fuera_plazo = actividades.objects.filter(estado=9).count()
-		except actividades.DoesNotExist:
+			actividades=Actividades.objects.all()
+			act_creadas=0
+			act_ejecutadas=0
+			act_reagendadas=0
+			act_justificadas=0
+			act_planificadas=0
+			act_fuera_plazo=0
+			for tengo_base in base:
+				
+						
+						
+						  
+				
+				for tengo_accion in accion:
+					if tengo_accion.base == tengo_base:
+						for tengo_plan in plancillo:
+							if tengo_plan.accion == tengo_accion:
+								for tengo_actividad in actividades:
+									if tengo_actividad.plancillo == tengo_plan: 
+										actividad_plan=actividad_plan +1
+										print actividad_plan
+
+										if tengo_actividad.estado == 0:	
+											act_creadas = act_creadas + 1
+										if tengo_actividad.estado == 1:	
+											act_ejecutadas = act_ejecutadas + 1
+										if tengo_actividad.estado == 2:	
+											act_reagendadas = act_reagendadas + 1
+										if tengo_actividad.estado == 3:	
+											act_justificadas = act_justificadas + 1
+										if tengo_actividad.estado == 8:	
+											act_planificadas = act_planificadas + 1	
+										if tengo_actividad.estado == 9:	
+											act_fuera_plazo = act_fuera_plazo + 1	
+	
+
+		except Actividades.DoesNotExist:
 			act_creadas=None
-			act_ejecutadas=None
-			act_reagendadas=None
-			act_justificadas=None
-			act_planificadas=None
-			act_fuera_plazo=None
+
 
 
 
@@ -1293,6 +1321,15 @@ def ActividadesListView(request,pk):
         		 'plancillo':plancillo,
         		 'actividades':actividades,
         		 'cantidad_bases':cantidad_bases,
+        		'act_creadas':act_creadas,
+				'act_ejecutadas':act_ejecutadas,
+				'act_reagendadas':act_reagendadas,
+				'act_justificadas':act_justificadas,
+				'act_planificadas':act_planificadas,
+				'act_fuera_plazo':act_fuera_plazo,
+				'actividad_plan':actividad_plan,
+				'indicadores':indicadores,
+
         		 }
     )
 
