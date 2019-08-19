@@ -1045,13 +1045,17 @@ class ReporteIntervenidos(ListView):
 	def get_context_data(self, **kwargs):
 		
 		context = super(ReporteIntervenidos, self).get_context_data(**kwargs)
-		intervenido = Intervenidos.objects.filter(usuario=self.request.user)
+		try:
+			intervenido = Intervenidos.objects.filter(usuario=self.request.user)
+		except Intervenidos.DoesNotExist:
+			intervenido=None
+		
 		diccionario=[]
 		
 		
 		for intervencion in intervenido:
 			dato=intervencion.Estudiante
-			print 'intervenido', dato
+			#print 'intervenido', dato
 			try:
 				ficha=Ficha_derivacion.objects.get(Estudiante=dato,estado=1,usuario=self.request.user)
 			except Ficha_derivacion.DoesNotExist:
@@ -1059,7 +1063,7 @@ class ReporteIntervenidos(ListView):
 			estado=intervencion.estado
 			try:
 				sesion_est=sesion.objects.filter(Estudiante=dato)
-				print sesion_est
+				
 				ultimo=sesion_est.latest('numero')
 							
 				apoderado=0
