@@ -248,8 +248,11 @@ def FichaCentroDetailView(request,pk):
 	try:
 		estudiante_id=Estudiante.objects.get(pk=pk)
 		family=estudiante_id.Familia
+		try:
+			ficha_id=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+		except Ficha_derivacion.DoesNotExist:
+			ficha_id=None
 		
-		ficha_id=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
 		
 		try:
 			parentesco_id=Parentesco.objects.filter(Familia=family).order_by('id')
