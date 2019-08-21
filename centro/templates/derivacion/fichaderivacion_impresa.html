@@ -1,0 +1,322 @@
+
+{% load static%}
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+	
+
+<!--  jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+  
+
+<title> FICHA DE DERIVACIÓN CENTRO DE BIENESTAR </title>
+
+ 
+ <br>
+ 
+<div class="row">
+  <div class="col-md-1 col-md-offset-3">
+  
+<center>
+	<img   src='{% static "img/logo.png" %}'  src="data:image/p" style="width: 790px; height: 80px;"></center>
+ 
+
+  </div>
+ 
+  </div>
+  <div class="col-md-8 col-md-offset-2">
+
+	<p class="lead" class="text-justify">
+	
+
+<br>
+
+<center><legend align="center"><h4>FICHA DE DERIVACIÓN CENTRO DE BIENESTAR</h4></legend></center>
+
+<h5 align="justify"><strong>i. Identificación  </strong></h5>
+
+      
+    
+<table class="table table-responsive table-striped" style="color:#456789;font-size:80%;">
+    
+    <tbody>
+        <tr>
+            <td>Nombre :</td>
+            <td>{{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }}</td>
+            
+        </tr>
+        <tr>
+            <td>Fecha de nacimiento:</td>
+            <td>{{estudiante.fecha_nacimiento|date:"d-m-Y " }}</td>
+      
+        </tr>
+        <tr>
+            <td>Edad:</td>
+            <td>{{estudiante.edad }} años</td>
+            
+        </tr>
+        <tr>
+            <td>Rut:</td>
+            <td>{{estudiante.rut }}</td>
+            
+        </tr>
+        <tr>
+            <td>Domicilio:</td>
+            <td>{{estudiante.domicilio_estudiante}}</td>
+            
+        </tr>
+        <tr >
+            <td >Escolaridad:</td>
+            <td>{{estudiante.curso.get_numero }} {{estudiante.curso.get_letra }}  |
+          {{estudiante.curso.establecimiento.nombre }} </td>
+        </tr>
+     <tr>  
+        <td >Adulto responsable:</td>
+        <td>
+        {% for family in apoderado %}
+ 
+    
+          {% if family.telefono %}
+             {{family.nombre|capfirst}} {{family.apellido_p|capfirst}} {{family.apellido_m|capfirst}} 
+          {%endif%}
+
+
+ 
+        {% endfor %}
+    </td>
+    </tr> 
+ <tr>  
+        <td >Edad adulto :</td>
+        <td>
+        {% for family in apoderado %}
+ 
+    
+          {% if family.telefono %}
+              {{family.edad}}  |  <strong>Rut: </strong>{{family.rut}}
+          {%endif%}
+
+
+ 
+  {% endfor %}
+ </td> 
+ <tr>  
+        <td >Domicilio Adulto :</td>
+        <td>
+        {% for family in apoderado %}
+ 
+    
+          {% if family.telefono %}
+             {{family.domicilio|capfirst}} 
+          {%endif%}
+
+  {% endfor %}
+ </td> 
+
+<tr>  
+        <td >Fono adulto:</td>
+        <td>
+        {% for family in apoderado %}
+ 
+    
+          {% if family.telefono %}
+             {{family.telefono}}
+          {%endif%}
+
+
+ 
+        {% endfor %}
+    </td>
+    </tr> 
+
+    <tr>
+            <td>Fecha derivación:</td>
+            <td>{{ficha.fecha_derivacion|date:"d-m-Y " }}</td>
+            
+    </tr>
+        <tr>
+            <td>Programa al que pertenece:</td>
+            <td>{% if ficha.pie == "True" and ficha.habilidades == "True" %} 
+                    Psicosocial __ Pie _x_ hpv _x_
+                {% else %}
+                      {% if ficha.pie == "True" %} 
+                        Psicosocial __ Pie _x_ hpv __
+                      {% else %} 
+                        {% if ficha.habilidades == "True"%}
+                        Psicosocial __ Pie __ hpv _x_
+                        {% else %} 
+                        Psicosocial _x_ Pie __ hpv __
+
+                        {% endif %} 
+                      {% endif %}  
+
+                {% endif %}
+            | Año pie :{% if ficha.anio_pie %}{{ficha.anio_pie}}{% else %} Sin año {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Atención en otra red de apoyo:</td>
+            <td>{{ficha.Red_apoyo.nombre }}  | {{ficha.Red_apoyo_obs }}</td> 
+            
+    </tr>
+
+    </tbody>
+</table>
+
+<h5 align="justify"><strong>II. ANTECEDENTES DE DERIVACIÓN  </strong></h5>
+
+<table class="table table-responsive table-striped" style="font-size:80%;">
+    
+    <tbody>
+        <tr>
+            <td>Profesional responsable :</td>
+            <td>{{usuario_ficha.first_name|capfirst }}
+            {{usuario_ficha.last_name|capfirst }}</td>
+
+            
+        </tr>
+        <tr>
+            <td>Fono profesional:</td>
+            <td>{{profesionales.phone }}</td>
+      
+        </tr>
+        <tr>
+            <td>Correo electrónico:</td>
+            <td>{{usuario_ficha.email }} </td>
+            
+        </tr>
+        
+
+    </tbody>
+</table>
+
+<h5 align="justify"><strong>III. MOTIVO DE DERIVACIÓN: INDICADORES ASOCIADOS A :  </strong></h5>
+
+
+        
+        
+        
+        <ul>{% for motivo in ficha.Motivo_derivacion.all %}
+            <li>
+              {{motivo.nombre}}
+            </li>
+            
+            {% endfor %}
+
+      </ul>
+     
+
+<h5 align="justify"><strong> IV. Apreciación del equipo respecto al motivo de consulta (Posibles causas o factores, indicadores presentes y Ámbitos
+  afectados -social, Educacional , Familiar)</strong></h5>
+  {{ficha.cuatro}} 
+  
+  <h5 align="justify"><strong> V. Señale las acciones realizadas frente a la situación descrita anteriormente</strong></h5>
+  {{ficha.cinco}}
+
+  <h5 align="justify"><strong> VI. Describa antedecentes escolares
+  CONDUCTA (Elementos más destacables positivos y negativos)</strong></h5>
+  {{ficha.conducta}}
+
+  <h5 align="justify"><strong>RENDIMIENTO (Área de mayor y menor dificultad)</strong></h5>
+  {{ficha.rendi<h5 align="justify"><strong>ÁREA DE RESPONSABILIDAD(Asistencia cumplimiento de deberes)</strong></h5>
+  {{object.area_responsabilidad}}
+
+<h5 align="justify"><strong>VII. ANTECEDENTES FAMILIARES  </strong></h5>
+<table class="table table-responsive table-striped" style="color:#456789;font-size:80%;">
+    
+    <tbody>
+        <tr>
+            <small><td>NOMBRE</td></small>
+            <td>PARENTESCO</td>
+            <td>EDAD</td>
+            <td>ESCOLARIDAD</td>
+            <td>OCUPACIÓN</td>
+            
+            
+        </tr>
+
+        {% if parentesco %}
+
+             {% for familia in parentesco %}
+             <tr>
+              <td>{{familia.nombre}} {{familia.apellido_p}}<br> 
+              {{familia.apellido_m}}</td>
+              <td>{{familia.parentesco}}</td>
+              <td>{{familia.edad}}</td>
+              <td> {{familia.get_escolaridad}}</td>
+              <td>{{familia.ocupacion}}</td>
+              </tr>
+              {% endfor %}
+           
+          
+    {% endif %}
+
+        
+
+    </tbody>
+</table>
+
+
+
+
+ <h5 align="justify"><strong>ANTECEDENTES FAMILIARES<br>
+ - Composición de la familia(Genograma y tipo de relaciones)<br>
+ - Comportamiento figuras de cuidado del estudiante<br>
+ - Situación social (El: vulneración de derecho, VIF, Presencia de alcoholismo o drogas )<br>
+ - Situación de salud</strong></h5>
+ {{ficha.antecedentes_familiares}}
+
+<h5 align="justify"><strong>Antedecentes de salud del estudiante y su grupo familiar (Patologías, consumo de sustancias)</strong></h5>
+  {{ficha.seis}}
+<h5 align="justify"><strong>Observaciones generales del equipo PsicoSocial</strong></h5>
+  {{ficha.observacion}} 
+
+ </td>
+</div>
+      
+
+		
+  <!--firma  -->
+<div class="container">
+  <div class="row">
+      <div class="col-md-3 col-md-offset-3">
+        
+          
+        </div>
+      </div>
+  </div>
+</div>
+  <!--FIN -->
+ 
+<footer>
+
+  
+  </ul>
+  <aside class="call-to-action bg-success">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h4>Centro de Bienestar</h4>
+
+                    <h5>bienestardemcabildo@gmail.com</h5>
+                    
+                </div>
+            </div>
+        </div>
+    </aside>
+</footer>
+
+
+
+
+</body>
+</html>
