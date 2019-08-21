@@ -74,17 +74,17 @@
       <tr><td>Rut:{{estudiante.rut}}</td>
       
       <td>Domicilio:{{estudiante.domicilio_estudiante}}</td>
-      <td> Fecha de nac:{{estudiante.fecha_nacimiento|date:"d-m-Y "}}</td>
+      <td>Fecha de nac:{{estudiante.fecha_nacimiento|date:"d-m-Y "}}</td>
       <td> 
       <dd>Edad Actualizada:{{estudiante.edad}}</dd>
-       <dd>Edad Ficha:{{ficha.edad}}</dd></td>
+      <dd>Edad Ficha:{{ficha.edad}}</dd></td>
       
       
       </tr>
      <tr>
        <td>
           <dd>Establecimiento Actual: {{ estudiante.curso.establecimiento}} </dd> 
-          <dd>Establecimiento Ficha: {{ ficha.establecimiento}}  </dd>
+          <dd>Establecimiento Ficha: {{ ficha.establecimiento.nombre}}  </dd>
 
        </td>
        <td>
