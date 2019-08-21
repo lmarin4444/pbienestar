@@ -250,39 +250,39 @@
 <TR>
     <TD COLSPAN=4 style="text-align:left;" ><STRONG>2 .- Señale las acciones realizadas frete a la situacion descrita anteriormente
   afectados -social, Educacinal , Familiar)</STRONG>
-      <li> {{ficha.cinco}}</li></TD>
+      <li align="justify"> {{ficha.cinco}}</li></TD>
 </TH>
 
 <TR>
-    <TD COLSPAN=4 style="text-align:left;" >3 .- ANTECEDENTES ESCOLARES, CONDUCTA (Elementos más destacables positivos y negativos)
-      <li><STRONG> {{ficha.conducta}}</STRONG></li></TD>
+    <TD COLSPAN=4 style="text-align:left;" ><STRONG> 3 .- ANTECEDENTES ESCOLARES, CONDUCTA (Elementos más destacables positivos y negativos)</STRONG>
+      <li align="justify">{{ficha.conducta}}</li></TD>
 </TH>
 <TR>
-    <TD COLSPAN=4 style="text-align:left;" >4 .- ANTECEDENTES ESCOLARES, RENDIMIENTO (Area de mayor y menor dificultad)
-      <li><STRONG> {{ficha.rendimiento}}</STRONG></li></TD>
+    <TD COLSPAN=4 style="text-align:left;" ><STRONG>4 .- ANTECEDENTES ESCOLARES, RENDIMIENTO (Area de mayor y menor dificultad)</STRONG>
+      <li align="justify"> {{ficha.rendimiento}}</li></TD>
 </TH>
  <TR>
-    <TD COLSPAN=4 style="text-align:left;" >5 .- ANTECEDENTES ESCOLARES, RESPONSABILIDAD(Asistencia cumplimiento de deberes)
-      <li><STRONG> {{ficha.area_responsabilidad}}</STRONG></li></TD>
+    <TD COLSPAN=4 style="text-align:left;" ><STRONG>5 .- ANTECEDENTES ESCOLARES, RESPONSABILIDAD(Asistencia cumplimiento de deberes)</STRONG>
+      <li align="justify"> {{ficha.area_responsabilidad}}</li></TD>
 </TH>
 </TR>
  <TR>
-    <TD COLSPAN=4 style="text-align:left;" >6 .- ANTECEDENTES FAMILIARES, RESPONSABILIDAD(Asistencia cumplimiento de deberes)
+    <TD COLSPAN=4 style="text-align:left;" ><STRONG>6 .- ANTECEDENTES FAMILIARES, RESPONSABILIDAD(Asistencia cumplimiento de deberes)
     <ul>
 <li> Composición de la familia(Genograma y tipo de relaciones)</li>
 <li>Comportamiento figuras de cuidado del estudiante</li>
 <li>Situación social (El: vulneración de derecho, VIF, Presencia de alcoholismo o drogas )</li>
-<li>Situación de salud</li></ul>
-      <li><STRONG> {{ficha.antecedentes_familiares}}</STRONG></li></TD>
+<li>Situación de salud</li></ul></STRONG>
+      <li align="justify"> {{ficha.antecedentes_familiares}}</li></TD>
 </TH>
 <TR>
-    <TD COLSPAN=4 style="text-align:left;" >7 .- Antedecentes de salud del estudiante y su grupo familiar (Patologías, consumo de sustancias)
-      <li><STRONG> {{ficha.seis}}</STRONG></li></TD>
+    <TD COLSPAN=4 style="text-align:left;" ><STRONG>7 .- Antedecentes de salud del estudiante y su grupo familiar (Patologías, consumo de sustancias)</STRONG>
+      <li align="justify"> {{ficha.seis}}</li></TD>
 </TH>
 </TR>
 <TR>
-    <TD COLSPAN=4 style="text-align:left;" >8 .- Observaciones generales del equipo PsicoSocial
-      <li><STRONG> {{ficha.observacion}}</STRONG></li></TD>
+    <TD COLSPAN=4 style="text-align:left;" ><STRONG>8 .- Observaciones generales del equipo PsicoSocial</STRONG>
+      <li align="justify"> {{ficha.observacion}}</li></TD>
 </TH>
 </TR>
 
@@ -303,7 +303,7 @@
 <div id="tab2" class="tab-pane fade" aria-labelledby="profile-tab" role="tab-panel"> 
 <div class="container">
 
-  <h3>Apoderado de {{estudiante.nombres}} {{estudiante.firs_name}}</h3>
+  <h3>Apoderado de {{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}}</h3>
   {{nino}}
 
 {% for family in apoderado %}
