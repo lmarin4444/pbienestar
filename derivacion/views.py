@@ -15,7 +15,7 @@ from derivacion.models import Ficha_derivacion
 from alumno.models import Estudiante,Escolaridad
 from alumno.models import curso
 from alumno.models import Profesor
-from alumno.models import establecimiento
+from alumno.models import establecimiento,Parentesco,apoderado
 from alumno.forms import EstudianteForm
 from derivacion.models import Bitacora,intervencion,Retorno,Red_apoyo,Motivo_Retorno_Ficha_derivacion
 from profesional.models import Profesional
@@ -1246,3 +1246,56 @@ class PDFPrueba(View):
 		pdf=render_pdf("derivacion/mi_pdf.html",{"datos":datos})	
 		return HttpResponse(pdf, content_type="applications/pdf")
     		
+
+
+
+# Para imprimir una ficha desde el navegador
+# para ver ficha desde el centro 
+
+def FichaCentroDetailViewimprimir(request,pk):
+	try:
+		estudiante_id=Estudiante.objects.get(pk=pk)
+		family=estudiante_id.Familia
+		
+		ficha_id=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+		usuario_id=ficha_id.usuario
+		try:
+			usuario_ficha=User.objects.get(id=usuario_id.id)
+		except User.DoesNotExist:
+			usuario_ficha=None
+		
+		
+		try:
+			profesionales=Profesional.objects.get(usuario=usuario_ficha)
+		except Profesional.DoesNotExist:
+			profesionales=None
+
+
+		try:
+			parentesco_id=Parentesco.objects.filter(Familia=family).order_by('id')
+		except Parentesco.DoesNotExist:
+			parentesco_id=None
+		
+		try:
+			apoderado_id=apoderado.objects.filter(Familia=family)
+		except apoderado.DoesNotExist:
+			apoderado_id=None
+		
+		
+
+	except Estudiante.DoesNotExist:
+		raise Http404("Estudiante does not exist")
+
+    #book_id=get_object_or_404(Book, pk=pk)
+    
+	return render(
+	request,
+	'derivacion/fichaderivacion_impresa.html',
+	context={'estudiante':estudiante_id,
+			'ficha':ficha_id,
+			'parentesco':parentesco_id,
+			'apoderado':apoderado_id, 
+			'profesionales':profesionales,
+			'usuario_ficha':usuario_ficha,
+			 }
+    )

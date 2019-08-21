@@ -4,11 +4,12 @@
 <h4>Listado de estudiantes semana actual.<br>{{profesionales.usuario.first_name}} {{profesionales.usuario.last_name}}
 
 	
-		<span class="glyphicon glyphicon-calendar"></span> Desde  :{{fecha_inicio |date:"d-m-Y"}} -- <span class="glyphicon glyphicon-calendar"></span> Hasta : {{fecha_termino |date:"d-m-Y"}}
+		<small><span class="glyphicon glyphicon-calendar"></span></small> {{fecha_inicio |date:"d-m-Y"}} -- <small><span class="glyphicon glyphicon-calendar"></span></small>  {{fecha_termino |date:"d-m-Y"}}
 
 		</h4>
 
-<table id="example" class="table table-bordered">
+<table align="center" id="example" class="table table-bordered">
+
 	<thead>
 		 <tr class="success">
 		

@@ -121,7 +121,15 @@
 					
 				{% endif %}	
 					<a class="btn btn-default btn-xs" href="{% url 'alumno:Ficha_centro' mascota.Estudiante.id %}">Ver</a>
-						<a title="Ficha derivación - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:fichaderivacion_pdf_report' mascota.Estudiante.id %}"></a>/
+						<a title="Ficha derivación - imprimir" class="glyphicon glyphicon-paperclip" href="{% url 'informe:fichaderivacion_pdf_report' mascota.Estudiante.id %}"></a>/ 
+
+						<a title="Ficha derivación - imprimir en html" class="glyphicon glyphicon-print" href="{% url 'derivacion:FichaCentroDetailViewimprimir' mascota.Estudiante.id %}"></a>/ 
+						
+
+
+
+
+						
 			{% endif %}	
 			{% endwith %}	
 	
