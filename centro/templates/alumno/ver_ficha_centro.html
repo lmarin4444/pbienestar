@@ -32,7 +32,7 @@
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu centro</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú centro</a></li>
   <li><a href="{% url 'derivacion:intervencion_listar' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Volver lista</a></li>
   
 
@@ -51,8 +51,8 @@
     <img class="media-object" src='{% static "img/logo.png" %}' alt="100x100" src="data:image/p" style="width: 110px; height: 110px;" alt="Centro Bienestar">
   </a>
   <div class="media-body">
-  <h2 class="media-heading">Ficha Familiar
- <span class="label label-default">{{ estudiante.nombres|capfirst }} {{ estudiante.firs_name|capfirst }} {{ estudiante.last_name |capfirst}} </span></h2>
+  <h2 class="media-heading">Ficha de derivación </h2>
+ <span class="label label-default">{{ estudiante.nombres|capfirst }} {{ estudiante.firs_name|capfirst }} {{ estudiante.last_name |capfirst}} </span>
     
 
   </div>
