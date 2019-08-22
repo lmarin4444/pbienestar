@@ -5,14 +5,14 @@
 {% block content %}
 <form method="post" enctype="multipart/form-data">
 	{% csrf_token %}
-<h4> DERIVACION A OTRA INSTITUCION Y/O EGRESO</h4>	
+<h4> DERIVACIÓN A OTRA INSTITUCIÓN Y/O EGRESO</h4>	
 Estudiante: <strong>{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}</strong> 	
 {% if ficha.pasada == 4 %}
-<div class="alert alert-success">Estudiante ya cuenta con un derivación vigente</div>
+<div class="alert alert-success">Estudiante ya cuenta con una derivación vigente</div>
 {% else %}
 	será egresado,  se informará a la  dupla PsicoSocial o al profesional Pie,  con fecha  {% now "DATE_FORMAT" %}
 	<h4> El proceso de egreso tiene dos áreas: 
-	<li>   1 . Derivación a otra derivación. </li>
+	<li>   1 . Derivación a otra institución. </li>
 	 <li>  2.  Término de la intervención.</li></h4>
 	
 {% endif%}

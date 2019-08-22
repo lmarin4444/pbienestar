@@ -1360,10 +1360,6 @@ def listar_estudiantes_establecimiento(request,pk):
 	return render(request, 'alumno/estudiante_establecimiento.html', contexto)
 
 
-
-
-
-
 # Listado del area de las duplas para el supervisor
 #Listado de estudiantes por establecimiento- dado que cada profesional tiene asignados un grupo de establecimientos
 def listar_estudiantes_establecimiento_supervisor(request,pk):
@@ -1557,32 +1553,21 @@ def search(request,pk):
 				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 
 			except curso.DoesNotExist:
-				print ("escolar-curso %s" % ( escolar.curso) )
-				print ("escolar-letra %s" % ( escolar.Letra) )
-				print ("escuela %s" % ( escuela) )
+				
 				curso.objects.create(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 	        #codigo
 			family=Familia.objects.create(cantidad=1)
-
 			estudiando.Familia=family
-
 			estudiando.curso=etapa
-
 			diff = (datetime.date.today() - estudiando.fecha_nacimiento).days
-
 			years = str(int(diff/365))		
-
 			estudiando.edad=years
 			estudiando.save()
-			
 			x=datetime.datetime.today()
-
 			y=x.year
 			escolar.edad=y
-
 			escolar.establecimiento=escuela
-
 			escolar.Estudiante=estudiando
 			escolar.save()
 
@@ -1593,10 +1578,10 @@ def search(request,pk):
 			
 			if form3.is_valid():
 				estudiando = form3.save(commit=False)
-				print estudiando
+			
 
 				valor=int(estudiando.rut)
-				print valor
+
 				estudiar=Estudiante.objects.get(pk=valor)
 				form = EstudianteForm(instance=estudiar)
 			else:
@@ -1642,7 +1627,7 @@ def ingresar_estudiantes_establecimiento(request,pk):
 				
 				curso.objects.create(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
-	        #codigo
+	        
 			family=Familia.objects.create(cantidad=1)
 			
 			estudiando.Familia=family
@@ -1673,13 +1658,13 @@ def ingresar_estudiantes_establecimiento(request,pk):
 			
 			if form.is_valid():
 				estudiando = form.save(commit=False)
-				print estudiando
+				
 				valor1=estudiando[:12]
 				largo=len(estudiando.rut)
 				corte=largo - 2
 				valor1=estudiando[:corte]
 				valor= estudiando.rut
-				print valor
+				
 				try:
 					persona=Estudiante.objects.get(rut=valor)
 					estudiar=Estudiante.objects.get(pk=persona.id)

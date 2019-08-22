@@ -3,8 +3,8 @@
 {% block content %}
 <form method="post">
 	{% csrf_token %}
-	<h3>El paso de la derivacion de  {{ object.Estudiante }} al centro de bienestar, fue registrada con exito</h3>	
-	<button class="btn btn-dark" type="submit">Sí, enviar al centro de bienestar</button>
+	<h3>El paso de la derivación de  {{ object.Estudiante }} al Centro de Bienestar, fue registrada con exito</h3>	
+	<button class="btn btn-dark" type="submit">Sí, enviar al Centro de Bienestar</button>
 	<a class= "btn btn-default" href="{% url 'derivacion:derivacion_listar' %}">Cancelar</a>
 </form>
 {% endblock %}
