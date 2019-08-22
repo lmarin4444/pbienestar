@@ -256,13 +256,15 @@ def FichaCentroDetailView(request,pk):
 		
 		try:
 			parentesco_id=Parentesco.objects.filter(Familia=family).order_by('id')
+			try:
+				apoderado_id=apoderado.objects.filter(Familia=family)
+			except apoderado.DoesNotExist:
+				apoderado_id=None
+
 		except Parentesco.DoesNotExist:
 			parentesco_id=None
 		
-		try:
-			apoderado_id=apoderado.objects.filter(Familia=family)
-		except apoderado.DoesNotExist:
-			apoderado_id=None
+		
 		
 		
 
