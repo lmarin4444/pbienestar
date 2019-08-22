@@ -1439,7 +1439,7 @@ def search(request,pk):
 		if rut>=0 or digito>= 0 or digito=='k' or digito=='K':	
 			digito=str(digito)
 
-			print ("Digito verificador %s" % ( digito) )
+			print ("Dígito verificador %s" % ( digito) )
 
 			digito_upper = digito.upper()
 			print ("Dígito verificador %s" % ( digito_upper) )
@@ -1597,6 +1597,7 @@ def search(request,pk):
         "mensaje":mensaje,
     }		
 	return render(request, template, context)	
+
 	
 @requires_csrf_token
 def ingresar_estudiantes_establecimiento(request,pk):
@@ -2192,4 +2193,233 @@ def buscar_estudiantes(request,pk):
         "mensaje":mensaje
     }		
 	return render(request, template, context)	
+
+
+#Proceso de busqueda y de validacion de rut para un estudiante 
+@requires_csrf_token
+def search_listado(request):
+	#form = EstudianteForm(request.POST or None)
+	#form2 =EscolaridadForm(request.POST or None)
+	#mensaje = []
+	# Aqui modifique la asignacion de la escuela dado que no funciona
 	
+	mensaje=""
+	estado=""
+	if 'rut' in request.GET:
+		
+		rut = request.GET['rut']
+		digito=request.GET['dig']
+		if rut>=0 or digito>= 0 or digito=='k' or digito=='K':	
+			digito=str(digito)
+
+			print ("Dígito verificador %s" % ( digito) )
+
+			digito_upper = digito.upper()
+			print ("Dígito verificador %s" % ( digito_upper) )
+			rut=str(rut)
+			valor=digito_verificador(rut)
+			print ("Rut %s" % ( rut) )
+			if valor== 10:
+				valor='K'
+			if str(valor) == str(digito_upper):
+				if str(rut) == '10':
+					rut_p=str(rut)+str('-')+'K'
+					
+				else:	
+					rut_p=str(rut)+str('-')+str(digito)
+					
+			else:
+				#mensaje.append('Rut incorrecto ')
+				mensaje="Rut incorrecto "
+				
+				rut_p=""
+	
+			if not rut:
+				mensaje.append('Ingresar un rut ')
+			elif len(rut) > 8:
+				mensaje=('Rut extiene el máximo de carácteres')
+				
+
+			else:
+				try:
+					
+					estudiante = Estudiante.objects.get(rut=rut_p)
+					lugar=estudiante.curso.establecimiento
+					escuela=estudiante.curso.establecimiento
+					lugar_curso=estudiante.curso.numero
+					lugar_letra=estudiante.curso.letra
+					try:
+						ficha=Ficha_derivacion.objects.filter(Estudiante=estudiante)
+					except Ficha_derivacion.DoesNotExist:
+						ficha=None
+					print ficha
+					if lugar_curso == 0:
+						estado=estudiante.curso.establecimiento.nombre+ "Curso : NT1"
+					elif lugar_curso == 1 :
+						estado=estudiante.curso.establecimiento.nombre+ "Curso : Kinder"
+					elif lugar_curso == 2 or lugar_curso == 3 or lugar_curso == 4 or lugar_curso == 5 or lugar_curso == 6 or lugar_curso == 7 or lugar_curso == 8 or lugar_curso == 9:
+						lugar_curso = lugar_curso - 1 
+						estado=estudiante.curso.establecimiento.nombre+" Curso :"+ str(lugar_curso) +"º"
+					elif lugar_curso == 10:
+						estado=estudiante.curso.establecimiento.nombre+" Curso :"+"1ª Medio"
+					elif lugar_curso == 11:
+						estado=estudiante.curso.establecimiento.nombre+" Curso :"+"2ª Medio"
+					elif lugar_curso == 12:
+						estado=estudiante.curso.establecimiento.nombre+" Curso :"+"3ª Medio"
+					elif lugar_curso == 13:
+						estado=estudiante.curso.establecimiento.nombre+" Curso :"+"4ª Medio"
+					# Falta la letra del curso y asignar el curso 			
+					if lugar_letra == 0:
+						estado=estado+ " A"
+					elif lugar_letra == 1:
+						estado=estado+ " B"
+					elif lugar_letra == 2:
+						estado=estado+ " C"
+					elif lugar_letra == 3:
+						estado=estado+ " D"			
+
+
+					escolaridad=Escolaridad.objects.get(Estudiante=estudiante)
+					#form = EstudianteForm(instance=estudiante)
+					#form2 =EscolaridadForm(instance=escolaridad)
+
+					mensaje="Estudiante existe en la base de datos "+estado
+					
+					try:
+						ficha=Ficha_derivacion.objects.filter(Estudiante=estudiante).order_by('fecha_derivacion')
+						
+					except Ficha_derivacion.DoesNotExist:
+						ficha=None
+
+					try:
+						ficha_dupla=Ficha_derivacion_dupla.objects.filter(Estudiante=estudiante).order_by('fecha_derivacion')
+						
+					except Ficha_derivacion_dupla.DoesNotExist:
+						ficha_dupla=None
+
+					return render(request, 'alumno/ingresar_escolaridad_busqueda.html',
+                      {'estudiante': estudiante,
+                      'digito':digito,'mensaje':mensaje,
+                      'estado':estado,
+                      'ficha':ficha,
+                      'ficha_dupla':ficha_dupla})
+					
+				except Estudiante.DoesNotExist:
+					
+					estudiante=Estudiante()
+					
+					
+					
+					
+
+		else:
+			mensaje="Rut sin puntos, ni guiones"			
+			
+			return render(request, 'alumno/ingresar_escolaridad_busqueda.html',
+                      {'estudiante': estudiante, 'form':form,
+                      'form2':form2,'digito':digito,'mensaje':mensaje,
+                      'estado':estado,
+                      })
+			 
+	
+
+						
+	return render(request,'alumno/ingresar_escolaridad_busqueda.html',
+			 {'mensaje': mensaje,
+			 'estado': estado,
+
+    		 })
+
+	
+
+	
+@requires_csrf_token
+def ingresar_estudiantes_establecimiento_listado(request):
+	form3 = EstudianteVerForm(request.POST or None)	
+	form = EstudianteForm(request.POST or None)
+	form2 =EscolaridadForm(request.POST or None)
+	
+	template = 'alumno/ingresar_escolaridad_busqueda.html'
+	
+	mensaje=""
+	if request.method == 'POST':
+		if form.is_valid() and form2.is_valid() :
+
+			estudiando = form.save(commit=False)# Estudiante
+			#print ("estudiando  %s" % ( estudiando) )
+			escolar=form2.save(commit=False)# escolaridad
+			#print ("escolar  %s" % ( escolar.Letra) )
+			#pesadilla=form3.save(commit=False)
+			#escuela=establecimiento.objects.get(id=pk)
+			#ir a buscar el curso
+			#etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
+
+			try:
+				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
+
+			except curso.DoesNotExist:
+
+				
+				curso.objects.create(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
+				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
+	        
+			family=Familia.objects.create(cantidad=1)
+			
+			estudiando.Familia=family
+
+			estudiando.curso=etapa
+			
+			diff = (datetime.date.today() - estudiando.fecha_nacimiento).days
+			
+			years = str(int(diff/365))		
+			
+			estudiando.edad=years
+			estudiando.save()
+			
+			x=datetime.datetime.today()
+			
+			y=x.year
+			escolar.edad=y
+			
+			escolar.establecimiento=escuela
+			
+			escolar.Estudiante=estudiando
+			escolar.save()
+
+
+			url = reverse(('sesion:intervenido'))
+			return HttpResponseRedirect(url)
+		else:
+			
+			if form.is_valid():
+				estudiando = form.save(commit=False)
+				
+				valor1=estudiando[:12]
+				largo=len(estudiando.rut)
+				corte=largo - 2
+				valor1=estudiando[:corte]
+				valor= estudiando.rut
+				
+				try:
+					persona=Estudiante.objects.get(rut=valor)
+					estudiar=Estudiante.objects.get(pk=persona.id)
+					form = EstudianteForm(instance=estudiar)
+					mensaje="Error en el  formulario y/o Estudiante ya existe 1"	
+
+				except Estudiante.DoesNotExist:
+					persona=None
+				
+
+			else:
+				mensaje="Error en el  formulario y/o Estudiante ya existe "	
+
+
+	context = {
+        "form": form,
+        "form2":form2,
+        "form3":form3,
+
+        
+        "mensaje":mensaje
+    }		
+	return render(request, template, context)	

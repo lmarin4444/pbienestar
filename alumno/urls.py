@@ -14,7 +14,8 @@ from alumno.views import EstablecimientoList, EstablecimientoCreate, Establecimi
     search,asignar_familia,agregar_familia,FichaCentroDetailView,estado_estudiantes_establecimiento,busqueda_estudiante, \
     buscar_estudiantes,search_estudiante,EstudianteListEstablecimiento,EstablecimientoListPie,EstudianteListpie, \
     EstablecimientoListsupervisor,listar_estudiantes_establecimiento_supervisor,FichaEstudianteDetailView_supervisor,ver_escolaridad_supervisor, \
-    actualizar_escolaridad_supervisor,ver_familia_supervisor
+    actualizar_escolaridad_supervisor,ver_familia_supervisor,ingresar_estudiantes_establecimiento_listado, \
+    search_listado
    
 
 urlpatterns = [
@@ -65,6 +66,10 @@ urlpatterns = [
     url(r'^escolaridad_supervisor/(?P<pk>\d+)/$', login_required( actualizar_escolaridad_supervisor), name='escolaridad_supervisor'),
 
     url(r'^search/(?P<pk>\d+)/$',login_required(search),name='search'),
+    # Search permite realizar la busqueda de un estudiante ya creado
+    url(r'^search_listado/$',login_required(search_listado),name='search_listado'),
+
+
     url(r'^search_estudiante/(?P<pk>\d+)/$',login_required(search_estudiante),name='search_estudiante'),
     
     
@@ -136,6 +141,7 @@ urlpatterns = [
     url(r'^estado_estudiantes_establecimiento/(?P<pk>\d+)/$', login_required(estado_estudiantes_establecimiento), name='estado_estudiantes_establecimiento'),
 
     url(r'^ingestudianteestable/(?P<pk>\d+)/$', login_required(ingresar_estudiantes_establecimiento), name='ingresar_estudiantes_establecimiento'),
+    url(r'^ingresar_estudiantes_establecimiento_listado/$', login_required(ingresar_estudiantes_establecimiento_listado), name='ingresar_estudiantes_establecimiento_listado'),
     #Para realizar proceso de bisqueda por medio de un formulario
     url(r'^busqueda_estudiante', login_required(busqueda_estudiante), name='busqueda_estudiante'),
 
