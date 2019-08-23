@@ -292,7 +292,9 @@ class agenda(models.Model):
     numero          = models.IntegerField(blank=True, null=True)# 1: hora tomada 2:hora realizada 3:hora no asistida
     estado          = models.IntegerField(blank=True, null=True, default=1)# 1: hora por confirmar 2:hora confirmada
     furgon          = models.IntegerField(choices=FURGON,default=0)# 0: no necesita furgon 1: si necesita coordinar furgón
-    
+    quien           = models.IntegerField(blank=True, null=True, default=1)# 1: psicologo 2:secretaria
+
+
     def get_horario_i(self):
         return u'%s' % TIPO_HORARIO[self.horario_i][1]
     def get_furgon(self):
