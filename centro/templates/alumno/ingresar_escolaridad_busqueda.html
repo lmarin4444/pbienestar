@@ -33,6 +33,69 @@
 
 {% endif %}
 
+<div class="container">
+    
+    <hr>
+        <div class="row">
+        <div class="col-sm-12 col-lg-12">
+            <div style="background-color: #f5f5f5; padding: 20px 10px 20px 10px; border-radius: 5px;">
+                                        <section>
+                            <br>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-md-5 col-sm-12">
+        <p>&nbsp;</p>
+        <article>
+            <!-- $_SERVER['HTTP_USER_AGENT'] -->
+            <h3>Ingresar nuevo estudiante</h3>
+            <p class="text-justify">Ingrese rut sin puntos, para su verificación. 
 
+
+                <strong>en caso que ya exista,  </strong> se despliegan datos y
+                <strong>se indica establecimiento - curso </strong> </p>
+
+                        
+        </article>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-md-4 col-sm-12">
+        
+
+
+<form action="/alumno/search_listado" method="get">
+{% csrf_token %}
+        
+<table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  <TR class="headt" >
+    <TH COLSPAN=2  bgcolor="#E1F8FA" style="text-align:center;" >INGRESE RUT </TH>
+    
+  </TR>
+  <TR>
+    <TD COLSPAN=1><input type="text" id="rut" name="rut" required oninput="checkRut(this)" placeholder="Ingrese RUT"></TD>
+ 
+    <TD COLSPAN=1> - <input type="text" id="dig" name="dig" style="width:50px;height:25px" maxlength="1"  required oninput="checkRut(this)" placeholder="DIG"></TD>
+ 
+  </TR>
+<TR>
+    <TH COLSPAN=4  style="text-align:center;" > <input type="submit" class="btn btn-success btn-sm" value="Validar Rut"></TH>
+    
+</TR>
+  
+  
+  
+    
+  </thead>
+  <tbody>
+
+    
+    
+    
+    
+  </tbody>
+</table> 
+
+</form>
   
 {% endblock %}
