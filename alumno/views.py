@@ -265,9 +265,7 @@ def FichaCentroDetailView(request,pk):
 			parentesco_id=None
 		
 		
-		
-		
-
+	
 	except Estudiante.DoesNotExist:
 		raise Http404("Estudiante does not exist")
 
@@ -2254,7 +2252,7 @@ def search_listado(request):
 						ficha=Ficha_derivacion.objects.filter(Estudiante=estudiante)
 					except Ficha_derivacion.DoesNotExist:
 						ficha=None
-					print ficha
+					
 					if lugar_curso == 0:
 						estado=estudiante.curso.establecimiento.nombre+ "Curso : NT1"
 					elif lugar_curso == 1 :
@@ -2281,7 +2279,7 @@ def search_listado(request):
 						estado=estado+ " D"			
 
 
-					escolaridad=Escolaridad.objects.get(Estudiante=estudiante)
+					#escolaridad=Escolaridad.objects.get(Estudiante=estudiante)
 					#form = EstudianteForm(instance=estudiante)
 					#form2 =EscolaridadForm(instance=escolaridad)
 
@@ -2308,8 +2306,13 @@ def search_listado(request):
 					
 				except Estudiante.DoesNotExist:
 					
-					estudiante=Estudiante()
 					
+					return render(request, 'alumno/ingresar_escolaridad_busqueda.html',
+                      {'estudiante': None,
+                      'digito':digito,'mensaje':mensaje,
+                      'estado':estado,
+                      'ficha':None,
+                      'ficha_dupla':None})
 					
 					
 					
@@ -2318,8 +2321,8 @@ def search_listado(request):
 			mensaje="Rut sin puntos, ni guiones"			
 			
 			return render(request, 'alumno/ingresar_escolaridad_busqueda.html',
-                      {'estudiante': estudiante, 'form':form,
-                      'form2':form2,'digito':digito,'mensaje':mensaje,
+                      {'estudiante': None, 'form':form,
+                      'form2':form2,'digito':None,'mensaje':mensaje,
                       'estado':estado,
                       })
 			 
