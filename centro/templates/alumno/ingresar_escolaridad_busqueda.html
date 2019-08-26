@@ -1,0 +1,38 @@
+{% extends 'base/base_centro.html' %}
+{% block content %}
+
+
+
+{% if mensaje %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir página Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir Menú inicial centro!">Menú </a></li>
+  
+ 
+ </ul> 
+ 
+ {% if estado %}<div class="alert alert-info">{{mensaje}} {{escuela.establecimiento.nombre}} 
+ <a class="btn btn-info" href="{% url 'comienza:listado_construccion' %}">Ver más </a>
+	{% else %}<div class="alert alert-danger"> {{mensaje}}{% endif %}
+
+
+
+</div></div>
+
+{% else %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú </a></li>
+  
+ 
+ 
+ </ul> 
+<div class="alert alert-success">Rut correcto, estudiante no esta registrado</div>
+
+{% endif %}
+
+
+  
+{% endblock %}

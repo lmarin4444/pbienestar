@@ -1,0 +1,119 @@
+{% extends 'base/base_centro.html' %}
+
+{% block content %}
+
+
+
+{% if mensaje %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú </a></li>
+  
+ 
+ </ul> 
+ 
+ {% if estado %}<div class="alert alert-info">{{mensaje}} {{escuela.establecimiento.nombre}} 
+ <a class="btn btn-info" href="{% url 'comienza:listado_construccion' %}">Ver más </a>
+	{% else %}<div class="alert alert-danger"> {{mensaje}}{% endif %}
+
+
+
+</div>
+
+{% else %}
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú </a></li>
+  
+ 
+ 
+ </ul> 
+<div class="alert alert-success">Rut correcto, estudiante no esta registrado</div>
+{% endif %}
+
+<div class="container">
+    
+    <hr>
+        <div class="row">
+        <div class="col-sm-12 col-lg-12">
+            <div style="background-color: #f5f5f5; padding: 20px 10px 20px 10px; border-radius: 5px;">
+<section>
+                            
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-md-5 col-sm-12">
+        <p>&nbsp;</p>
+        <article>
+           
+<form action="/alumno/search_listado/" method="get">
+{% csrf_token %}
+        
+<table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  <TR class="headt" >
+    <TH COLSPAN=2  bgcolor="#E1F8FA" style="text-align:center;" >INGRESE RUT </TH>
+    
+  </TR>
+  <TR>
+    <TD COLSPAN=1><input type="text" id="rut" name="rut" required oninput="checkRut(this)" placeholder="Ingrese RUT"></TD>
+ 
+    <TD COLSPAN=1> - <input type="text" id="dig" name="dig" style="width:50px;height:25px" maxlength="1"  required oninput="checkRut(this)" placeholder="DIG"></TD>
+ 
+  </TR>
+<TR>
+    <TH COLSPAN=4  style="text-align:center;" > <input type="submit" class="btn btn-success btn-sm" value="Validar Rut"></TH>
+    
+</TR>
+  
+ 
+  
+    
+  </thead>
+
+ </table> 
+
+  
+
+ </form>
+                        
+ </article>
+    </div>
+
+        
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+<script>
+   google.load("visualization", "1", {packages:["corechart"]});
+   google.setOnLoadCallback(dibujarGrafico);
+   function dibujarGrafico() {
+     // Tabla de datos: valores y etiquetas de la gráfica
+     var data = google.visualization.arrayToDataTable([
+       ['Texto', 'Valor numérico'],
+       ['Texto1', 20.21],
+       ['Texto2', 4.28],
+       ['Texto3', 17.26],
+       ['Texto4', 10.25]    
+     ]);
+     var options = {
+       title: 'Nuestro primer ejemplo con Google Charts'
+     }
+     // Dibujar el gráfico
+     new google.visualization.ColumnChart( 
+     //ColumnChart sería el tipo de gráfico a dibujar
+       document.getElementById('GraficoGoogleChart-ejemplo-1')
+     ).draw(data, options);
+   }
+ </script> 
+<body>
+Comenzando con Google Charts....
+<div id="GraficoGoogleChart-ejemplo-1" style="width: 800px; height: 600px">
+</div>
+
+
+  
+  
+{% endblock %}

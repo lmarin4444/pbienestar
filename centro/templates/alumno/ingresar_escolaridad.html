@@ -6,8 +6,8 @@
 {% if mensaje %}
 <ul class="breadcrumb">
 
-  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú </a></li>
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir página Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir Menú inicial centro!">Menú </a></li>
   
   <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Ir listado establecimiento">Volver establecimientos</a></li>
  
@@ -17,7 +17,7 @@
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu </a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir Menú inicial centro!">Menú </a></li>
   <li><a href="{% url 'alumno:estudiante_listar' %}"data-toggle="tooltip" title="Ir listado de estudiantes intervenidos!">Estudiantes intervenidos centro bienestar </a></li>
   
   <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Lista de estudiantes del establecimiento </a></li>
