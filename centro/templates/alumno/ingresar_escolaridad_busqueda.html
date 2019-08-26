@@ -12,7 +12,7 @@
  
  </ul> 
  
- {% if estado %}<div class="alert alert-info">{{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }}{{mensaje}} {{escuela.establecimiento.nombre}} 
+ {% if estado %}<div class="alert alert-info"> {{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }} {{mensaje}} {{escuela.establecimiento.nombre}} 
  <a class="btn btn-info" href="{% url 'comienza:listado_construccion' %}">Ver más </a>
 	{% else %}<div class="alert alert-danger"> {{mensaje}}{% endif %}
 
@@ -29,7 +29,7 @@
  
  
  </ul> 
-<div class="alert alert-success">Rut correcto</div>
+<div class="alert alert-success">Rut no se encuentra en los registros de la base de datos</div>
 
 {% endif %}
 

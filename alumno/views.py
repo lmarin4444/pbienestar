@@ -2328,7 +2328,7 @@ def search_listado(request):
 			 
 	
 
-						
+	mensaje="Estudiante no se encuentra registrado y/o rut incorrecto "				
 	return render(request,'alumno/ingresar_escolaridad_busqueda.html',
 			 {'mensaje': mensaje,
 			 'estado': estado,
