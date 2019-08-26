@@ -2283,7 +2283,7 @@ def search_listado(request):
 					#form = EstudianteForm(instance=estudiante)
 					#form2 =EscolaridadForm(instance=escolaridad)
 
-					mensaje="Estudiante existe en la base de datos "+estado
+					mensaje=" existe en la base de datos "+estado
 					
 					try:
 						ficha=Ficha_derivacion.objects.filter(Estudiante=estudiante).order_by('fecha_derivacion')

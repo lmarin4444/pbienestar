@@ -12,7 +12,7 @@
  
  </ul> 
  
- {% if estado %}<div class="alert alert-info">{{mensaje}} {{escuela.establecimiento.nombre}} 
+ {% if estado %}<div class="alert alert-info">{{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }}{{mensaje}} {{escuela.establecimiento.nombre}} 
  <a class="btn btn-info" href="{% url 'comienza:listado_construccion' %}">Ver más </a>
 	{% else %}<div class="alert alert-danger"> {{mensaje}}{% endif %}
 
@@ -29,7 +29,7 @@
  
  
  </ul> 
-<div class="alert alert-success">Rut correcto, estudiante no esta registrado</div>
+<div class="alert alert-success">Rut correcto</div>
 
 {% endif %}
 
@@ -81,21 +81,45 @@
 <TR>
     <TH COLSPAN=4  style="text-align:center;" > <input type="submit" class="btn btn-success btn-sm" value="Validar Rut"></TH>
     
-</TR>
+  </TR>
   
   
   
-    
+  
   </thead>
   <tbody>
 
     
-    
-    
+
     
   </tbody>
 </table> 
 
 </form>
-  
+ <div> 
+ {% if ficha %}
+ Fecha derivación centro de bienestar:<br>
+
+
+	{% for fichas in ficha %}
+		 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa
+		{% else %} Antigua{% endif %}<br>
+{% endfor %}
+{% endif %}
+</div>
+<div> 
+ {% if ficha %}
+ Fecha derivación dupla psicosocial:<br>
+
+
+	{% for fichas in ficha_dupla %}
+		 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa
+		{% else %} Antigua{% endif %}<br>
+{% endfor %}
+{% endif %}
+</div>
+
+
+
+
 {% endblock %}
