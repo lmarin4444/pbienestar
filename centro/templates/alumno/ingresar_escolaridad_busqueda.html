@@ -96,17 +96,19 @@
 </table> 
 
 </form>
- <div> 
- {% if ficha %}
- Fecha derivación centro de bienestar:<br>
+ <div class="row">
+        <div class="col-sm-12 col-lg-12">
+		 {% if ficha %}
+		 Fecha derivación centro de bienestar:<br>
 
 
-	{% for fichas in ficha %}
-		 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa
-		{% else %} Antigua{% endif %}<br>
-{% endfor %}
-{% endif %}
-</div>
+			{% for fichas in ficha %}
+				 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa
+				{% else %} Antigua{% endif %}<br>
+		{% endfor %}
+		{% endif %}
+	</div>
+</div>	
 <div> 
  {% if ficha %}
  Fecha derivación dupla psicosocial:<br>
