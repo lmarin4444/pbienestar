@@ -475,10 +475,17 @@ def ver_historia_objetivos(request,pk,estudiante):
 
 def ver_historia_ficha_derivacion(request,pk,estudiante):
 	
-	history=Historia.objects.get(pk=pk)
+	
+	try:
+		history=Historia.objects.get(pk=pk)
+		ficha=history.Ficha_derivacion
+	except Historia.DoesNotExist:
+		history=None
+		
+	
 	dato=Estudiante.objects.get(pk=estudiante)
 	
-	ficha=history.Ficha_derivacion
+	
 
 	template = 'historia/ver_historia_ficha_derivacion.html'
 	context = {
@@ -488,6 +495,10 @@ def ver_historia_ficha_derivacion(request,pk,estudiante):
         "historia":history,
     }
 	return render(request, template, context)
+
+
+
+
 
 def ver_historia_sesiones(request,pk,estudiante):
 	

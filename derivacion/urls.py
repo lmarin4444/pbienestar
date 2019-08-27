@@ -7,7 +7,8 @@ from derivacion.views import listadousuarios, index, mascota_view, mascota_list,
     IntervencionUpdateView,seguimientocentroListView,MascotaseguimientoList,EntradasBitacora,AsignarUpdateView, \
     BusquedaAjaxView,asignar_intervencion,EntradasFicha,gracias,EntradasList,EntradasOtrasList,EntradasRetornoDuplaList,historia_retorno, \
     ModificarFicha,RetornoDefinitivo,RetornoInstList,MascotaCreate_Prueba,MascotaUpdate_centro,ModificarRetornoDefinitivo, \
-    ReporteIntervenidos,PDFPrueba,EntradasFichaSupervisor,ReporteIntervenidosSupervisor,FichaCentroDetailViewimprimir
+    ReporteIntervenidos,PDFPrueba,EntradasFichaSupervisor,ReporteIntervenidosSupervisor,FichaCentroDetailViewimprimir, \
+    FichaCentroDetailViewimprimirbusqueda
     
 
 urlpatterns = [
@@ -83,7 +84,7 @@ urlpatterns = [
     # Imprimir desde template 
     url(r'^PDFPrueba', login_required(PDFPrueba.as_view()), name='PDFPrueba'),
     url(r'^FichaCentroDetailViewimprimir/(?P<pk>\d+)/$',login_required(FichaCentroDetailViewimprimir),name='FichaCentroDetailViewimprimir'),
-
+    url(r'^FichaCentroDetailViewimprimirbusqueda/(?P<pk>\d+)/(?P<est>\d+)/$',login_required(FichaCentroDetailViewimprimirbusqueda),name='FichaCentroDetailViewimprimirbusqueda'),
 
 
 ]

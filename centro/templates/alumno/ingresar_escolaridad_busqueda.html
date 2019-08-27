@@ -97,16 +97,31 @@
 
 </form>
 </div>
+	
+				
+
+
+			 
+
         <div class="col-md-6 col-md-6">
+        {% if estudiante %}
+        <li>Rut: {{estudiante.rut}}</li>
+					<li>{{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }}  {{escuela.establecimiento.nombre}}</li>
+					<li>Fecha nacimiento:{{estudiante.fecha_nacimiento}}</li>
+					<li>Domicilio : {{estudiante.domicilio_estudiante}}</li>
+
+		{% endif %}
 		 {% if ficha %}
 		 Fecha derivación centro de bienestar:<br>
 
 
 			{% for fichas in ficha %}
-				 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa
+				 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa 
+ 				 <a title="Ver Ficha de derivación" class="glyphicon glyphicon-file" href="{% url 'derivacion:FichaCentroDetailViewimprimirbusqueda' fichas.id fichas.Estudiante.id %}"></a>
+
 				{% else %} Antigua 
 
-				<a title="Ver Ficha de derivación" class="glyphicon glyphicon-list" href="{% url 'historia:ver_historia_ficha_derivacion' fichas.id fichas.Estudiante.id %}"></a>
+				<a title="Ver Ficha de derivación" class="glyphicon glyphicon-list" href="{% url 'derivacion:FichaCentroDetailViewimprimirbusqueda' fichas.id fichas.Estudiante.id %}"></a>
 				{% endif %}<br>
 		{% endfor %}
 		{% endif %}
@@ -118,8 +133,11 @@
 
 
 	{% for fichas in ficha_dupla %}
-		 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa 
-		{% else %} Antigua{% endif %}<br>
+
+		 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa <a title="Ver Ficha de derivación" class="glyphicon glyphicon-file" href="{% url 'derivacion:FichaCentroDetailViewimprimir' fichas.id  %}"></a>
+		{% else %} Antigua 
+		<a title="Ver Ficha de derivación" class="glyphicon glyphicon-file" href="{% url 'derivacion:FichaCentroDetailViewimprimir' fichas.id  %}"></a>
+		{% endif %}<br>
 {% endfor %}
 {% endif %}
 
