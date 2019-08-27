@@ -134,9 +134,9 @@
 
 	{% for fichas in ficha_dupla %}
 
-		 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa <a title="Ver Ficha de derivación" class="glyphicon glyphicon-file" href="{% url 'derivacion:FichaCentroDetailViewimprimir' fichas.id  %}"></a>
+		 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa <a title="Ver Ficha de derivación" class="glyphicon glyphicon-file" href="{% url 'derivacion:FichaCentroDetailViewimprimirsocialbusqueda' fichas.id  fichas.Estudiante.id %}"></a>
 		{% else %} Antigua 
-		<a title="Ver Ficha de derivación" class="glyphicon glyphicon-file" href="{% url 'derivacion:FichaCentroDetailViewimprimir' fichas.id  %}"></a>
+		<a title="Ver Ficha de derivación" class="glyphicon glyphicon-file" href="{% url 'derivacion:FichaCentroDetailViewimprimirsocialbusqueda' fichas.id fichas.Estudiante.id %}"></a>
 		{% endif %}<br>
 {% endfor %}
 {% endif %}

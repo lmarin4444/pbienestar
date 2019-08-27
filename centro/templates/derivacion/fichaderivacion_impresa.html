@@ -281,10 +281,24 @@
   <p align="justify">{{ficha.observacion}} </p>
 
  </td>
-</div>
-      
 
-		
+      
+{% if ficha.Imagen%} 
+<td><strong>Genograma asociado</strong>
+
+<p><img src="{{ ficha.Imagen.url }}" style="width:600px;height:400px" ALIGN="MIDDLE"></p>
+{% else %}
+<div class="row">
+    <div class="col-md-8 col-md-offset-1">
+      <div >
+        Sin imagen
+        
+      </div>
+    </div>
+ </div>   
+
+{% endif %}
+		</td></div>
   <!--firma  -->
 <div class="container">
   <div class="row">

@@ -8,7 +8,7 @@ from derivacion.views import listadousuarios, index, mascota_view, mascota_list,
     BusquedaAjaxView,asignar_intervencion,EntradasFicha,gracias,EntradasList,EntradasOtrasList,EntradasRetornoDuplaList,historia_retorno, \
     ModificarFicha,RetornoDefinitivo,RetornoInstList,MascotaCreate_Prueba,MascotaUpdate_centro,ModificarRetornoDefinitivo, \
     ReporteIntervenidos,PDFPrueba,EntradasFichaSupervisor,ReporteIntervenidosSupervisor,FichaCentroDetailViewimprimir, \
-    FichaCentroDetailViewimprimirbusqueda
+    FichaCentroDetailViewimprimirbusqueda,FichaCentroDetailViewimprimirsocial,FichaCentroDetailViewimprimirsocialbusqueda
     
 
 urlpatterns = [
@@ -86,6 +86,8 @@ urlpatterns = [
     url(r'^FichaCentroDetailViewimprimir/(?P<pk>\d+)/$',login_required(FichaCentroDetailViewimprimir),name='FichaCentroDetailViewimprimir'),
     url(r'^FichaCentroDetailViewimprimirbusqueda/(?P<pk>\d+)/(?P<est>\d+)/$',login_required(FichaCentroDetailViewimprimirbusqueda),name='FichaCentroDetailViewimprimirbusqueda'),
 
+    url(r'^FichaCentroDetailViewimprimirsocial/(?P<pk>\d+)/$',login_required(FichaCentroDetailViewimprimirsocial),name='FichaCentroDetailViewimprimirsocial'),
+    url(r'^FichaCentroDetailViewimprimirsocialbusqueda/(?P<pk>\d+)/(?P<est>\d+)/$',login_required(FichaCentroDetailViewimprimirsocialbusqueda),name='FichaCentroDetailViewimprimirsocialbusqueda'),
 
 ]
 
