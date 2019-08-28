@@ -9,7 +9,7 @@ from sesion.models import Intervenidos,objetivo_intervencion,objetivo_intervenci
 from historia.models import Historia,Ficha_derivacion_historica,Intervenidos_historico,agenda_historica, \
 	objetivo_historico, objetivo_intervencion_historico,sesion_historica, \
 	Motivo_Retorno_historia,Diagnostico_historia,Ficha_de_egreso_historia,Reporte_continuidad_historia
-		
+from bitacora.models import Lista		
 from derivacion.models import Ficha_derivacion,Motivo_Retorno_Ficha_derivacion
 from secretaria.models import agenda, Confirma, Registro
 from sesion.models import sesion
@@ -43,7 +43,7 @@ def ir_historia(request,pk):
 			#history.observacion=history.observacion+"-Con fecha :"+date+"Historia de centro de bienestar"
 		#except Historia.DoesNotExist:	
 			#history=Historia.objects.create(fecha=date,Estudiante=dato,Ficha_derivacion=ficha,objetivo_intervencion=objeto,observacion="Con fecha :"+date+"Historia desde el centro de bienestar")
-		history=Historia.objects.create(fecha="2019/06/13",Estudiante=dato,Ficha_derivacion=ficha,objetivo_intervencion=objeto,observacion="Con fecha : 13/06/2019 Historia desde el centro de bienestar")	
+		history=Historia.objects.create(fecha=datetime.datetime.now(),Estudiante=dato,Ficha_derivacion=ficha,objetivo_intervencion=objeto,observacion="Con fecha : 13/06/2019 Historia desde el centro de bienestar")	
 	#		
 	#Todos los datos de la ficha de derivacion
 		fecha_derivacion 		=ficha.fecha_derivacion
@@ -77,7 +77,11 @@ def ir_historia(request,pk):
 		try:
 			
 		
-			agendo=Lista.objects.filter(Estudiante__id=pk)
+				
+			agendo=agenda.objects.filter(Estudiante__id=pk)
+			
+			
+			
 			for ida in agendo:
 				if ida.numero==1 and ida.estado==1:
 					agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
@@ -86,50 +90,134 @@ def ir_historia(request,pk):
 						situacion='No se reaiza la sesión',obs='',otros='Solo se agendó',obs_confirma='sin confirmación Solo se agendó'
 						)
 				elif ida.numero==1 and ida.estado==2:
-					confirmacion=Confirma.objects.get(agenda=ida)
-					agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+					try:
+						confirmacion=Confirma.objects.get(agenda=ida)
+						agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
 						participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
 						usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico='NO SE REALIZÓ LA SESIÓN',privado='-',observacion='-',pruebas='',usuario_sesion="",
 						situacion='No se reaiza la sesión',obs='',otros='Solo se agendó',obs_confirma=confirmacion.obs
 						)
-					confirmacion.delete()
+						confirmacion.delete()
+					except Confirma.DoesNotExist:
+						agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+						participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
+						usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico='NO SE REALIZÓ LA SESIÓN',privado='-',observacion='-',pruebas='',usuario_sesion="",
+						situacion='No se reaiza la sesión',obs='',otros='Solo se agendó',obs_confirma='No se realizó confirmación'
+						)
+						
+					
 				elif ida.numero==2 and ida.estado==1:
-					Sesion=sesion.objects.get(fecha=ida.fecha,horario_i=ida.horario_i,Estudiante__id=pk)
+					try:
+						Sesion=sesion.objects.get(fecha=ida.fecha,horario_i=ida.horario_i,Estudiante__id=pk)
 				
-					agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+						agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
 						participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
 						usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico=Sesion.publico,privado=Sesion.privado,observacion=Sesion.observacion,
 						pruebas=Sesion.pruebas,usuario_sesion=Sesion.usuario.username+" "+Sesion.usuario.first_name+" "+Sesion.usuario.last_name,numero=Sesion.numero,situacion='Asiste a la sesión',obs='',otros='',obs_confirma='No se realiza la confirmación'
 						)	
-					Sesion.delete()
+						Sesion.delete()
+					except sesion.DoesNotExist:
+						agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+						participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
+						usuario='Sesión sin registo',publico='Sesión sin registo',privado='Sesión sin registo',observacion='Sesión sin registo',
+						usuario_sesion='Sesión sin usurio registo',situacion='Sesión sin registo',obs='',otros='',obs_confirma='No se realiza la confirmación'
+						)
+						
+					
 				elif ida.numero==2 and ida.estado==2:
-					Sesion=sesion.objects.get(fecha=ida.fecha,horario_i=ida.horario_i,Estudiante__id=pk)
-					confirmacion=Confirma.objects.get(agenda=ida)
-					agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
-						participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
-						usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico=Sesion.publico,privado=Sesion.privado,observacion=Sesion.observacion,
-						pruebas=Sesion.pruebas,usuario_sesion=Sesion.usuario.username+" "+Sesion.usuario.first_name+" "+Sesion.usuario.last_name,numero=Sesion.numero,situacion='Asiste a la sesión',obs='',otros='',obs_confirma=confirmacion.obs
-						)
-					confirmacion.delete()
-					Sesion.delete()
+					try:
+						Sesion=sesion.objects.get(fecha=ida.fecha,horario_i=ida.horario_i,Estudiante__id=pk)
+						try:
+							confirmacion=Confirma.objects.get(agenda=ida)
+						
+							agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+								participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
+								usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico=Sesion.publico,privado=Sesion.privado,observacion=Sesion.observacion,
+								pruebas=Sesion.pruebas,usuario_sesion=Sesion.usuario.username+" "+Sesion.usuario.first_name+" "+Sesion.usuario.last_name,numero=Sesion.numero,situacion='Asiste a la sesión',obs='',otros='',obs_confirma=confirmacion.obs
+								)
+							confirmacion.delete()
+						
+						except Confirma.DoesNotExist:
+							agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+								participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
+								usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico=Sesion.publico,privado=Sesion.privado,observacion=Sesion.observacion,
+								pruebas=Sesion.pruebas,usuario_sesion=Sesion.usuario.username+" "+Sesion.usuario.first_name+" "+Sesion.usuario.last_name,numero=Sesion.numero,situacion='Asiste a la sesión',obs='',otros='',obs_confirma='No existe registro de confirmación'
+								)
+
+
+						Sesion.delete()
+					except sesion.DoesNotExist:
+						try:
+							confirmacion=Confirma.objects.get(agenda=ida)
+						
+							agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+								participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
+								usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico='Sesión sin registro',privado='Sesión sin registro',observacion='Sesión sin registro',
+								usuario_sesion='Sesión sin registro',situacion='Sesión sin registro',obs='',otros='',obs_confirma=confirmacion.obs
+								)
+							confirmacion.delete()
+						
+						except Confirma.DoesNotExist:
+							agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+								participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
+								usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico='Sesión sin registro',privado='Sesión sin registro',observacion='Sesión sin registro',
+								usuario_sesion='Sesión sin registro',situacion='Sesión sin registro',obs='',otros='',obs_confirma='Sesión sin registro de confirmación'
+								)
+						
+					
 				elif ida.numero==3 and ida.estado==1:
-					registro=Registro.objects.get(agenda=ida)
-					agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+					try:
+						registro=Registro.objects.get(agenda=ida)
+						agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
 						participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
 						usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico='NO SE REALIZÓ LA SESIÓN',privado='-',observacion='-',
-						pruebas='',usuario_sesion="",situacion=registro.situacion,obs=registro.obs,otros=registro.otros,obs_confirma='No se realiza la confirmación'
+						usuario_sesion="",situacion=registro.situacion,obs=registro.obs,otros=registro.otros,obs_confirma='No se realiza la confirmación'
 						)
-					registro.delete()								
+						registro.delete()	
+					except Registro.DoesNotExist:
+						agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+						participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
+						usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico='NO SE REALIZÓ LA SESIÓN',privado='-',observacion='-',
+						pruebas='',usuario_sesion="",situacion='Sin realización de registro',obs='Sin observación de registro',otros='Sin realización de registro',obs_confirma='No se realiza la confirmación'
+						)
+												
 				elif ida.numero==3 and ida.estado==2:
-					registro=Registro.objects.get(agenda=ida)
-					confirmacion=Confirma.objects.get(agenda=ida)
-					agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
-						participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
-						usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico='NO SE REALIZÓ LA SESIÓN',privado='-',observacion='-',
-						pruebas='',usuario_sesion="",situacion=registro.situacion,obs=registro.obs,otros=registro.otros,obs_confirma=confirmacion.obs
-						)
-					registro.delete()
-					confirmacion.delete()						
+					try:
+						registro=Registro.objects.get(agenda=ida)
+						try:
+							confirmacion=Confirma.objects.get(agenda=ida)
+							agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+							participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
+							usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico='NO SE REALIZÓ LA SESIÓN',privado='-',observacion='-',
+							pruebas='',usuario_sesion="",situacion=registro.situacion,obs=registro.obs,otros=registro.otros,obs_confirma=confirmacion.obs
+							)
+							confirmacion.delete()
+						except Confirma.DoesNotExist:
+							agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+							participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
+							usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico='NO SE REALIZÓ LA SESIÓN',privado='-',observacion='-',
+							usuario_sesion="",situacion=registro.situacion,obs=registro.obs,otros=registro.otros,obs_confirma='Sin registro de confirmación'
+							)
+						
+						registro.delete()
+							
+					except Registro.DoesNotExist:
+						try:
+							confirmacion=Confirma.objects.get(agenda=ida)
+							agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+							participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
+							usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico='NO SE REALIZÓ LA SESIÓN',privado='-',observacion='-',
+							pruebas='',usuario_sesion="",situacion='Sin información de registro',obs='Sin información de registro',otros='Sin información de registro',obs_confirma=confirmacion.obs
+							)
+							confirmacion.delete()
+						except Confirma.DoesNotExist:
+							
+							agenda_historica.objects.create(fecha=ida.fecha,Historia=history,horario_i=ida.horario_i,
+							participantes=ida.participantes,tipo_sesion=ida.tipo_actividad,
+							usuario=ida.usuario.username+" "+ida.usuario.first_name+" "+ida.usuario.last_name,publico='NO SE REALIZÓ LA SESIÓN',privado='-',observacion='-',
+							pruebas='',usuario_sesion="",situacion='Sin información de registro',obs='Sin información de registro',otros='Sin información de registro',obs_confirma='Sin registro de confirmación'
+							)
+										
 			
 		except agenda.DoesNotExist:						
 			agendo=None
