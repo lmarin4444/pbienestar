@@ -6,9 +6,11 @@ from django.http import Http404
 from alumno.models import establecimiento,curso,Familia,EscolaridadAnterior
 from alumno.models import Estudiante,Escolaridad
 from alumno.models import Parentesco,apoderado,hermano
-from sesion.models import objetivo_intervencion,Diagnostico,Intervenidos
+from sesion.models import objetivo_intervencion,Diagnostico,Intervenidos,sesion
 from sesion.forms import DiagnosticoForm
 from profesional.models import Profesional,Cargo
+from secretaria.models import agenda,Registro
+
 #from alumno.models import Pariente,tutor
 from alumno.forms import EstablecimientoForm,EstudianteForm,ParentescoForm,ApoderadoForm,HermanoForm, \
 EstudianteVerForm,EstudianteFormVersinrut,EscolaridadForm,EscolaridadActualizaForm,EscolaridadActualizaFormCentro, \
@@ -2296,13 +2298,41 @@ def search_listado(request):
 						
 					except Ficha_derivacion_dupla.DoesNotExist:
 						ficha_dupla=None
+					try:
+						intervenidos = Intervenidos.objects.all()
+					except Intervenidos.DoesNotExist:
+						intervenidos=None
+					try:
+						Sesion = sesion.objects.filter(Estudiante__id=estudiante.id).order_by('fecha')
+					except sesion.DoesNotExist:
+						Sesion=None
+	
+					# ir a buscar la informacion de la agenda
+					try:
+						agendado=agenda.objects.filter(Estudiante__id=estudiante.id).order_by('fecha')
+					except agenda.DoesNotExist:
+						agendado=None
+	
+					try:
+						registrado=Registro.objects.filter(agenda=agendado).order_by('fecha')
+					except Registro.DoesNotExist:
+						registrado=None
+
 
 					return render(request, 'alumno/ingresar_escolaridad_busqueda.html',
                       {'estudiante': estudiante,
                       'digito':digito,'mensaje':mensaje,
                       'estado':estado,
                       'ficha':ficha,
-                      'ficha_dupla':ficha_dupla})
+                      'ficha_dupla':ficha_dupla,
+                      'intervenidos':intervenidos,
+                      'Sesion':Sesion,
+                      'agendado':agendado,
+                      'registrado':registrado,
+
+
+                      })
+	
 					
 				except Estudiante.DoesNotExist:
 					
@@ -2312,6 +2342,7 @@ def search_listado(request):
                       'digito':digito,'mensaje':mensaje,
                       'estado':estado,
                       'ficha':None,
+
                       'ficha_dupla':None})
 					
 					
@@ -2418,11 +2449,12 @@ def ingresar_estudiantes_establecimiento_listado(request):
 			else:
 				mensaje="Error en el  formulario y/o Estudiante ya existe "	
 
-
+	intervenidos = Intervenidos.objects.all()
 	context = {
         "form": form,
         "form2":form2,
         "form3":form3,
+        "intervenidos":intervenidos,
 
         
         "mensaje":mensaje

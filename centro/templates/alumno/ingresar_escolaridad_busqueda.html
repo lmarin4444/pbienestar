@@ -12,7 +12,8 @@
  
  </ul> 
  
- {% if estado %}<div class="alert alert-info"> {{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }} {{mensaje}} {{escuela.establecimiento.nombre}} 
+ {% if estado %}<div class="alert alert-info">
+  {{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }} {{mensaje}} {{escuela.establecimiento.nombre}} 
  
 	{% else %}<div class="alert alert-danger"> {{mensaje}}{% endif %}
 
@@ -57,6 +58,7 @@
                         
         </article>
     </div>
+
     <div class="col-1"></div>
     <div class="col-md-4 col-sm-12">
         
@@ -87,37 +89,284 @@
   
   
   </thead>
-  <tbody>
 
-    
-
-    
-  </tbody>
 </table> 
 
 </form>
+
 </div>
+   <div class="jumbotron">
 	
-				
+   {% if estudiante %}	
 
+<br>
+<br>
+<br>
+<br>
+  
+   <p class="lead">
+  <br><h3>{{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }} {{estudiante.last_name|capfirst }}</h3>  
+ Existe en la base de datos del Centro de Bienestar.</p>
+  <hr class="my-4">
+  <p>
+    <li>{{estudiante.curso.establecimiento.nombre}} / <strong>Curso {{estudiante.curso.get_numero}} {{estudiante.curso.get_letra}}</li></strong>
+    <li>Rut: {{estudiante.rut}}</li>
+    <li>Fecha nacimiento:{{estudiante.fecha_nacimiento}}</li>
+  <li>Domicilio : {{estudiante.domicilio_estudiante}}</li>
+  </p>
 
-			 
+</div>
 
-        <div class="col-md-6 col-md-6">
-        {% if estudiante %}
-        <li>Rut: {{estudiante.rut}}</li>
-					<li>{{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }}  {{escuela.establecimiento.nombre}}</li>
-					<li>Fecha nacimiento:{{estudiante.fecha_nacimiento}}</li>
-					<li>Domicilio : {{estudiante.domicilio_estudiante}}</li>
+    {% endif %}			 
 
-		{% endif %}
+        <div class="col-md-12 col-md-12">
+
 		 {% if ficha %}
-		 Fecha derivación centro de bienestar:<br>
+<div class="progress">
+  <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+		 <h3>Ficha derivación centro de bienestar:</h3><br>
 
 
 			{% for fichas in ficha %}
-				 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa 
+				 Fecha :{{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa 
  				 <a title="Ver Ficha de derivación" class="glyphicon glyphicon-file" href="{% url 'derivacion:FichaCentroDetailViewimprimirbusqueda' fichas.id fichas.Estudiante.id %}"></a>
+
+<div class="col-md-12 col-sm-12">
+ <table  class="table table-bordered" fontsize =10px>
+  <thead>
+    <tr>
+    
+      <td>Nª:</td>
+      <td>Derivado el /Estado:</td>
+      <td>Informes - Escolaridad</td>
+      <td>Opciones </td>
+
+
+    </tr>
+    
+  </thead>
+  <tbody>
+
+
+    <tr>
+          
+      <td>Nª {{fichas.id}}<td>
+      <dd><small>{{ fichas.fecha_derivacion|date:"d-m-Y "}}</small></dd>
+      {% with estado=fichas.pasada %} 
+      {% if estado == 1 %}
+
+      Ficha en bandega de entrada
+      
+      {% elif estado == 2 %}
+      
+      
+       Espera desde {{ fichas.fecha_espera|date:"d-m-Y "}}
+      
+      {% elif estado == 3 %}
+      
+      <a class="btn btn-info btn-xs" href="{% url 'sesion:historia' fichas.id estudiante.id  %}">Historia</a>
+      <a class="btn btn-success btn-xs" href="{% url 'dupla:Dupla_casos_centro' estudiante.id  %}">Historia Centro</a>
+
+      En intervención
+      
+      {% elif estado == 4 %}
+      <strong>Otra institución</strong>
+      <a class="btn btn-info btn-xs" href="{% url 'sesion:historia' fichas.id estudiante.id  %}">Historia</a>
+      
+      {% elif estado == 5 %}
+      <strong>Retorno</strong>Por falta de información
+      
+      
+      {% elif estado == 6 %}
+      <strong>Estudiante dado de alta</strong>
+      
+
+      {% elif estado == 7 %}
+      <strong>Estudiante en lista de egreso</strong>
+      <a class="btn btn-info btn-xs" href="{% url 'sesion:historia' fichas.id estudiante.id  %}">Historia</a>
+      {% endif %}
+
+    
+      </td>
+      
+      
+       
+      <td>
+
+
+        
+        {% if intervenidos %}
+        
+          {% for intervencion  in intervenidos  %}
+         
+            {% if intervencion.Estudiante == fichas.Estudiante   %}
+            <a class="btn btn-info btn-xs" href="{% url 'alumno:reporte_caso' estudiante.id %}">1</a>
+            <a class="btn btn-success btn-xs" href="{% url 'sesion:reporte_continuidad_solo' estudiante.id %}">2</a>
+            <a title="Ver Informes de Continuidad" class="glyphicon glyphicon-book" href="{% url 'sesion:ver_reporte_continuidad' estudiante.id %}"></a>/
+            <a class="btn btn-danger btn-xs" href="{% url 'sesion:Ficha_egreso' estudiante.id %}">3</a> -
+            
+            <a title="Ver Escolaridad" class="glyphicon glyphicon-education" href="{% url 'alumno:ver_escolaridad_centro' estudiante.id %}"></a>/
+            <a title="Modificar Escolaridad" class="glyphicon glyphicon-list-alt" href="{% url 'alumno: actualizar_escolaridad_centro' estudiante.id %}"></a> 
+            
+            <td>
+      
+      
+            <a class="btn btn-primary btn-xs" href="{% url 'derivacion:centro_derivacion_editar' fichas.id %}">Editar </a>
+        
+            
+
+
+            {% endif %} 
+          {% endfor %}
+
+          
+        
+          <a class="btn btn-default btn-xs" href="{% url 'alumno:Ficha_centro' estudiante.id %}">Ver</a>
+            <a title="Ficha derivación - imprimir" class="glyphicon glyphicon-paperclip" href="{% url 'informe:fichaderivacion_pdf_report' estudiante.id %}"></a>/ 
+
+            <a title="Ficha derivación - imprimir en html" class="glyphicon glyphicon-print" href="{% url 'derivacion:FichaCentroDetailViewimprimir' estudiante.id %}"></a>/ 
+            
+
+
+
+
+            
+      {% endif %} 
+      {% endwith %} 
+  
+
+      
+    
+      
+      </td>
+    
+    </td>
+      
+
+    </tr>
+ 
+
+  </tbody>
+</table> 
+</div>
+
+<table id="example" class="table table-bordered">
+  <thead>
+    <tr>
+      <td>Nª Total </td>
+      <td># Sesión</td>
+      
+      <td>Fecha </td>
+      <td>Horario</td>
+      
+      <td>Objetivo específico</td>
+      <td>Participantes</td>
+      
+      <td>Tipo Sesión</td>
+      <td>Acciones</td>
+    </tr>
+  </thead>
+  
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog">     
+  <tbody>
+    
+    {% if Sesion %}
+    {% for mascota in Sesion %}
+    
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ mascota.numero }}</td>
+      
+      <td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+      <td>{{ mascota.get_horario_i}}</td>
+    
+      <td>{{ mascota.observacion}}</td>
+      <td>{{ mascota.get_participantes}}</td>
+    
+      <td>{{ mascota.tipo_sesion}}</td>
+
+  
+        
+      <td>
+        <div class="btn-group-vertical">
+        <a class="btn btn-success btn-xs" href="{% url 'sesion:sesion_editar' mascota.id %}">Modificar</a>
+        <a class="btn btn-danger btn-xs" href="{% url 'sesion:sesion_eliminar' mascota.id %}">Eliminar</a>
+        
+        
+        
+        </div>
+        
+      </td>
+    </tr>
+
+    {% endfor %}
+    
+    {% else %}
+    <h3>Sin anotaciones</h3>
+    {% endif %}
+  </tbody>
+</table> 
+
+<table id="example" class="table table-bordered">
+  <thead>
+<h4>Resumen general de asistencias de {{estudiante.nombres|capfirst}} {{estudiante.firs_name|capfirst}} {{estudiante.last_name|capfirst}}</h4>
+<thead>
+    <tr>
+      <td>Nª  </td>
+      <td>Fecha </td>
+      <td>Horario</td>
+      <td>Situación</td>
+      <td>Confirmación</td>
+
+    </tr>
+  </thead>
+{% if agendado %}
+      
+   {% for mascota in agendado %}
+  
+      <tr>
+        
+        {% if mascota.numero == 1 %}
+        <td>{{ forloop.counter }}</td>
+        <td>{{ mascota.fecha }}</td>
+        
+        <td>{{ mascota.get_horario_i}}</td>
+        <td> Hora solo agendada</td>
+        {% elif mascota.numero == 2 %}
+        <td>{{ forloop.counter }}</td>
+        <td>{{ mascota.fecha }}</td>
+        
+        <td>{{ mascota.get_horario_i}}</td>
+        <td>Sesión realizada</td>
+
+        {% else %}
+
+        <td class="danger">{{ forloop.counter }}</td>
+        <td class="danger">{{ mascota.fecha }}</td>
+        
+        <td class="danger">{{ mascota.get_horario_i}}</td>
+        <td class="danger">Estudiante no asistio</td>
+
+        {% endif %}
+        
+        <td>  
+        <a class="btn btn-info btn-xs" href="{% url 'sesion:confirma_ver' estudiante.id mascota.id %}">Ver</a>
+      
+        </td> 
+        
+      </tr>
+  
+      
+    {% endfor %}
+    
+    {% else %}
+    <h1>No hay registros de asistencia</h1>
+    {% endif %}
+  </tbody>
+</table> 
 
 				{% else %} Antigua 
 
@@ -135,6 +384,9 @@
 	{% for fichas in ficha_dupla %}
 
 		 {{fichas.fecha_derivacion|date:"d-m-Y "}}{% if fichas.estado == 1%}Activa <a title="Ver Ficha de derivación" class="glyphicon glyphicon-file" href="{% url 'derivacion:FichaCentroDetailViewimprimirsocialbusqueda' fichas.id  fichas.Estudiante.id %}"></a>
+
+
+
 		{% else %} Antigua 
 		<a title="Ver Ficha de derivación" class="glyphicon glyphicon-file" href="{% url 'derivacion:FichaCentroDetailViewimprimirsocialbusqueda' fichas.id fichas.Estudiante.id %}"></a>
 		{% endif %}<br>
