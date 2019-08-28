@@ -13,7 +13,7 @@
  </ul> 
  
  {% if estado %}<div class="alert alert-info"> {{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }} {{mensaje}} {{escuela.establecimiento.nombre}} 
- <a class="btn btn-info" href="{% url 'comienza:listado_construccion' %}">Ver más </a>
+ 
 	{% else %}<div class="alert alert-danger"> {{mensaje}}{% endif %}
 
 
