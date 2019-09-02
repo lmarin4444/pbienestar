@@ -12,7 +12,7 @@ from sesion.views import listadousuarios, SesionList,SesionCreate,SesionDelete,S
     Motivo_egresoDelete,Motivo_egresoList,historia,historia_dupla,VerObjetivo,VerObjetivohistorico,Ficha_egresoModificar, \
     ReportecontinuidadModificar,CrearSeguimiento,ListarSeguimiento,ver_registro,ModificarRegistro,confirma_ver, \
     confirma_modificar,SeguimeintoDelete,SeguimientoUpdate,VerReportecontinuidad,ReportecontinuidadModificar, \
-    Reportecontinuidad_solo,CrearCitaProfesional,historia_supervisor
+    Reportecontinuidad_solo,CrearCitaProfesional,historia_supervisor,confirma_ver_busqueda
 
  
 
@@ -33,6 +33,7 @@ urlpatterns = [
     
     # Una vez que la sesion este echa mostar los detalles de la confirmacion
     url(r'^confirma_ver/(?P<pk>\d+)/(?P<age>\d+)$', login_required(confirma_ver), name='confirma_ver'),
+    url(r'^confirma_ver_busqueda/(?P<pk>\d+)/(?P<age>\d+)$', login_required(confirma_ver_busqueda), name='confirma_ver_busqueda'),
     url(r'^confirma_modificar/(?P<pk>\d+)/(?P<age>\d+)$', login_required(confirma_modificar), name='confirma_modificar'),
     
 

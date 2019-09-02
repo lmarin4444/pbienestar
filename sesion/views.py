@@ -1653,7 +1653,6 @@ class ListarSeguimiento(ListView):
 def confirma_ver(request,pk,age):
 
 	dato = get_object_or_404(Estudiante, pk=pk)
-	    
 	agendo=agenda.objects.get(id=age)
 	try:
 		confirma=Confirma.objects.get(agenda=agendo)
@@ -1670,42 +1669,74 @@ def confirma_ver(request,pk,age):
         }
 	return render(request, template, context)
 
-def  confirma_modificar(request,pk,age):
+
+def confirma_ver_busqueda(request,pk,age):
 
 	dato = get_object_or_404(Estudiante, pk=pk)
-	
 	agendo=agenda.objects.get(id=age)
-	
-
 	try:
 		confirma=Confirma.objects.get(agenda=agendo)
 	except Confirma.DoesNotExist:
 		confirma=None
-	x = datetime.date.today()
-
-	form = Formconfirma(request.POST or None, instance=confirma)
-	template = "sesion/crearconfirmacion.html"         
-	if form.is_valid():
-		instance = form.save(commit=False)
-		instance.usuario = request.user
-		instance.Estudiante=dato
-		instance.fecha_creacion=x
-		instance.save()
-        
-	if request.method == 'POST':
-		instance = form.save(commit=False)
-		instance.usuario = request.user
-		instance.Estudiante=dato
-		instance.save()
-		url = reverse(('sesion:intervencion_listar'), kwargs={ 'pk': dato.id })
-		return HttpResponseRedirect(url)
-	else:
-        
-		context={
-        "dato": dato,
-        "formulario": form,
+	
+	template = 'sesion/confirma_ver_busqueda.html'
+    
+	context = {
+        "confirma": confirma,
         "agendo":agendo,
+        "dato": dato,
+
         }
+	return render(request, template, context)
+
+def  confirma_modificar(request,pk,age):
+
+	dato = get_object_or_404(Estudiante, pk=pk)
+	agendo=get_object_or_404(agenda,id=age)
+	
+
+	try:
+		confirma=Confirma.objects.get(agenda=agendo)
+		x = datetime.date.today()
+		form = Formconfirma(request.POST or None, instance=confirma)
+		template = "sesion/crearconfirmacion.html"         
+	
+		if request.method=='POST':
+			form = Formconfirma(request.POST or None, instance=confirma)
+ 			if form.is_valid():
+
+				instance = form.save(commit=False)
+				instance.usuario = request.user
+				instance.Estudiante=dato
+				instance.fecha_creacion=x
+				instance.save()
+	        
+				url = reverse(('sesion:intervencion_listar'), kwargs={ 'pk': dato.id })
+				return HttpResponseRedirect(url)
+
+	except Confirma.DoesNotExist:
+		confirma=None
+		form = Formconfirma(request.POST or None, instance=confirma)
+		mensaje="Estudiante sin confirmación para modificar"
+		template = "sesion/crearconfirmacion.html"         
+		context={
+	        "dato": dato,
+	        "formulario": form,
+	        "agendo":agendo,
+	        "mensaje":mensaje,
+
+	        }
+
+
+		return render(request, template, context) 
+	
+	
+        
+	context={
+	        "dato": dato,
+	        "formulario": form,
+	        "agendo":agendo,
+	        }
 
 
 	return render(request, template, context) 

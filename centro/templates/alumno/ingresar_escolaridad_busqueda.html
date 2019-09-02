@@ -122,9 +122,10 @@
         <div class="col-md-12 col-md-12">
 
 		 {% if ficha %}
+<span class="border border-info">
 <div class="progress">
   <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
+</div></span>
 
 		 <h3>Ficha derivación centro de bienestar:</h3><br>
 
@@ -252,7 +253,7 @@
 </table> 
 </div>
 
-<table id="example" class="table table-bordered">
+<table id="example"  class="table table-striped">
   <thead>
     <tr>
       <td>Nª Total </td>
@@ -319,7 +320,8 @@
       <td>Fecha </td>
       <td>Horario</td>
       <td>Situación</td>
-      <td>Confirmación</td>
+      <td>Ver Confirmación</td>
+      <td>Sesión</td>
 
     </tr>
   </thead>
@@ -331,7 +333,7 @@
         
         {% if mascota.numero == 1 %}
         <td>{{ forloop.counter }}</td>
-        <td>{{ mascota.fecha }}</td>
+        <td>{{ mascota.fecha|date:"d-m-Y " }}</td>
         
         <td>{{ mascota.get_horario_i}}</td>
         <td> Hora solo agendada</td>
@@ -353,9 +355,84 @@
         {% endif %}
         
         <td>  
-        <a class="btn btn-info btn-xs" href="{% url 'sesion:confirma_ver' estudiante.id mascota.id %}">Ver</a>
+        <a class="btn btn-info btn-xs" href="{% url 'sesion:confirma_ver_busqueda' estudiante.id mascota.id %}">Ver</a>
       
         </td> 
+
+         <td>  
+  
+  {% for mascota in agenda %}
+    <tr>
+      
+  {% with numero=mascota.numero %} 
+     {% if numero == 1 %}
+      <span >
+           <td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+       <td> {{ mascota.get_horario_i}}</td>
+      <td>{{ mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name}} </td>
+       <td> {{ mascota.participantes}}</td>
+      
+       <td>{{ mascota.tipo_actividad}}</td>
+      
+      <td>
+
+      <ul class="fa-ul">
+      
+        <li><i class="fa-li fa fa-spinner fa-spin"></i>Sesión aun no se registra
+       <a class="btn btn-primary btn-xs" href="{% url 'sesion:crear_sesion' mascota.id mascota.Estudiante.id %}">Ir a sesión </a>
+      <a class="btn btn-success btn-xs" href="{% url 'sesion:crear_registro' mascota.id mascota.Estudiante.id %}">Ir a registro asistencia</a>
+      </li>
+      </ul>
+      
+
+      </td>
+      </span>
+
+      {% elif numero == 2 %}
+      <span class="fa fa-check color-green" ">
+                                                
+        <td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+      <td> {{ mascota.get_horario_i}}</td>
+      <td>{{ mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name}} </td>
+      <td> {{ mascota.participantes}}</td>
+      
+      <td>{{ mascota.tipo_actividad}}</td>
+      
+      <td>
+
+      <i class="fa fa-check-square-o " style="font-size:28px;color: #04B431;"></i>Sesión realizada: Estudiante asistio
+      
+      
+        </td>
+      </span>
+
+      {% else%}
+      <span style="color: red;">
+             <td>{{ mascota.fecha|date:"d-m-Y "}}</td>
+       <td> {{ mascota.get_horario_i}}</td>
+      <td>{{ mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name}} </td>
+       <td> {{ mascota.participantes}}</td>
+      
+       <td>{{ mascota.tipo_actividad}}</td>
+      
+      <td>
+
+      <i class="fa fa-close" style="font-size:28px;color:red"></i>Sesión Realizada :Estudiante No asistio
+      <a class="btn btn-success btn-xs" href="{% url 'sesion:ver_registro' mascota.id  mascota.Estudiante.id %}">Ir registro asistencia</a>
+        </td>                                  
+   
+       </span>
+       {% endif %}
+      {% endwith %}   
+
+
+
+    </tr>
+    {% endfor %}
+    
+
+      
+        </td>
         
       </tr>
   
@@ -396,5 +473,13 @@
 </div>
 
 
+
+
+
+</div>
+
+</div>
+
+  
 
 {% endblock %}

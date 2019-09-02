@@ -2,7 +2,12 @@
 {% extends 'base/base_centro.html' %}
 
 {% block content %}
+{% if mensaje %}
+<div class="alert alert-danger">{{mensaje}}</div>
+{% else %}
 
+<div class="alert alert-success">Proceso de modificación de confirmación desde Centro de Bienestar</div>
+{% endif %}
 
        <h3>Proceso de conformación  para el estudiante :{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.nombres.last_name|capfirst}}</h3>
         <h4>El dia :{{agendo.fecha}} a las {{ agendo.horario_i}}</h4>

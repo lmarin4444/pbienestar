@@ -8,7 +8,7 @@
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'sesion:intervenido' %}"data-toggle="tooltip" title="Ir menu personal !">Menu Personal</a></li>
+  <li><a href="{% url 'sesion:intervenido' %}"data-toggle="tooltip" title="Ir menu personal !">Menú Personal</a></li>
   <li><i class="fa fa-calendar" style="font-size:12px;color:black"></i><a href="{% url 'calendario:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">  Calendario </a></li>
 
 
@@ -64,15 +64,15 @@
    			</td>
           </span>
 
-               {% elif numero == 2 %}
+           {% elif numero == 2 %}
 			<span class="fa fa-check color-green" ">
                                                 
    			<td>{{ mascota.fecha|date:"d-m-Y "}}</td>
-			 <td> {{ mascota.get_horario_i}}</td>
+			<td> {{ mascota.get_horario_i}}</td>
 			<td>{{ mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name}} </td>
-			 <td> {{ mascota.participantes}}</td>
+			<td> {{ mascota.participantes}}</td>
 			
-			 <td>{{ mascota.tipo_actividad}}</td>
+			<td>{{ mascota.tipo_actividad}}</td>
 			
 			<td>
 

@@ -323,7 +323,7 @@ class Confirma(models.Model):
         return u'%s' % ESTADO[self.estado3][1]
 
     def __str__(self):
-        return '{} {} {}  '.format(self.fecha_confirma, self.estado1,self.estado2)
+        return '{} {} {}  '.format(self.fecha_confirma, self.estado1,self.estado2,self.estado3)
 
 class  Registro(models.Model):
     """docstring for  Registro"""
