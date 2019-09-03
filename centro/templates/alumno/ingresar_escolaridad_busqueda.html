@@ -321,7 +321,6 @@
       <td>Horario</td>
       <td>Situación</td>
       <td>Ver Confirmación</td>
-      <td>Sesión</td>
 
     </tr>
   </thead>
@@ -332,25 +331,37 @@
       <tr>
         
         {% if mascota.numero == 1 %}
-        <td>{{ forloop.counter }}</td>
+        <td class="info">{{ forloop.counter }}</td>
         <td>{{ mascota.fecha|date:"d-m-Y " }}</td>
         
         <td>{{ mascota.get_horario_i}}</td>
-        <td> Hora solo agendada</td>
+        <td> Hora solo agendada
+                <ul class="fa-ul">
+      
+        <i class="fa-li fa fa-spinner fa-spin"></i>Sesión aun no se registra
+       <a class="btn btn-primary btn-xs" href="{% url 'sesion:crear_sesion' mascota.id mascota.Estudiante.id %}">Ir a sesión </a>
+      <a class="btn btn-success btn-xs" href="{% url 'sesion:crear_registro' mascota.id mascota.Estudiante.id %}">Ir a registro asistencia</a>
+      
+      </ul>
+        </td>
+
         {% elif mascota.numero == 2 %}
-        <td>{{ forloop.counter }}</td>
-        <td>{{ mascota.fecha }}</td>
+
+        <td class="btn-success">{{ forloop.counter }}</td>
+        <td class="btn-success">{{ mascota.fecha }}</td>
         
-        <td>{{ mascota.get_horario_i}}</td>
-        <td>Sesión realizada</td>
+        <td class="btn-success">{{ mascota.get_horario_i}}</td>
+        <td class="btn-success">Sesión realizada</td>
+
+
 
         {% else %}
 
         <td class="danger">{{ forloop.counter }}</td>
-        <td class="danger">{{ mascota.fecha }}</td>
+        <td class="danger">{{ mascota.fecha|date:"d-m-Y " }}</td>
         
         <td class="danger">{{ mascota.get_horario_i}}</td>
-        <td class="danger">Estudiante no asistio</td>
+        <td class="danger">Estudiante no asistió</td>
 
         {% endif %}
         
@@ -359,7 +370,7 @@
       
         </td> 
 
-         <td>  
+        
   
   {% for mascota in agenda %}
     <tr>
