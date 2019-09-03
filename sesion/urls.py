@@ -12,7 +12,8 @@ from sesion.views import listadousuarios, SesionList,SesionCreate,SesionDelete,S
     Motivo_egresoDelete,Motivo_egresoList,historia,historia_dupla,VerObjetivo,VerObjetivohistorico,Ficha_egresoModificar, \
     ReportecontinuidadModificar,CrearSeguimiento,ListarSeguimiento,ver_registro,ModificarRegistro,confirma_ver, \
     confirma_modificar,SeguimeintoDelete,SeguimientoUpdate,VerReportecontinuidad,ReportecontinuidadModificar, \
-    Reportecontinuidad_solo,CrearCitaProfesional,historia_supervisor,confirma_ver_busqueda
+    Reportecontinuidad_solo,CrearCitaProfesional,historia_supervisor,confirma_ver_busqueda,CrearCitaSecretaria, \
+    IntervenidosListSecretaria
 
  
 
@@ -20,6 +21,7 @@ urlpatterns = [
     
     #sesiones desde la salida de una cita 
     url(r'^agregarcitanuevo/(?P<id_Estudiante>\d+)/$',login_required(CrearCita), name='nuevoagregar_cita'),
+    url(r'^agregarcitanuevosecretaria/(?P<id_Estudiante>\d+)/(?P<profesional>\d+)/$',login_required(CrearCitaSecretaria), name='nuevoagregar_cita_secretaria'),
     # Crear asignacion de horario para actividades fuera de las acciones de los estudiantes
     url(r'^CrearCitaProfesional/$',login_required(CrearCitaProfesional), name='CrearCitaProfesional'),
 
@@ -41,7 +43,7 @@ urlpatterns = [
     # funciones que resileven las consultas 
     
     url(r'^sesiones_listar/(?P<pk>\d+)/$', login_required(Intervenidos_sesiones), name='intervencion_listar'),
-    url(r'^editar/(?P<pk>\d+)/$', login_required(SesionUpdate.as_view()), name='sesion_editar'),
+    url(r'^editar/(?P<pk>\d+)/$', login_required(SesionUpdate), name='sesion_editar'),
     url(r'^eliminar/(?P<pk>\d+)/$', login_required(SesionDelete.as_view()), name='sesion_eliminar'),
     
     
@@ -87,7 +89,10 @@ urlpatterns = [
     #acciones con los estudiantes intervenidos
     
     url(r'^intervenido', login_required(IntervenidosList.as_view()), name='intervenido'),
- 	url(r'^listado', listadousuarios, name="listado"),
+    url(r'^IntervenidosListSecretaria/(?P<pk>\d+)/$',login_required(IntervenidosListSecretaria.as_view()), name='IntervenidosListSecretaria'),
+ 	
+
+    url(r'^listado', listadousuarios, name="listado"),
     #acciones para ver el seguimiento de un estudiante
     url(r'^Ficha_caso/(?P<pk>\d+)/$',login_required( CasoDetailView.as_view()),name='Caso'),
     # mostrar el listado de sesiones de un estudiante en particular 

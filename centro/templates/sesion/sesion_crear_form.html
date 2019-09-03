@@ -4,7 +4,7 @@
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú centro</a></li>
+  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menú inicial centro!">Menú centro</a></li>
   <li><a href="{% url 'calendario:calendar-ano-mes' %}"data-toggle="tooltip" title="Ir calendario!">Calendario </a></li>
   
 
@@ -16,7 +16,7 @@
   <div class="row">
    
         <h3> Para el estudiante {{dato.nombres|capfirst}} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}</h3>
-        Con fecha :{{agenda.fecha}} horario : {{agenda.get_horario_i}} <br>
+        Con fecha :{{agenda.fecha|date:"d-m-Y "}} horario {{agenda.get_horario_i}} <br>
         
         <strong>Temática o temáticas:</strong>
         <div>

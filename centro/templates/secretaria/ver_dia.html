@@ -7,7 +7,15 @@
 
 {% if profesionales %}
 		{% for mascota in profesionales %}
-		<li><a href="{% url 'secretaria:ver_impresa_profesional' mascota.usuario.id %}">Impreso {{mascota.usuario.first_name}} {{mascota.usuario.last_name}}</a></li>
+		<li><a href="{% url 'secretaria:ver_impresa_profesional' mascota.usuario.id %}">{{mascota.usuario.first_name}} {{mascota.usuario.last_name}} 
+
+		</a>
+		 
+  		<a><span title="Listado semanal " class="glyphicon glyphicon-list-alt"></span></a></span> <a class="btn btn-info btn-xs" href="{% url 'sesion:IntervenidosListSecretaria' mascota.usuario.id  %}">Agendar </a>
+
+  		</li>
+  		
+
 		{%endfor%}
 {%endif%}		
 

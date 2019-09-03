@@ -706,6 +706,10 @@ def ver_impresa_profesional(request,pk):
     })
 
 
+# ver el calendario para agendar
+# ver el listado por profesional
+
+
 
 def ver_dia(request,fecha=None):
 
@@ -725,6 +729,8 @@ def ver_dia(request,fecha=None):
         
                  
     })  
+
+# Previo a sacar hora seleccionar al 
 
 #Para ver a los apoderado de cada uno de los estudiante
 def ver_apoderado(request,pk,fami):

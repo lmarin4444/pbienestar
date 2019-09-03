@@ -4,7 +4,7 @@
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_secretaria' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menu Secretaria</a></li>
+  <li><a href="{% url 'comienza:entrar_secretaria' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú Secretaria</a></li>
   
   
 
@@ -35,9 +35,16 @@
 			<td>
 				 
 		<div class="btn-toolbar" role="toolbar">
-    		<dd>1 <span class="glyphicon glyphicon-earphone"></span> {{ estudio.get_estado1}}</dd>
-  			<dd>2 <span class="glyphicon glyphicon-earphone"></span> {{ estudio.get_estado2}}</dd>
-  			<dd>3 <span class="glyphicon glyphicon-earphone"></span> {{ estudio.get_estado3}}</dd>
+    		<dd>1 <span class="glyphicon glyphicon-earphone"></span> 
+    		{% if estudio.estado1 > 0 %}{{ estudio.get_estado1}} {% else%} No se realizó el llamado </dd>{% endif %}
+
+    		<dd>2 <span class="glyphicon glyphicon-earphone"></span> 
+    		{% if estudio.estado2 > 0 %}{{ estudio.get_estado2}} {% else%} No se realizó el llamado </dd>{% endif %}
+
+    		<dd>3 <span class="glyphicon glyphicon-earphone"></span> 
+    		{% if estudio.estado3 > 0 %}{{ estudio.get_estado3}} {% else%} No se realizó el llamado </dd>{% endif %}
+
+
   			</div> 
 					
 				

@@ -72,6 +72,47 @@ def CrearCita(request,id_Estudiante):
 		 }
 	return render(request, 'sesion/formcita_nueva.html', context)
 
+# Proceso por el cual la secretaria podra solicitar hora para un estudiante asignandole a un profesional
+def CrearCitaSecretaria(request,id_Estudiante,profesional):
+
+    #group_required = 'puede_administrar_encuestas
+	mensaje=""
+
+	dato = get_object_or_404(Estudiante, pk=id_Estudiante)
+	psico= get_object_or_404(profesional, pk=profesional)
+	usuario=psico.usuario
+	if request.method=='POST':
+		formulario = FormCita(request.POST, request.FILES)
+ 		if formulario.is_valid():
+			instance = formulario.save(commit=False)
+			try:
+ 			 # try something
+	 			hoy=agenda.objects.get(Q(fecha=instance.fecha) & Q(horario_i=instance.horario_i)& Q(usuario=request.user))
+	 			
+			except agenda.DoesNotExist:
+			  # do something
+				hoy=None
+				
+			if hoy==None:	
+				instance.Estudiante=dato
+				instance.usuario = usuario
+				instance.numero=1# significa hora pedida ( 2: hora realizada 3: hora no asistida)
+				instance.save()
+				return HttpResponseRedirect('/calendario/show/calendar')
+			else:
+				mensaje='Horario ocupado por '+hoy.Estudiante.nombres+" "+hoy.Estudiante.firs_name+" "+hoy.Estudiante.last_name
+				formulario = FormCita(request.POST or None, instance=hoy)
+	else:
+		formulario = FormCita()
+	
+	context = {
+		"formulario": formulario,
+		"dato": dato,
+		"mensaje":mensaje,
+		 }
+	return render(request, 'sesion/formcita_nueva_secretaria.html', context)
+
+
 # Crear asignacion de actividad individual de cada profesional
 
 def CrearCitaProfesional(request):
@@ -800,51 +841,72 @@ class intervencionesList(ListView):
 		queryset = super(intervencionesList, self).get_queryset()
 		return queryset.filter(derivado=2,pasada=3,estado=1)
 
-class SesionUpdate(UpdateView):
-	model = sesion
-	form_class = SesionModificarForm
-	#template_name = 'sesion/sesion_form.html'
-	template_name = 'sesion/sesion_crear_form.html'
+
+def  SesionUpdate(request,pk):
+
+	Sesion = get_object_or_404(sesion, pk=pk)
+	dato=Sesion.Estudiante
+	template = 'sesion/sesion_crear_form.html'        
 	
-	def get_context_data(self, **kwargs):
-		context = super(SesionUpdate, self).get_context_data(**kwargs)
-		pk = self.kwargs.get('pk')
+
+	try:
 		Sesion=sesion.objects.get(pk=pk)
-
-		dato=Sesion.Estudiante
-		context['dato'] = dato
-		context['agenda'] = Sesion
-
-		return context
+		x = datetime.date.today()
+		form = SesionModificarForm(request.POST or None, instance=Sesion)
+		template = 'sesion/sesion_crear_form.html'
 	
-	def post(self,request,*args,**kwargs):
-	
-		pk = self.kwargs.get('pk')
-		Sesion=sesion.objects.get(pk=pk)
-		
-		form = self.form_class(request.POST,request.FILES)
-		estudiante=Sesion.Estudiante
-		if form.is_valid():
-			
-			estudiante=Sesion.Estudiante
-			form.instance= form.save(commit=False)
-			form.instance.usuario = self.request.user
-			form.instance.fecha=Sesion.fecha
-			form.instance.horario_i=Sesion.horario_i
-			form.instance.numero=Sesion.numero
-			form.instance.Estudiante=estudiante
+		if request.method=='POST':
+			form = SesionModificarForm(request.POST or None, instance=Sesion)
+ 			if form.is_valid():
 
-			form.instance.save()
+				form.instance= form.save(commit=False)
+				form.instance.numero=Sesion.numero
+				form.instance.horario_i=Sesion.horario_i
+				form.instance.fecha=Sesion.fecha
+				form.instance.usuario=request.user
+				form.instance.Estudiante=Sesion.Estudiante
+
+				form.instance.save()
 			
 			
 				
 				
-			url = reverse(('sesion:intervencion_listar'), kwargs={ 'pk': estudiante.id })
+			url = reverse(('sesion:intervencion_listar'), kwargs={ 'pk': Sesion.Estudiante.id })
 			return HttpResponseRedirect(url)
 
-		else:
-			mensaje="Error"
-			return self.render_to_response(self.get_context_data(form=form))
+	except sesion.DoesNotExist:
+		Sesion=None
+		form = SesionModificarForm(request.POST or None, instance=Sesion)
+		
+		template= 'sesion/sesion_crear_form.html'
+		context={
+	        "dato": dato,
+	        "form": form,
+	        "agenda": Sesion,
+
+
+
+	        }
+
+
+		return render(request, template, context) 
+	
+	
+	
+	context={
+	        "dato": dato,
+	        "form": form,
+	        "agenda": Sesion,
+	        
+	        }
+
+
+	return render(request, template, context) 
+
+
+
+
+
 
 
 class SesionDelete(DeleteView):
@@ -1007,7 +1069,16 @@ class IntervenidosList(ListView):
 		queryset = super(IntervenidosList, self).get_queryset()
 		return queryset.filter(usuario=self.request.user,activo=1)
 
-#para pedir hora 		
+# Listar intervenidos por profesional para pedir hora
+class IntervenidosListSecretaria(ListView):
+	model = Intervenidos 
+	template_name = 'sesion/intervenidos_listar_secretaria.html'
+
+	def get_queryset(self):
+		qs = super(IntervenidosListSecretaria, self).get_queryset()
+		return qs.filter(usuario=self.kwargs['pk'],activo=1)
+
+#Para pedir hora 		
 
 class IntervenidosListAgenda(ListView):
 	model = Intervenidos 
