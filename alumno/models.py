@@ -45,6 +45,9 @@ TIPO_FAMILIAR = (
         ('PRIMO', 'PRIMO'),
         ('PRIMA', 'PRIMA'),
         ('TUTOR', 'TUTOR'),
+        ('AMIGA DE LA FAMILIA', 'AMIGA DE LA FAMILIA'),
+        ('AMIGO DE LA FAMILIA', 'AMIGO DE LA FAMILIA'),
+        ('ARRENDATARIA/O', 'ARRENDATARIA/O'),
 
         )
 
