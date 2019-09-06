@@ -1074,9 +1074,14 @@ class IntervenidosListSecretaria(ListView):
 	model = Intervenidos 
 	template_name = 'sesion/intervenidos_listar_secretaria.html'
 
-	def get_queryset(self):
-		qs = super(IntervenidosListSecretaria, self).get_queryset()
-		return qs.filter(usuario=self.kwargs['pk'],activo=1)
+	def get_context_data(self, *args, **kwargs):
+		context = super(IntervenidosListSecretaria, self).get_context_data(**kwargs)
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		upro=User.objects.get(id=pk)
+		intervenido=Intervenidos.objects.filter(usuario=upro,activo=1)
+		context['intervenido']=intervenido
+		return context
+
 
 #Para pedir hora 		
 
