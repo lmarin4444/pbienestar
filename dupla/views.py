@@ -212,6 +212,7 @@ def FichaingresonduplaUpdate(request,pk):
 	
 	mensaje=""
 	estudiante= get_object_or_404(Estudiante, pk=pk)
+	colegio=estudiante.curso.establecimiento
 
 	try:
 		ficha=Ficha_derivacion_dupla.objects.get(Estudiante=estudiante,estado=1)
@@ -226,7 +227,7 @@ def FichaingresonduplaUpdate(request,pk):
 		ficha=None
 		ficha_ingreso=None
 		mensaje="Estudiante sin ficha de ingreso para modificar"
-		colegio=estudiante.curso.establecimiento
+		
 
 	
 	if request.method=='POST':
@@ -264,6 +265,7 @@ def FichaingresonduplaUpdate(request,pk):
 		"ficha_ingreso":ficha_ingreso,
 		"entrevista_ingreso":ficha_ingreso,
 		"dato":estudiante,
+		"colegio":colegio,
 		"mensaje":mensaje,
 
 

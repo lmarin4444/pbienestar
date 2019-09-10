@@ -638,9 +638,9 @@ class EstudianteListEstablecimiento(ListView):
 	        # Llamamos ala implementacion primero del  context
 			context = super(EstudianteListEstablecimiento, self).get_context_data(**kwargs)
 			indice = self.kwargs.get('pk') # El mismo nombre que en tu URL
-			print indice
+			
 			escuela=establecimiento.objects.get(pk=indice)
-			print escuela
+			
 			try: 
 				fichas=Ficha_derivacion.objects.filter(Q(estado=1) & Q(Estudiante__curso__establecimiento__nombre=escuela))
 			except Ficha_derivacion.DoesNotExist:

@@ -11,7 +11,7 @@
   
    <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' colegio.id %}"data-toggle="tooltip" title="Volver listado anterior!">Volver lista estudiantes dupla </a></li>
 
-  <li><a href="{% url 'alumno:estado_estudiantes_establecimiento' colegio.id %}"data-toggle="tooltip" title="Volver listado anterior!">Volver lista estudiantes  </a>
+
 
   <li class="active">Entrevista de ingreso </li> 
 </ul>
@@ -85,7 +85,8 @@
 				{% if entrevista_ingreso %}
 				<div class="col-md-10 ">
 				<div class="alert alert-info">Ya cuenta con Entrevista de ingreso - 
-				Imprimir Entrevista <a title="Ficha derivación - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:entrevistaingreso_dupla_pdf_report' dato.id %}"></a>/</dd></div></div>
+				Imprimir Entrevista <a title="Ficha derivación - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:entrevistaingreso_dupla_pdf_report' dato.id %}"></a>/</dd>
+				<button class="btn btn-info " type="submit">Modificar</button></div></div>
 				
 				{% else%}
 				
