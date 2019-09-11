@@ -128,7 +128,8 @@ class ModificarFicha(ListView):
 	
 	def get_queryset(self):
 		queryset = super(ModificarFicha, self).get_queryset()
-		return queryset.filter(derivado=2,estado=1,usuario=self.request.user)
+		#return queryset.filter(derivado=2,estado=1,usuario=self.request.user)
+		return queryset.filter(derivado=2,estado=1)
 	
 
 	def get_context_data(self, **kwargs):
