@@ -661,8 +661,8 @@ def informe1_pdf_report(request,pk):
     cabecera = estiloHoja['Heading4']
     Elements.append(Spacer(0,8))
     #imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg',width=490,height=40)
-
-    #Elements.append(imagen_logo)
+    imagen_logo = settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg'
+    Elements.append(imagen_logo)
     
     Elements.append(Spacer(0,8))
     Elements.append(Spacer(0,8))
