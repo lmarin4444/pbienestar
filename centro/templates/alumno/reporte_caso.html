@@ -82,13 +82,13 @@
     
       <td>OBJETIVO DE LA INTERVENCION</td>
 
-      <td><li> {{objetivo.objetivo_particular}}</li>
+      <td>{{objetivo.objetivo_particular}}
     
         {% if objetivo %} 
           {% for x in objetivo.Tematicas.all %}
             
          
-            {{x.nombre}}
+            <li>{{x.nombre}}</li>
             
            {% endfor%}
          {% endif %}    
