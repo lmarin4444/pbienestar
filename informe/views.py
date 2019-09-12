@@ -749,11 +749,7 @@ def informe1_pdf_report(request,pk):
         Paragraph('<font size=10>%s</font>' % obj.objetivo_particular, estilo['Normal']),   
         ))
     
-    data.append((
-      
-    Paragraph('<font size=10>%s</font>' % "Derivación (Institución  y/o Especialista):", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.Red_apoyo, estilo['Normal']),   
-    ))
+    
     if evaluado:
         data.append((
           
