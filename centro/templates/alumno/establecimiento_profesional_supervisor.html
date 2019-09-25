@@ -1,14 +1,13 @@
 {% extends 'base/base_usuario.html' %}
 {% block content %}
 
-<h3>Listado de establecimientos asignados a : <strong> {{ user.first_name}} {{ user.last_name}}</strong></h3>
+<h3>Listado de establecimientos asignados a : <strong> Coordinación </strong></h3>
 <table id="example" class="table table-bordered">
 	<thead>
 		<tr>
 			
 			
 			<td>Establecimiento </td>
-			
 			<td>Opciones</td>
 			<td>Planes</td>
 		
@@ -26,7 +25,7 @@
 		{% for escuela in profesional %}
 			
 		<td>
-		{{ escuela.escuela.nombre}}
+		{{ escuela.nombre}}
 			
 
 		
@@ -37,21 +36,21 @@
 
 		
 				
-				<a class="btn btn-primary btn-xs" href="{% url 'alumno:listar_estudiantes_establecimiento_supervisor' escuela.escuela.id %}"><small>Act. Dupla</small></a>
+				<a class="btn btn-primary btn-xs" href="{% url 'alumno:listar_estudiantes_establecimiento_supervisor' escuela.id %}"><small>Act. Dupla</small></a>
 				
 			
-			{% if escuela.tipo_profesional == 6 or escuela.tipo_profesional == 7 or escuela.tipo_profesional == 8 or escuela.tipo_profesional == 9 %}
-				<a class="btn btn-warning btn-xs" href="{% url 'dupla:listar_convivencia_escolar_supervisor' escuela.escuela.id %}"><small>Encargado</small></a>
+			
+				<a class="btn btn-warning btn-xs" href="{% url 'dupla:listar_convivencia_escolar_supervisor' escuela.id %}"><small>Encargado</small></a>
 				
 
-			{% endif %}
+			
 			</td>
 			<td>
 
-			<a class="btn btn-info btn-xs" href="{% url 'dupla:DiagnosticoListViewTodos_supervisor' escuela.escuela.id  %}"><small>Diagnósticos</small></a>
+			<a class="btn btn-info btn-xs" href="{% url 'dupla:DiagnosticoListViewTodos_supervisor' escuela.id  %}"><small>Diagnósticos</small></a>
 
 			
-			<a class="btn btn-success btn-xs" href="{% url 'plan:PlanListViewTodos_supervisor' escuela.escuela.id  %}"><small>Planes</small></a>
+			<a class="btn btn-success btn-xs" href="{% url 'plan:PlanListViewTodos_supervisor' escuela.id  %}"><small>Planes</small></a>
 			
 			
 		

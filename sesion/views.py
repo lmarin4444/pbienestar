@@ -508,6 +508,87 @@ def crear_Sesion(request,age,pk):
 		 }
 	return render(request, 'sesion/sesion_crear_form.html', context)
 
+# Crear una sesion desde el buscador 
+def crear_Sesion_buscador(request,age,pk):	
+#group_required = 'puede_administrar_encuestas
+	mensaje=""
+	dato = get_object_or_404(Estudiante, pk=pk)
+	inter= get_object_or_404(agenda, pk=age)
+	
+
+	try:
+ 			 # Verificar si hay objetivo definido
+		objetivo=objetivo_intervencion.objects.get(Estudiante=dato,activo=1)
+	 			
+	except objetivo_intervencion.DoesNotExist:
+			  # do something
+		objetivo=None
+
+	try:
+ 		# Obtener el numero de la ultima sesion en donde se atiende al estudiante
+		#ultima=sesion.objects.latest(Estudiante__id=dato.id)
+		#ultima = sesion.objects.filter(Estudiante=dato)
+		#longitud = ultima
+		users = sesion.objects.filter(Estudiante__id=dato.id)	 			
+	except sesion.DoesNotExist:
+			  # do something
+		last=None
+
+
+	if users.exists():	
+	
+		lusers = list(users)
+		first = lusers[0]
+		last = lusers[-1]	
+		numero=last.numero +1
+	else:
+		numero=1		
+
+
+	date = datetime.date.today()
+
+	if request.method=='POST':
+		formulario = SesionFormCalendar(request.POST, request.FILES)
+ 		if formulario.is_valid():
+			instance = formulario.save(commit=False)
+			#listado de los participantes en donde esta el estudiante, si el esta cuenta 1 sino no 
+			
+			if instance.participantes==0 or instance.participantes==2 or instance.participantes==3 or instance.participantes==4 or instance.participantes==5 or instance.participantes==6 or instance.participantes==7 or instance.participantes==8:			
+				instance.numero=numero
+				
+			else:
+				instance.numero=numero-1
+			intervenido=Intervenidos.objects.get(Estudiante=dato)
+			intervenido.estado='Sesión Numero'+str(instance.numero)	
+			intervenido.save()
+			instance.fecha=inter.fecha
+			instance.usuario = request.user
+			instance.Estudiante=dato	
+			instance.horario_i=inter.horario_i
+			instance.save()
+			inter.numero=2 #porque el estudiante asistio a la sesion
+			inter.save()
+			Registro.objects.create(fecha=date,agenda=inter,Estudiante=dato,situacion=3,obs="El estudiante asiste a la sesión", usuario=request.user)
+			url = reverse(('calendario:fechas'), kwargs={ 'dia': inter.fecha.day,'mes': inter.fecha.month})
+			return HttpResponseRedirect(url)
+			
+			mensaje='Sesion almacenada de '+hoy.Estudiante.nombres+" "+hoy.Estudiante.firs_name+" "+hoy.Estudiante.last_name
+				
+	else:
+		formulario = SesionFormCalendar(request.POST or None, instance=inter)
+		
+	
+	context = {
+		"form": formulario,
+		"dato": dato,
+		"mensaje":mensaje,
+		"agenda":inter,
+		"objetivo":objetivo,
+		 }
+	return render(request, 'sesion/sesion_crear_form.html', context)
+
+
+
 
 def Crear_Registro(request,age,pk):	
 
@@ -1080,6 +1161,8 @@ class IntervenidosListSecretaria(ListView):
 		upro=User.objects.get(id=pk)
 		intervenido=Intervenidos.objects.filter(usuario=upro,activo=1)
 		context['intervenido']=intervenido
+		context['usuario']=upro
+
 		return context
 
 

@@ -1275,7 +1275,7 @@ class EstablecimientoListsupervisor(ListView):
 # en el acceso de las aciiones con los establecimientos 
 # se establecen acciones exclusivas para el encargado de convivencia y se determina en base al tipo de
 # cargo que tiene en el establecimiento y este es desde el numero 6 -7-8 -9	
-	model = Cargo
+	model = establecimiento
 	template_name = 'alumno/establecimiento_profesional_supervisor.html'
 	success_url = reverse_lazy('alumno:establecimiento_listar')	
 
@@ -1283,8 +1283,8 @@ class EstablecimientoListsupervisor(ListView):
         # Llamamos ala implementacion primero del  context
 		context = super(EstablecimientoListsupervisor, self).get_context_data(**kwargs)
 		try:
-			dup=Profesional.objects.get(usuario=self.request.user)
-			context['profesional']=Cargo.objects.filter(profesional=dup)
+			dup=establecimiento.objects.all()
+			context['profesional']=dup
 
 		
 			return context

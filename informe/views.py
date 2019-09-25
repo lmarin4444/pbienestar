@@ -612,6 +612,10 @@ def informe1_pdf_report(request,pk):
     estilo_centrado.add(ParagraphStyle(name = "ejemplo",  alignment=TA_CENTER, fontSize=12,
            fontName="Helvetica-BoldOblique"))
 
+    estilo_justificado=getSampleStyleSheet()
+    estilo_justificado.add(ParagraphStyle(name = "ejemplo",  alignment=TA_JUSTIFY, fontSize=12,
+           fontName="Helvetica-BoldOblique"))
+
 
     
    
@@ -661,10 +665,10 @@ def informe1_pdf_report(request,pk):
     cabecera = estiloHoja['Heading4']
     Elements.append(Spacer(0,8))
     #imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg',width=490,height=40)
-    fichero_imagen = "encabezadocabildo.jpg"
+    #fichero_imagen = "encabezadocabildo.jpg"
     #imagen_logo = settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg'
-    imagen_logo=Image(os.path.realpath(fichero_imagen),width=100,height=50)
-    Elements.append(imagen_logo)
+    #imagen_logo=Image(os.path.realpath(fichero_imagen),width=100,height=50)
+    #Elements.append(imagen_logo)
     
     Elements.append(Spacer(0,8))
     Elements.append(Spacer(0,8))
@@ -740,8 +744,8 @@ def informe1_pdf_report(request,pk):
     if evaluado:
         data.append((
           
-        Paragraph('<font size=10>%s</font>' % "Situación Actual:", estilo_centrado['Normal']),
-        Paragraph('<font size=10>%s</font>' % evaluado.situacion_actual, estilo_centrado['Normal']),   
+        Paragraph('<font size=10>%s</font>' % "Situación Actual:", estilo_centrado['estilo_justificado']),
+        Paragraph('<font size=10>%s</font>' % evaluado.situacion_actual, estilo_centrado['estilo_justificado']),   
     ))
     if obj:        
 
