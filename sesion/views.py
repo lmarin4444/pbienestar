@@ -28,6 +28,7 @@ from alumno.models import Estudiante
 from derivacion.models import Ficha_derivacion,Motivo_Retorno_Ficha_derivacion
 from secretaria.models import agenda,Registro,Confirma
 from secretaria.forms import FormagendaCalendario,Formconfirma
+from profesional.models import Profesional
 
 # sesion 
 #Agendar una nueva cita desde el incio
@@ -79,7 +80,7 @@ def CrearCitaSecretaria(request,id_Estudiante,profesional):
 	mensaje=""
 
 	dato = get_object_or_404(Estudiante, pk=id_Estudiante)
-	psico= get_object_or_404(profesional, pk=profesional)
+	psico= get_object_or_404(Profesional, pk=profesional)
 	usuario=psico.usuario
 	if request.method=='POST':
 		formulario = FormCita(request.POST, request.FILES)
