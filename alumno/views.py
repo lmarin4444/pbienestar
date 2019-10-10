@@ -1362,6 +1362,27 @@ def listar_estudiantes_establecimiento(request,pk):
 	return render(request, 'alumno/estudiante_establecimiento.html', contexto)
 
 
+#Listado de estudiantes por establecimiento- dado que cada profesional tiene asignados un grupo de establecimientos
+def listar_estudiantes_establecimiento_pie(request,pk):
+		
+	estudiando=Escolaridad.objects.filter(establecimiento__id=pk)
+	escuela=establecimiento.objects.get(id=pk)
+	ficha=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=pk) & Q(estado=1) & Q(pie='True'))
+	
+	casos=Intervencion_casos.objects.filter(estudiante__curso__establecimiento__id=pk)
+	
+
+	contexto = {'estudiando':estudiando,
+				'escuela':escuela,
+				 'ficha':ficha,
+				 'casos':casos,
+				 }
+
+	return render(request, 'alumno/estudiante_establecimiento_pie.html', contexto)
+
+
+
+
 # Listado del area de las duplas para el supervisor
 #Listado de estudiantes por establecimiento- dado que cada profesional tiene asignados un grupo de establecimientos
 def listar_estudiantes_establecimiento_supervisor(request,pk):
@@ -1610,7 +1631,13 @@ def ingresar_estudiantes_establecimiento(request,pk):
 	template = 'alumno/ingresar_escolaridad.html'
 	#Seleccionar al usuario que esta logeado para determinar si es pie o no 
 	uso=request.user
-	profesional=Profesional.objects.get(usuaio=uso)
+	print uso
+	try:
+		profesional=Profesional.objects.get(usuario=uso,tipo_profesional=3)
+	except Profesional.DoesNotExist:
+		profesional=None
+	
+
 	
 	mensaje=""
 	if request.method == 'POST':
@@ -1681,7 +1708,9 @@ def ingresar_estudiantes_establecimiento(request,pk):
         "form3":form3,
 		"escuela":escuela,
         "mensaje":mensaje,
-        "usuario":usuario,
+        "profesional":profesional,
+
+        
 
     }		
 	return render(request, template, context)	
