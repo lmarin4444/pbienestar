@@ -617,7 +617,7 @@ class EstudianteList(ListView):
 
 class EstudianteListpie(ListView):
 	model =Estudiante
-	template_name = 'alumno/estudiante_list.html'
+	template_name = 'alumno/estudiante_listpie.html'
 	paginate_by = 100
 
 	def get_queryset(self, *args, **kwargs):
@@ -1608,6 +1608,9 @@ def ingresar_estudiantes_establecimiento(request,pk):
 	form2 =EscolaridadForm(request.POST or None)
 	escuela=establecimiento.objects.get(id=pk)
 	template = 'alumno/ingresar_escolaridad.html'
+	#Seleccionar al usuario que esta logeado para determinar si es pie o no 
+	uso=request.user
+	profesional=Profesional.objects.get(usuaio=uso)
 	
 	mensaje=""
 	if request.method == 'POST':
@@ -1632,25 +1635,16 @@ def ingresar_estudiantes_establecimiento(request,pk):
 				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
 	        
 			family=Familia.objects.create(cantidad=1)
-			
 			estudiando.Familia=family
-
 			estudiando.curso=etapa
-			
 			diff = (datetime.date.today() - estudiando.fecha_nacimiento).days
-			
 			years = str(int(diff/365))		
-			
 			estudiando.edad=years
 			estudiando.save()
-			
 			x=datetime.datetime.today()
-			
 			y=x.year
 			escolar.edad=y
-			
 			escolar.establecimiento=escuela
-			
 			escolar.Estudiante=estudiando
 			escolar.save()
 
@@ -1661,7 +1655,6 @@ def ingresar_estudiantes_establecimiento(request,pk):
 			
 			if form.is_valid():
 				estudiando = form.save(commit=False)
-				
 				valor1=estudiando[:12]
 				largo=len(estudiando.rut)
 				corte=largo - 2
@@ -1686,9 +1679,10 @@ def ingresar_estudiantes_establecimiento(request,pk):
         "form": form,
         "form2":form2,
         "form3":form3,
+		"escuela":escuela,
+        "mensaje":mensaje,
+        "usuario":usuario,
 
-        "escuela":escuela,
-        "mensaje":mensaje
     }		
 	return render(request, template, context)	
 	

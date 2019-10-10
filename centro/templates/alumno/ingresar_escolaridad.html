@@ -1,5 +1,7 @@
+
 {% extends 'base/base_datos_agenda_dupla.html' %}
 {% load crispy_forms_tags %}
+
 {% block content %}
 
 <h4> Proceso de ingreso de información de estudiantes al establecimiento:  {{escuela.nombre}}.</h4>
@@ -23,8 +25,10 @@
   <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.id %}"data-toggle="tooltip" title="Ir listado establecimiento">Lista de estudiantes del establecimiento </a></li>
  
  </ul> 
+
+ {% endif %}
 <div class="alert alert-success">Rut correcto, ingresar un nuevo estudiante</div>
-{% endif %}
+
 
 <div class="container">
     

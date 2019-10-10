@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^listar$', login_required(EstablecimientoList.as_view()), name='establecimiento_listar'),
     url(r'^EstablecimientoListsupervisor$', login_required(EstablecimientoListsupervisor.as_view()), name='EstablecimientoListsupervisor'),
 
-    url(r'^EstablecimientoListPie', login_required(EstablecimientoListPie.as_view()), name='EstablecimientoListPie'),
+    url(r'^EstablecimientoListPie$', login_required(EstablecimientoListPie.as_view()), name='EstablecimientoListPie'),
 
     url(r'^editar/(?P<pk>\d+)/$', login_required(EstablecimientoUpdate.as_view()), name='establecimiento_editar'),
     url(r'^eliminar/(?P<pk>\d+)/$', login_required(EstablecimientoDelete.as_view()), name='establecimiento_eliminar'),

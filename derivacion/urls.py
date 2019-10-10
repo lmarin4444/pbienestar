@@ -8,7 +8,8 @@ from derivacion.views import listadousuarios, index, mascota_view, mascota_list,
     BusquedaAjaxView,asignar_intervencion,EntradasFicha,gracias,EntradasList,EntradasOtrasList,EntradasRetornoDuplaList,historia_retorno, \
     ModificarFicha,RetornoDefinitivo,RetornoInstList,MascotaCreate_Prueba,MascotaUpdate_centro,ModificarRetornoDefinitivo, \
     ReporteIntervenidos,PDFPrueba,EntradasFichaSupervisor,ReporteIntervenidosSupervisor,FichaCentroDetailViewimprimir, \
-    FichaCentroDetailViewimprimirbusqueda,FichaCentroDetailViewimprimirsocial,FichaCentroDetailViewimprimirsocialbusqueda
+    FichaCentroDetailViewimprimirbusqueda,FichaCentroDetailViewimprimirsocial,FichaCentroDetailViewimprimirsocialbusqueda, \
+    pie
     
 
 urlpatterns = [
@@ -17,6 +18,10 @@ urlpatterns = [
     url(r'^nuevo_prueba$', login_required(MascotaCreate_Prueba.as_view()), name='derivacion_crear_prueba'),
 
     url(r'^listar', login_required(MascotaList.as_view()), name='derivacion_listar'),
+#Listar para el pie
+    url(r'^pie', login_required(pie.as_view()), name='pie'),
+
+
 #listados de fichas de derivacion sin entrar al centro
     url(r'^centro_listar$',login_required(seguimientoListView.as_view()), name='centro_listar'),
 #listados de fichas de derivacion 

@@ -321,6 +321,10 @@ class seguimientocentroListView(ListView):
 #muestra a todas las derivaciones realizadas    
 	def get_queryset(self, *args, **kwargs):
 		return Ficha_derivacion.objects.filter(derivado=2,Pasada=3,estado=1)
+#Proceso de listado para mostrar los estudiantes en intervencion PIE
+
+
+
 # para mostrar todos los estudiantes en proceso 
   
 class listaesperaListView(ListView): 
@@ -363,6 +367,19 @@ class MascotaList(ListView):
 	template_name = 'derivacion/mascotara_list.html'
 	def get_queryset(self, *args, **kwargs):
 		return Ficha_derivacion.objects.filter(usuario=self.request.user,derivado=1)
+
+#Listado de derivaciones solo del pie que esta actualmente en el cargo
+class pie(ListView):
+	
+	paginate_by = 6
+	
+	template_name = 'derivacion/listar_pie.html'
+	def get_queryset(self, *args, **kwargs):
+		return Ficha_derivacion.objects.filter(usuario=self.request.user,derivado=1)
+
+
+
+
 
 #listado de las derivaciones realizadas por usuario 
 
