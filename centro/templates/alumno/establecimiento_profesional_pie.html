@@ -36,7 +36,7 @@
 
 				<a class="btn btn-success btn-xs" href="{% url 'alumno:ingresar_estudiantes_establecimiento' escuela.escuela.id %}"><small>Ing. Estudiante</small></a>
 				
-				<a class="btn btn-primary btn-xs" href="{% url 'alumno:listar_estudiantes_establecimiento' escuela.escuela.id %}"><small>Act. PIE</small></a>
+				<a class="btn btn-primary btn-xs" href="{% url 'alumno:listar_estudiantes_establecimiento_pie' escuela.escuela.id %}"><small>Act. PIE</small></a>
 				
 			
 			{% if escuela.tipo_profesional == 6 or escuela.tipo_profesional == 7 or escuela.tipo_profesional == 8 or escuela.tipo_profesional == 9 %}

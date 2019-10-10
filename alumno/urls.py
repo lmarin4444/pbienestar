@@ -15,7 +15,7 @@ from alumno.views import EstablecimientoList, EstablecimientoCreate, Establecimi
     buscar_estudiantes,search_estudiante,EstudianteListEstablecimiento,EstablecimientoListPie,EstudianteListpie, \
     EstablecimientoListsupervisor,listar_estudiantes_establecimiento_supervisor,FichaEstudianteDetailView_supervisor,ver_escolaridad_supervisor, \
     actualizar_escolaridad_supervisor,ver_familia_supervisor,ingresar_estudiantes_establecimiento_listado, \
-    search_listado
+    search_listado,listar_estudiantes_establecimiento_pie
    
 
 urlpatterns = [
@@ -137,6 +137,8 @@ urlpatterns = [
     
     url(r'^estableciprofe', login_required(EstablecimientoList.as_view()), name='profesinal_establecimiento_listar'),
     url(r'^estudianteestable/(?P<pk>\d+)/$', login_required(listar_estudiantes_establecimiento), name='listar_estudiantes_establecimiento'),
+    url(r'^listar_estudiantes_establecimiento_pie/(?P<pk>\d+)/$', login_required(listar_estudiantes_establecimiento_pie), name='listar_estudiantes_establecimiento_pie'),
+    
     url(r'^listar_estudiantes_establecimiento_supervisor/(?P<pk>\d+)/$', login_required(listar_estudiantes_establecimiento_supervisor), name='listar_estudiantes_establecimiento_supervisor'),
     url(r'^estado_estudiantes_establecimiento/(?P<pk>\d+)/$', login_required(estado_estudiantes_establecimiento), name='estado_estudiantes_establecimiento'),
 
