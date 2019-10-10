@@ -621,7 +621,7 @@ class EstudianteListpie(ListView):
 	paginate_by = 100
 
 	def get_queryset(self, *args, **kwargs):
-		return Ficha_derivacion.objects.filter(usuario=self.request.user,estado=1,pie='True')
+		return Ficha_derivacion.objects.filter(usuario=self.request.user,estado=1)
 	#def get_queryset(self, *args, **kwargs):
 	#	return Ficha_derivacion.objects.filter(usuario=self.request.user,pasada=3)
 
