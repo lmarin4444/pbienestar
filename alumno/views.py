@@ -1367,7 +1367,7 @@ def listar_estudiantes_establecimiento_pie(request,pk):
 		
 	estudiando=Escolaridad.objects.filter(establecimiento__id=pk)
 	escuela=establecimiento.objects.get(id=pk)
-	ficha=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=pk) & Q(estado=1) & Q(pie='Si'))
+	ficha=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=pk) & Q(estado=1) )
 	
 	casos=Intervencion_casos.objects.filter(estudiante__curso__establecimiento__id=pk)
 	
