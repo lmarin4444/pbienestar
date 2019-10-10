@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 	
-<title>{% block title %}Programa P.I.E {% endblock %}</title>
+<title>{% block title %}Módulo P.I.E. {% endblock %}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Programas de Bienestar</title>
+<title>Convivencia escolar / Centro de Bienestar</title>
 <link rel="icon" href='{% static "img/logo-convivencia-escolar.gif" %}'>
 
 
@@ -26,7 +26,7 @@
 
 <body>
 
-<h3 class="text-center" > Área P.I.E. <small>Listado de establecimiento</small></h1>
+<h3 class="text-center" > Área P.I.E <small>Listado de información</small></h1>
 <div class="container">
 
 	{% block navbar %}
@@ -44,14 +44,14 @@
 					                      <li class="dropdown">
 					                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ver (Establecientos - Derivaciones) <span class="caret"></span></a>
 											 <ul class="dropdown-menu" role="menu">
-											 	<li><a href="{% url 'alumno:EstablecimientoListPie' %}">Ver Establecimientos </a></li>
+											 	<li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}">Ver Establecimientos </a></li>
 												 
 												 
-											     <li><a href="{% url 'alumno:EstudianteListpie' %}">Listar Estudiantes con ficha de derivación </a></li>
+											     <li><a href="{% url 'alumno:estudiante_listar' %}">Listar Estudiantes con ficha de derivación </a></li>
 												 
-												 <li><a href="{% url 'derivacion:pie' %}">Listar derivaciones </a></li>
+												 <li><a href="{% url 'derivacion:derivacion_listar' %}">Listar derivaciones </a></li>
 
-												
+												  <li><a href="{% url 'derivacion:centrolistar' %}">Listar fichas derivadas </a></li>
 												 
 												 
 
@@ -62,7 +62,20 @@
 												 
 
 											 </ul>
-				                           
+				                           <li>
+				                    	<div class="container-fluid">
+									    <div class="row">
+
+									      <li class="dropdown">
+					                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Registro de familia <span class="caret"></span></a>
+											 <ul class="dropdown-menu" role="menu">
+												 
+
+												 <li><a href="{% url 'alumno:parentesco_listar'  %}">Listar integrantes de la familia para un estudiante</a></li>
+												 
+												 <li><a href="{% url 'alumno:apoderado_listar' %}">Listar apoderados </a></li>
+									
+											 </ul>
 				                           <li>
 
 				                           <div class="container-fluid">
