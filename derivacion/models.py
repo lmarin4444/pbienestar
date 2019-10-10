@@ -115,7 +115,7 @@ class Ficha_derivacion(models.Model):
 #Imagen de la familia
 	Imagen = models.ImageField(upload_to='imagenes/%Y/%m/%d',blank=True, null=True)
 	def __unicode__(self):
-		return '{} {}  '.format(self.id,self.fecha_derivacion)	
+		return '{} {} {}  '.format(self.id,self.fecha_derivacion,self.pie)	
 	
 	
 
