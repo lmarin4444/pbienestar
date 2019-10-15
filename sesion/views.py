@@ -99,7 +99,9 @@ def CrearCitaSecretaria(request,id_Estudiante,profesional):
 				instance.usuario = usuario
 				instance.numero=1# significa hora pedida ( 2: hora realizada 3: hora no asistida)
 				instance.save()
-				return HttpResponseRedirect('/calendario/show/calendar')
+				#return HttpResponseRedirect('/calendario/show/calendar')
+				#return HttpResponseRedirect('secretaria/ver_impresa')
+				return redirect('secretaria:ver_impresa')
 			else:
 				mensaje='Horario ocupado por '+hoy.Estudiante.nombres+" "+hoy.Estudiante.firs_name+" "+hoy.Estudiante.last_name
 				formulario = FormCita(request.POST or None, instance=hoy)
