@@ -369,7 +369,11 @@ def FichaEstudianteDetailView_supervisor(request,pk):
 def Reportedecaso(request,pk):
     
 	estudiante_id=Estudiante.objects.get(pk=pk)
-	ficha_id=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+	try:
+		ficha_id=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+	except Ficha_derivacion.DoesNotExist:
+		ficha_id=None
+	
 	mensaje=""
 	try:
 		intervencion=Intervenidos.objects.get(Estudiante__id=pk)
@@ -1369,7 +1373,7 @@ def listar_estudiantes_establecimiento_pie(request,pk):
 	escuela=establecimiento.objects.get(id=pk)
 	usuario=request.user
 
-	ficha=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=pk) & Q(estado=1) & Q(pie='True'))
+	ficha=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=pk) & Q(estado=1) & Q(pie='Si'))
 	
 	casos=Intervencion_casos.objects.filter(estudiante__curso__establecimiento__id=pk)
 	
