@@ -572,7 +572,7 @@ def crear_Sesion_buscador(request,age,pk):
 			inter.numero=2 #porque el estudiante asistio a la sesion
 			inter.save()
 			Registro.objects.create(fecha=date,agenda=inter,Estudiante=dato,situacion=3,obs="El estudiante asiste a la sesión", usuario=request.user)
-			url = reverse(('calendario:fechas'), kwargs={ 'dia': inter.fecha.day,'mes': inter.fecha.month})
+			url = reverse(('alumno:ingresar_estudiantes_establecimiento_listado_retorno'), kwargs={'pk':dato.id})
 			return HttpResponseRedirect(url)
 			
 			mensaje='Sesion almacenada de '+hoy.Estudiante.nombres+" "+hoy.Estudiante.firs_name+" "+hoy.Estudiante.last_name

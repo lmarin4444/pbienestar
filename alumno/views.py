@@ -373,14 +373,13 @@ def Reportedecaso(request,pk):
 		ficha_id=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
 	except Ficha_derivacion.DoesNotExist:
 		ficha_id=None
-	
-	mensaje=""
+		mensaje=""
 	try:
 		intervencion=Intervenidos.objects.get(Estudiante__id=pk)
 		yo=intervencion.usuario
 	except Intervenidos.DoesNotExist:
-		intervencion=""
-		yo=""
+		intervencion=None
+		yo=None
 	try:
 		evaluar=Diagnostico.objects.get(Estudiante__id=pk)
 		mensaje="Estudiante ya cuenta con un informe de evaluación"
@@ -2189,7 +2188,7 @@ def buscar_estudiantes(request,pk):
 	estudiante=None
 	
 	escuela=establecimiento.objects.get(id=pk)
-	print escuela
+
 	template = 'alumno/buscar_estudiante.html'
 	
 	mensaje="aqui pase"
@@ -2199,9 +2198,7 @@ def buscar_estudiantes(request,pk):
 			print est.rut	
 			try: 
 				estudiante=Estudiante.objects.get(rut=est.rut)
-				print estudiante
 				mensaje=" Estudiante encontrado "
-				print mensaje
 				escuela=establecimiento.objects.get(id=pk)
 			except Estudiante.DoesNotExist:
 				mensaje= " Estudiante no existe en los registros"
@@ -2489,3 +2486,91 @@ def ingresar_estudiantes_establecimiento_listado(request):
         "mensaje":mensaje
     }		
 	return render(request, template, context)	
+
+
+def ingresar_estudiantes_establecimiento_listado_retorno(request,pk):
+	form3 = EstudianteVerForm(request.POST or None)	
+	form = EstudianteForm(request.POST or None)
+	form2 =EscolaridadForm(request.POST or None)
+	# busqueda del estudiante en el cual se estan ingresando las sesiones
+	activo=Estudiante.objects.get(id=pk)
+	
+	template = 'alumno/ingresar_escolaridad_busqueda_vuelta.html'
+	
+	mensaje=""
+	if request.method == 'POST':
+		if form.is_valid() and form2.is_valid() :
+
+			estudiando = form.save(commit=False)# Estudiante
+			estudiando = activo
+			#print ("estudiando  %s" % ( estudiando) )
+			escolar=Escolaridad.objects.get(Estudiante=activo)# escolaridad
+			#print ("escolar  %s" % ( escolar.Letra) )
+			#pesadilla=form3.save(commit=False)
+			#escuela=establecimiento.objects.get(id=pk)
+			#ir a buscar el curso
+			#etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
+
+			try:
+				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
+
+			except curso.DoesNotExist:
+
+				
+				curso.objects.create(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
+				etapa=curso.objects.get(numero=escolar.curso,letra=escolar.Letra,establecimiento=escuela)
+	        
+			family=Familia.objects.create(cantidad=1)
+			estudiando.Familia=family
+			estudiando.curso=etapa
+			diff = (datetime.date.today() - estudiando.fecha_nacimiento).days
+			years = str(int(diff/365))		
+			estudiando.edad=years
+			estudiando.save()
+			x=datetime.datetime.today()
+			y=x.year
+			escolar.edad=y
+			escolar.establecimiento=escuela
+			escolar.Estudiante=estudiando
+			escolar.save()
+
+
+			url = reverse(('sesion:intervenido'))
+			return HttpResponseRedirect(url)
+		else:
+			
+			if form.is_valid():
+				estudiando = form.save(commit=False)
+				
+				valor1=estudiando[:12]
+				largo=len(estudiando.rut)
+				corte=largo - 2
+				valor1=estudiando[:corte]
+				valor= estudiando.rut
+				
+				try:
+					persona=Estudiante.objects.get(rut=valor)
+					estudiar=Estudiante.objects.get(pk=persona.id)
+					form = EstudianteForm(instance=estudiar)
+					mensaje="Error en el  formulario y/o Estudiante ya existe 1"	
+
+				except Estudiante.DoesNotExist:
+					persona=None
+				
+
+			else:
+				mensaje="Error en el  formulario y/o Estudiante ya existe "	
+
+	intervenidos = Intervenidos.objects.all()
+	context = {
+        "form": form,
+        "form2":form2,
+        "form3":form3,
+        "intervenidos":intervenidos,
+
+        
+        "mensaje":mensaje
+    }		
+	return render(request, template, context)	
+
+

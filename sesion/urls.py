@@ -13,7 +13,7 @@ from sesion.views import listadousuarios, SesionList,SesionCreate,SesionDelete,S
     ReportecontinuidadModificar,CrearSeguimiento,ListarSeguimiento,ver_registro,ModificarRegistro,confirma_ver, \
     confirma_modificar,SeguimeintoDelete,SeguimientoUpdate,VerReportecontinuidad,ReportecontinuidadModificar, \
     Reportecontinuidad_solo,CrearCitaProfesional,historia_supervisor,confirma_ver_busqueda,CrearCitaSecretaria, \
-    IntervenidosListSecretaria
+    IntervenidosListSecretaria,crear_Sesion_buscador
 
  
 
@@ -103,7 +103,7 @@ urlpatterns = [
     url(r'^modificar_citas/(?P<pk>\d+)/(?P<age>\d+)$', login_required(ModificarCita), name='modificar_citas'),
     # Manejo de informacion para las sesiones
     url(r'^crear_Sesion/(?P<age>\d+)/(?P<pk>\d+)$', login_required(crear_Sesion), name='crear_sesion'),
-       
+    url(r'^crear_Sesion_buscador/(?P<age>\d+)/(?P<pk>\d+)$', login_required(crear_Sesion_buscador), name='crear_Sesion_buscador'),
     # Manejo de informacion para las sesiones
     url(r'^crear_registro/(?P<age>\d+)/(?P<pk>\d+)$', login_required(Crear_Registro), name='crear_registro'),
     url(r'^ver_registro/(?P<age>\d+)/(?P<pk>\d+)$', login_required(ver_registro), name='ver_registro'),

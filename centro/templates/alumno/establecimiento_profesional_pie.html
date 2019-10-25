@@ -23,7 +23,7 @@
 		
 		
 		{% for escuela in profesional %}
-			
+		{% if escuela.tipo_profesional == 3 %}	
 		<td>
 		{{ escuela.escuela.nombre|truncatewords:15|make_list|slice:":25"|join:"" }}
 				{% if escuela.escuela.nombre|truncatewords:15|make_list|slice:":25"|length_is:"25" %} ...{% endif %}
@@ -45,13 +45,8 @@
 
 			{% endif %}
 			</td>
-			
-			
-			
-			
-			
-			
 		</tr>
+		{% endif %}
 		{% endfor %}
 		
 		{% else %}
