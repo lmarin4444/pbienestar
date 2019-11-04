@@ -790,7 +790,7 @@ def EstudianteUpdatePie(request,pk,escuela):
 
 		
 		 }
-	return render(request,'alumno/estudiante_form_modificar.html', context)
+	return render(request,'alumno/estudiante_form_modificar_pie.html', context)
 
 
 
