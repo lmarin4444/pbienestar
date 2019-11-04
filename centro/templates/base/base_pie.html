@@ -128,19 +128,71 @@
 	
 
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript">
+		
+	$(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+	</script>
+	<script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<script>
+ $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '< Ant',
+ nextText: 'Sig >',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ $.datepicker.setDefaults($.datepicker.regional['es']);
+$(function () {
+$("#fecha").datepicker();
+});
+</script>
+ <script>
+        $(function() {
+            $( "#id_fecha_derivacion" ).datepicker();
+            $( "#id_fecha_nacimiento" ).datepicker();
+            $( "#id_fecha" ).datepicker();
+            $( "#id_fecha_inicio" ).datepicker();
+            $( "#id_fecha_termino" ).datepicker();
+            $( "#id_fecha_diagnostico" ).datepicker();
+            $( "#id_fecha_retorno" ).datepicker();
+
+        });
+        </script>
+
 
 	<script type="text/javascript">
 		
 	$(document).ready(function() {
     $('#example').DataTable();
 
-    $('#id_fecha_derivacion').datetimepicker();	
+    $('#id_fecha_derivacion').datepicker(format: 'dd/mm/yyyy',
+    
+           language: 'es');	
 } );
 
-	</script>
+	
+</script>
 	{% block extrajs %}
 	{% endblock %}
 
