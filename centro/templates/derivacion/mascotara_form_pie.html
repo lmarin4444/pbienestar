@@ -33,7 +33,7 @@
 	{{ form|crispy }}
 	 
 	<button type="submit" class="btn btn-info">Registrar</button>
-	<a class= "btn btn-danger" href="{% url 'alumno:listar_estudiantes_establecimiento' dato.curso.establecimiento.id %}">Cancelar</a>
+	<a class= "btn btn-danger" href="{% url 'alumno:listar_estudiantes_establecimiento_pie' dato.curso.establecimiento.id %}">Cancelar</a>
 
 
 </form>

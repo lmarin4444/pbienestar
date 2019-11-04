@@ -554,6 +554,7 @@ class MascotaCreatePie(CreateView):
 				#Campos para registrar valores al moemnto de crear la ficha
 				form.instance.edad=estudiante.edad
 				form.instance.establecimiento=estudiante.curso.establecimiento.nombre
+				
 				form.instance.curso=estudiante.curso.get_numero()
 				form.instance.letra=estudiante.curso.get_letra()
 				form.instance.save()
@@ -561,7 +562,7 @@ class MascotaCreatePie(CreateView):
 			
 				
 				
-				url = reverse(('alumno:listar_estudiantes_establecimiento'), kwargs={ 'pk': estudiante.curso.establecimiento.id })
+				url = reverse(('alumno:listar_estudiantes_establecimiento_pie'), kwargs={ 'pk': estudiante.curso.establecimiento.id })
 				return HttpResponseRedirect(url)
 
 		else:
