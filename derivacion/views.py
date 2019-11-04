@@ -500,6 +500,77 @@ class MascotaCreate(CreateView):
 			mensaje="Ficha ya existe"
 			return self.render_to_response(self.get_context_data(form=form))
 
+# Ficha de derivacion para rol pie
+class MascotaCreatePie(CreateView):
+	model = Ficha_derivacion	
+	form_class = derivacionForm
+	template_name = 'derivacion/mascotara_form_pie.html'
+	success_url = reverse_lazy('derivacion:derivacion_listar')
+	
+	    
+	def get_context_data(self, **kwargs):
+        # Llamamos ala implementacion primero del  context
+		context = super(MascotaCreatePie, self).get_context_data(**kwargs)
+		if 'form' not in context:
+			context['form'] = self.form_class(self.request.GET)
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		print pk
+		try:
+			ficha=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+			mensaje="Estudiante ya cuenta con ficha de derivación"
+		except Ficha_derivacion.DoesNotExist:
+			mensaje="Estudiante sin ficha de derivación"
+		
+		context['dato']=Estudiante.objects.get(id=pk)
+		context['mensaje']=mensaje
+		indice = self.kwargs.get('establecimiento')
+		escuela=establecimiento.objects.get(pk=indice)
+		context['escuela']=escuela
+		return context
+		
+	
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		form = self.form_class(request.POST,request.FILES)
+		
+		if form.is_valid():
+			pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+			try:
+				ficha=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+				return self.render_to_response(self.get_context_data(form=form))
+			except Ficha_derivacion.DoesNotExist:
+				
+				form.instance= form.save(commit=False)
+				#motivos=form.instance.Motivo_derivacion
+				#for motivo in motivos:
+
+				#	form.intance.Motivo_derivacion.add(motivo)
+				form.instance.usuario = self.request.user
+				form.instance.pasada=1
+				form.instance.derivado=1
+				
+				estudiante=Estudiante.objects.get(id=pk)
+				form.instance.Estudiante=estudiante
+				#Campos para registrar valores al moemnto de crear la ficha
+				form.instance.edad=estudiante.edad
+				form.instance.establecimiento=estudiante.curso.establecimiento.nombre
+				form.instance.curso=estudiante.curso.get_numero()
+				form.instance.letra=estudiante.curso.get_letra()
+				form.instance.save()
+				form.save_m2m()
+			
+				
+				
+				url = reverse(('alumno:listar_estudiantes_establecimiento'), kwargs={ 'pk': estudiante.curso.establecimiento.id })
+				return HttpResponseRedirect(url)
+
+		else:
+			mensaje="Ficha ya existe"
+			return self.render_to_response(self.get_context_data(form=form))
+
+
+
+
 # Prueba el ingreso de la ficha de derivacion	    
 class MascotaCreate_Prueba(CreateView):
 	model = Estudiante	

@@ -9,12 +9,14 @@ from derivacion.views import listadousuarios, index, mascota_view, mascota_list,
     ModificarFicha,RetornoDefinitivo,RetornoInstList,MascotaCreate_Prueba,MascotaUpdate_centro,ModificarRetornoDefinitivo, \
     ReporteIntervenidos,PDFPrueba,EntradasFichaSupervisor,ReporteIntervenidosSupervisor,FichaCentroDetailViewimprimir, \
     FichaCentroDetailViewimprimirbusqueda,FichaCentroDetailViewimprimirsocial,FichaCentroDetailViewimprimirsocialbusqueda, \
-    pie
+    pie,MascotaCreatePie
     
 
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^nuevo/(?P<pk>\d+)/(?P<establecimiento>\d+)$', login_required(MascotaCreate.as_view()), name='derivacion_crear'),
+    url(r'^MascotaCreatePie/(?P<pk>\d+)/(?P<establecimiento>\d+)$', login_required(MascotaCreatePie.as_view()), name='MascotaCreatePie'),
+
     url(r'^nuevo_prueba$', login_required(MascotaCreate_Prueba.as_view()), name='derivacion_crear_prueba'),
 
     url(r'^listar', login_required(MascotaList.as_view()), name='derivacion_listar'),
