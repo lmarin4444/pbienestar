@@ -748,6 +748,49 @@ def EstudianteUpdate(request,pk,escuela):
 		 }
 	return render(request, 'alumno/estudiante_form_modificar.html', context)
 
+# Modificar estudiante desde pie
+
+def EstudianteUpdatePie(request,pk,escuela):
+#Realizar la modificación  de los datos de un estudiante
+	
+	dato = get_object_or_404(Estudiante, pk=pk)
+	colegio = establecimiento.objects.get(pk=escuela)
+	form = EstudianteFormVersinrut(instance=dato)
+
+
+	if request.method=='POST':
+
+		form = EstudianteFormVersinrut(request.POST,instance=dato)
+		
+ 		if form.is_valid():
+ 			
+ 			instance = form.save(commit=False)
+ 			
+			edad_formulario=instance.fecha_nacimiento
+		
+			diff = (datetime.date.today() - edad_formulario).days
+
+			years = str(int(diff/365))	
+			instance.edad=years
+			instance.curso=dato.curso
+			instance.rut=dato.rut
+			instance.Familia=dato.Familia
+			instance.save()
+
+			url = reverse(('alumno:listar_estudiantes_establecimiento_pie'), kwargs={ 'pk':colegio.id })
+			return HttpResponseRedirect(url)
+
+	
+		
+
+	context = {
+		"form": form,
+		"dato": dato,
+		"colegio": colegio,
+
+		
+		 }
+	return render(request,'alumno/estudiante_form_modificar_pie.html', context)
 
 
 
