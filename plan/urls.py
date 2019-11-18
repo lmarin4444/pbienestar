@@ -8,7 +8,7 @@ from . import views
 urlpatterns = [
  
 	
-	url(r'^ingresar_plan/(?P<pk>\d+)/', login_required(views.ingresar_plan.as_view()), name='ingresar_plan'),
+	url(r'^ingresar_plan/(?P<pk>\d+)/$', login_required(views.ingresar_plan.as_view()), name='ingresar_plan'),
 #	Ingresar planes apoyo a la educacion
 	url(r'^ingresar_plan_mineduc/(?P<pk>\d+)/', login_required(views.ingresar_plan_mineduc.as_view()), name='ingresar_plan_mineduc'),
 

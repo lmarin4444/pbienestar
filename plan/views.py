@@ -30,10 +30,14 @@ class ingresar_plan(CreateView):
 	        # Llamamos ala implementacion primero del  context
 			context = super(ingresar_plan, self).get_context_data(**kwargs)
 			colegio = self.kwargs.get('pk') # El mismo nombre que en tu URL
+			
 			escuela=establecimiento.objects.get(id=colegio)
+			
 			try:
+				
 				x= datetime.date.today() 
 				annio=str(int(x.year))
+
 				plan=Plan.objects.get(establecimiento=escuela,annio=annio)
 				context['escuela']=escuela
 				context['plan']=plan
@@ -43,6 +47,8 @@ class ingresar_plan(CreateView):
 				context['escuela']=escuela
 				context['mensaje']=''
 				return context
+				
+				
 		
 	def post(self, request, *args, **kwargs):
 		self.object = self.get_object
@@ -168,7 +174,6 @@ def PlanMineducListView(request,pk):
 def PlanListView(request,pk):
 #Registrar los bases para cada plan
 
-	
 	try:
 		colegio=establecimiento.objects.get(id=pk)
 		x= datetime.date.today() 

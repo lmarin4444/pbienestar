@@ -324,6 +324,49 @@ def FichaEstudianteDetailView(request,pk):
         		 'colegio':colegio	}
     )
 
+# Ver ficha desde el rol de pie
+
+def FichaEstudianteDetailViewPie(request,pk):
+
+	try:
+		estudiante_id=Estudiante.objects.get(pk=pk)
+		family=estudiante_id.Familia
+		colegio=Escolaridad.objects.get(Estudiante__id=pk)
+		
+	except Estudiante.DoesNotExist:
+		estudiante_id=None
+	try:
+		ficha_id=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+	except Ficha_derivacion.DoesNotExist:
+		ficha_id=None		
+		
+	try:
+		parentesco_id=Parentesco.objects.filter(Familia=family).order_by('id')
+	except Parentesco.DoesNotExist:
+		parentesco_id=None
+
+	try:
+		apoderado_id=apoderado.objects.filter(Familia=family)
+        
+
+	except apoderado.DoesNotExist:
+		apoderado_id=None
+
+		
+
+    #book_id=get_object_or_404(Book, pk=pk)
+	return render(
+        request,
+        'alumno/ver_grupo.html',
+        context={'estudiante':estudiante_id,
+        		 'ficha':ficha_id,
+        		 'parentesco':parentesco_id,
+        		 'apoderado':apoderado_id,
+        		 'colegio':colegio	}
+    )
+
+
+
 
 #Ficha de un estudiante desde la dupla
 def FichaEstudianteDetailView_supervisor(request,pk):

@@ -16,7 +16,7 @@ from alumno.views import EstablecimientoList, EstablecimientoCreate, Establecimi
     EstablecimientoListsupervisor,listar_estudiantes_establecimiento_supervisor,FichaEstudianteDetailView_supervisor,ver_escolaridad_supervisor, \
     actualizar_escolaridad_supervisor,ver_familia_supervisor,ingresar_estudiantes_establecimiento_listado, \
     search_listado,listar_estudiantes_establecimiento_pie,ingresar_estudiantes_establecimiento_listado_retorno, \
-    EstudianteUpdatePie
+    EstudianteUpdatePie,FichaEstudianteDetailViewPie
    
 
 urlpatterns = [
@@ -125,6 +125,8 @@ urlpatterns = [
     url(r'^buscar_familia$',buscar_familia, name='buscar_familia'),#lista los estableciientos en la paguina principal
     #url(r'^buscar_familia$',detail_ficha , name='detalle_familia'),
     url(r'^Ver_ficha/(?P<pk>\d+)/$',login_required(FichaEstudianteDetailView), name='ver_ficha'),
+    url(r'^FichaEstudianteDetailViewPie/(?P<pk>\d+)/$',login_required(FichaEstudianteDetailViewPie), name='FichaEstudianteDetailViewPie'),
+
     url(r'^FichaEstudianteDetailView_supervisor/(?P<pk>\d+)/$',login_required(FichaEstudianteDetailView_supervisor), name='FichaEstudianteDetailView_supervisor'),
 
 
