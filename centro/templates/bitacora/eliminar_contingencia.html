@@ -17,11 +17,10 @@
 
 <form method="post">
 	{% csrf_token %}
-	<h3>¿Desea eliminar el evento  {{ lista.nombre|capfirst }}  ?</h3>	
+
+	<h3>¿Desea eliminar el evento nombre: {{ lista.nombre|capfirst }}  ?</h3>	
 	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
 	<a class= "btn btn-info" href="{% url 'bitacora:fechas' lista.fecha.day lista.fecha.month %}">Cancelar</a>
-
-
 
 
 </form>
