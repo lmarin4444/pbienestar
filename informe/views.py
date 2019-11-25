@@ -351,7 +351,7 @@ def ver_calendario(request):
 class FormatosList(ListView):
     model = formatos
     template_name = 'informe/formato_listar.html' 
-    paginate_by = 1
+    paginate_by = 6
 
     def get_queryset(self, *args, **kwargs):
        return formatos.objects.all()
