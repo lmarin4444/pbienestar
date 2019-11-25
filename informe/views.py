@@ -365,7 +365,7 @@ def FormatosList(request):
     return render(
         request,
         'informe/formato_listar.html' ,
-        context={'object_list':formatitos,
+        context={'formatitos':formatitos,
                  }
     )
 
