@@ -1,5 +1,5 @@
 {% extends "base/base_secre_simple.html" %}
-
+{% load static%}
 {% block title%} Listado de documentos{% endblock%}
 
 
@@ -37,8 +37,8 @@
     
   </thead>
   <tbody>
-    {% if formatitos %}
-    {% for mascota in formatitos %}
+    {% if object_list %}
+    {% for mascota in object_list %}
     <tr>
      
       <td>{{ mascota.fecha_subida|date:"d-m-Y "}}</td>
@@ -63,7 +63,18 @@
     {% endif %}
   </tbody>
 </table> 
-
+<ul class="pager">
+  <li>
+    {% if page_obj.has_previous %}
+         <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+    {% endif %}
+        </li>
+  <li>
+    {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+      {% endif %}
+    </li>
+</ul>
 
 
 
