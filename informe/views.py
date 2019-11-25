@@ -359,11 +359,9 @@ def ver_calendario(request):
 
 
 def FormatosList(request):
-#Registrar los logros de cada uno,  para cada diagnostico
-
+#Listado de formatos 
     formatitos=formatos.objects.all()
-       
-    
+      
     return render(
         request,
         'informe/formato_listar.html' ,

@@ -357,7 +357,7 @@ def FichaEstudianteDetailViewPie(request,pk):
     #book_id=get_object_or_404(Book, pk=pk)
 	return render(
         request,
-        'alumno/ver_grupo.html',
+        'alumno/ver_grupo_pie.html',
         context={'estudiante':estudiante_id,
         		 'ficha':ficha_id,
         		 'parentesco':parentesco_id,
