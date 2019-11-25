@@ -348,13 +348,34 @@ class ReporteEstudiantePDF_certificado(View):
 def ver_calendario(request):
      return render (request,"informe/Calendario_fechas.html",{})
 
-class FormatosList(ListView):
-    model = formatos
-    template_name = 'informe/formato_listar.html' 
-    paginate_by = 6
+#class FormatosList(ListView):
+#    model = formatos
+#    template_name = 'informe/formato_listar.html' 
+#    paginate_by = 6
 
-    def get_queryset(self, *args, **kwargs):
-        return formatos.objects.all()
+ #   def get_queryset(self, *args, **kwargs):
+ #       return formatos.objects.all()
+
+
+
+def FormatosList(request):
+#Registrar los logros de cada uno,  para cada diagnostico
+
+    formatitos=formatos.objects.all()
+       
+    
+    return render(
+        request,
+        'informe/formato_listar.html' ,
+        context={'object_list':formatitos,
+                 }
+    )
+
+
+
+
+
+
 
 
 

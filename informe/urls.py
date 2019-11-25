@@ -20,7 +20,8 @@ urlpatterns = [
     url(r'^Calendario_fechas/$',ver_calendario, name='calendario'),
 
     
-    url(r'^listar', login_required(FormatosList.as_view()), name='formatos_listar'),
+    #url(r'^listar', login_required(FormatosList.as_view()), name='formatos_listar'),
+    url(r'^listar', login_required(FormatosList), name='formatos_listar'),
     url(r'^eliminar/(?P<pk>\d+)/$', login_required(FormatosDelete.as_view()), name='formatos_eliminar'),
     url(r'^upload_file$', login_required(upload_file), name='upload_file'),
 
