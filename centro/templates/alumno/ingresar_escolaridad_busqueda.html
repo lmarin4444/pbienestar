@@ -9,7 +9,7 @@
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir página Principal!">Inicio</a></li>
   <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir Menú inicial centro!">Menú </a></li>
   
- 
+
  </ul> 
  
  {% if estado %}<div class="alert alert-info">
@@ -109,7 +109,7 @@
  Existe en la base de datos del Centro de Bienestar.</p>
   <hr class="my-4">
   <p>
-    <li>{{estudiante.curso.establecimiento.nombre}} / <strong>Curso {{estudiante.curso.get_numero}} {{estudiante.curso.get_letra}}</li></strong>
+    <li>{{estudiante.curso.establecimiento.nombre|capfirst}} / <strong>Curso {{estudiante.curso.get_numero}} {{estudiante.curso.get_letra}}</li></strong>
     <li>Rut: {{estudiante.rut}}</li>
     <li>Fecha nacimiento:{{estudiante.fecha_nacimiento}}</li>
   <li>Domicilio : {{estudiante.domicilio_estudiante}}</li>
@@ -339,8 +339,8 @@
                 <ul class="fa-ul">
       
         <i class="fa-li fa fa-spinner fa-spin"></i>Sesión aun no se registra
-       <a class="btn btn-primary btn-xs" href="{% url 'sesion:crear_Sesion_buscador' mascota.id mascota.Estudiante.id %}">Ir a sesión </a>
-      <a class="btn btn-success btn-xs" href="{% url 'sesion:crear_registro' mascota.id mascota.Estudiante.id %}">Ir a registro asistencia</a>
+       <a class="btn btn-success btn-xs" href="{% url 'sesion:crear_Sesion_buscador' mascota.id mascota.Estudiante.id %}">Registra sesión </a>
+      <a class="btn btn-danger btn-xs" href="{% url 'sesion:crear_registro' mascota.id mascota.Estudiante.id %}">Registro inasistencia</a>
       
       </ul>
         </td>
@@ -390,8 +390,8 @@
       <ul class="fa-ul">
       
         <li><i class="fa-li fa fa-spinner fa-spin"></i>Sesión aun no se registra
-       <a class="btn btn-primary btn-xs" href="{% url 'sesion:crear_Sesion_buscador' mascota.id mascota.Estudiante.id %}">Ir a sesión </a>
-      <a class="btn btn-success btn-xs" href="{% url 'sesion:crear_registro' mascota.id mascota.Estudiante.id %}">Ir a registro asistencia</a>
+       <a class="btn btn-primary btn-xs" href="{% url 'sesion:crear_Sesion_buscador' mascota.id mascota.Estudiante.id %}">Registrar sesión </a>
+      <a class="btn btn-danger btn-xs" href="{% url 'sesion:crear_registro' mascota.id mascota.Estudiante.id %}">Ir inasistencia</a>
       </li>
       </ul>
       
