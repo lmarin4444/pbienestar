@@ -38,6 +38,8 @@
 
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Listado de Temáticas </a>
                 </h4>
+                <div class="panel-body">
+            </div>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse">
                 <div class="panel-body">
@@ -49,7 +51,7 @@
 							
 						<td>
 						{% for temas in tema.all %}
-						<lu>{{ temas.nombre }} {{temas.objetivo.nombre}}</lu>
+						<li>{{ temas.nombre }} {{temas.objetivo.nombre}}</li>
 								{% for objetiv in temas.objetivo.all %}
 								<li>{{ objetiv.nombre }} </li>
 								{% endfor%}	
@@ -74,7 +76,7 @@
             </div>
             <div id="collapseThree" class="panel-collapse collapse">
                 <div class="panel-body">
-                    < Ingresar un objetivo de intervención para el estudiante seleccionado
+                    Ingresar  objetivo de intervención para el estudiante seleccionado.
                 </div>
             </div>
         </div>

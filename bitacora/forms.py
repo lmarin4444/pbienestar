@@ -15,20 +15,17 @@ class BitacoraForm(forms.ModelForm):
 			
 			'fecha',
 			'horario',
-			
 			'nombre',
 			'curso',
 			'tipo_letras',
 			'ambito',
 			'tipo_actividad',
 			'participantes',
-			
 			'desarrollo',
 		]
 		labels = {
 			'fecha': 'Fecha',
 			'horario': 'Horario',
-			
 			'nombre':'Nombre de la acción',
 			'curso': 'Curso o nivel',
 			'tipo_letras':' Letra',

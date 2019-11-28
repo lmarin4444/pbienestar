@@ -25,17 +25,19 @@
 </p>
 </ul>
 
+<div class="table-responsive-sm">
+<table class="table table-condensed table-striped">
 
 <table id="example" class="table table-bordered" fontsize =10px>
 	<thead>
 		<tr>
 		
-			<td>Nª:</td>
-			<td>Derivado el /Estado:</td>
-			<td>Estudiante</td>
-			<td>Curso Establecimiento</td>
-			<td>Informes - Escolaridad</td>
-			<td>Opciones sobre Ficha</td>
+			<th >Nª:</th>
+			<th>Derivado el /Estado:</th>
+			<th>Estudiante</th>
+			<th>Curso Establecimiento</th>
+			<th class="col-sm-3">Informes - Escolaridad</th>
+			<th>Opciones sobre Ficha</th>
 		</tr>
 		
 	</thead>
@@ -99,6 +101,7 @@
 					{% for intervencion  in intervenidos  %}
 
 						{% if intervencion.Estudiante == mascota.Estudiante and intervencion.usuario == user   %}
+						<div>
 						<a class="btn btn-info btn-xs" href="{% url 'alumno:reporte_caso' mascota.Estudiante.id %}">1</a>
 						<a class="btn btn-success btn-xs" href="{% url 'sesion:reporte_continuidad_solo' mascota.Estudiante.id %}">2</a>
 						<a title="Ver Informes de Continuidad" class="glyphicon glyphicon-book" href="{% url 'sesion:ver_reporte_continuidad' mascota.Estudiante.id %}"></a>/
@@ -106,11 +109,13 @@
 						
 						<a title="Ver Escolaridad" class="glyphicon glyphicon-education" href="{% url 'alumno:ver_escolaridad_centro' mascota.Estudiante.id %}"></a>/
 						<a title="Modificar Escolaridad" class="glyphicon glyphicon-list-alt" href="{% url 'alumno: actualizar_escolaridad_centro' mascota.Estudiante.id %}"></a> 
-						
+						<a class="btn btn-warning btn-xs" href="{% url 'sesion:objetivo_intervencion' mascota.Estudiante.id  %}"> <small>Objetivo</small></a>
+						</div>
 						<td>
 			
 			
 						<a class="btn btn-primary btn-xs" href="{% url 'derivacion:centro_derivacion_editar' mascota.id %}">Editar </a>
+
 				
 						
 
@@ -150,6 +155,7 @@
 		{% endif %}
 	</tbody>
 </table> 
+</div>
 <ul class="pager">
 	<li>
 		{% if page_obj.has_previous %}

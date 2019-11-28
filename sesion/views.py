@@ -761,7 +761,7 @@ def ObjetivoIntervencionCreate(request,pk):
 				formulario.save_m2m()
 			
 
-				return HttpResponseRedirect('/sesion/intervenido')
+				return HttpResponseRedirect('/derivacion/intervencion_listar')
 		else:
 			formulario = Objetivo_intervencionForm()
 
@@ -902,7 +902,7 @@ def cambio_objetivo(request,pk,objetivo):
 		#grabar el registro en el archivo de hostoria de cada uno de los estudiantes
 		objetivo_intervencionhistoria.objects.create(fecha_creacion=x,objetivo_particular=objetivo_pasado,Tematicas=tematicas,Estudiante=dato, usuario=request.user)
 
-		return HttpResponseRedirect("/sesion/intervenido/")
+		return HttpResponseRedirect("/derivacion/intervencion_listar")
 	context = {
 		"dato": dato,
 		"objetivo": obje,
