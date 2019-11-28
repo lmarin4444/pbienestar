@@ -2580,10 +2580,37 @@ def ingresar_estudiantes_establecimiento_listado_retorno(request,pk):
 	form2 =EscolaridadForm(request.POST or None)
 	# busqueda del estudiante en el cual se estan ingresando las sesiones
 	activo=Estudiante.objects.get(id=pk)
-	
+
+	estado="vuelta"
 	template = 'alumno/ingresar_escolaridad_busqueda_vuelta.html'
+	# Fichas del estudiante del centro de bienestar
+	try:
+		ficha=Ficha_derivacion.objects.filter(Estudiante=activo)
+		
+	except Ficha_derivacion.DoesNotExist:
+		ficha=None
+
+	try:
+		intervenidos=Intervenidos.objects.all()
+		
+	except Intervenidos.DoesNotExist:
+		intervenidos=None
+	try:
+		Sesion = sesion.objects.filter(Estudiante__id=activo.id).order_by('fecha')
+	except sesion.DoesNotExist:
+		Sesion=None
 	
-	mensaje=""
+					# ir a buscar la informacion de la agenda
+	try:
+		agendado=agenda.objects.filter(Estudiante__id=activo.id).order_by('fecha')
+	except agenda.DoesNotExist:
+		agendado=None
+	
+	try:
+		registrado=Registro.objects.filter(agenda=agendado).order_by('fecha')
+	except Registro.DoesNotExist:
+		registrado=None	
+	
 	if request.method == 'POST':
 		if form.is_valid() and form2.is_valid() :
 
@@ -2647,15 +2674,21 @@ def ingresar_estudiantes_establecimiento_listado_retorno(request,pk):
 			else:
 				mensaje="Error en el  formulario y/o Estudiante ya existe "	
 
-	intervenidos = Intervenidos.objects.all()
+	
 	context = {
         "form": form,
         "form2":form2,
         "form3":form3,
         "intervenidos":intervenidos,
+        "estado":estado,
+        "ficha":ficha,
+        "Sesion":Sesion,
+        "agendado":agendado,
+        "registrado":registrado,
+        "estudiante":activo,
 
-        
-        "mensaje":mensaje
+
+       
     }		
 	return render(request, template, context)	
 
