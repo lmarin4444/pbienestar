@@ -3,7 +3,7 @@
 
 
 
-{% if mensaje %}
+
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir página Principal!">Inicio</a></li>
@@ -12,27 +12,10 @@
  
  </ul> 
  
- {% if estado %}<div class="alert alert-info">
-  {{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }} {{mensaje}} {{escuela.establecimiento.nombre}} 
+<div class="alert alert-info">
+  {{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }} existe en la base de datos  {{estudiante.curso.establecimiento.nombre}} 
  
-	{% else %}<div class="alert alert-danger"> {{mensaje}}{% endif %}
-
-
-
-</div></div>
-
-{% else %}
-<ul class="breadcrumb">
-
-  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_centro' %}"data-toggle="tooltip" title="Ir menu inicial centro!">Menú </a></li>
-  
- 
- 
- </ul> 
-<div class="alert alert-success">Rut no se encuentra en los registros de la base de datos</div>
-
-{% endif %}
+	</div>
 
 <div class="container">
     
@@ -121,7 +104,7 @@
 
         <div class="col-md-12 col-md-12">
 
-		 {% if ficha %}
+{% if ficha %}
 <span class="border border-info">
 <div class="progress">
   <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -163,7 +146,7 @@
       {% elif estado == 2 %}
       
       
-       Espera desde {{ fichas.fecha_espera|date:"d-m-Y "}}
+      Espera desde {{ fichas.fecha_espera|date:"d-m-Y "}}
       
       {% elif estado == 3 %}
       
@@ -199,7 +182,7 @@
 
         
         {% if intervenidos %}
-        
+       
           {% for intervencion  in intervenidos  %}
          
             {% if intervencion.Estudiante == fichas.Estudiante   %}
@@ -229,11 +212,7 @@
 
             <a title="Ficha derivación - imprimir en html" class="glyphicon glyphicon-print" href="{% url 'derivacion:FichaCentroDetailViewimprimir' estudiante.id %}"></a>/ 
             
-
-
-
-
-            
+      
       {% endif %} 
       {% endwith %} 
   
@@ -256,7 +235,7 @@
 <table id="example"  class="table table-striped">
   <thead>
     <tr>
-      <td>Nª Total </td>
+      <td>Nº Total </td>
       <td># Sesión</td>
       
       <td>Fecha </td>
@@ -390,8 +369,8 @@
       <ul class="fa-ul">
       
         <li><i class="fa-li fa fa-spinner fa-spin"></i>Sesión aun no se registra
-       <a class="btn btn-primary btn-xs" href="{% url 'sesion:crear_Sesion_buscador' mascota.id mascota.Estudiante.id %}">Ir a sesión </a>
-      <a class="btn btn-success btn-xs" href="{% url 'sesion:crear_registro' mascota.id mascota.Estudiante.id %}">Ir a registro asistencia</a>
+       <a class="btn btn-primary btn-xs" href="{% url 'sesion:crear_Sesion_buscador' mascota.id mascota.Estudiante.id %}">Registrar sesión </a>
+      <a class="btn btn-success btn-xs" href="{% url 'sesion:crear_registro' mascota.id mascota.Estudiante.id %}">Registrar  inasistencia</a>
       </li>
       </ul>
       
@@ -465,7 +444,7 @@
 
 	
  
- {% if ficha %}
+ {% if ficha_dupla %}
  Fecha derivación dupla psicosocial:<br>
 
 

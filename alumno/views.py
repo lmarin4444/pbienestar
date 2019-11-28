@@ -2591,6 +2591,12 @@ def ingresar_estudiantes_establecimiento_listado_retorno(request,pk):
 		ficha=None
 
 	try:
+		ficha_dupla=Ficha_derivacion_dupla.objects.filter(Estudiante=activo).order_by('fecha_derivacion')
+						
+	except Ficha_derivacion_dupla.DoesNotExist:
+		ficha_dupla=None
+
+	try:
 		intervenidos=Intervenidos.objects.all()
 		
 	except Intervenidos.DoesNotExist:
@@ -2682,7 +2688,8 @@ def ingresar_estudiantes_establecimiento_listado_retorno(request,pk):
         "intervenidos":intervenidos,
         "estado":estado,
         "ficha":ficha,
-        "Sesion":Sesion,
+        "ficha_dupla":ficha_dupla,
+		"Sesion":Sesion,
         "agendado":agendado,
         "registrado":registrado,
         "estudiante":activo,
