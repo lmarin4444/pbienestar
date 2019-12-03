@@ -204,7 +204,7 @@
          
             {% if intervencion.Estudiante == fichas.Estudiante   %}
             <a class="btn btn-info btn-xs" href="{% url 'alumno:reporte_caso' estudiante.id %}">1</a>
-            <a class="btn btn-success btn-xs" href="{% url 'sesion:reporte_continuidad_solo' estudiante.id %}"> {{intervencion.Estudiante.nombre}}2</a>
+            <a class="btn btn-success btn-xs" href="{% url 'sesion:reporte_continuidad_solo' estudiante.id %}"> 2</a>
             <a title="Ver Informes de Continuidad" class="glyphicon glyphicon-book" href="{% url 'sesion:ver_reporte_continuidad' estudiante.id %}"></a>/
             <a class="btn btn-danger btn-xs" href="{% url 'sesion:Ficha_egreso' estudiante.id %}">3</a> -
             

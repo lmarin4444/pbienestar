@@ -1388,6 +1388,11 @@ def FichaCentroDetailViewimprimir(request,pk):
 			'usuario_ficha':usuario_ficha,
 			 }
     )
+
+
+
+
+
 # Imprimir historia de una ficha desde el buscador 
 # Para imprimir una ficha desde el navegador
 # para ver ficha desde el centro 

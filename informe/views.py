@@ -27,6 +27,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT, TA_RIGHT 
 from reportlab.lib.units import cm, mm, inch 
 from reportlab.lib import colors
+
 from reportlab.pdfgen import canvas
 from io import BytesIO
 from django.shortcuts import render_to_response
@@ -44,6 +45,7 @@ from django.views.generic import View
 from django.conf import settings
 import os
 from PIL import Image, ImageDraw, ImageFont
+
 
 def search_form(request):
     return render_to_response('search_form.html')
@@ -686,6 +688,12 @@ def informe1_pdf_report(request,pk):
     estiloHoja = getSampleStyleSheet()
     cabecera = estiloHoja['Heading4']
     Elements.append(Spacer(0,8))
+    
+
+    imagen_logo=Image('%simg/prueba.png' % settings.MEDIA_URL, width = self.ancho*0.33,
+           height = self.ancho*0.33*escala)
+
+
     #imagen_logo = Image(settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg',width=490,height=40)
     #fichero_imagen = "encabezadocabildo.jpg"
     #imagen_logo = settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg'
@@ -766,8 +774,8 @@ def informe1_pdf_report(request,pk):
     if evaluado:
         data.append((
           
-        Paragraph('<font size=10>%s</font>' % "Situación Actual:", estilo_centrado['estilo_justificado']),
-        Paragraph('<font size=10>%s</font>' % evaluado.situacion_actual, estilo_centrado['estilo_justificado']),   
+        Paragraph('<font size=10>%s</font>' % "Situación Actual:", estilo_centrado['Normal']),
+        Paragraph('<font size=10>%s</font>' % evaluado.situacion_actual, estilo_centrado['Normal']),   
     ))
     if obj:        
 
@@ -2026,7 +2034,9 @@ def fichaderivacion_pdf_report(request,pk):
     estilo_centrado.add(ParagraphStyle(name = "ejemplo",  alignment=TA_CENTER, fontSize=12,
            fontName="Helvetica-BoldOblique"))
 
-
+    estilo_justificado=getSampleStyleSheet()
+    estilo_justificado.add(ParagraphStyle(name = "ejemplo",  alignment=TA_JUSTIFY, fontSize=12,
+           fontName="Helvetica-BoldOblique"))
 
     # Set up HttpResponse object
     #response = HttpResponse(mimetype='application/pdf')
@@ -2038,6 +2048,7 @@ def fichaderivacion_pdf_report(request,pk):
     letra=escolar.get_Letra()
     try:
         ficha=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+        print ficha
     except Ficha_derivacion.DoesNotExist:
         ficha=None
     
@@ -2088,9 +2099,8 @@ def fichaderivacion_pdf_report(request,pk):
     estiloHoja = getSampleStyleSheet()
     cabecera = estiloHoja['Heading6']
     
-    
     #imagen_logo = settings.MEDIA_ROOT+'/imagenes/encabezadocabildo.jpg'
-    #Elements.append(imagen_logo)
+    #Elements.append(logo)
     
     parrafo = Paragraph("",cabecera)
     Elements.append(parrafo)
@@ -2121,7 +2131,7 @@ def fichaderivacion_pdf_report(request,pk):
 
     data.append((
     Paragraph('<font size=10>%s</font>' % "Establecimiento:", estilo['Normal']), 
-    Paragraph('<font size=10>%s</font>' % estudiante.curso.establecimiento, estilo['Normal']),
+    Paragraph('<font size=10>%s</font>' % estudiante.curso.establecimiento.nombre, estilo['Normal']),
     ))
     data.append((
     Paragraph('<font size=10>%s</font>' % "Curso:", estilo['Normal']), 
@@ -2137,7 +2147,7 @@ def fichaderivacion_pdf_report(request,pk):
     
     data.append((
     Paragraph('<font size=10>%s</font>' % "Profesional que deriva:", estilo['Normal']), 
-    Paragraph('<font size=10>%s</font>' % ficha.usuario.first_name+" "+ficha.usuario.last_name, estilo['Normal']),
+    Paragraph('<font size=10>%s</font>' % ficha.usuario.first_name , estilo['Normal']),
     ))
 
 
@@ -2210,6 +2220,8 @@ def fichaderivacion_pdf_report(request,pk):
 
     
     data.append((
+
+
       
     Paragraph('<font size=10>%s</font>' % "IV. APRECIACIÓN DEL EQUIPO RESPECTO DE MOTIVO DE CONSULTA", estilo['Normal']),
     Paragraph('<font size=10>%s</font>' % ficha.cuatro, estilo['Normal']),   
@@ -2265,21 +2277,7 @@ def fichaderivacion_pdf_report(request,pk):
 
 
 
-    data.append((
-      
-    Paragraph('<font size=10>%s</font>' % "Establecimiento (Ficha)", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.establecimiento, estilo['Normal']),   
-    ))
-    data.append((
-      
-    Paragraph('<font size=10>%s</font>' % "Curso (Ficha):", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.curso+" "+ficha.letra, estilo['Normal']),   
-    ))
-    data.append((
-      
-    Paragraph('<font size=10>%s</font>' % "Edad (Ficha):", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.edad, estilo['Normal']),   
-    ))
+    
 
     data.append((
       
@@ -2351,24 +2349,11 @@ def fichaderivacion_pdf_report(request,pk):
         ])
     )
 
-
- 
-       
- 
-
-    
     Elements.append(table)
+
+
+
     Elements.append(Spacer(0,15))
-
-
-
-
-
-
-   
-    
-    
-    
     Elements.append(Spacer(0,60))
     #Elements.append(table2)
     Elements.append(Spacer(0,20))
