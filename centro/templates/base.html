@@ -85,44 +85,39 @@
 
 {% if user.is_authenticated %} 
             
-            
-            <nav class="navbar navbar-default">
-              <div class="container-fluid" class="col-xs-1 col-sm-6 col-md-8" style="background-color: #FF9922;">
+<div class="container text-white">  
+  <div class="row">  
+    <div >
 
-                <div class="navbar-header">
-                <ul class="nav navbar-nav navbar-left">
-                <div class="container-fluid"  >
+        <h3>Menú de opciones </h3>
 
-               <FONT COLOR="white"> Menú de opciones</h3> </FONT>
+    </div>  
+  </div>  
+  
+  <div class="row">  
+    <div >
+        
+        <a class="btn btn-info" href="{%  url 'comienza:entrar_dupla' %}" role="button">PsicoSocial</a>
+        <a class="btn btn-success" href="{%  url 'comienza:entrar_centro' %}" role="button">Centro</a>
+        <a class="btn btn-primary" href="{%  url 'comienza:entrar_secretaria' %}" role="button">Secretaria</a>
+        <a class="btn btn-warning" href="{%  url 'comienza:entrar_pie' %}" role="button">PIE</a>
 
-                </div>
-                    
-               
-            
-
-<a class="btn btn-info" href="{%  url 'comienza:entrar_dupla' %}" role="button">PsicoSocial</a>
-<a class="btn btn-success" href="{%  url 'comienza:entrar_centro' %}" role="button">Centro</a>
-<a class="btn btn-primary" href="{%  url 'comienza:entrar_secretaria' %}" role="button">Secretaria</a>
-<a class="btn btn-warning" href="{%  url 'comienza:entrar_pie' %}" role="button">PIE</a>
-
-<a class="btn btn-danger" href="{% url 'usuario:cerrar' %}" type="button" class="btn btn-success">Cerrar Sesión</a>
-
-
-          
-           
-            <ul class="nav navbar-nav navbar-collapse navbar-right">
-            
-            <li><a href="{%  url 'informe:formatos_listar' %}"><span class="glyphicon glyphicon-paperclip"></span> Formatos</a></li>
+        <a class="btn btn-danger" href="{% url 'usuario:cerrar' %}" type="button" class="btn btn-success">Cerrar Sesión</a>
+    </div>  
+  
+  </div>  
+  
+  <div class="row">  
+    
+    <div class="col bg-warning ">
+        <li><a href="{%  url 'informe:formatos_listar' %}"><span class="glyphicon glyphicon-paperclip"></span> Formatos</a></li>
 
             <li><a href="{%  url 'comienza:Planes_externosList' %}"><span class="glyphicon glyphicon-education"></span> Planes Externos</a></li>
+
+    </div>  
+  </div>  
+</div>  
             
-            </ul>
-
-
-           
-            </div>
-              </div>
-            </nav>
             </ul>
 
             <div class="navbar-header">
