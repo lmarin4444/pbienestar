@@ -1,50 +1,45 @@
 
 {% extends 'base.html' %}
 {% load static%}
-{% block title%} Programas de Bienestar{% endblock%}
+{% block title%} Programas de Bienestar {% endblock%}
 {{ titulo}}
 {% block content %}
 
-        
-            
-          
-               
-
-                
+    
                  
                     
                       {% if user.is_authenticated %}
-                      <h2>Sistema de Gestión de Información</h2>
-                      <h4>SYSTEMPSICO</h4> 
+                      <h3 style="background-color: #4A235A;">
+                      <FONT COLOR="white"> Sistema de Gestión de Información WEBs
+                      SYSTEMPSICO</h3> </FONT>
+                       <br>
+                       <br>
+                       <br>
+                      
+                       <br>
+                       <br>
 
-                      <h3><strong> Le damos la bienvenida a {{user.first_name|capfirst}} {{user.last_name|capfirst}}</strong></h3>
+                      <h2 ><strong> Le damos la bienvenida a <br> {{user.first_name|capfirst}} {{user.last_name|capfirst}}</strong></h2>
                         
-                        <strong>
-                          {{user.lastname|capfirst}}
-                        </strong>
-                         <a href="{% url 'usuario:cerrar' %}"><h4>Salir del sistema</a></h4>
-                         <h3><strong> Departamento de Educación </strong></h3>
-                         <h3><strong> Cabildo </strong></h3>
+                        
+                        <a class="btn btn-danger btn-xs" href="{% url 'usuario:cerrar' %}">Cerrar Sesión</a>
+                         <br>
+                     
+                       <br>
+                       <br>
+                       <br>
+                       <br>
+                       <br>
                         {{perns}}
+                        <h2 style="background-color: #4A235A;">  <FONT COLOR="white"> Departamento de Educación <br>Cabildo </FONT></h2>
 
                         
                       
             
                     {% else %}
-                   <h2>Sitio Web y Plataforma de Gestión </h2>
-                   <h2>Departamento de educación </h2>
 
-                      <h4>SYSTEMPSICO</h4>
+<h2 style="background-color: #4A235A;">  <FONT COLOR="white">Plataforma webs <br> Departamento de Educación Cabildo </FONT></h2>
 
-
-                      <h3><strong> Departamento de Educación </strong></h3>
-                      <h3><strong> Cabildo </strong></h3>
-                       
-
-                        
-                        <strong>
-                          
-                        </strong>
                         
 
                         

@@ -33,11 +33,6 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-</head>
-
-<body>
-    
-<!-- MAnu de navegacion  -->
 
 
 
@@ -45,19 +40,24 @@
     <!-- Header -->
 
 
-    
-<!-- Para agregar otro banner puedes usar el siguiente código:
-    <li>
-        <a href="http://tusitio.com/" title="descripcion"><img src="http://tusitio.com/imagen.png" alt="descripcion"/></a>
-    </li>
-Termina código -->
-
 </ul>
 </div>
+
+
     
-    <header id="top" class="header">
+<div class=”row”>
+<div class=”col-lg-3 col-md-4 col-sm-6 col-xs-12″> 
+
+
+
+
+    </div><!-- fin navbar-collapse -->
+  </div><!-- fin container-fluid -->
+
+    <header id="top" class="header" >
     <div class="text-vertical-center">
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-light" >
+   
     <div class="container-fluid">
     <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
             <nav id="sidebar-wrapper">
@@ -84,95 +84,163 @@ Termina código -->
             </nav>
 
 {% if user.is_authenticated %} 
-       
-            <div class="navbar-header">
-              <a class="navbar-brand" >Programas de Bienestar</a>
-            </div>
-           
-            <ul class="nav navbar-nav navbar-left">
-            <li><a href="{%  url 'comienza:entrar_dupla' %}"><span class="glyphicon glyphicon-user"></span> PsicoSocial</a></li>
             
-            <li><a href="{%  url 'comienza:entrar_centro' %}"><span class="glyphicon glyphicon-user"></span> Centro </a></li>
             
-            <li><a href="{%  url 'comienza:entrar_secretaria' %}"><span class="glyphicon glyphicon-user"></span> Secretaria </a></li>
+            <nav class="navbar navbar-default">
+              <div class="container-fluid" class="col-xs-1 col-sm-6 col-md-8" style="background-color: #FF9922;">
 
-            <li><a href="{%  url 'comienza:entrar_pie' %}"><span class="glyphicon glyphicon-user"></span> Pie </a></li>
+                <div class="navbar-header">
+                <ul class="nav navbar-nav navbar-left">
+                <div class="container-fluid"  >
+
+               <FONT COLOR="white"> Menú de opciones</h3> </FONT>
+
+                </div>
+                    
+               
+            
+
+<a class="btn btn-info" href="{%  url 'comienza:entrar_dupla' %}" role="button">PsicoSocial</a>
+<a class="btn btn-success" href="{%  url 'comienza:entrar_centro' %}" role="button">Centro</a>
+<a class="btn btn-primary" href="{%  url 'comienza:entrar_secretaria' %}" role="button">Secretaria</a>
+<a class="btn btn-warning" href="{%  url 'comienza:entrar_pie' %}" role="button">PIE</a>
+
+<a class="btn btn-danger" href="{% url 'usuario:cerrar' %}" type="button" class="btn btn-success">Cerrar Sesión</a>
+
+
+          
+           
+            <ul class="nav navbar-nav navbar-collapse navbar-right">
+            
             <li><a href="{%  url 'informe:formatos_listar' %}"><span class="glyphicon glyphicon-paperclip"></span> Formatos</a></li>
 
             <li><a href="{%  url 'comienza:Planes_externosList' %}"><span class="glyphicon glyphicon-education"></span> Planes Externos</a></li>
-            <li><a href="{% url 'usuario:cerrar' %}"><span class="glyphicon glyphicon-log-in"></span> Cerrar Sesión</a></li>{{user.first_name}} {{user.last_name}} 
+            
             </ul>
+
+
+           
+            </div>
+              </div>
+            </nav>
+            </ul>
+
+            <div class="navbar-header">
+              <a class="navbar-brand" ></a>
+            </div>
+           
+            
     
         
 {% else %}
- <div class="navbar-header">
-     <a class="navbar-brand" >Plataforma Webs SystemPsico</a>
- </div>
+<div class="container-fluid">
+ <div class="row">
+   <div class="col-md-2" style="background-color: #4A235A;" >
+   <div class="navbar-header" >
+  
+        <FONT COLOR="white">Plataforma Webs SystemPsico </FONT>
+        
  
-  <form class="form-inline" role="form" action="{% url "usuario:login" %}"
-                        method="post" accept-charset="utf-8">
-                      <div class="form-group">
+        <form class="form-inline" role="form" action="{% url "usuario:login" %}" 
+                    method="post" accept-charset="utf-8">
+        <div class="form-group">
                       
-                    <input type="text" placeholder="Nombre de usuario" class="form-control" name="username">
-                    <input type="password" placeholder="Contraseña" class="form-control" name="password">
-                        
-                      {% csrf_token %}
-                      <button type="submit" class="btn btn-success">Entrar al Sistema</button>
-                      </div>
+            <input type="text" placeholder="Nombre de usuario" class="form-control" name="username">
+            <input type="password" placeholder="Contraseña" class="form-control" name="password">
+            {% csrf_token %}
+                      <button type="submit" class="btn btn-warning btn-xs"  >Entrar al Sistema</button>
+        </div>
         
          <!-- Navigation -->
              
- </form>          
-     
+        </form>          
+   </div>    
+
+</div>
 
 
-       <div class="navbar-header">
-          <a class="navbar-brand" href="/"> </a>
-        </div>                  
+  
+    <h2 style="background-color: #F39C12;"> Programas  de Bienestar <br>
+    Red & Psicosocial</h2>
+      <div  class="col-md-4">
         
+           
+
+           <div >
+<div class="container">               
+        <div class="col-md-2">
+        <h4 class="text-longshadow">
+                Departamento de educación<br> 
+    
+            </h4>
+          <img  src='{% static "img/logodem.gif" %}' alt="100x100" src="data:image/p" style="width: 180px; height: 180px;">
+
+        </div>
+                        
+
+        <div class="col-md-2">
+       
+            <h4 class="text-longshadow">
+                Centro Bienestar<br> 
+    
+            </h4>
+
+           <div >
+                <img  src='{% static "img/logo.png" %}' alt="100x100" src="data:image/p" style="width: 180px; height: 180px;">
+
+            
+            </div>  
 
 
-        {% endif %}
+
+  </div>
+  <div class="col-md-2">
+      <h4 class="text-longshadow">
+                Convivencia Escolar<br></h4>
+
+        <div >
+                <img  src='{% static "img/logo-convivencia-escolar.gif"  %}' alt="100x100" src="data:image/p" style="width: 180px; height: 205px;">
+
+            
+        </div>  
+
+<br>
+<br>
+<br>
+<br>
+
+  </div>
+</div>
+</div>
       </div>
 
     </nav>
 
-    
-
-    
- 
-            <h1>Programas de Bienestar </h1>
-            <h3>Red PsicoSocial &amp; Red Convivencia</h3>
-            
 
 
 
+{% endif %}
 
-            <div class="container-fluid">
-            <div class="row">
-              
-           
-               <div class="col-sm-4">
-                 <img src='{% static "img/logo-convivencia-escolar.gif" %}' alt="100x100" src="data:image/p" style="width: 160px; height: 220px;">
-               </div>
-                 <div class="col-sm-4">
-                 <img  src='{% static "img/logodem.gif" %}' alt="100x100" src="data:image/p" style="width: 200px; height: 200px;">
-               </div>
-
-                <div class="col-sm-4">
-                <img class="img-circle" src='{% static "img/logo.png" %}' alt="100x100" src="data:image/p" style="width: 200px; height: 200px;">
-
-            
-    </div>            
-    </div>
  <div class="row">
-  <div class="col-md-6">
+
+                <div class="col-lg-12 text-center">
+  
 
                  {% block content %}
                  {% endblock%}
            </div>
            </div>
     </header>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    
 
     <!-- About -->
     <section id="about" class="about">
@@ -189,6 +257,10 @@ Termina código -->
 
         <!-- /.container -->
     </section>
+
+
+
+
 
     <!-- Services -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
@@ -207,7 +279,7 @@ Termina código -->
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
 
-                                <img class="img-circle" src='{% static "img/logo-convivencia-escolar.gif" %}' alt="100x100" src="data:image/p" style="width: 100px; height: 100px;">
+                                <img class="img-circle" src='{% static "img/logo-convivencia-escolar.gif" %}' alt="100x100" src="data:image/p" style="width: 90px; height: 100px;">
                                 <!-- Bootstrap Core CSS -->    
                            <!--  <i class="fa fa-compass fa-spin fa-stack-1x text-primary"></i> el icono se mueve -->  
                             </span>
@@ -320,7 +392,7 @@ Termina código -->
                     {% if perms.profesional.add_profesional %}
                     <a href="{% url 'usuario:usuario_listar' %}" class="btn btn-lg btn-dark">Supervisor</a>
                     {% endif %}
-                    <a href="{% url 'admin:index' %}" class="btn btn-lg btn-dark">Administrador</a>
+                    <a href="{% url 'admin:index' %}" class="btn btn-lg ">Administrador</a>
                 </div>
             </div>
         </div>
@@ -471,6 +543,7 @@ Termina código -->
         }
         // Enable map zooming with mouse scroll when the user clicks the map
     $('.map').on('click', onMapClickHandler);
+
     </script>
 
 </body>
