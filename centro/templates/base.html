@@ -135,7 +135,7 @@
         
         <div class="navbar-header" >
   
-        <FONT COLOR="white">Plataforma Webs SystemPsico </FONT>
+        <FONT COLOR="white">Plataforma Webs SystemPsico INGRESAR </FONT>
         
  
         <form class="form-inline" role="form" action="{% url "usuario:login" %}" 
@@ -145,7 +145,7 @@
             <input type="text" placeholder="Nombre de usuario" class="form-control" name="username">
             <input type="password" placeholder="Contraseña" class="form-control" name="password">
             {% csrf_token %}
-                      <button type="submit" class="btn btn-warning btn-xs"  >Entrar al Sistema</button>
+                      <button type="submit" class="btn btn-warning"  >Entrar al Sistema</button>
         </div>
         
          <!-- Navigation -->
@@ -157,7 +157,9 @@
         <div class="col-3 col-md-6 col-lg-12 >  
         col-3 col-md-6 col-lg-12 " style="background-color: #4A235A;">
 
-
+        <h2 style="background-color: #F39C12;"> Programas  de Bienestar <br>
+    Red & Psicosocial</h2> 
+        </div>  
 
         </div>  
     </div>  
@@ -167,77 +169,59 @@
 
 
 
-  
+
+
+
+
+
+  <div class="row bg-dark h-25">  
    
-      <div  class="col-md-4">
+    <div class="col-6 bg-info">  
+        <div class="row">  
         
-           
+                
+            
 
-        <div>
-
-
-<div class="container text-white">  
-    <div class="row">  
-        <div class="col-3 col-md-6 col-lg-12 ">  
-         <h2 style="background-color: #F39C12;"> Programas  de Bienestar <br>
-    Red & Psicosocial</h2> 
-        </div>  
-        <div class="col-3 col-md-6 col-lg-12 bg-danger">  
-        col-3 col-md-6 col-lg-12  
-        </div>  
-    </div>  
-</div>  
-
-
-
-        <div class="container">               
-        <div class="col-md-2">
-        <h4 class="text-longshadow">
-                Departamento de educación<br> 
-    
-            </h4>
-          <img  src='{% static "img/logodem.gif" %}' alt="100x100" src="data:image/p" style="width: 180px; height: 180px;">
-
-        </div>
-                        
-
-        <div class="col-md-2">
        
-            <h4 class="text-longshadow">
-                Centro Bienestar<br> 
-    
-            </h4>
-
-           <div >
-                <img  src='{% static "img/logo.png" %}' alt="100x100" src="data:image/p" style="width: 180px; height: 180px;">
+        
 
             
-            </div>  
+        </div>  
+    </div>  
+  
+</div>  
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
+<div class="row">
+  <div class="col-xs-6 col-md-4"><h4 class="text-longshadow">
+                Centro Bienestar<br> </h4>
 
-  </div>
-  <div class="col-md-2">
+       
+        <img  src='{% static "img/logo.png" %}' alt="100x100" src="data:image/p" style="width: 180px; height: 180px;">
+</div>
+  <div class="col-xs-6 col-md-4"><h4 class="text-longshadow">
+
+            Departamento de educación<br> </h4>
+          <img  src='{% static "img/logodem.gif" %}' alt="100x100" src="data:image/p" style="width: 180px; height: 180px;">
+          </div>
+  <div class="col-xs-6 col-md-4">
       <h4 class="text-longshadow">
                 Convivencia Escolar<br></h4>
 
-        <div >
-                <img  src='{% static "img/logo-convivencia-escolar.gif"  %}' alt="100x100" src="data:image/p" style="width: 180px; height: 205px;">
+        
+                <img  src='{% static "img/logo-convivencia-escolar.gif"  %}' alt="100x100" src="data:image/p" style="width: 170px; height: 205px;">
 
-            
-        </div>  
-
-<br>
-<br>
-<br>
-<br>
 
   </div>
 </div>
-</div>
-      </div>
 
-    </nav>
+      
+</nav>
 
 
 
