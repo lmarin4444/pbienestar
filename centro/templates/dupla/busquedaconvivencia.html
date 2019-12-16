@@ -174,8 +174,8 @@
       </h4>
     </div>
     <div id="collapse3" class="panel-collapse collapse">
-      <div class="panel-body">Listado de los lineamientos  definidas  determinadas, por el equipo de 
-      formación y convivencia escolar. Estableciendo un sistema cohesionado con la comunidad educativa</div>
+      <div class="panel-body">Listado de los lineamientos  determinados, por el equipo de 
+      Formación y Convivencia Escolar. Estableciendo un sistema cohesionado con la comunidad educativa</div>
     </div>
   </div>
 </div>
@@ -207,11 +207,11 @@
         <li>
           {{motivo.nombre}} - {{motivo.dimension.nombre}}  - <a href="{% url 'plan:ingresar_indicador' motivo.id colegio.id  %}" data-toggle="tooltip" title="ingresar indicadores">indicadores: </a> {{motivo.cantidad_indicadores}} - <a href="{% url 'plan:ingresar_acciones' motivo.id colegio.id  %}" data-toggle="tooltip" title="Abrir acciones">Acciones: </a>{{motivo.cantidad_acciones}} 
 
-<div class="btn-group btn-group-justified">    
-  <a class="btn btn-info btn-lg" href="{% url 'plan:ver_bases' motivo.id %}"><small>Ver base</small></a>
-  <a class="btn btn-success btn-lg" href="{% url 'plan:modificar_base' motivo.id %}"><small>Modificar base</small></a>
-  <a class="btn btn-danger btn-lg" href="{% url 'plan:eliminar_base' motivo.id %}"><small>Eliminar base</small></a>
-  
+         <div class="btn-group btn-group-justified">    
+          <a class="btn btn-info btn-lg" href="{% url 'plan:ver_bases' motivo.id %}"><small>Ver base</small></a>
+          <a class="btn btn-success btn-lg" href="{% url 'plan:modificar_base' motivo.id %}"><small>Modificar base</small></a>
+          <a class="btn btn-danger btn-lg" href="{% url 'plan:eliminar_base' motivo.id %}"><small>Eliminar base</small></a>
+          
 
  </div>
 

@@ -13,20 +13,20 @@
 <ul class="breadcrumb" >
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menu </a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial !">Menú </a></li>
 
   <li><a href="{% url 'alumno:profesinal_establecimiento_listar' %}"data-toggle="tooltip" title="Listado de establecimientos">Volver lista</a></li>
   
   
   
 
-  <li class="active">Ingresar accion de convivencia escolar </li> 
+  <li class="active">Ingresar acción de convivencia escolar </li> 
 </ul>
 {% if mensaje %}
 <div class="alert alert-danger">{{escuela.nombre}} {{mensaje}}</div>
 {% else %}
 
-<div class="alert alert-success"><h4>Ingresar accion de convivencia escolar :{{colegio.nombre}} </h4></div>
+<div class="alert alert-success"><h4>Ingresar acción de convivencia escolar :{{colegio.nombre}} </h4></div>
 {% endif %}
 
 <input type="text" placeholder="Buscar proyectos" id="busquedProyecto"> 
