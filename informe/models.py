@@ -53,7 +53,7 @@ class formatos(models.Model):
 
 		docfile1.allow_tags = True
 
-	def get_estado(self):
+	def get_tipo(self):
 		return u'%s' % TIPO[self.tipo][1]
 
 	def __unicode__(self):

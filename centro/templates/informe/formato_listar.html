@@ -30,6 +30,7 @@
  
       <td>Fecha subida</td>
       <td>Nombre</td>
+      <td>Área</td>
       <td>Descarga</td>
  
 
@@ -43,6 +44,8 @@
      
       <td>{{ mascota.fecha_subida|date:"d-m-Y "}}</td>
       <td>{{ mascota.nombre|capfirst}}  </td>
+      <td>{{ mascota.get_tipo}}  </td>
+
        <td><a href="{{ mascota.docfile1.url }}"> <span class="glyphicon glyphicon-floppy-save"></span> </a></td>
       
 
