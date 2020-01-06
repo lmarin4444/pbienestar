@@ -19,6 +19,7 @@ from django.views.generic import CreateView, TemplateView
 from comienza.forms import RegisterUserForm, LoginForm
 from usuario.models import Profile
 from plan.models import Planes_externos
+from profesional.models import Profesional, Cargo
 
 # Create your views here.
 #def index(request):
@@ -90,7 +91,7 @@ def entrar_dupla(request):
 def entrar_pie(request):
     try:
         perfil=Profile.objects.get(user=request.user)
-        if perfil.area == 1 or perfil.area == 4:
+        if perfil.area == 1 or perfil.area == 6:
             cantidad = Ficha_derivacion.objects.filter(estado=1)
             retorno=Ficha_derivacion.objects.filter(Q(pasada=5) & Q(derivado=2) &  Q(estado=1) & Q(usuario=request.user))
             inst=Ficha_derivacion.objects.filter((Q(pasada=4) | Q(pasada=7)) & Q(derivado=2) & Q(estado=1) &  Q(usuario=request.user))
@@ -102,6 +103,36 @@ def entrar_pie(request):
             return redirect('index')
     except Profile.DoesNotExist:
         return redirect('index')
+
+def entrar_director(request):
+    try:
+        perfil=Profile.objects.get(user=request.user)
+
+        if perfil.area == 1 or perfil.area == 7:
+            director=Profesional.objects.get(usuario=request.user)
+            funcion=Cargo.objects.get(profesional=director)
+            
+            funcion.escuela
+            
+            #colegio=establecimiento.objects.get(id=id_colegio)
+            
+            try:
+                fichas=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=funcion.escuela.id), Q(estado=1))
+                #fichas=Ficha_derivacion.objects.filter(Q(estado=1) & Q(establecimiento=funcion.escuela))
+            except Ficha_derivacion.DoesNotExist:
+                fichas=None
+            
+            print fichas
+
+            context = {'retorno':fichas,
+                        'funcion':funcion
+                       
+                    }
+            return render (request,"comienza/entrar_director.html",context)
+        else:
+            return redirect('index')
+    except Profile.DoesNotExist:
+        return redirect('index')        
 
 def Planes_externosList(request):
 #Listar la planificacion de los programas externos 

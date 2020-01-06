@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
 from comienza.views import entrar_dupla,entrar_pie, entrar_centro, entrar_secretaria,ver_derivaciones, \
 	ver_centro, nosotros,documentos,dupla,convivencia,nosotros_con,listado,equipop,dupla_ficha_derivacion, \
-    listado_construccion,encargados,construye,mi_error_404,Planes_externosList
+    listado_construccion,encargados,construye,mi_error_404,Planes_externosList,entrar_director
 
 
 
@@ -10,6 +10,8 @@ from comienza.views import entrar_dupla,entrar_pie, entrar_centro, entrar_secret
 
 urlpatterns = [
     url(r'^entrar_dupla/$',login_required(entrar_dupla), name='entrar_dupla'),  
+    url(r'^entrar_director/$',login_required(entrar_director), name='entrar_director'),  
+
     url(r'^entrar_pie/$',login_required(entrar_pie), name='entrar_pie'),  
     url(r'^entrar_centro/$',login_required(entrar_centro), name='entrar_centro'),  
     url(r'^entrar_secretaria/$',login_required(entrar_secretaria), name='entrar_secretaria'), 

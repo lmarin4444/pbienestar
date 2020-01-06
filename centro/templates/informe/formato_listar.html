@@ -3,7 +3,7 @@
 {% block title%} Listado de documentos{% endblock%}
 
 
-{% block encabezado%}Listado de formatos{% endblock%}
+{% block encabezado%}Formatos {% endblock%}
 {% block subencabezado%}Comuna de Cabildo{% endblock%}
 
 
@@ -12,7 +12,7 @@
      
 <ul class="breadcrumb">
 
-  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir al menu del centro!">Volver /</a></li>
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir al Menú del centro!">Volver /</a></li>
     <!-- Opcion para subir un informe se desabilita porque solo se suben el administrador
   <a href="{% url 'informe:upload_file' %}" type="button" class="glyphicon glyphicon-paperclip" ></a> Agregar formato
   -->
@@ -21,9 +21,12 @@
     
 
 </ul>
-
-
-<h3>Listado de formatos </h3>
+<div class="container" style="padding-top: 1em;">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Listado documentación </h3>
+    </div>
+    <div class="panel-body">
 <table id="example" class="table table-bordered" fontsize =10px>
   <thead>
     <tr>
@@ -78,6 +81,11 @@
       {% endif %}
     </li>
 </ul>
+
+    </div>
+  </div>
+
+
 
 
 

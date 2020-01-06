@@ -22,6 +22,7 @@ TIPO = (
             (7,'Encargado de convivencia y Psicologo Dupla'),
             (8,'Encargado de convivencia y Trabajador Social Dupla'),
             (9,'Encargado de convivencia, Psicólogo Psicóloga y Trabajador Social Dupla'),
+            (10,'Dirección establecimiento'),
             )
 
 TIPO_ACCION = (

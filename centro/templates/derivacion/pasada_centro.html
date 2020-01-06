@@ -18,7 +18,7 @@
 
 <form method="post">
 	{% csrf_token %}
-	<h3>¿Desea enviar al centro al Centro de Bienestar la ficha de  {{ object.Estudiante.nombres|capfirst}} {{ object.Estudiante.firs_name|capfirst}} {{ object.Estudiante.last_name|capfirst}}?</h3>	
+	<h3>¿Desea enviar al  Centro de Bienestar la ficha de  {{ object.Estudiante.nombres|capfirst}} {{ object.Estudiante.firs_name|capfirst}} {{ object.Estudiante.last_name|capfirst}}?</h3>	
 	
 	<button class="btn btn-info" type="submit">Sí, enviar</button>
 	<a class= "btn btn-danger" href="{% url 'derivacion:derivacion_listar' %}">Cancelar</a>

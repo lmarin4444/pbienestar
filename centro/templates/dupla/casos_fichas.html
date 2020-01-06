@@ -45,7 +45,7 @@ Listado de estudiantes en intervención  {{escuela.nombre}}
 					
 			<td>{{ mascota.fecha_derivacion|date:"d-m-Y "}}</td>
 			
-			<td>{{ mascota.Estudiante.nombres}} {{ mascota.Estudiante.firs_name}} </td>
+			<td>{{ mascota.Estudiante.nombres|capfirst}} {{ mascota.Estudiante.firs_name|capfirst}} </td>
 			 <td> {{ mascota.Estudiante.curso.get_numero}} {{ mascota.Estudiante.curso.get_letra}}</td>
 			
 			 <td>{{ mascota.usuario.first_name}} {{ mascota.usuario.last_name}}</td>
