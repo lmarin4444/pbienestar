@@ -7,9 +7,9 @@
 <form method="post">
 	{% csrf_token %}
 
-	Estudiante es retornado a dupla PsicoSocial para seguimiento interno con fecha  {% now "DATE_FORMAT" %}
+	Estudiante es retornado al equipo se formación y convivencua para seguimiento interno con fecha  {% now "DATE_FORMAT" %}
 
-	<h3>¿Desea retorna a dupla PsicoSocial   el registro de {{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}?</h3>	
+	<h3>¿Desea retornar al equipo de formación y convivencia el registro de {{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}?</h3>	
 
 	{{ formulario|crispy }}
 	<button class="btn btn-danger" type="submit">Sí, enviar</button>

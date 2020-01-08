@@ -115,22 +115,20 @@ def entrar_director(request):
             director=Profesional.objects.get(usuario=request.user)
             funcion=Cargo.objects.get(profesional=director)
             try:
-                fichas_duplas=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=funcion.escuela.id)).order_by('fecha_derivacion')
-                    #fichas=Ficha_derivacion.objects.filter(Q(estado=1) & Q(establecimiento=funcion.escuela))
-            except Ficha_derivacion_dupla.DoesNotExist:
-                fichas_duplas=None
-            try:
-                fichas=Ficha_derivacion_dupla.objects.filter(Q(Estudiante__curso__establecimiento__id=funcion.escuela.id)).order_by('fecha_derivacion')
+                fichas=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=funcion.escuela.id)).order_by('fecha_derivacion')
                     #fichas=Ficha_derivacion.objects.filter(Q(estado=1) & Q(establecimiento=funcion.escuela))
             except Ficha_derivacion.DoesNotExist:
                 fichas=None
+            try:
+                fichas_dupla=Ficha_derivacion_dupla.objects.filter(Q(Estudiante__curso__establecimiento__id=funcion.escuela.id)).order_by('fecha_derivacion')
+                    #fichas=Ficha_derivacion.objects.filter(Q(estado=1) & Q(establecimiento=funcion.escuela))
+            except Ficha_derivacion_dupla.DoesNotExist:
+                fichas_dupla=None
 
-                
-            print fichas
 
             context = {'retorno':fichas,
                             'funcion':funcion,
-                            'fichas_duplas':fichas_duplas
+                            'fichas_duplas':fichas_dupla
                            
                         }
             return render (request,"comienza/entrar_director.html",context)

@@ -10,7 +10,7 @@ Estudiante: <strong>{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ d
 {% if ficha.pasada == 4 %}
 <div class="alert alert-success">Estudiante ya cuenta con una derivación vigente</div>
 {% else %}
-	será egresado,  se informará a la  dupla PsicoSocial o al profesional Pie,  con fecha  {% now "DATE_FORMAT" %}
+	será egresado,  se informará a al Equipo de formación y convivencia o al profesional Pie,  con fecha  {% now "DATE_FORMAT" %}
 	<h4> El proceso de egreso tiene dos áreas: 
 	<li>   1 . Derivación a otra institución. </li>
 	 <li>  2.  Término de la intervención.</li></h4>
@@ -137,7 +137,7 @@ Estudiante: <strong>{{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ d
 <div class="col-md-8 col-md-offset-2">
 			<div class="form-group">
 				<h3> {{ dato.nombres|capfirst}} {{ dato.firs_name|capfirst}} {{ dato.last_name|capfirst}}</h3>	
-				Ya cuenta con una derivacion vigente 
+				Ya cuenta con una derivación vigente 
 			</div>
 		</div>
 

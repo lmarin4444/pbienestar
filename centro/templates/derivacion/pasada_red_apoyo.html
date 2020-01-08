@@ -3,10 +3,13 @@
 {% block content %}
 <form method="post">
 	{% csrf_token %}
+
+	{{estudiante.nombres|capfirst }} {{estudiante.firs_name|capfirst }}   {{estudiante.last_name|capfirst }}
+
 	<h3>Cambio de asignación   {{ object.Estudiante}} </h3>	
 	<button class="btn btn-dark" type="submit"></button>
 	<form  action = "/ your-name /"  method = "post" > 
-    <label  for = "your_name" > Ingrese motivo de derivacion interna </ label > 
+    <label  for = "your_name" > Ingrese motivo de derivación interna </ label > 
     <input  id = "observacion"  type = "textarea"  name = "your_name"  value = " {{  current_name  }} " > 
   
 </form >
