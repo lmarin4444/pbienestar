@@ -2889,40 +2889,40 @@ def fichaderivacion_dupla_pdf_report(request,pk):
     
     data.append((
       
-    Paragraph('<font size=10>%s</font>' % "Observación General", estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.observacion, estilo['Normal']),   
+    Paragraph('<font size=8>%s</font>' % "Observación General", estilo['Normal']),
+    Paragraph('<font size=8>%s</font>' % ficha.observacion, estilo['Normal']),   
     ))
    
 
     data.append((
       
-    Paragraph('<font size=10>%s</font>' % "Inasistencias Marzo/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.marzo+" ", estilo['Normal']), 
+    Paragraph('<font size=8>%s</font>' % "Inasistencias Marzo/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=8>%s</font>' % ficha.marzo+" ", estilo['Normal']), 
 
     ))
     data.append((
       
-    Paragraph('<font size=10>%s</font>' % "Inasistencias Abril/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.abril+" ", estilo['Normal']), 
+    Paragraph('<font size=8>%s</font>' % "Inasistencias Abril/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=8>%s</font>' % ficha.abril+" ", estilo['Normal']), 
 
     ))
     data.append((
       
-    Paragraph('<font size=10>%s</font>' % "Inasistencias Mayo/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.mayo+" ", estilo['Normal']), 
+    Paragraph('<font size=8>%s</font>' % "Inasistencias Mayo/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=8>%s</font>' % ficha.mayo+" ", estilo['Normal']), 
 
     ))
     data.append((
       
-    Paragraph('<font size=10>%s</font>' % "Inasistencias Junio/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.junio+" ", estilo['Normal']), 
+    Paragraph('<font size=8>%s</font>' % "Inasistencias Junio/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=8>%s</font>' % ficha.junio+" ", estilo['Normal']), 
 
     ))
     
     data.append((
       
-    Paragraph('<font size=10>%s</font>' % "Inasistencias Julio/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
-    Paragraph('<font size=10>%s</font>' % ficha.julio+" ", estilo['Normal']), 
+    Paragraph('<font size=8>%s</font>' % "Inasistencias Julio/"+str(int(ficha.fecha_derivacion.year)), estilo['Normal']),
+    Paragraph('<font size=8>%s</font>' % ficha.julio+" ", estilo['Normal']), 
 
     ))
 

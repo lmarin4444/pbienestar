@@ -139,6 +139,72 @@ def entrar_director(request):
     except Profile.DoesNotExist:
         return redirect('index')  
     
+def entrar_director_centro(request):
+        
+
+    
+    try:
+        perfil=Profile.objects.get(user=request.user)
+        if  perfil.area == 7:
+            director=Profesional.objects.get(usuario=request.user)
+            funcion=Cargo.objects.get(profesional=director)
+            try:
+                fichas=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=funcion.escuela.id)).order_by('fecha_derivacion')
+                    #fichas=Ficha_derivacion.objects.filter(Q(estado=1) & Q(establecimiento=funcion.escuela))
+            except Ficha_derivacion.DoesNotExist:
+                fichas=None
+            
+
+
+            context = {'retorno':fichas,
+                            'funcion':funcion
+                            
+                           
+                        }
+            return render (request,"comienza/entrar_director_centro.html",context)
+        else:
+            return redirect('index')
+                      
+    
+    except Profile.DoesNotExist:
+        return redirect('index')  
+
+
+def entrar_director_psicosocial(request):
+        
+
+    
+    try:
+        perfil=Profile.objects.get(user=request.user)
+        if  perfil.area == 7:
+            director=Profesional.objects.get(usuario=request.user)
+            funcion=Cargo.objects.get(profesional=director)
+            try:
+                fichas_duplas=Ficha_derivacion_dupla.objects.filter(Q(Estudiante__curso__establecimiento__id=funcion.escuela.id)).order_by('fecha_derivacion')
+                    #fichas=Ficha_derivacion.objects.filter(Q(estado=1) & Q(establecimiento=funcion.escuela))
+            
+                    #fichas=Ficha_derivacion.objects.filter(Q(estado=1) & Q(establecimiento=funcion.escuela))
+            except Ficha_derivacion_dupla.DoesNotExist:
+                fichas_duplas=None
+
+
+            context = {'fichas_duplas':fichas_duplas,
+                            'funcion':funcion,
+
+                            
+                           
+                        }
+            return render (request,"comienza/entrar_director_psicosocial.html",context)
+        else:
+            return redirect('index')
+                      
+    
+    except Profile.DoesNotExist:
+        return redirect('index')          
+
+
+
+
 
 def Planes_externosList(request):
 #Listar la planificacion de los programas externos 

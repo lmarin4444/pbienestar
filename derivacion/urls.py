@@ -9,7 +9,7 @@ from derivacion.views import listadousuarios, index, mascota_view, mascota_list,
     ModificarFicha,RetornoDefinitivo,RetornoInstList,MascotaCreate_Prueba,MascotaUpdate_centro,ModificarRetornoDefinitivo, \
     ReporteIntervenidos,PDFPrueba,EntradasFichaSupervisor,ReporteIntervenidosSupervisor,FichaCentroDetailViewimprimir, \
     FichaCentroDetailViewimprimirbusqueda,FichaCentroDetailViewimprimirsocial,FichaCentroDetailViewimprimirsocialbusqueda, \
-    pie,MascotaCreatePie, FichaCentroDetailViewimprimirAntigua
+    pie,MascotaCreatePie, FichaCentroDetailViewimprimirAntigua, FichaDuplaDetailViewimprimir
     
 
 urlpatterns = [
@@ -91,6 +91,8 @@ urlpatterns = [
     # Imprimir desde template 
     url(r'^PDFPrueba', login_required(PDFPrueba.as_view()), name='PDFPrueba'),
     url(r'^FichaCentroDetailViewimprimir/(?P<pk>\d+)/$',login_required(FichaCentroDetailViewimprimir),name='FichaCentroDetailViewimprimir'),
+    url(r'^FichaDuplaDetailViewimprimir/(?P<pk>\d+)/$',login_required(FichaDuplaDetailViewimprimir),name='FichaDuplaDetailViewimprimir'),
+
     url(r'^FichaCentroDetailViewimprimirAntigua/(?P<pk>\d+)/$',login_required(FichaCentroDetailViewimprimirAntigua),name='FichaCentroDetailViewimprimirAntigua'),
     
     url(r'^FichaCentroDetailViewimprimirbusqueda/(?P<pk>\d+)/(?P<est>\d+)/$',login_required(FichaCentroDetailViewimprimirbusqueda),name='FichaCentroDetailViewimprimirbusqueda'),
