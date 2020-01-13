@@ -136,7 +136,7 @@ def entrar_director(request):
                         }
             return render (request,"comienza/entrar_director.html",context)
         else:
-            return redirect('alumno:estudiante_listar')
+            return redirect('comienza:director_error')
                       
     
     except Profile.DoesNotExist:
@@ -282,6 +282,11 @@ def handler404(request):
 
 def mi_error_404(request):
     nombre_template = '404.html'
+    return render(request, template_name=nombre_template)
+
+
+def director_error(request):
+    nombre_template = 'director_error_404.html'
     return render(request, template_name=nombre_template)
 
 
