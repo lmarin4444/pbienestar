@@ -110,7 +110,7 @@ def entrar_director(request):
 
     try:
         perfil=Profile.objects.get(user=request.user)
-        print perfil
+
         if  perfil.area == 7:
             director=Profesional.objects.get(usuario=request.user)
             funcion_cargo=Cargo.objects.filter(profesional=director)
@@ -136,7 +136,7 @@ def entrar_director(request):
                         }
             return render (request,"comienza/entrar_director.html",context)
         else:
-            return redirect('index')
+            return redirect('alumno:estudiante_listar')
                       
     
     except Profile.DoesNotExist:
