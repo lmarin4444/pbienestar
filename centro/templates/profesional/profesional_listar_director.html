@@ -5,11 +5,10 @@
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
   
-  
-  
+ 
   
 
-  <li class="active">Listado Profesionales</li> 
+  <li class="active">Listado Profesionales {{escuela.nombre}}</li> 
 </ul>
 
 
@@ -22,26 +21,28 @@
 			<td>Profesional</td>
 			
 			<td>Establecimiento</td>
-			<td>Opciones</td>
+	
 
 
 		</tr>
 		
 	</thead>
 	<tbody>
-		{% if object_list %}
-		{% for estudio in object_list %}
+		{% if equipo %}
+		{% for estudio in equipo %}
+
+
 		<tr>
 			<td>
-			<span class="glyphicon glyphicon-credit-card"></span> {{ estudio.rut }} 
-			<li> {{ estudio.usuario.first_name}} {{ estudio.usuario.last_name_p }}</li>  
-			<span class="glyphicon glyphicon-user"></span>  {{ estudio.usuario.username }}<br>
+			<span class="glyphicon glyphicon-credit-card"></span> {{ estudio.profesional.rut }} 
+			<li> {{ estudio.profesional.usuario.first_name}} {{ estudio.profesional.usuario.last_name_p }}</li>  
+			<span class="glyphicon glyphicon-user"></span>  {{ estudio.profesional.usuario.username }}<br>
 			 
-			<span class="glyphicon glyphicon-envelope"></span>  {{ estudio.usuario.email }}</td>  
+			<span class="glyphicon glyphicon-envelope"></span>  {{ estudio.profesional.usuario.email }}</td>  
 
-			<td>{{ estudio.get_profesional}}</td>
+			<td>{{ estudio.profesional.get_profesional}}</td>
 			<td>
-			{% for escuela in estudio.establecimiento.all %}
+			{% for escuela in estudio.profesional.establecimiento.all %}
 			
 			<li>{{ escuela.nombre}} </li>
 			{% endfor %}</td>
@@ -51,29 +52,12 @@
 
 		
 			
-			<td>
-			{% if acceso == 0 %}  
-			    
-			    <a class="btn btn-info btn-sm" href="{% url 'profesional:profesional_editar' estudio.id %}">Editar</a>
-				<!--     
-				<a  class="btn btn-success btn-sm" href="{% url 'profesional:profesional_eliminar' estudio.id %}">Eliminar</a>
-				-->
-
-			  {% elif acceso == 1 %}
-
-			  
-			  
 			
-				<a disabled="true" class="btn btn-info btn-sm" href="{% url 'profesional:profesional_editar' estudio.id %}">Editar</a>
-				<!--     
-				<a  disabled="true" class="btn btn-success btn-sm" href="{% url 'profesional:profesional_eliminar' estudio.id %}">Eliminar</a>
-				-->
-			{% endif %}   
-				
 
 
 				
 			</td>
+		
 		</tr>
 		{% endfor %}
 		

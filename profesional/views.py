@@ -35,7 +35,7 @@ class ProfesionalList(ListView):
 class ProfesionalListDirector(ListView):
 	model = Profesional
 	template_name = 'profesional/profesional_listar_director.html'
-	paginate_by = 6
+	
 
 
 	def get_context_data(self, **kwargs):
@@ -43,15 +43,23 @@ class ProfesionalListDirector(ListView):
 		perfil=Profile.objects.get(user=self.request.user)
 		
 		if  perfil.area== 7:
+			
 			director=Profesional.objects.get(usuario=self.request.user)
-			funcion=Cargo.objects.get(profesional=director)
-			escuela=funcion.escuela
-			print escuela
-			equipo=Cargo.objects.filter(escuela=escuela)
-			context['funcion'] = equipo
+			funcion_cargo=Cargo.objects.filter(profesional=director)
+			for cargos in funcion_cargo:
+				funcion=cargos
+
+			print funcion.escuela	
+			
+
+			equipo=Cargo.objects.filter(escuela=funcion.escuela)
+			print equipo
+			context['equipo'] = equipo
+			context['escuela'] = funcion.escuela
+
 
 		else:
-			context['funcion'] = None	        
+			context['equipo'] = None	        
 		return context
 
 
