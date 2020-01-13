@@ -108,9 +108,9 @@ def entrar_pie(request):
 def entrar_director(request):
         
 
-    
     try:
         perfil=Profile.objects.get(user=request.user)
+        print perfil
         if  perfil.area == 7:
             director=Profesional.objects.get(usuario=request.user)
             funcion=Cargo.objects.get(profesional=director)
