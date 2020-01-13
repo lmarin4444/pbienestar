@@ -30,6 +30,7 @@
 	<tbody>
 		{% if equipo %}
 		{% for estudio in equipo %}
+				{% if estudio.tipo_profesional == 4 or estudio.tipo_profesional == 5 or estudio.tipo_profesional == 6 or estudio.tipo_profesional == 7 or estudio.tipo_profesional == 8 or estudio.tipo_profesional == 9%}
 
 
 		<tr>
@@ -42,23 +43,14 @@
 
 			<td>{{ estudio.profesional.get_profesional}}</td>
 			<td>
-			{% for escuela in estudio.profesional.establecimiento.all %}
-			
-			<li>{{ escuela.nombre}} </li>
-			{% endfor %}</td>
-
-
-
-
-		
-			
-			
-
-
-				
+					{% for escuela in estudio.profesional.establecimiento.all %}
+					<li>{{ escuela.nombre}} </li>
+					{% endfor %}</td>
+	
 			</td>
-		
+			
 		</tr>
+	{% endif %}
 		{% endfor %}
 		
 		{% else %}
