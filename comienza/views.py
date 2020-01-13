@@ -113,7 +113,9 @@ def entrar_director(request):
         print perfil
         if  perfil.area == 7:
             director=Profesional.objects.get(usuario=request.user)
-            funcion=Cargo.objects.get(profesional=director)
+            funcion_cargo=Cargo.objects.filter(profesional=director)
+            for cargos in funcion_cargo:
+                funcion=cargos
 
             try:
                 fichas=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=funcion.escuela.id)).order_by('fecha_derivacion')
