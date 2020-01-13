@@ -1,0 +1,146 @@
+{% extends 'base/base_director.html' %}
+{% block content %}
+
+<table id="example" class="table table-bordered">
+<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">Objetivo equipo de formación y convivencia escolar.</button>
+
+
+{% if funcion %}
+    Establecimiento: {{funcion.escuela.nombre}}
+{% endif %}    
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog"> 
+  <div class="modal-dialog"> 
+
+
+    <!-- Modal content-->
+    <div class="modal-content"> 
+      <div class="modal-header"> 
+        <button type="button" class="close" data-dismiss="modal">&times;</button> 
+        <h3>Información general </h3> 
+        
+      </div> 
+      <div class="modal-body"> 
+       
+
+        <form method="post">
+  
+  
+ <section>
+  <h4><FONT face="Tahoma">¿Cómo aporta el equipo de formación y convivencia escolar en la comunidad educativa?</FONT> </h4>
+
+  <MENU>
+  <h5>El equipo de formación y convivencia escolar se compone de: </h5>
+<LI><strong>1: </strong>.......-
+<LI><strong>2: </strong>.......- 
+<LI><strong>3: </strong>.......-
+<LI><strong>4: </strong>.......- 
+<h5>Orientaciones del cargo</h5>
+<LI><strong>1: </strong>.......-
+<LI><strong>2: </strong>.......- 
+<LI><strong>3: </strong>.......-
+<LI><strong>4: </strong>.......- 
+<h5>Roles del cargo</h5>
+<LI><strong>1: </strong>.......-
+<LI><strong>2: </strong>.......- 
+<LI><strong>3: </strong>.......-
+<LI><strong>4: </strong>.......- 
+
+ 
+
+
+
+</MENU>
+
+ </section>
+ <FONT COLOR="#800000">
+Convivencia escolar 2020
+</FONT>
+  
+
+  
+</form>
+
+
+    
+
+      <div class="modal-footer">  
+        <button type="submit" class="btn btn-primary btn-default pull-left" data-dismiss="modal">
+          <span class="glyphicon glyphicon-add"></span> Aceptar
+        </button> 
+
+
+  <thead>
+
+  <h3>Listado de interveciones realizadas por equipo de formación y convivencia escolar</h3> 
+    <tr>
+      <td>Fecha</td>
+      <td>Nombre </td>
+      <td>Curso</td>
+      <td>Ver Ficha</td>
+      <td>Estado</td>
+
+      
+
+      
+      
+      
+    
+    </tr>
+    
+  </thead>
+
+  <tbody>
+   
+
+{% if fichas_duplas %}
+    {% for ficha_d in fichas_duplas %}
+
+ 
+    <tr>
+      <td>{{ ficha_d.fecha_derivacion|date:"d-m-Y " }}</td>
+      <td>{{ficha_d.Estudiante.nombres|capfirst }} {{ficha_d.Estudiante.firs_name|capfirst }}   {{ficha_d.Estudiante.last_name|capfirst }}</td>
+      <td>{{ ficha_d.Estudiante.curso.get_numero}} {{ ficha_d.Estudiante.curso.get_letra}}</td>
+      <td>  <a class="btn btn-warning btn-xs" href="{% url 'dupla:Dupla_casos_centro_director' ficha_d.Estudiante.id %}">Intervención Equipo PsicoSocial</a>  <a class="btn btn-info btn-xs" href="{% url 'derivacion:FichaDuplaDetailViewimprimir' ficha_d.Estudiante.id %}">Ver Ficha derivación</a></td>
+      <td>{% if ficha_d.estado == 1 %}Activa {%else%} Antigua{% endif %}</td>
+      
+        <!--  
+      
+      -->
+
+    </tr>
+    {% endfor %}
+
+    {% else %}
+    <h1>No hay registros de fichas de derivación</h1>
+    {% endif %}
+
+
+
+
+  </tbody>
+</table> 
+
+
+
+
+<ul class="pager">
+  <li>
+    {% if page_obj.has_previous %}
+         <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+    {% endif %}
+        </li>
+  <li>
+    {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">Siguente</a> 
+      {% endif %}
+    </li>
+</ul>
+
+
+
+
+
+
+{% endblock%}

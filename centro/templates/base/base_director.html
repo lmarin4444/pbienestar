@@ -1,0 +1,188 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+
+	{% block extrastatic %}
+	{% endblock %}
+
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+	 <link rel="icon" href='{% static "img/logo.png" %}'>
+	<title>{% block title %}Dirección Establecimiento{% endblock %}</title>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet"> 
+
+
+
+    <!-- boostrap datapiker -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Establecimiento educacional</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+$(function() {
+$( ".datepicker" ).datepicker();  
+$( ".datepicker" ).datepicker("option", "dateFormat","yy-mm-dd");
+});
+</script>
+</head>
+
+
+<body>
+
+
+<h3 class="text-center" > {% block encabezado %} Área Dirección {% endblock %} <small>{% block encabezadop %}Desarrollo de acciones equipo de formación y convivencia escolar{% endblock %}</small></h1>
+<div class="container">
+
+	{% block navbar %}
+		<div class="bs-docs-section clearfix">
+		    <div class="row">
+		        <div class="col-lg-12">
+		            <div class="bs-component">
+		            	<nav class="navbar navbar-default">
+		                	<div class="container-fluid">
+		                  		<div class="navbar-header">
+		                    		<a class="navbar-brand" href="{% url 'index'%}">Volver </a>
+
+		                  		    </div>
+					                  	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					                    	<ul class="nav navbar-nav">
+					                      		<li class="dropdown">
+					                        		
+							                        <li class="dropdown">
+							                        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Casos Informados<span class="caret"></span></a>
+							                        	<ul class="dropdown-menu" role="menu">
+								                          	
+								                          
+
+								                          	<li><a href="{% url 'comienza:entrar_director_centro' %}">Centro Bienestar</a></li>
+
+								                          	<li><a href="{% url 'comienza:entrar_director_psicosocial' %}">Equipo de formación y convievencia escolar</a></li>
+
+								                          	<li><a href="{% url 'comienza:entrar_director' %}">Ver Todos</a></li>
+
+								                           
+								                          	
+							                        	</ul>
+							                         </li>
+							                         <li class="dropdown">
+							                        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Convivencia escolar<span class="caret"></span></a>
+							                        	<ul class="dropdown-menu" role="menu">
+								                          	
+								                          	<li><a href="{% url 'profesional:profesional_listar' %}">Casos informados</a></li>
+
+								                          	<li><a href="{% url 'profesional:profesional_listar' %}">Listado de temáticas</a></li>
+
+								                          	<li><a href="{% url 'profesional:profesional_listar' %}">Acciones realizadas</a></li>
+
+								                           
+								                          	
+							                        	</ul>
+							                         </li>
+							                        <li class="dropdown">
+					                        		<a href="{% url 'secretaria:secretaria_listar' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Plan de gestión <span class="caret"></span></a>
+							                        <ul class="dropdown-menu" role="menu">
+							                        	<li><a href="{% url 'dupla:PlanesMostrarEscuelaDirectorListView'%}">Registro de acciones/actividades </a></li>
+							                        	<!--     
+
+							                        	<li><a href="{% url 'derivacion:ReporteIntervenidosSupervisor' %}">Reporte de  intervenidos </a></li>
+-->
+							                        	
+							                        	<li><a href="{% url 'historia:listar_EstudiantevsTematicas' %}">Equipo psicosocial </a></li>
+							                        	<li><a href="{% url 'historia:listar_Listadointervenidos' %}">Convivencia Escolar</a></li>
+							                        	<li><a href="{% url 'profesional:ProfesionalListDirector' %}">Equipo de formación y convivencia escolar</a></li>
+							                        	
+							                        	
+
+							                        
+							                        	
+				                   
+
+								                    </ul>
+						                      		</li>
+							                         
+							                      
+
+							                        
+							                        	
+				                   
+
+								                    </ul>
+						                      		</li>
+							                         
+
+							                   
+							                    </li>
+						                    	</ul>
+						                    	<div class="container-fluid">
+									    <div class="row">
+
+
+
+									         <div class="col-sm-4">
+												 <button type="button" class="btn btn-default" title="descripción o información" value="Imprime esta pagina" onclick="window.print()">
+												  <span class="glyphicon glyphicon-print"></span>
+												  <div class="btn-toolbar" role="toolbar">
+									           			
+									                </p>
+									              <div class="col-sm-4">    
+									        </div>
+									      </div>            
+									    </div>
+
+
+
+
+
+
+
+
+						                    	<ul class="nav navbar-nav   navbar-right">
+						                        	
+						                        	
+		                    	</ul>
+		                    </div>
+		                </div>
+		            </nav>
+		        </div>
+           	</div>
+        </div>
+    </div>    
+
+
+
+
+	{% endblock %}
+	
+	{% block content %}
+	<h4>	Bloque de contenido		</h4>
+	{% endblock %}
+
+
+	{% block footer %}
+	{% endblock%}
+</div>
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript">
+		
+	$(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+	</script>
+
+	{% block extrajs %}
+	{% endblock %}
+
+
+</body>
+</html>
