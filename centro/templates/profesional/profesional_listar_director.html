@@ -5,8 +5,6 @@
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
   
- 
-  
 
   <li class="active">Listado Profesionales {{escuela.nombre}}</li> 
 </ul>
@@ -30,12 +28,13 @@
 	<tbody>
 		{% if equipo %}
 		{% for estudio in equipo %}
-				{% if estudio.tipo_profesional == 4 or estudio.tipo_profesional == 5 or estudio.tipo_profesional == 6 or estudio.tipo_profesional == 7 or estudio.tipo_profesional == 8 or estudio.tipo_profesional == 9%}
+
+				{% if estudio.profesional.tipo_profesional == 4 or estudio.profesional.tipo_profesional == 5 or estudio.profesional.tipo_profesional == 6 or estudio.profesional.tipo_profesional == 7 or estudio.profesional.tipo_profesional == 8 or estudio.profesional.tipo_profesional == 9 %}
 
 
 		<tr>
 			<td>
-			<span class="glyphicon glyphicon-credit-card"></span> {{ estudio.profesional.rut }} 
+			<span class="glyphicon glyphicon-credit-card"></span> {{ estudio.profesional.rut }} {{estudio.profesional.tipo_profesional}}
 			<li> {{ estudio.profesional.usuario.first_name}} {{ estudio.profesional.usuario.last_name_p }}</li>  
 			<span class="glyphicon glyphicon-user"></span>  {{ estudio.profesional.usuario.username }}<br>
 			 
