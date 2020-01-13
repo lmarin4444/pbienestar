@@ -2,13 +2,20 @@ from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
 from profesional.views import ProfesionalList,ProfesionalCreate,ProfesionalUpdate,ProfesionalDelete, \
 	ProfesionalUpdate,CambioCreateView,ProfesionalListCentro,AccionesProfesionalList,AccionProfesional, \
-    SeguimientoProfesionalList,AccionExternaDelete,ListarSeguimiento,AccionProfesionalCentro,AccionesProfesionaCentrolList
+    SeguimientoProfesionalList,AccionExternaDelete,ListarSeguimiento,AccionProfesionalCentro,AccionesProfesionaCentrolList, \
+    ProfesionalList,ProfesionalListDirector
 
 	
 urlpatterns = [
    
     #urls de profesinal
-    url(r'^Profesionallistar',login_required(ProfesionalList.as_view()), name='profesional_listar'),
+    url(r'^Profesionallistar/$',login_required(ProfesionalList.as_view()), name='profesional_listar'),
+    #Listado de profesionales para cada director
+    url(r'^ProfesionalList/$',login_required(ProfesionalList.as_view()), name='ProfesionalList'),
+    url(r'^ProfesionalListDirector/$',login_required(ProfesionalListDirector.as_view()), name='ProfesionalListDirector'),
+    
+    
+
     url(r'^ProfesionalListCentro',login_required(ProfesionalListCentro.as_view()), name='profesional_listar_Centro'),
     url(r'^ModificarProfesional/(?P<pk>\d+)/$', login_required(ProfesionalUpdate.as_view()), name='profesional_editar'),
     url(r'^eliminarProfesional/(?P<pk>\d+)/$', login_required(ProfesionalDelete.as_view()), name='profesional_eliminar'),

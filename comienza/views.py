@@ -114,6 +114,7 @@ def entrar_director(request):
         if  perfil.area == 7:
             director=Profesional.objects.get(usuario=request.user)
             funcion=Cargo.objects.get(profesional=director)
+
             try:
                 fichas=Ficha_derivacion.objects.filter(Q(Estudiante__curso__establecimiento__id=funcion.escuela.id)).order_by('fecha_derivacion')
                     #fichas=Ficha_derivacion.objects.filter(Q(estado=1) & Q(establecimiento=funcion.escuela))
@@ -127,8 +128,8 @@ def entrar_director(request):
 
 
             context = {'retorno':fichas,
-                            'funcion':funcion,
-                            'fichas_duplas':fichas_dupla
+                        'funcion':funcion,
+                        'fichas_duplas':fichas_dupla
                            
                         }
             return render (request,"comienza/entrar_director.html",context)

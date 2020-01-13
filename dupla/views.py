@@ -26,6 +26,7 @@ from sesion.models import sesion,Intervenidos,objetivo_intervencion
 from alumno.models import Estudiante,establecimiento,Escolaridad,curso
 from profesional.models import Cargo,Profesional
 from secretaria.models import Registro 
+from usuario.models import Profile
 from django.db.models import Q
 from django.urls import reverse
 import datetime
@@ -2636,6 +2637,82 @@ def PlanesMostrarEscuelaListView(request,pk):
 
                  }
     ) 
+
+# Listar Plan de desarrollo de actividades a los directores
+
+def PlanesMostrarEscuelaDirectorListView(request):
+#Registrar los logros de cada uno de las dimensiones de logros para cada diagnostico
+
+	try:
+		perfil=Profile.objects.get(user=request.user)
+		if  perfil.area == 7:
+			director=Profesional.objects.get(usuario=request.user)
+			funcion=Cargo.objects.get(profesional=director)
+			escuela=funcion.escuela
+
+
+			try:
+		        
+				x= datetime.date.today() 
+				annio=str(int(x.year))
+			        
+				try:
+					plan=Plan.objects.get(annio=annio,establecimiento=escuela)
+			        
+					base=Base.objects.filter(plan=plan)
+					indicador_base=Indicador_base.objects.filter(base__plan=plan)
+					accion=Accion.objects.filter(base__plan=plan)
+					plancillo=Plancillo.objects.filter(accion__base__plan=plan)
+					actividades=Actividades.objects.filter(plancillo__accion__base__plan=plan).order_by('fecha')
+						        
+					hecho_a=Hecho_Actividades.objects.filter(actividades__plancillo__accion__base__plan=plan).order_by('fecha')
+					mensaje="Plan presente en la planificación de los establecimientos"
+				except Plan.DoesNotExist:
+					plan=None
+					base=None
+					indicador_base=None
+					accion=None
+					plancillo=None
+					actividades=None
+					hecho_a=None
+					mensaje=""
+			        
+		        
+			except Actividades.DoesNotExist:
+				plan =None
+				base=None
+				indicador_base=None
+				accion=None
+				plancillo=None
+				actividades=None
+				hecho_a=None
+				mensaje="Plan externo sin planificación"
+			    
+			return render(
+			        request,
+			        'dupla/ver_planes_total_director.html',
+			        context={
+			                 
+			                 'plan':plan,
+			                 'base':base,
+			                 'indicador_base':indicador_base,
+							 'accion':accion,
+			                 'plancillo':plancillo,
+			                 'actividades':actividades,
+			                 'hecho_a':hecho_a,
+							 'mensaje':mensaje,
+							 'escuela':escuela,
+
+
+		                 }) 
+ 		else:
+			return redirect('index')
+                      
+    
+	except Profile.DoesNotExist:
+		return redirect('index')  
+
+
 
 # Listar el plan de gestion pero solo convivencia escolar 
 #--------------------------------------------------------------------------

@@ -31,6 +31,33 @@ class ProfesionalList(ListView):
 		return context
 
 
+# Listar equipo profesional por establecimiento dependiendo del director
+class ProfesionalListDirector(ListView):
+	model = Profesional
+	template_name = 'profesional/profesional_listar_director.html'
+	paginate_by = 6
+
+
+	def get_context_data(self, **kwargs):
+		context=super(ProfesionalListDirector,self).get_context_data(**kwargs)
+		perfil=Profile.objects.get(user=self.request.user)
+		
+		if  perfil.area== 7:
+			director=Profesional.objects.get(usuario=self.request.user)
+			funcion=Cargo.objects.get(profesional=director)
+			escuela=funcion.escuela
+			print escuela
+			equipo=Cargo.objects.filter(escuela=escuela)
+			context['funcion'] = equipo
+
+		else:
+			context['funcion'] = None	        
+		return context
+
+
+
+
+
 class ProfesionalListCentro(ListView):
 	model = Profesional
 	template_name = 'profesional/profesional_listar_centro.html'

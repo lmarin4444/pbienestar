@@ -116,6 +116,8 @@ urlpatterns = [
 
 
 	url(r'^PlanesMostrarEscuelaListView/(?P<pk>\d+)/', login_required(views.PlanesMostrarEscuelaListView), name='PlanesMostrarEscuelaListView'),
+	url(r'^PlanesMostrarEscuelaDirectorListView/', login_required(views.PlanesMostrarEscuelaDirectorListView), name='PlanesMostrarEscuelaDirectorListView'),
+
 	url(r'^PlanesMostrarEscuelaConvivenciaescolarListView/(?P<pk>\d+)/', login_required(views.PlanesMostrarEscuelaConvivenciaescolarListView), name='PlanesMostrarEscuelaConvivenciaescolarListView'),
 	
 # Borrar un caso de intervencion
