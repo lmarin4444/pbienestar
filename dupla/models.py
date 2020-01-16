@@ -23,7 +23,10 @@ TIPO = (
 TIPO_CONVIVENCIA = (
         (0,'Evento aislado '),
         (1,'Evento con curso involucrado'), 
-        (2,'Evento mediación escolar'),        
+        (2,'Evento mediación escolar'),
+        (3,'Seguimiento '),
+        
+
         )
 
 OPCION = (
@@ -70,20 +73,21 @@ RESPONSABLE   = (
             )
 
 TIPO_CHOICES = (
-        (0, 'Estudiante'),
-        (1, 'Adulto responsable'),
-        (2, 'Estudiante - Mamá'),
-        (3, 'Estudiante - Papá'),
-        (4, 'Estudiante - Mama y Papá o Padrastros'),
-        (5, 'Estudiante - Hermano o Hermana'),
-        (6, 'Estudiante - Tío o Tía'),
-        (7, 'Estudiante - Abuelo o Abuela'),
-        (8, 'Estudiante -  Otro'),
-        (9, 'Reunión Adulto Responsable'),
-        (10, 'Reunión Profesionales (Dupla - Pie)'),
-        (11, 'Reunión Profesionales Establecimiento'),
-        (12, 'Reunión Profesionales Centro'),
-        (13, 'Reunión Otros'),
+        (0, 'Estudiantes'),
+        (1, 'Estudiante'),
+        (2, 'Adulto responsable'),
+        (3, 'Estudiante - Mamá'),
+        (4, 'Estudiante - Papá'),
+        (5, 'Estudiante - Mama y Papá o Padrastros'),
+        (6, 'Estudiante - Hermano o Hermana'),
+        (7, 'Estudiante - Tío o Tía'),
+        (8, 'Estudiante - Abuelo o Abuela'),
+        (9, 'Estudiante -  Otro'),
+        (10, 'Reunión Adulto Responsable'),
+        (11, 'Reunión Profesionales (Dupla - Pie)'),
+        (12, 'Reunión Profesionales Establecimiento'),
+        (13, 'Reunión Profesionales Centro'),
+        (14, 'Reunión Otros'),
         
 
         
@@ -315,6 +319,8 @@ EVENTO   = (
             (4,'Informes de '),
             (5,'Hospital y/o Servicio de salud'),
             (6,'Alcohol y drogas'),
+            (7,'Alcohol y drogas'),
+
             
 
             )

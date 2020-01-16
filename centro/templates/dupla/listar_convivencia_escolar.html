@@ -13,6 +13,8 @@ Listado de acciones :
 <a  class="btn btn-primary btn-xs" href="{% url 'dupla:indicador_convivencia_curso' escuela.id %}"><small>Evento de convivencia (Curso particular)</small></a>
 
 
+
+
 <!--     
 <a title="Listar convivencia escolar " class="glyphicon glyphicon-file" href="{% url 'dupla:busqueda' escuela.id %}"></a> Convivencia 
 
@@ -43,7 +45,7 @@ Listado de acciones :
 				
 				{% for estudio in estudiando %}
 				<td>{{ estudio.fecha|date:"d-m-Y " }} [{{estudio.get_horario}}]{{ motivo.firs_name|capfirst }} {{ motivo.last_name|capfirst }}  </td>
-				<td>{{ estudio.observacion}} </td> 
+				<td align="justify">{{ estudio.observacion}} </td> 
 				<td>
 					{% if estudiando1 %}
 					{% for curso in estudiando1 %}
@@ -83,6 +85,8 @@ Listado de acciones :
 				    href=""></a> Modificar 
 				    <a title="Eliminar" class="glyphicon glyphicon-remove-circle" href=""></a> Eliminar
 				  <strong> ] </strong>
+				  
+
 						
 						
 				
@@ -101,7 +105,7 @@ Listado de acciones :
 				
 				{% for estudio in estudiando2 %}
 				<td>{{ estudio.fecha|date:"d-m-Y " }} [{{estudio.get_horario}}] </td>
-				<td>{{ estudio.observacion}} </td> 
+				<td align="justify">{{ estudio.observacion}} </td> 
 				<td>
 			
 				
@@ -114,6 +118,27 @@ Listado de acciones :
 				    <a title="Ingresar estudiantes" class="glyphicon glyphicon-list-alt" href="{% url 'dupla:MediciacionUpdate' estudio.id %}"></a> Modificar 
 				    <a title="Ingresar estudiante" class="glyphicon glyphicon-remove-circle" href=""></a> Eliminar
 				  <strong> ] </strong>
+
+				 
+			  <div class="btn-group">
+				<div class="btn-group">
+				 <button class="btn btn-success btn-xs dropdown-toggle"
+				            data-toggle="dropdown">
+					Agregar estudiantes
+					<span class="caret"></span>
+				 </button>
+				<ul class="dropdown-menu">
+						<li><a href="{% url 'dupla:Estudiante_listar_fichas_duplas' escuela.id %}">Agregar estudiantes</a></li>
+						<li><a href="{% url 'dupla:EntradasDerivadasIntitucion' escuela.id %}">Ver estudiantes</a></li>
+						
+
+				  </ul>
+				</div>
+			</div>
+				
+
+				
+		
 						
 						
 				
