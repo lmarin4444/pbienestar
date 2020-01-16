@@ -1,6 +1,17 @@
 {% extends 'base/base_secre.html' %}
 {% block content %}
-    
+
+<ul class="breadcrumb">
+
+<li><a href="{% url 'comienza:entrar_secretaria' %}" data-toggle="tooltip" title="Ir al menú secretaria!">Menú secretaria</a></li>
+
+<li><a href="{% url 'secretaria:ver_dia' %}" data-toggle="tooltip" title="Ir al menú secretaria!">Volver Lista</a></li>
+
+
+
+ 
+<li class="active">Ver agenda</li> 
+</ul>    
 <h4>Listado de estudiantes semana actual.<br>{{profesionales.usuario.first_name}} {{profesionales.usuario.last_name}}
 
 	

@@ -661,31 +661,35 @@ def ver_impresa(request):
     })
 
 # Ver el calendario de la proxima semana 
-def ver_impresa(request):
+def ver_impresa_proxima(request):
     
     # Obtener todos los usuarios que son profesionales centro de bienestar
 
     
-    
     date = datetime.date.today()
     start_week = date - datetime.timedelta(date.weekday())
-    
     end_week = start_week + datetime.timedelta(7)
-    #start_week=end_week
+    
+    start_week=end_week
     end_week = start_week + datetime.timedelta(4)
+    
+
    
     #fechas = agenda.objects.filter(Q(fecha__gte=start_week), Q(fecha__lte=end_week)) 
     fechas = agenda.objects.filter(fecha__range=[start_week, end_week]).order_by('horario_i')
   
     
     dias = timedelta(days=1)
-    
+    print dias
     martes=start_week+dias
+    print martes
 
     dias = timedelta(days=2)
     miercoles=start_week+dias
+    print miercoles
     dias = timedelta(days=3)
     jueves=start_week+dias
+    print jueves
    
     #BUSCAR LOS PSICOLOGOS DE LA PROXIMA SEMANA 
 
@@ -768,7 +772,6 @@ def ver_dia(request,fecha=None):
          context={
          'fechas':fechas,
          'profesionales':profesionales,
-         
          'date':date,
         
                  

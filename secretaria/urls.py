@@ -55,6 +55,7 @@ urlpatterns = [
 
     url(r'^ver_semana', login_required(views.ver_semana), name='ver_semana'),
     url(r'^ver_impresa$', login_required(views.ver_impresa), name='ver_impresa'),
+    url(r'^ver_impresa_proxima$', login_required(views.ver_impresa_proxima), name='ver_impresa_proxima'),
     url(r'^ver_impresa_profesional/(?P<pk>\d+)$', login_required(views.ver_impresa_profesional), name='ver_impresa_profesional'),
     
 

@@ -80,8 +80,11 @@ def CrearCitaSecretaria(request,id_Estudiante,profesional):
 	mensaje=""
 
 	dato = get_object_or_404(Estudiante, pk=id_Estudiante)
+
 	psico= get_object_or_404(Profesional, pk=profesional)
+
 	usuario=psico.usuario
+
 	if request.method=='POST':
 		formulario = FormCita(request.POST, request.FILES)
  		if formulario.is_valid():
@@ -89,22 +92,26 @@ def CrearCitaSecretaria(request,id_Estudiante,profesional):
 			try:
  			 # try something
 	 			hoy=agenda.objects.get(Q(fecha=instance.fecha) & Q(horario_i=instance.horario_i)& Q(usuario=request.user))
+	 			mensaje='Horario ocupado por '+hoy.Estudiante.nombres+" "+hoy.Estudiante.firs_name+" "+hoy.Estudiante.last_name
+				formulario = FormCita(request.POST or None, instance=hoy)
 	 			
 			except agenda.DoesNotExist:
 			  # do something
-				hoy=None
 				
-			if hoy==None:	
+				
+	
 				instance.Estudiante=dato
 				instance.usuario = usuario
 				instance.numero=1# significa hora pedida ( 2: hora realizada 3: hora no asistida)
+				fecha=instance.fecha
 				instance.save()
 				#return HttpResponseRedirect('/calendario/show/calendar')
 				#return HttpResponseRedirect('secretaria/ver_impresa')
+				
+
 				return redirect('secretaria:ver_impresa')
-			else:
-				mensaje='Horario ocupado por '+hoy.Estudiante.nombres+" "+hoy.Estudiante.firs_name+" "+hoy.Estudiante.last_name
-				formulario = FormCita(request.POST or None, instance=hoy)
+		
+				
 	else:
 		formulario = FormCita()
 	

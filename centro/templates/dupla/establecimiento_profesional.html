@@ -26,37 +26,29 @@
 		<td>{{ escuela.get_profesional |title|truncatewords:'2'}} </td>
 		
 			<td>
-			<div class="btn-group">
-				  
-
-				  <div class="btn-group">
-				    
-				    <button class="btn btn-success btn-xs dropdown-toggle"
+			  <div class="btn-group">
+				<div class="btn-group">
+				 <button class="btn btn-success btn-xs dropdown-toggle"
 				            data-toggle="dropdown">
-				      Despliegue 
-				      <span class="caret"></span>
-				    </button>
-				    <ul class="dropdown-menu">
-				    	
+					Despliegue 
+					<span class="caret"></span>
+				 </button>
+				<ul class="dropdown-menu">
+						<li><a href="{% url 'dupla:Estudiante_listar_fichas_duplas' escuela.escuela.id %}">Fichas derivadas DUPLA</a></li>
+						<li><a href="{% url 'dupla:EntradasDerivadasIntitucion' escuela.escuela.id %}">Derivados Instituciones externas</a></li>
+						<li><a href="{% url 'alumno:EstudianteListEstablecimiento' escuela.escuela.id %}">Derivados establecimiento</a></li>
 
-					      <li><a href="{% url 'dupla:Estudiante_listar_fichas_duplas' escuela.escuela.id %}">Fichas derivadas DUPLA</a></li>
-					      <li><a href="{% url 'dupla:EntradasDerivadasIntitucion' escuela.escuela.id %}">Derivados Instituciones externas</a></li>
-					    
-					    	<li><a href="{% url 'alumno:EstudianteListEstablecimiento' escuela.escuela.id %}">Derivados establecimiento</a></li>
-
-				    </ul>
-				  </div>
+				  </ul>
 				</div>
+			</div>
 				
 
 				<a class="btn btn-primary btn-xs" href="{% url 'plan:ActividadesDuplaListView' escuela.escuela.id %}"><small>Plan GFCE dupla</small></a>
-				
-			
-			{% if escuela.tipo_profesional == 6 or escuela.tipo_profesional == 7 or escuela.tipo_profesional == 8 or escuela.tipo_profesional == 9 %}
-				<a class="btn btn-warning btn-xs" href="{% url 'plan:ActividadesConvivenciaListView' escuela.escuela.id %}"><small>Plan GFCE Encargado</small></a>
+				{% if escuela.tipo_profesional == 6 or escuela.tipo_profesional == 7 or escuela.tipo_profesional == 8 or escuela.tipo_profesional == 9 %}
+					<a class="btn btn-warning btn-xs" href="{% url 'plan:ActividadesConvivenciaListView' escuela.escuela.id %}"><small>Plan GFCE Encargado</small></a>
 				
 
-			{% endif %}
+				{% endif %}
 			</td>
 			<div class="btn-group-vertical">
 				<td>

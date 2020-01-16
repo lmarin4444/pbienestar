@@ -1,9 +1,14 @@
 {% extends 'base/base_secre.html' %}
 {% block content %}
+<ul class="breadcrumb">
 
+<li><a href="{% url 'comienza:entrar_secretaria' %}" data-toggle="tooltip" title="Ir al menú secretaria!">Menú secretaria</a></li>
+ 
+<li class="active">Tomar cita</li> 
+</ul>
 <h3>Listado de estudiates Para el día : {{date}} hora actual.</h3>
 
-<li><a href="{% url 'secretaria:ver_calandario_mes' %}"data-toggle="tooltip" title="Ir ver clandario mes">Ver citas por mes</a></li>
+
 <table class="table table-hover">
 		<caption>Listado de profesinales para agendar</caption>
 {% if profesionales %}
@@ -21,10 +26,10 @@
 		{%endfor%}
 {%endif%}		
 </table>
-
+<li><a href="{% url 'secretaria:ver_calandario_mes' %}"data-toggle="tooltip" title="Ir ver clandario mes">Ver citas por mes</a></li>
  <a class="btn btn-info btn-xs" href="{% url 'secretaria:ver_impresa'  %}">Ver semana actual </a>
 
-<a><span title="Listado semanal " class="glyphicon glyphicon-calendar"></span></a></span> <a class="btn btn-success btn-xs" href="{% url 'secretaria:ver_impresa'  %}">Ver próxima semana</a>
+<a><span title="Listado semanal " class="glyphicon glyphicon-calendar"></span></a></span> <a class="btn btn-success btn-xs" href="{% url 'secretaria:ver_impresa_proxima'  %}">Ver próxima semana</a>
 
 
 
@@ -58,7 +63,7 @@
 			<td>{{ mascota.Estudiante.curso.establecimiento.nombre }} </td> 
 			<td>{{ mascota.usuario.first_name}} {{ mascota.usuario.last_name}}</td>
 			<td>
-			<a class="btn-xs btn-success" href="{% url 'secretaria:confirmacion_modificar' mascota.Estudiante.id mascota.id %}"> ver </a></td>
+			<a class="btn-xs btn-success" href="{% url 'secretaria:confirmacion_modificar' mascota.Estudiante.id mascota.id %}"> Confirmar </a></td>
 			
 		
 		</tr>
