@@ -35,7 +35,7 @@
 			 <td>{{ estudio.Estudiante.curso.establecimiento.nombre }}</td>  
 
 			<td>
-				<a class="btn btn-info btn-sm" href="{% url 'alumno:certificado' estudio.Estudiante.id %}">Vista Simple</a>
+				<a class="btn btn-info btn-xs" href="{% url 'alumno:certificado' estudio.Estudiante.id %}">Vista Simple</a>
 				
 				<a title="Certificado en pdf - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:pdf_asistencia' estudio.Estudiante.id %}"></a>/
 	
