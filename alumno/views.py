@@ -2842,7 +2842,7 @@ def search_listado_otros(request):
 				except Estudiante.DoesNotExist:
 					
 					
-					return render(request, 'alumno/ingresar_escolaridad_busqueda.html',
+					return render(request, 'alumno/ingresar_escolaridad_busqueda_otros.html',
                       {'estudiante': None,
                       'digito':digito,'mensaje':mensaje,
                       'estado':estado,
@@ -2856,7 +2856,7 @@ def search_listado_otros(request):
 		else:
 			mensaje="Rut sin puntos, ni guiones"			
 			
-			return render(request, 'alumno/ingresar_escolaridad_busqueda.html',
+			return render(request, 'alumno/ingresar_escolaridad_busqueda_otros.html',
                       {'estudiante': None, 'form':form,
                       'form2':form2,'digito':None,'mensaje':mensaje,
                       'estado':estado,
@@ -2865,7 +2865,7 @@ def search_listado_otros(request):
 	
 
 	mensaje="Estudiante no se encuentra registrado y/o rut incorrecto "				
-	return render(request,'alumno/ingresar_escolaridad_busqueda.html',
+	return render(request,'alumno/ingresar_escolaridad_busqueda_otros.html',
 			 {'mensaje': mensaje,
 			 'estado': estado,
 
