@@ -20,7 +20,6 @@ Listado de acciones :
 
 <a title="Listar convivencia escolar medicación" class="glyphicon glyphicon-thumbs-up" href="{% url 'dupla:indicador_convivencia_mediacion' escuela.id %}"></a>Mediación
 -->
-
 								
 <table id="example" class="table table-bordered">
 	<thead>
@@ -45,7 +44,7 @@ Listado de acciones :
 				
 				{% for estudio in estudiando %}
 				<td>{{ estudio.fecha|date:"d-m-Y " }} [{{estudio.get_horario}}]{{ motivo.firs_name|capfirst }} {{ motivo.last_name|capfirst }}  </td>
-				<td align="justify">{{ estudio.observacion}} </td> 
+				<td align="justify">{{ estudio.observacion|truncatechars:10 }} </td> 
 				<td>
 					{% if estudiando1 %}
 					{% for curso in estudiando1 %}

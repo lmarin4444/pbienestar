@@ -78,11 +78,8 @@ def CrearCitaSecretaria(request,id_Estudiante,profesional):
 
     #group_required = 'puede_administrar_encuestas
 	mensaje=""
-
 	dato = get_object_or_404(Estudiante, pk=id_Estudiante)
-
 	psico= get_object_or_404(Profesional, pk=profesional)
-
 	usuario=psico.usuario
 
 	if request.method=='POST':
@@ -107,9 +104,12 @@ def CrearCitaSecretaria(request,id_Estudiante,profesional):
 				instance.save()
 				#return HttpResponseRedirect('/calendario/show/calendar')
 				#return HttpResponseRedirect('secretaria/ver_impresa')
-				
+				formato = "%d/%m/%Y"
 
-				return redirect('secretaria:ver_impresa')
+				hoy=datetime()
+				if fecha: 
+
+					return redirect('secretaria:ver_impresa')
 		
 				
 	else:
@@ -1857,6 +1857,28 @@ def confirma_ver_busqueda(request,pk,age):
 
         }
 	return render(request, template, context)
+
+
+# Ver el registro de la confirmacion realizada por la secretaria
+def confirma_ver_busqueda_otros(request,pk,age):
+
+	dato = get_object_or_404(Estudiante, pk=pk)
+	agendo=agenda.objects.get(id=age)
+	try:
+		confirma=Confirma.objects.get(agenda=agendo)
+	except Confirma.DoesNotExist:
+		confirma=None
+	
+	template = 'sesion/confirma_ver_busqueda_otros.html'
+    
+	context = {
+        "confirma": confirma,
+        "agendo":agendo,
+        "dato": dato,
+
+        }
+	return render(request, template, context)
+
 
 def  confirma_modificar(request,pk,age):
 

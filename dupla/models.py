@@ -58,8 +58,7 @@ MOTIVO_TERMINO   = (
             (5,'Estudiante egresa del sistema educacional '), 
             (6,'Estudiante egresa del establecimiento de enseñanza básica'), 
             
-		
-
+	
             )
 
 #Responsables de la creacion de un diagnostico 

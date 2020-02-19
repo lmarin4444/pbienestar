@@ -3,25 +3,18 @@
 {% block content %}
 <ul class="breadcrumb">
 
-  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir página Principal!">Inicio</a></li>
   
-
-  <li class="active">Listado Profesionales {{escuela.nombre}}</li> 
+<li class="active">Listado Profesionales en el sistema del Establecimiento: {{escuela.nombre}}</li> 
 </ul>
-
 
 <table id="example" class="table table-bordered" >
 	<thead>
 		<tr>
 			
 			<td>Información</td>
-			
 			<td>Profesional</td>
-			
 			<td>Establecimiento</td>
-	
-
-
 		</tr>
 		
 	</thead>
@@ -42,15 +35,14 @@
 
 			<td>{{ estudio.profesional.get_profesional}}</td>
 			<td>
-					{% for escuela in estudio.profesional.establecimiento.all %}
-					<li>{{ escuela.nombre}} </li>
-					{% endfor %}</td>
+				{% for escuela in estudio.profesional.establecimiento.all %}
+				<li>{{ escuela.nombre}} </li>
+				{% endfor %}</td>
 	
 			</td>
 			
 		</tr>
-	{% else %}
-	Profesional fuera del establecimiento	
+	
 
 	{% endif %}
 		{% endfor %}
@@ -72,10 +64,5 @@
     	{% endif %}
     </li>
 </ul>
-
-
-
-
-
 
 {% endblock%}

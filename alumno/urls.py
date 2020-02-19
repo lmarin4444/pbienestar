@@ -16,7 +16,8 @@ from alumno.views import EstablecimientoList, EstablecimientoCreate, Establecimi
     EstablecimientoListsupervisor,listar_estudiantes_establecimiento_supervisor,FichaEstudianteDetailView_supervisor,ver_escolaridad_supervisor, \
     actualizar_escolaridad_supervisor,ver_familia_supervisor,ingresar_estudiantes_establecimiento_listado, \
     search_listado,listar_estudiantes_establecimiento_pie,ingresar_estudiantes_establecimiento_listado_retorno, \
-    EstudianteUpdatePie,FichaEstudianteDetailViewPie
+    EstudianteUpdatePie,FichaEstudianteDetailViewPie,ingresar_estudiantes_establecimiento_listado_otros, \
+    search_listado_otros
    
 
 urlpatterns = [
@@ -69,6 +70,8 @@ urlpatterns = [
     url(r'^search/(?P<pk>\d+)/$',login_required(search),name='search'),
     # Search permite realizar la busqueda de un estudiante ya creado
     url(r'^search_listado/$',login_required(search_listado),name='search_listado'),
+    url(r'^search_listado_otros/$',login_required(search_listado_otros),name='search_listado_otros'),
+
 
 
     url(r'^search_estudiante/(?P<pk>\d+)/$',login_required(search_estudiante),name='search_estudiante'),
@@ -149,6 +152,9 @@ urlpatterns = [
 
     url(r'^ingestudianteestable/(?P<pk>\d+)/$', login_required(ingresar_estudiantes_establecimiento), name='ingresar_estudiantes_establecimiento'),
     url(r'^ingresar_estudiantes_establecimiento_listado/$', login_required(ingresar_estudiantes_establecimiento_listado), name='ingresar_estudiantes_establecimiento_listado'),
+    url(r'^ingresar_estudiantes_establecimiento_listado_otros/$', login_required(ingresar_estudiantes_establecimiento_listado_otros), name='ingresar_estudiantes_establecimiento_listado_otros'),
+    
+    
     url(r'^ingresar_estudiantes_establecimiento_listado_retorno/(?P<pk>\d+)/$', login_required(ingresar_estudiantes_establecimiento_listado_retorno), name='ingresar_estudiantes_establecimiento_listado_retorno'),
     #Para realizar proceso de bisqueda por medio de un formulario
     url(r'^busqueda_estudiante', login_required(busqueda_estudiante), name='busqueda_estudiante'),

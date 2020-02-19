@@ -163,6 +163,78 @@
 
 
   </tr> 
+<TR>
+    <TH COLSPAN=4 bgcolor="#F7E0E9" style="text-align:center;" > {{plan.establecimiento.nombre}} <STRONG> - RESUMEN ACTUAL</STRONG></TH>
+    
+  </TR>
+
+      
+      <TD COLSPAN=4>  
+      
+     
+      <ul>Profesional activo: {{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
+
+      <ul><h5>Panorama de cumplimiento del plan </h5></ul>
+
+      
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Actividades</th>
+      <th scope="col">Total</th>
+      <th scope="col">Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Creadas</td>
+      <td>{{act_creadas}}</td>
+      <td>Actividades solo creadas. </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Planificadas</td>
+      <td>{{act_planificadas}}</td>
+      <td>Actividades con asignación de fecha / hora / planificación.</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Ejecutadas</td>
+      <td>{{act_ejecutadas}}</td>
+      <td>Actividades realizadas </td>
+    </tr>
+
+    <tr>
+      <th scope="row">4</th>
+      <td>Justificadas</td>
+      <td>{{act_justificadas}}</td>
+      <td>Actividades planificadas, no realizadas <strong>sin </strong>fecha próxima.</td>
+    </tr>
+
+    <tr>
+      <th scope="row">5</th>
+      <td>Re-agendadas</td>
+      <td>{{act_reagendadas}}</td>
+      <td>Actividades planificadas, no realizadas <strong> con </strong> fecha próxima.</td>
+    </tr>
+
+    <tr>
+      <th scope="row">6</th>
+      <td>Fuera de plazo</td>
+      <td>{{act_fuera_plazo}}</td>
+      <td>Actividades planificadas, no realizadas <strong> DENTRO DEL MES SEÑALADO.</strong> </td>
+      
+    </tr>
+
+     <tr>
+      <th scope="row">7</th>
+      <td><strong>Total de actividades</strong></td>
+      <td>{{actividad_plan}}</td>
+      
+    </tr>
 
 </table>
 

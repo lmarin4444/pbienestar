@@ -49,9 +49,7 @@ class ProfesionalListDirector(ListView):
 			for cargos in funcion_cargo:
 				funcion=cargos
 
-			print funcion.escuela	
-			
-
+	
 			equipo=Cargo.objects.filter(escuela=funcion.escuela)
 			print equipo
 			context['equipo'] = equipo
@@ -61,9 +59,6 @@ class ProfesionalListDirector(ListView):
 		else:
 			context['equipo'] = None	        
 		return context
-
-
-
 
 
 class ProfesionalListCentro(ListView):

@@ -333,11 +333,11 @@ TIPO_ACTIVIDAD   = (
             )
 
 TIPO_EVALUACION = (
-        (0,'Encuesta de satisfacción'),
-        (1,'Encuesta Nº1'),
-        (1,'Encuesta Nº2'),
-        (1,'Encuesta Nº3'),
-        (1,'Encuesta Nº4'),
+        (0,'Encuesta de satisfacción Primer Ciclo'),
+        (1,'Encuesta de satisfacción Segundo Ciclo'),
+        (2,'Encuesta de satisfacción Enseñanda Media'),
+        (3,'Encuesta de satisfacción Padres y/o Apoderados '),
+        (4,'Encuesta de satisfacción propuesta equipo '),
              
         )
 NOTA = (

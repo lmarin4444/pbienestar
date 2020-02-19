@@ -106,7 +106,7 @@ class Base_PlanForm(forms.ModelForm):
 			'dimension',
 			'objetivo',
 			'estrategia',
-			'cantidad_indicadores',
+			#'cantidad_indicadores',
 			'cantidad_acciones',
 
 			
@@ -118,7 +118,7 @@ class Base_PlanForm(forms.ModelForm):
 			'dimension':'Indicador',
 			'objetivo':'Objetivo',
 			'estrategia':'Estrategia',
-			'cantidad_indicadores':'Cantidad de Indicadores a definir',
+			#'cantidad_indicadores':'Cantidad de Indicadores a definir',
 			'cantidad_acciones':'Cantidad de acciones por componentes ',
 			
 		
@@ -130,7 +130,7 @@ class Base_PlanForm(forms.ModelForm):
 			'dimension': forms.Select(attrs={'class':'form-control'}),
 			'objetivo': forms.Textarea(attrs={'class':'form-control'}),
 			'estrategia': forms.Textarea(attrs={'class':'form-control'}),
-			'cantidad_indicadores': forms.Select(attrs={'class':'form-control'}),
+			#'cantidad_indicadores': forms.Select(attrs={'class':'form-control'}),
 			'cantidad_acciones': forms.Select(attrs={'class':'form-control'}),
 			}
 

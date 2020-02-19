@@ -8,12 +8,8 @@
 <button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">Objetivo equipo de formación y convivencia escolar.</button>
 
 
-
-{% if funcion %}
-    
-        Establecimiento: {{funcion.escuela.nombre}}
-    
-{% endif %}    
+<br>
+{% if funcion %} {{funcion.escuela.nombre}}{% endif %}    
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog"> 

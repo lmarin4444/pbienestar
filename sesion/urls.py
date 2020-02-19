@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
-
 from sesion.views import listadousuarios, SesionList,SesionCreate,SesionDelete,SesionUpdate,index, \
 	DiagnosticoList,DiagnosticoUpdate,DiagnosticoDelete, \
     DiagnosticoCreate,CasoDetailView,tipo_sesionList,tipo_sesionCreate,tipo_sesionUpdate,tipo_sesionDelete, \
@@ -13,7 +12,7 @@ from sesion.views import listadousuarios, SesionList,SesionCreate,SesionDelete,S
     ReportecontinuidadModificar,CrearSeguimiento,ListarSeguimiento,ver_registro,ModificarRegistro,confirma_ver, \
     confirma_modificar,SeguimeintoDelete,SeguimientoUpdate,VerReportecontinuidad,ReportecontinuidadModificar, \
     Reportecontinuidad_solo,CrearCitaProfesional,historia_supervisor,confirma_ver_busqueda,CrearCitaSecretaria, \
-    IntervenidosListSecretaria,crear_Sesion_buscador
+    IntervenidosListSecretaria,crear_Sesion_buscador,confirma_ver_busqueda_otros
 
  
 
@@ -36,6 +35,9 @@ urlpatterns = [
     # Una vez que la sesion este echa mostar los detalles de la confirmacion
     url(r'^confirma_ver/(?P<pk>\d+)/(?P<age>\d+)$', login_required(confirma_ver), name='confirma_ver'),
     url(r'^confirma_ver_busqueda/(?P<pk>\d+)/(?P<age>\d+)$', login_required(confirma_ver_busqueda), name='confirma_ver_busqueda'),
+    url(r'^confirma_ver_busqueda_otros/(?P<pk>\d+)/(?P<age>\d+)$', login_required(confirma_ver_busqueda_otros), name='confirma_ver_busqueda_otros'),
+    
+
     url(r'^confirma_modificar/(?P<pk>\d+)/(?P<age>\d+)$', login_required(confirma_modificar), name='confirma_modificar'),
     
 
