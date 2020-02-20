@@ -1357,6 +1357,10 @@ def ActividadesDuplaListView(request,pk):
 		
 	except Plan.DoesNotExist:
 		plan =None
+		base=None
+		accion=None
+		plancillo=None
+		actividades=None
 
 	
 	return render(
@@ -1388,6 +1392,10 @@ def ActividadesConvivenciaListView(request,pk):
 		
 	except Plan.DoesNotExist:
 		plan =None
+		base=None
+		accion=None
+		plancillo=None
+		actividades=None
 
 	
 	return render(

@@ -7,13 +7,14 @@ from alumno.models import Estudiante
 from sesion.models import Intervenidos,objetivo_intervencion,objetivo_intervencionhistoria,Diagnostico, \
 	Ficha_de_egreso,Reporte_continuidad
 from historia.models import Historia,Ficha_derivacion_historica,Intervenidos_historico,agenda_historica, \
-	objetivo_historico, objetivo_intervencion_historico,sesion_historica, \
+	objetivo_historico, objetivo_intervencion_historico,sesion_historica,Ficha_derivacion_dupla_hostorica, \
 	Motivo_Retorno_historia,Diagnostico_historia,Ficha_de_egreso_historia,Reporte_continuidad_historia
 from bitacora.models import Lista		
 from derivacion.models import Ficha_derivacion,Motivo_Retorno_Ficha_derivacion
 from secretaria.models import agenda, Confirma, Registro
 from sesion.models import sesion
 from sesion.forms import DiagnosticoForm,FichaEgresoForm,ContinuidadForm
+from dupla.models import Ficha_derivacion_dupla
 import datetime
 
 # Create your views here.
@@ -319,7 +320,9 @@ def ir_historia(request,pk):
 # -------------------- Historia de un caso dentro de la dupla 
 def ir_historia_dupla(request,pk):
 	dato=Estudiante.objects.get(id=pk)
-	context={'dato':dato}
+	escuela=dato.curso.establecimiento
+	context={'dato':dato,
+			'escuela':escuela}
 	
 	if request.method=='POST':
 		date = datetime.date.today()
@@ -328,11 +331,11 @@ def ir_historia_dupla(request,pk):
 		try:
 			ficha=Ficha_derivacion_dupla.objects.get(Estudiante__id=pk,estado=1)
 		except Ficha_derivacion_dupla.DoesNotExist:
-			ficha=""
+			ficha=None
 			
 		
 
-		history=Historia_dupla.objects.create(fecha=date,Estudiante=dato,Ficha_derivacion=ficha,objetivo_intervencion=objeto,observacion="Información desde la dupla PsicoSocial")
+		history=Ficha_derivacion_dupla_hostorica.objects.create(fecha=date,Estudiante=dato,Ficha_derivacion=ficha,objetivo_intervencion=objeto,observacion="Información desde la dupla PsicoSocial")
 		
 
 	#Todos los datos de la ficha de derivacion del area PsicoSocial
@@ -524,7 +527,7 @@ def ir_historia_dupla(request,pk):
 		return redirect('derivacion:intervencion_listar')
 	
 		
-	return render(request,"historia/aviso_termino.html",context)
+	return render(request,"historia/aviso_termino_dupla.html",context)
 
 
 

@@ -25,10 +25,11 @@
 		<td>{{ escuela.escuela.nombre }} </td>
 		<td>{{ escuela.get_profesional |title|truncatewords:'2'}} </td>
 		
+		     
 			<td>
 			  <div class="btn-group">
 				<div class="btn-group">
-				 <button class="btn btn-success btn-xs dropdown-toggle"
+				<!-- <button class="btn btn-success btn-xs dropdown-toggle"
 				            data-toggle="dropdown">
 					Despliegue 
 					<span class="caret"></span>
@@ -38,10 +39,10 @@
 						<li><a href="{% url 'dupla:EntradasDerivadasIntitucion' escuela.escuela.id %}">Derivados Instituciones externas</a></li>
 						<li><a href="{% url 'alumno:EstudianteListEstablecimiento' escuela.escuela.id %}">Derivados establecimiento</a></li>
 
-				  </ul>
+				  </ul>-->	
 				</div>
 			</div>
-				
+			
 
 				<a class="btn btn-primary btn-xs" href="{% url 'plan:ActividadesDuplaListView' escuela.escuela.id %}"><small>Plan GFCE dupla</small></a>
 				{% if escuela.tipo_profesional == 6 or escuela.tipo_profesional == 7 or escuela.tipo_profesional == 8 or escuela.tipo_profesional == 9 %}
