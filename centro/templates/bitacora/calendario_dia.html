@@ -108,7 +108,7 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
           </span>
 
           {% elif numero == 2 %}
-			<span class="fa fa-check color-green" ">
+			<span class="fa fa-check color-green" "></span>
                                                 
    			
 			 <td> {{ mascota.get_horario}}</td>
@@ -146,7 +146,7 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			{% endif %}
 
 			{% if mascota.ambito == 0 %}
-				<span class="fa fa-check color-green" >
+				<span class="fa fa-check color-green" ></span>
 				<a class="btn btn-success btn-xs" href="{% url 'bitacora:modificar_contingencia' mascota.id %}">Modificar</a>
 				<a class="btn btn-danger btn-xs" href="{% url 'bitacora:eliminar_contingencia' mascota.id %}">Eliminar</a>
 				<a class="btn btn-info btn-xs" href="{% url 'bitacora:ver_sucesos' mascota.id %}">Ver</a>
@@ -154,7 +154,7 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			{% endif %}
 			{% if mascota.ambito == 3 %}<!-- Ambito : Convivencia escolar -->
 				
-				<span class="fa fa-check color-green" >
+				<span class="fa fa-check color-green" ></span>
 				<a class="btn btn-success btn-xs" href="">Modificar</a>
 				<a class="btn btn-danger btn-xs" href="{% url 'dupla:eliminar_mediacion' mascota.id %}">Eliminar</a>
 				
@@ -163,7 +163,7 @@ Fecha anterior  JUSTIFIQUE si tiene actividades de Plan de Gestión
 			{% endif %}
 			{% if mascota.ambito == 4 %}<!-- Ambito : Convivencia escolar MEDIACION-->
 				
-				<span class="fa fa-check color-green" >
+				<span class="fa fa-check color-green" ></span>
 				<a class="btn btn-success btn-xs" href="">Modicar</a>
 				<a class="btn btn-danger btn-xs" href="">Eliminar</a>
 				<a  class="btn btn-info btn-xs" href="">Ver </a>

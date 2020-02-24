@@ -315,10 +315,12 @@ EVENTO   = (
             (1,'Agresión Física'),
             (2,'Asistencia y/o apoyo '),
             (3,'Contención emocional'),
-            (4,'Informes de '),
+            (4,'Informes'),
             (5,'Hospital y/o Servicio de salud'),
             (6,'Alcohol y drogas'),
-            (7,'Alcohol y drogas'),
+            (7,'Ciber acoso'),
+
+
 
             
 
@@ -675,8 +677,7 @@ class Evento_convivencia(models.Model):
     tipo_evento                = models.IntegerField(choices=EVENTO,default=0)
     observacion                = models.TextField()
 # enlaces a los otros  modelos
-    estudiante                  = models.ManyToManyField(Estudiante)
-    
+    estudiante                  = models.ForeignKey(Estudiante)
     usuario                     = models.ForeignKey(User)
     
     
@@ -685,7 +686,6 @@ class Evento_convivencia(models.Model):
     def get_horario(self):
             return u'%s' %HORARIO[self.horario][1]      
     
-
     def __unicode__(self):
         return '{} {}'.format(self.id,self.observacion) 
 
@@ -710,8 +710,6 @@ class Intervencion_convivencia(models.Model):
             return u'%s' %HORARIO[self.horario][1] 
     def get_tipo_convivencia(self):
             return u'%s' %TIPO_CONVIVENCIA[self.tipo_convivencia][1]                  
-    
-
     def __unicode__(self):
         return '{} {}'.format(self.id,self.fecha)
 
@@ -726,7 +724,6 @@ class Intervencion_convivencia_mediacion(models.Model):
     dimensiones                 = models.ForeignKey(Dimensiones,blank=True, null=True)
     establecimiento             = models.ForeignKey(establecimiento,blank=True, null=True)
     usuario                     = models.ForeignKey(User)
-    
     tipo_convivencia            = models.IntegerField(choices=TIPO_CONVIVENCIA,default=0)
     
     def get_participantes(self):
@@ -768,3 +765,33 @@ class  Relacion_Intervencion_convivencia_estudiante( models.Model ):
 
 
 
+class convivencia(models.Model):
+    
+    fecha                       = models.DateField()            
+    horario                     = models.IntegerField(choices=HORARIO,default=0)
+    observacion                 = models.TextField()
+    participantes               = models.IntegerField(choices=PARTICIPANTES,default=0)
+    
+# enlaces a los otros  modelos
+    dimensiones                 = models.ForeignKey(Dimensiones,blank=True, null=True)
+    establecimiento             = models.ForeignKey(establecimiento,blank=True, null=True)
+    usuario                     = models.ForeignKey(User)
+    evento                      = models.ForeignKey(Evento_convivencia,blank=True, null=True)
+#campo que indica si un evento tiene o no niños asociados, indica la cantidad  
+    
+    tipo_convivencia             = models.IntegerField(choices=TIPO_CONVIVENCIA,default=0)
+    curso                        = models.IntegerField(choices=CURSO,default=15)    
+    letra                        = models.IntegerField(choices=TIPO_LETRAS,default=5)    
+
+    def get_curso(self):
+            return u'%s' %CURSO[self.curso][1]
+    def get_letra(self):
+            return u'%s' %TIPO_LETRAS[self.letra][1] 
+    def get_participantes(self):
+            return u'%s' %PARTICIPANTES[self.participantes][1]
+    def get_horario(self):
+            return u'%s' %HORARIO[self.horario][1] 
+    def get_tipo_convivencia(self):
+            return u'%s' %TIPO_CONVIVENCIA[self.tipo_convivencia][1]                  
+    def __unicode__(self):
+        return '{} {}'.format(self.id,self.fecha)
