@@ -369,7 +369,14 @@ TIPO_LETRAS = (
 
         )
 
+TIPO_SEGUIMIENTO = (
+        (0,'Evento aislado '),
+        (1,'Evento con curso involucrado'), 
+        (2,'Evento mediación escolar'),
+        (3,'Seguimiento individual  '),
+        
 
+        )
 
 class Indicador(models.Model):
     
@@ -795,3 +802,21 @@ class convivencia(models.Model):
             return u'%s' %TIPO_CONVIVENCIA[self.tipo_convivencia][1]                  
     def __unicode__(self):
         return '{} {}'.format(self.id,self.fecha)
+
+
+class Seguimiento_convivencia(models.Model):
+    
+    fecha                   = models.DateField()
+    observacion             = models.CharField(max_length=100,blank = True)
+    
+    
+    #tipo_s indica el tipo de seguimento en el cual se deve relizar 
+    tipo_s                  = models.PositiveIntegerField('TIPO_SEGUIMIENTO',choices=TIPO_SEGUIMIENTO)
+    usuario                 = models.ForeignKey(User)
+    evento                  = models.ForeignKey(Evento_convivencia)
+    
+    def __unicode__(self):
+        return '{} {} '.format(self.Estudiante,self.observacion)
+    
+    def get_tipo_s(self):
+        return u'%s' % TIPO_SEGUIMIENTO[self.tipo_s][1] 
