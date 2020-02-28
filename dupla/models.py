@@ -314,11 +314,12 @@ EVENTO   = (
             (0,'Agresión Verbal'),
             (1,'Agresión Física'),
             (2,'Asistencia y/o apoyo '),
-            (3,'Contención emocional'),
-            (4,'Informes'),
-            (5,'Hospital y/o Servicio de salud'),
-            (6,'Alcohol y drogas'),
-            (7,'Ciber acoso'),
+            (3,'Bullying'),
+            (4,'Ciber Acoso'),
+            (5,'Contención emocional'),
+            (6,'Drogas / Alcohol'),
+            (7,'Hospital y/o Servicio de salud'),
+            (8,'Judicial'),
 
 
 

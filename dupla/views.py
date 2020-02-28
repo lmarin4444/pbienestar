@@ -1423,14 +1423,13 @@ def listar_convivencia_escolar(request,pk):
 	colegio=establecimiento.objects.get(id=pk)
 	
 	estudiando=Intervencion_convivencia.objects.filter(establecimiento=colegio,usuario=request.user).order_by('fecha')
-	estudiando1=Intervencion_convivencia_curso.objects.filter(establecimiento=colegio,usuario=request.user).order_by('fecha')
-	estudiando2=Intervencion_convivencia_mediacion.objects.filter(establecimiento=colegio,usuario=request.user).order_by('fecha')
+	#estudiando1=Intervencion_convivencia_curso.objects.filter(establecimiento=colegio,usuario=request.user).order_by('fecha')
+	#estudiando2=Intervencion_convivencia_mediacion.objects.filter(establecimiento=colegio,usuario=request.user).order_by('fecha')
 	
 
 
 	contexto = {'estudiando':estudiando,
-				'estudiando1':estudiando1,
-				'estudiando2':estudiando2,
+				
 				
 
 				'escuela':colegio,
