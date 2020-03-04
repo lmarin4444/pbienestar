@@ -4,7 +4,7 @@
 <ul class="breadcrumb">
 
   <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
-  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial dupla!">Menu </a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menu inicial dupla!">Menú </a></li>
   
   <li><a href="{% url 'alumno:listar_estudiantes_establecimiento' colegio.id %}"data-toggle="tooltip" title="Volver listado anterior!">Volver lista estudiantes dupla </a></li>
 
@@ -44,7 +44,7 @@
 				
 				
 				
-				<a class="btn btn-primary btn-xs" href=""> Ver</a>
+				<a class="btn btn-primary btn-xs" href="{% url 'derivacion:FichaCentroDetailViewimprimirsocialbusqueda' estudio.id estudio.Estudiante.id  %}"> Ver</a>
 				
 
 						

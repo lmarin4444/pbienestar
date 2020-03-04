@@ -1345,12 +1345,19 @@ def FichaCentroDetailViewimprimir(request,pk):
 		estudiante_id=Estudiante.objects.get(pk=pk)
 		family=estudiante_id.Familia
 		
-		ficha_id=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
-		usuario_id=ficha_id.usuario
 		try:
-			usuario_ficha=User.objects.get(id=usuario_id.id)
-		except User.DoesNotExist:
+			ficha_id=Ficha_derivacion.objects.get(Estudiante__id=pk,estado=1)
+			usuario_id=ficha_id.usuario
+
+			try:
+				usuario_ficha=User.objects.get(id=usuario_id.id)
+			except User.DoesNotExist:
+				usuario_ficha=None
+		except Ficha_derivacion.DoesNotExist:
+			ficha_id=None
 			usuario_ficha=None
+			usuario_id=None
+
 		
 		
 		try:
@@ -1607,8 +1614,6 @@ def FichaCentroDetailViewimprimirsocial(request,pk):
 def FichaCentroDetailViewimprimirsocialbusqueda(request,pk,est):
 	
 
-
-
 	try:
 		estudiante_id=Estudiante.objects.get(pk=est)
 		family=estudiante_id.Familia
@@ -1638,7 +1643,14 @@ def FichaCentroDetailViewimprimirsocialbusqueda(request,pk,est):
 		
 	
 	except Estudiante.DoesNotExist:
-		raise Http404("Estudiante does not exist")
+		estudiante=None
+		ficha=None
+		parentesco=None
+		apoderado_id=None
+		profesionales=None
+		usuario_ficha=None
+
+
 
     #book_id=get_object_or_404(Book, pk=pk)
     
