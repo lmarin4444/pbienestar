@@ -183,8 +183,20 @@ def ModificarCita(request,pk,age):
     #group_required = 'puede_administrar_encuestas
 	mensaje=""
 
-	dato = get_object_or_404(Estudiante, pk=pk)
-	cita = get_object_or_404(agenda, pk=age)
+	#dato = get_object_or_404(Estudiante, pk=pk)
+	#cita = get_object_or_404(agenda, pk=age)
+
+	try:
+		dato=Estudiante.objects.get(pk=pk)
+	except Estudiante.DoesNotExist:
+		dato=None
+
+	try:
+		cita=agenda.objects.get(pk=age)
+	except agenda.DoesNotExist:
+		cita=None
+
+
 	
 	if request.method=='POST':
 		
@@ -248,15 +260,19 @@ def buscar_citas(request,pk):
     
     
 	dato = get_object_or_404(Estudiante, pk=pk)
-	atencion= agenda.objects.filter(Estudiante__id=pk,numero=1).order_by('fecha')
+	try:
+
+		atencion= agenda.objects.filter(Estudiante__id=pk,numero=1).order_by('fecha')
 	
+	except agenda.DoesNotExist:
+		atencion=None
 	try:
 		confirma=Confirma.objects.filter(Estudiante__id=pk,agenda__numero=1)
 		
 		 			
 	except Confirma.DoesNotExist:
 			  # do something
-		confirma=""
+		confirma=None
 	
 	context = {
         "dato": dato,
