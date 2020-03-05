@@ -273,10 +273,10 @@ def buscar_citas(request,pk):
 	except Confirma.DoesNotExist:
 			  # do something
 		confirma=None
-	
+	agendado = atencion.order_by('fecha')
 	context = {
         "dato": dato,
-        "agenda":atencion,
+        "agenda":agendado,
         "confirma":confirma,
          }
 	return render(request, 'sesion/buscar_agenda.html', context)  
