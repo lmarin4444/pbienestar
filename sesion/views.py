@@ -262,7 +262,7 @@ def buscar_citas(request,pk):
 	dato = get_object_or_404(Estudiante, pk=pk)
 	try:
 
-		atencion= agenda.objects.filter(Estudiante__id=pk,numero=1).order_by('fecha')
+		atencion= agenda.objects.filter(Estudiante__id=pk,numero=1).order_by('id')
 	
 	except agenda.DoesNotExist:
 		atencion=None
