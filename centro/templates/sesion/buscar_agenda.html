@@ -15,6 +15,7 @@ Listado  para el estudiante <strong>{{dato.nombres}} {{dato.firs_name}} {{dato.l
 	<thead>
 		<tr>
 			
+			<td>Nª</td>
 			<td>Fecha</td>
 			<td>Horario</td>
 			<td>Participantes</td>
@@ -32,6 +33,7 @@ Listado  para el estudiante <strong>{{dato.nombres}} {{dato.firs_name}} {{dato.l
 
 		{% if mascota.estado == 1 %}
 		<tr>
+			<td>{{ mascota.id}}</td>
 			<td>{{ mascota.fecha |date:"d-m-Y" }}</td>
 			<td>{{ mascota.get_horario_i }}</td>
 			<td>{{ mascota.participantes }}</td>

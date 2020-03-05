@@ -263,7 +263,7 @@ def buscar_citas(request,pk):
 	try:
 
 		atencion= agenda.objects.filter(Estudiante__id=pk,numero=1).order_by('id')
-	
+		print atencion
 	except agenda.DoesNotExist:
 		atencion=None
 	try:
