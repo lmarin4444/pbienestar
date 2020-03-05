@@ -36,7 +36,7 @@ TIPO_CHOICES = (
         (13, 'Reunión Profesionales Establecimiento'),
         
         (14, 'Reunión Profesionales Centro'),
-        (15, 'Reunión Otros'),
+        (15, 'Reunión Instituciones'),
         (16, 'Participación en Taller'),
 
         )

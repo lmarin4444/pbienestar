@@ -267,6 +267,8 @@ class agenda(models.Model):
     PARTICIPANTES = (
         ('Estudiante ', ' Estudiante'),
         ('Adulto Responsable ', 'Adulto Responsable '),
+        ('Papá mamá ambos ', 'Papá mamá ambos '),
+       
         ('Estudiante - Mamá', 'Estudiante - Mamá'),
         ('Estudiante - Papá', 'Estudiante - Papá'),
         ('Estudiante - Mamá Papá o Padrastros', 'Estudiante - Mamá Papá o Padrastros'),
@@ -274,11 +276,10 @@ class agenda(models.Model):
         ('Estudiante - Abuelo o Abuela', 'Estudiante - Abuelo o Abuela'),
         ('Estudiante - Otro', 'Estudiante - Otro'),
 
-        ('Reunión Adulto Responsable', 'Reunión Adulto Responsable'),
-        ('Reunión Profesionales Dupla - Pie', 'Reunión Profesionales Dupla - Pie'),
-        ('Reunión Profesionales Establecimiento', 'Reunión Profesionales Establecimiento'),
-        ('Reunión Profesionales Centro', 'Reunión Profesionales Centro'),
-        ('Reunión Otros', 'Reunión Otros'),
+        ('Dupla Psicosocial y/o Pie', 'Dupla Psicosocial y/o Pie'),
+        ('Profesionales Establecimiento', 'Profesionales Establecimiento'),
+        ('Profesionales Centro', 'Profesionales Centro'),
+        ('Instituciones', 'Instituciones'),
              
         )
 
@@ -300,7 +301,7 @@ class agenda(models.Model):
     def get_furgon(self):
         return u'%s' % FURGON[self.Furgon][1]        
     def __str__(self):
-		return '{} {} {} {}'.format( self.id,self.Estudiante,self.fecha,self.horario_i)
+		return '{} {} {} {} {}'.format( self.id,self.Estudiante,self.fecha,self.horario_i,self.tipo_actividad.nombre)
 
 class Confirma(models.Model):
     
