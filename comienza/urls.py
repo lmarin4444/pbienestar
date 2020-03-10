@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from comienza.views import entrar_dupla,entrar_pie, entrar_centro, entrar_secretaria,ver_derivaciones, \
 	ver_centro, nosotros,documentos,dupla,convivencia,nosotros_con,listado,equipop,dupla_ficha_derivacion, \
     listado_construccion,encargados,construye,mi_error_404,Planes_externosList,entrar_director, \
-    entrar_director_centro,entrar_director_psicosocial,director_error
+    entrar_director_centro,entrar_director_psicosocial,director_error,listado_escuela
 
 
 
@@ -40,6 +40,8 @@ urlpatterns = [
 
     url(r'^dupla_ficha_derivacion/$',login_required(dupla_ficha_derivacion), name='dupla_ficha_derivacion'),
     url(r'^listado_construccion/$',login_required(listado_construccion), name='listado_construccion'),
+    url(r'^listado_escuela/$',login_required(listado_escuela), name='listado_escuela'),
+
     url(r'^encargados/$',encargados, name='encargados'),
     url(r'^Planes_externosList', login_required(Planes_externosList), name='Planes_externosList'),
    

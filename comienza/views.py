@@ -271,6 +271,9 @@ def equipop(request):
 def listado_construccion(request):
     return render (request,"comienza/construccion.html",{})    
 
+def listado_escuela(request):
+    return render (request,"comienza/construccion.html",{})        
+
 def encargados(request):
     return render (request,"comienza/encargados_convivencia.html",{})  
 

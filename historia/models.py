@@ -29,6 +29,7 @@ class Historia(models.Model):
 	def __unicode__(self):
 		return '{} {} {}  '.format(self.id,self.fecha,self.Estudiante)
 
+
 class Ficha_de_egreso_historia(models.Model):
 	"""docstring for Diagnostico"""
 
