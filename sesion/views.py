@@ -665,6 +665,56 @@ def Crear_Registro(request,age,pk):
 		 }
 	return render(request, 'sesion/sesion_crear_registro.html', context)
 
+#Crear un registro de inasistencia desde el buscador
+def Crear_Registro_busqueda(request,age,pk):	
+
+	mensaje=""	
+	dato = get_object_or_404(Estudiante, pk=pk)	
+	inter= get_object_or_404(agenda, pk=age)
+	date = datetime.date.today()
+
+	try:
+ 			 # try something
+		hoy=Registro.objects.get(Q(agenda=inter) & Q(Estudiante=dato))
+	 			
+	except Registro.DoesNotExist:
+			  # do something
+		hoy=None
+	
+	if hoy==None:
+		if request.method=='POST':
+			formulario = CrearRegistroForm(request.POST, request.FILES)
+	 		if formulario.is_valid():
+				instance = formulario.save(commit=False)			
+				instance.agenda=inter
+				instance.usuario = request.user
+				instance.Estudiante=dato
+				instance.fecha=date
+				instance.save()
+				inter.numero=3
+				inter.save()
+
+				url = reverse(('alumno:ingresar_estudiantes_establecimiento_listado_retorno'), kwargs={'pk':dato.id})
+			return HttpResponseRedirect(url)
+						
+		else:
+			formulario = CrearRegistroForm()
+	
+	else:
+		mensaje='Ya se a realizado el registro para esta sesión  de: '+hoy.Estudiante.nombres+" "+hoy.Estudiante.firs_name+" "+hoy.Estudiante.last_name
+		formulario = CrearRegistroForm(request.POST or None, instance=hoy)
+
+	
+		
+	
+	context = {
+		"form": formulario,
+		"dato": dato,
+		"agenda":inter,
+		"mensaje":mensaje,
+		 }
+	return render(request, 'sesion/sesion_crear_registro.html', context)
+
 
 def ver_registro(request,age,pk):	
 
