@@ -139,7 +139,7 @@
  
                 <h3>Estudiante {{ estudiante.nombres|upper }} {{ estudiante.firs_name|upper }} {{ estudiante.last_name|upper }} </h3>
                 
-             <dd> Establecimiento: {{ estudiante.curso.establecimiento}}</dd>
+             <dd> Establecimiento: {{ estudiante.curso.establecimiento.nombre}}</dd>
              <dd> Curso:{{ estudiante.curso.get_numero}} {{ estudiante.curso.get_letra}}</dd>
              <dd>Imprimir ficha de derivación <a title="Ficha derivación - imprimir" class="glyphicon glyphicon-print" href="{% url 'informe:fichaderivacion_pdf_report' estudiante.id %}"></a>/</dd>
            
@@ -238,7 +238,7 @@
 
       </ul>
     
-  <strong><ul>Apreciacion del equipo respecto al motivo de consulta (Posibles causas o factores, indicadores presentes y Ámbitos
+  <strong><ul>Apreciación del equipo respecto al motivo de consulta (Posibles causas o factores, indicadores presentes y Ámbitos
   afectados -social, Educacinal , Familiar)</ul></strong>
   <li> {{ficha.cuatro}} </li>
   

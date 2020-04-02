@@ -40,7 +40,7 @@
 </ul>
 <title> Ficha de derivación . </title>
 <div class="row">
-  <div class="col-md-4"> Dem Cabildo el {% now "SHORT_DATETIME_FORMAT" %} .</div>
+  <div class="col-md-4">  {% now "SHORT_DATETIME_FORMAT" %} .</div>
   
   
   </div>
@@ -74,22 +74,22 @@
       <tr><td>Rut:{{estudiante.rut}}</td>
       
       <td>Domicilio:{{estudiante.domicilio_estudiante}}</td>
-      <td>Fecha de nac:{{estudiante.fecha_nacimiento|date:"d-m-Y "}}</td>
+      <td>Fecha nacimiento:{{estudiante.fecha_nacimiento|date:"d-m-Y "}}</td>
       <td> 
-      <dd>Edad Actualizada:{{estudiante.edad}}</dd>
-      <dd>Edad Ficha:{{ficha.edad}}</dd></td>
+      <dd>Edad:{{estudiante.edad}}</dd>
+      
       
       
       </tr>
      <tr>
        <td>
           <dd>Establecimiento Actual: {{ estudiante.curso.establecimiento.nombre}} </dd> 
-          <dd>Establecimiento Ficha: {{ ficha.establecimiento}}  </dd>
+          
 
        </td>
        <td>
-         <dd>Curso Actual: {{ estudiante.curso.get_numero}} {{ estudiante.curso.get_letra}} </dd>
-         <dd>Curso Ficha: {{ ficha.curso }} {{ ficha.letra}} </dd>
+         <dd>Cursando: {{ estudiante.curso.get_numero}} {{ estudiante.curso.get_letra}} </dd>
+         
        </td>
        <td>
        <h5>Programas </h5>
