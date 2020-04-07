@@ -2219,13 +2219,12 @@ class duplicar_plancillo(CreateView):
 							cantidad_horas=form.instance.cantidad_horas,duracion=form.instance.duracion,
 							justificacion=form.instance.justificacion,objetivo_general=form.instance.objetivo_general,
 							objetivo_especificos=form.instance.objetivo_especificos,materiales=form.instance.materiales,
-							reportes=form.instance.reportes,evaluacion=form.instance.evaluacion,accion=form.instance.accion,usuario=form.instance.usuario)
+							reportes=form.instance.reportes,indicador=form.instance.indicador,evaluacion=form.instance.evaluacion,accion=form.instance.accion,usuario=form.instance.usuario)
 				n.save()
 
 				
 				plan_plancillo = Plancillo.objects.get(id=n.id)
-				print plan_plancillo
-				print actividades_copiadas
+				
 				for activo in actividades_copiadas:
 					Actividades.objects.create(fecha=None,horario=0,mes=activo.mes,
 						nombre=activo.nombre,tipo=activo.tipo,descripcion=activo.descripcion,ejecutores=activo.ejecutores,
