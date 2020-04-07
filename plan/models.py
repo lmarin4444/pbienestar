@@ -529,34 +529,35 @@ class Plancillo(models.Model):
 	
 	#Ingresar cada uno de los niveles de logros por diagnostico
 	
-	fecha				 		= models.DateField()
-	nombre		 				= models.CharField(max_length=70)
-	responsable		 			= models.IntegerField(default=0,choices=RESPONSABLES)
-	numero 						= models.IntegerField(choices=TIPO_NUMERO)
-	letra 						= models.IntegerField(choices=TIPO_LETRAS)			
-	Curso 	 					= models.ForeignKey(curso,blank=True, null=True)
-	cantidad_horas 				= models.IntegerField()
-	duracion					= models.TextField()
-	justificacion 				= models.TextField()
-	objetivo_general 			= models.TextField()
-	objetivo_especificos 		= models.TextField()
-	materiales  		 		= models.TextField()
-	reportes 					= models.TextField()
-	evaluacion 					= models.IntegerField(default=0,choices=EVALUACION)
-	accion 						= models.ForeignKey(Accion)
-	usuario 					= models.ForeignKey(User)
+    fecha				 		= models.DateField()
+    nombre		 				= models.CharField(max_length=70)
+    responsable		 			= models.IntegerField(default=0,choices=RESPONSABLES)
+    numero 						= models.IntegerField(choices=TIPO_NUMERO)
+    letra 						= models.IntegerField(choices=TIPO_LETRAS)			
+    Curso 	 					= models.ForeignKey(curso,blank=True, null=True)
+    cantidad_horas 				= models.IntegerField()
+    duracion					= models.TextField()
+    justificacion 				= models.TextField()
+    objetivo_general 			= models.TextField()
+    objetivo_especificos 		= models.TextField()
+    materiales  		 		= models.TextField()
+    reportes 					= models.TextField()
+    evaluacion 					= models.IntegerField(default=0,choices=EVALUACION)
+    accion 						= models.ForeignKey(Accion)
+    indicador                   = models.ForeignKey(Indicador_base)
+    usuario 					= models.ForeignKey(User)
 	
-	def get_responsable(self):
-			return u'%s' %RESPONSABLES[self.responsable][1]
-	def get_evaluacion(self):
-			return u'%s' %EVALUACION[self.evaluacion][1]
-	def get_numero(self):
+    def get_responsable(self):
+    		return u'%s' %RESPONSABLES[self.responsable][1]
+    def get_evaluacion(self):
+    		return u'%s' %EVALUACION[self.evaluacion][1]
+    def get_numero(self):
             return u'%s' %TIPO_NUMERO[self.numero][1]
-	def get_letra(self):
-			return u'%s' %TIPO_LETRAS[self.letra][1]				
-	
-	def __unicode__(self):
-		return '{} {} {} '.format(self.nombre, self.fecha,self.id)		
+    def get_letra(self):
+    	   return u'%s' %TIPO_LETRAS[self.letra][1]				
+    	
+    def __unicode__(self):
+    	return '{} {} {} '.format(self.nombre, self.fecha,self.id)		
 
 class Actividades(models.Model):
 	
@@ -646,4 +647,5 @@ class Hecho_Actividades(models.Model):
         return u'%s' %NOTA[self.nota][1]           
     def __unicode__(self):
         return '{} {} {}'.format(self.estado, self.fecha, self.actividades.nombre)		
+
 
