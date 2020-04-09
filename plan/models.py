@@ -35,11 +35,7 @@ EJECUTORES = (
             (2,'Encargado de convivencia'),
             (3,'Psicólogo Dupla'),
             (4,'Trabajador Social  Dupla'),
-            (5,'Profesional externo'),
-            (6,'Red externa'),
-            (7,'Programa municipal externo'),
-            (8,'Profesional comunidad educativa'),
-
+            
           
             )
 RESPONSABLES = (

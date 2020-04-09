@@ -510,6 +510,7 @@ class Base_ActividadesPlan(forms.ModelForm):
 			'nombre',
 			'tipo',
 			'descripcion',
+			'ejecutores',
 			'participantes',
 			'numero',
 			'letra',
@@ -527,6 +528,8 @@ class Base_ActividadesPlan(forms.ModelForm):
 			'nombre':'Nombre de la actividad',
 			'tipo':'Tipo de la actividad',
 			'descripcion ':'Descripción de la actividad',
+			'ejecutores ':'Selecione a el o los encargados de la actividad ',
+
 			'participantes':'Participantes a la  actividad',
 			'numero':'Ingresar el curso',
 			'letra':'Ingresar Letra',
@@ -545,6 +548,7 @@ class Base_ActividadesPlan(forms.ModelForm):
 			
 			'tipo':forms.Select(attrs={'class':'form-control'}),
 			'descripcion':forms.TextInput(attrs={'class':'form-control'}),
+			'ejecutores': forms.Select(attrs={'class':'form-control'}),
 			'participantes': forms.Select(attrs={'class':'form-control'}),
 			
 			'numero':forms.Select(attrs={'class':'form-control'}),
