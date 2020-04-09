@@ -477,6 +477,33 @@ class Planes_mineduc(models.Model):
     def __unicode__(self):
             return '{} '.format(self.nombre)
 
+
+class Planes_mineduc_establecimientos(models.Model):
+    
+    #Ingresar cada uno de los niveles de logros por diagnostico
+    
+    
+    fecha                       = models.DateField('Fecha de creacion',blank=True,null=True)
+    nombre                      = models.CharField(max_length=70)
+    descripcion                 = models.TextField()
+    objetivo_general            = models.TextField()
+    establecimiento             = models.ForeignKey(establecimiento)
+    docfile1                    = models.FileField(upload_to='documents/%Y/%m/%d',blank=True, null=True)
+
+
+    def docfile1_link(self):
+        if self.docfile1:
+            return "<a href='%s'>download</a>" % (self.docfile1.url,)
+        else:
+            return "No attachment"
+
+        docfile1.allow_tags = True
+
+    def __unicode__(self):
+            return '{} '.format(self.nombre)
+
+
+
 class Accion(models.Model):
 	
 	#Ingresar cada uno de los niveles de logros por diagnostico

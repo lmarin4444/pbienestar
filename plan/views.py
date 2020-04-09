@@ -5,7 +5,7 @@ from django.views.generic import CreateView,ListView,UpdateView,DeleteView
 from django.urls import reverse
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect
-from plan.models import Plan,Base,Indicador_base,Accion,Plancillo,Actividades,Hecho_Actividades,Planes_mineduc
+from plan.models import Plan,Base,Indicador_base,Accion,Plancillo,Actividades,Hecho_Actividades,Planes_mineduc,Planes_mineduc_establecimientos
 from alumno.models import curso
 from bitacora.models import Lista
 from django.http import HttpResponseRedirect
@@ -86,7 +86,7 @@ class ingresar_plan(CreateView):
 # Ingresar plan externo del mineduc
 # Create your views here.
 class ingresar_plan_mineduc(CreateView):
-	model = Planes_mineduc	
+	model = Planes_mineduc_establecimientos
 	form_class = PlanFormMineduc
 	template_name = 'plan/plan_mineduc_form.html'
 	success_url = reverse_lazy('comienza:ver_dupla')
@@ -2033,7 +2033,7 @@ def PlanListViewMineduc(request,pk):
 	
 	colegio=establecimiento.objects.get(id=pk)
 	try:
-		planes=Planes_mineduc.objects.filter(establecimiento=colegio)
+		planes=Planes_mineduc_establecimientos.objects.filter(establecimiento=colegio)
 		
 	except Plan.DoesNotExist:
 		planes=None
