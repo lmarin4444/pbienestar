@@ -559,7 +559,7 @@ class Actividades(models.Model):
 	
 	#Ingresar cada uno de los niveles de logros por diagnostico
 	
-    fecha				 		= models.DateField(blank=True, null=True,default='2019-01-01')
+    fecha				 		= models.DateField(blank=True, null=True,default='2020-01-01')
     horario   		  		    = models.IntegerField(choices=TIPO_HORARIO,default=0)
     mes  						= models.IntegerField(default=0,choices=MES)
     nombre		 				= models.CharField(max_length=70)
