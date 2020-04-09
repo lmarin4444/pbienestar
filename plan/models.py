@@ -540,7 +540,7 @@ class Plancillo(models.Model):
     reportes 					= models.TextField()
     evaluacion 					= models.IntegerField(default=0,choices=EVALUACION)
     accion 						= models.ForeignKey(Accion)
-    indicador                   = models.ForeignKey(Indicador_base)
+    indicador                   = models.ForeignKey(Indicador_base,blank=True, null=True)
     usuario 					= models.ForeignKey(User)
 	
     def get_responsable(self):

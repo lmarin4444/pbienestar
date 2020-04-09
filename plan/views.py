@@ -465,6 +465,7 @@ class ingresar_plancillo(CreateView):
 			base= self.kwargs.get('base') # El mismo nombre que en tu URL
 			base_activa=Base.objects.get(id=base)
 			accion_activa=Accion.objects.get(id=accion)
+
 			try:
 				plan=Plancillo.objects.filter(accion=accion_activa)
 				context['accion']=accion_activa
@@ -472,6 +473,10 @@ class ingresar_plancillo(CreateView):
 
 				context['mensaje']='Listado de planes / Actividades '
 				context['base']=base_activa
+				
+				#context['form_class'].fields['indicador'].queryset = Indicador_base.objects.get(base_activa)
+
+
 				return context
 			except Plancillo.DoesNotExist:
 				context['accion']=accion_activa
@@ -509,7 +514,9 @@ class ingresar_plancillo(CreateView):
 					instance.numero=15
 					instance.letra=5
 				instance.curso=cursando
+
 				instance.usuario=self.request.user
+
 				instance.save()
 
 				url = reverse(('plan:ver_plancillo'), kwargs={ 'pk': accion_activa.id ,'base':base_activa.id })

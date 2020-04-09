@@ -266,6 +266,7 @@ class Accion_baseForm(forms.ModelForm):
 
 
 class Base_PlancilloForm(forms.ModelForm):
+	
 
 	class Meta:
 		model = Plancillo
@@ -286,7 +287,7 @@ class Base_PlancilloForm(forms.ModelForm):
 			'objetivo_general',
 			'objetivo_especificos',
 			'materiales',
-			'indicador',
+			
 			'reportes',
 
 			
@@ -307,7 +308,7 @@ class Base_PlancilloForm(forms.ModelForm):
 			'objetivo_general':'Objetivo general de la cronología de actividades',
 			'objetivo_especificos':'Objetivo específico de la cronología de actividades',
 			'materiales':'Materiales a utilizar ',
-			'indicador':'Ingrese el indicador con el cual esta relacionando',
+			
 			'reportes':'Reportes de estado de avance a entregar',
 
 		
@@ -327,7 +328,7 @@ class Base_PlancilloForm(forms.ModelForm):
 			'objetivo_general': forms.TextInput(attrs={'class':'form-control'}),
 			'objetivo_especificos': forms.TextInput(attrs={'class':'form-control'}),
 			'materiales': forms.Textarea(attrs={'class':'form-control'}),
-			'indicador':forms.Select(attrs={'class':'form-control'}),
+			
 			'reportes': forms.TextInput(attrs={'class':'form-control'}),
 		
 			}
