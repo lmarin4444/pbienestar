@@ -2,7 +2,9 @@
 from django import forms
 #from derivacion.models import Area_derivacion
 #from derivacion.models import Motivo_derivacion,Escolaridad
-from plan.models import  Plan,Base,Indicador_base,Accion,Plancillo,Actividades,Hecho_Actividades,Planes_mineduc
+from plan.models import  Plan,Base,Indicador_base,Accion,Plancillo, \
+Actividades,Hecho_Actividades,Planes_mineduc,Planes_convivencia, \
+Planes_mineduc_establecimientos
 from bootstrap3_datetime.widgets import DateTimePicker
 
 
@@ -53,7 +55,7 @@ class PlanForm(forms.ModelForm):
 class PlanFormMineduc(forms.ModelForm):
 
 	class Meta:
-		model = Planes_mineduc
+		model = Planes_mineduc_establecimientos
 
 
 		fields = [
@@ -93,6 +95,51 @@ class PlanFormMineduc(forms.ModelForm):
 
 			
 		}
+
+class PlanFormConvivencia(forms.ModelForm):
+
+	class Meta:
+		model = Planes_convivencia
+
+
+		fields = [
+			
+			'fecha',
+			'nombre' ,
+			'descripcion',	
+			'objetivo_general',
+			'docfile1',
+		
+		]
+		labels = {
+			
+			'fecha':'Fecha de ingreso plan',
+			'nombre':'Ingresar nombre del plan ' ,
+			'descripcion':'Descripción ',
+			'objetivo_general':'Objetivo General',
+			'docfile1':'Adjuntar archivo',
+			
+			
+
+		}
+		widgets = {
+			
+			
+			'fecha':forms.TextInput(attrs={'"format": "DD-MM-YYYY",class':'datepicker','placeholder':'Ingresar Fecha '}),
+			#'fecha_derivacion': forms.DateInput(format=('%d-%m-%Y'), 
+                                          #   attrs={'class':'myDateClass', 
+                                          # 'placeholder':'Select a date'}),
+
+			
+
+			'nombre': forms.TextInput(attrs={'class':'form-control'}),
+			'descripcion': forms.TextInput(attrs={'class':'form-control'}),
+			'objetivo_general': forms.Textarea(attrs={'class':'form-control'}),
+			'docfile1':forms.FileInput(attrs={'class':'form-control'}),
+
+			
+		}
+
 class Base_PlanForm(forms.ModelForm):
 
 	class Meta:

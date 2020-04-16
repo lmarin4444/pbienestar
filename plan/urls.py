@@ -11,6 +11,8 @@ urlpatterns = [
 	url(r'^ingresar_plan/(?P<pk>\d+)/$', login_required(views.ingresar_plan.as_view()), name='ingresar_plan'),
 #	Ingresar planes apoyo a la educacion
 	url(r'^ingresar_plan_mineduc/(?P<pk>\d+)/', login_required(views.ingresar_plan_mineduc.as_view()), name='ingresar_plan_mineduc'),
+	url(r'^ingresar_plan_convivencia/(?P<pk>\d+)/', login_required(views.ingresar_plan_convivencia.as_view()), name='ingresar_plan_convivencia'),
+
 
 
 	url(r'^modificar_plan/(?P<pk>\d+)/$', login_required(views.modificar_plan), name='modificar_plan'),
@@ -81,7 +83,10 @@ url(r'^justificar_hecho_actividades_fueradeplazo/(?P<agenda>\d+)/(?P<pk>\d+)/$',
 	url(r'^PlanListViewTodos_supervisor/(?P<pk>\d+)/', login_required(views.PlanListViewTodos_supervisor), name='PlanListViewTodos_supervisor'),
 
 	url(r'^PlanListViewMineduc/(?P<pk>\d+)/', login_required(views.PlanListViewMineduc), name='PlanListViewMineduc'),
+	url(r'^PlanListViewConvivencia/(?P<pk>\d+)/', login_required(views.PlanListViewConvivencia), name='PlanListViewConvivencia'),
 
+
+	
 	#Modificar plan del año actual
 	url(r'^modificar_plan/(?P<pk>\d+)/', login_required(views.modificar_plan), name='modificar_plan'),
 	# Ver actividades presente en la bitacora

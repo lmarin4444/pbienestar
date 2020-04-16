@@ -5,13 +5,14 @@ from django.views.generic import CreateView,ListView,UpdateView,DeleteView
 from django.urls import reverse
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import redirect
-from plan.models import Plan,Base,Indicador_base,Accion,Plancillo,Actividades,Hecho_Actividades,Planes_mineduc,Planes_mineduc_establecimientos
+from plan.models import Plan,Base,Indicador_base,Accion,Plancillo,Actividades,Hecho_Actividades,Planes_mineduc,Planes_mineduc_establecimientos, \
+Planes_convivencia
 from alumno.models import curso
 from bitacora.models import Lista
 from django.http import HttpResponseRedirect
 from plan.forms import PlanForm,Base_PlanForm,Indicador_baseForm,Accion_baseForm,Base_PlancilloForm,Base_ActividadesForm, \
 	Indicador_baseLogroForm,Base_ActividadesPlanificacion,Base_ActividadesPlan,Hecho_ActividadesForm,Justificar_ActividadesForm, \
-	Reagendar_ActividadesForm,PlanFormMineduc
+	Reagendar_ActividadesForm,PlanFormMineduc, Planes_convivencia,PlanFormConvivencia
 from alumno.models import establecimiento
 import datetime
 from django.db.models import Q
@@ -124,6 +125,54 @@ class ingresar_plan_mineduc(CreateView):
 				instance.save()
 
 				url = reverse(('plan:PlanListViewMineduc'), kwargs={ 'pk': pk })
+				return HttpResponseRedirect(url)
+			else:
+				return self.render_to_response(self.get_context_data(form=form))
+
+
+
+
+
+# Ingresar plan convivencia 
+class ingresar_plan_convivencia(CreateView):
+	model = Planes_convivencia
+	form_class = PlanFormConvivencia
+	template_name = 'plan/plan_convivencia_form.html'
+	success_url = reverse_lazy('comienza:ver_dupla')
+
+	def get_context_data(self, **kwargs):
+	        # Llamamos ala implementacion primero del  context
+			context = super(ingresar_plan_convivencia, self).get_context_data(**kwargs)
+			colegio = self.kwargs.get('pk') # El mismo nombre que en tu URL
+			escuela=establecimiento.objects.get(id=colegio)
+			
+			context['escuela']=escuela
+			context['mensaje']=''
+			return context
+		
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		form = self.form_class(request.POST,request.FILES)
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+			
+		if request.method == 'POST':
+			form = PlanFormConvivencia(request.POST)
+		        #codigo
+			if form.is_valid():
+				pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+				escuela=establecimiento.objects.get(id=pk)
+				
+				instance = form.save(commit=False)
+					
+
+				instance.establecimiento=establecimiento.objects.get(id=pk)
+					
+				instance.usuario=self.request.user
+				
+
+				instance.save()
+
+				url = reverse(('plan:PlanListViewConvivencia'), kwargs={ 'pk': pk })
 				return HttpResponseRedirect(url)
 			else:
 				return self.render_to_response(self.get_context_data(form=form))
@@ -2035,7 +2084,7 @@ def PlanListViewMineduc(request,pk):
 	try:
 		planes=Planes_mineduc_establecimientos.objects.filter(establecimiento=colegio)
 		
-	except Plan.DoesNotExist:
+	except Planes_mineduc_establecimientos.DoesNotExist:
 		planes=None
 	
 		
@@ -2047,6 +2096,32 @@ def PlanListViewMineduc(request,pk):
         		 
         		 }
     )
+
+
+# Ver todos los planes de gestion por establecimiento
+
+def PlanListViewConvivencia(request,pk):
+#Llistar todos los planes anteriores 
+
+	
+	colegio=establecimiento.objects.get(id=pk)
+	try:
+		planes=Planes_convivencia.objects.filter(establecimiento=colegio)
+		
+	except Planes_convivencia.DoesNotExist:
+		planes=None
+	
+		
+	return render(
+        request,
+        'plan/plan_todos_convivencia.html',
+        context={'colegio':colegio,
+        		 'planes':planes,
+        		 
+        		 }
+    )
+
+
 
 # Listar los datos de un plan en particular
 def PlanmineducListView(request,pk):

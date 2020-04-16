@@ -16,6 +16,7 @@ from .models import Hecho_Actividades
 from .models import Verificadores
 from .models import Planes_mineduc
 from .models import Planes_mineduc_establecimientos
+from .models import Planes_convivencia
 
 admin.site.register(Plan)
 admin.site.register(Base)
@@ -29,3 +30,4 @@ admin.site.register(Hecho_Actividades)
 admin.site.register(Verificadores)
 admin.site.register(Planes_mineduc)
 admin.site.register(Planes_mineduc_establecimientos)
+admin.site.register(Planes_convivencia)

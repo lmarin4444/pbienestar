@@ -9,6 +9,11 @@ Listado de acciones :
 
 <a  class="btn btn-success btn-xs" href="{% url 'dupla:Estudiante_listar_fichas_duplas' escuela.id %}"><small>Listado de fichas derivadas dupla</small></a>
 <a  class="btn btn-warning btn-xs" href="{% url 'dupla:indicador_convivencia' escuela.id %}"><small>Evento de convivencia  </small></a>
+<a  class="btn btn-primary btn-xs" href="{% url 'plan:ingresar_plan_convivencia' escuela.id %}"><small>P Gestión </small></a>
+<a  class="btn btn-info btn-xs" href="{% url 'plan:PlanListViewConvivencia' escuela.id %}"><small>PX Gestión </small></a>
+
+
+
 <!--
 <a  class="btn btn-primary btn-xs" href="{% url 'dupla:indicador_convivencia_curso' escuela.id %}"><small>Evento de convivencia (Curso particular)</small></a>
 
