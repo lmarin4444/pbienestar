@@ -1,0 +1,92 @@
+{% extends 'base/base_datos.html' %}
+
+{% block content %}
+<ul class="breadcrumb" >
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menú inicial !">Menú </a></li>
+
+  <li><a href="{% url 'plan:PlanListViewConvivencia' colegio.id %}"data-toggle="tooltip" title="Listado ">Volver lista</a></li>
+ 
+  <li class="active">Listado de información plan de Gestión Convivencia Escolar</li> 
+</ul>
+
+<ul class="breadcrumb">
+
+<center>
+  <table class="table table-bordered"  border=15px fontsize =14px>
+  <thead>
+  
+  
+    <TH COLSPAN=4 bgcolor="#E1F8FA" style="text-align:center;"> Plan de Gestión Equipo de formación y Convivencia Escolar {{plan.establecimiento.nombre}} </TH>
+ 
+</TR>
+
+<TR>
+    <TD COLSPAN=2> 
+    <dd><span class="glyphicon glyphicon-asterisk"></span><strong> Nombre :</strong> {{plan.nombre}}</dd>
+     <dd><span class="glyphicon glyphicon-cog"></span> <strong>Objetivo Descripción   :</strong>{{plan.descripcion}}</dd>
+
+    <dd><span class="glyphicon glyphicon-asterisk"></span> <strong> 
+    Objetivo general  :</strong>{{plan.objetivo_general}}</dd>
+     <dd><span class="glyphicon glyphicon-asterisk"></span> <strong> 
+    Establecimiento :</strong>{{plan.establecimiento.nombre}}</dd>
+   
+
+   
+  
+    
+</TD>
+</TR>
+ 
+
+
+
+</table>
+
+  
+
+<TR>
+    <TH COLSPAN=4 bgcolor="#F7E0E9" style="text-align:center;" >Establecimiento {{plan.establecimiento.nombre}}</TH>
+    
+  </TR>
+
+      
+      <TD COLSPAN=4>  
+      
+      <ul><strong>NOMBRE/EQUIPO DE FORMACIÓN Y CONVIVENCIA ESCOLAR </strong></ul>
+      <ul>{{ user.first_name|upper}} {{ user.last_name|upper}}</ul>
+      </TD>
+   
+  
+    </tr>
+    
+    
+  </thead>
+  <tbody>
+
+    
+    
+    
+    
+  </tbody>
+</table> 
+</center>
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

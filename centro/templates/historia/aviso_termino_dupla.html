@@ -1,0 +1,25 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+	
+
+	<script language="JavaScript" type="text/javascript">
+	alert("Advertencia --¡¡¡  El egresar a un estudiante es un proceso que NO SE PUEDE REVERTIR , egrese una vez que este segura o seguro  ¡¡¡¡");
+	</script>
+	<h3 ¡¡¡ Etapa del proceso de intervención¡¡</h3><br>
+	La información de {{dato.nombres|upper}} {{dato.firs_name|upper}} {{dato.last_name|upper}},
+	
+	<h2><div class="alert alert-danger"> La información saldrá definitivamente del sistema. Solo será visible desde el buscador de estudiantes </div>
+	</h2>
+	</h3>
+    
+
+	<h4>¿Esta realmente  segura o seguro  de egresar a  {{ dato.nombres|capfirst }} {{dato.firs_name|capfirst}} {{dato.last_name|capfirst}}?</h4>	
+	<button class="btn btn-danger" type="submit">Sí, egresar</button>
+	<a class= "btn btn-info" href="{% url 'dupla:EntradasRetornoCasoDuplaList' escuela.id %}">Cancelar</a>
+</form>
+
+
+{% endblock %}

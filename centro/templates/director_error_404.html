@@ -1,0 +1,66 @@
+{% extends 'base/base_error.html' %}
+
+{% comment %} Página no encontrada {% endcomment %}
+
+{% block titulo %} Error 404 {% endblock %}
+
+{% block encabezado %}
+	<h2>ERROR 404  </h2>
+{% endblock %}
+
+{% block contenido %}
+  
+  <p>
+  	
+  </p>
+
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
+					<h1><strong>Página de error<br></strong></h1>
+					<h3>Lo sentimos <br /></h3>
+					No se puede completar la socilitud requerida
+				</div>
+			</header>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- One -->
+					<section id="one">
+						<header class="major">
+							<h4>Acceso denegado<br />
+							Área de dirección, solo es accesible 
+							para los directores de cada establecimiento.</h4>
+						</header>
+						<p>Volver al menú principal.</p>
+						<ul class="actions">
+							<li><a href="{% url 'index' %}" class="button">Menú Principal</a></li>
+						</ul>
+					</section>
+
+				
+
+		<!-- Footer -->
+			
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
+{% endblock %}
