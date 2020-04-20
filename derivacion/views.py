@@ -423,7 +423,7 @@ class RetornoInstList(ListView):
         # Llamamos ala implementacion primero del  context
 		context = super(RetornoInstList, self).get_context_data(**kwargs)
 		context['retorno']=Motivo_Retorno_Ficha_derivacion.objects.filter(**kwargs)
-		print context
+		
         # Agregamos el publisher
 		
 		#query = super(RetornoList, self).Ficha_derivacion.queryset()

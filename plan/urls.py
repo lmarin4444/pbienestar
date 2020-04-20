@@ -12,6 +12,8 @@ urlpatterns = [
 #	Ingresar planes apoyo a la educacion
 	url(r'^ingresar_plan_mineduc/(?P<pk>\d+)/', login_required(views.ingresar_plan_mineduc.as_view()), name='ingresar_plan_mineduc'),
 	url(r'^ingresar_plan_convivencia/(?P<pk>\d+)/', login_required(views.ingresar_plan_convivencia.as_view()), name='ingresar_plan_convivencia'),
+#ver de gestion de convivencia escolar
+	url(r'^PlanesConvivenciaVERListView/(?P<pk>\d+)/', login_required(views.PlanesConvivenciaVERListView), name='PlanesConvivenciaVERListView'),
 
 
 

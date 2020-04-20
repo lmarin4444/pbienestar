@@ -156,15 +156,16 @@ class ingresar_plan_convivencia(CreateView):
 		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
 			
 		if request.method == 'POST':
-			form = PlanFormConvivencia(request.POST)
+			form = PlanFormConvivencia(request.POST,request.FILES)
 		        #codigo
 			if form.is_valid():
 				pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
 				escuela=establecimiento.objects.get(id=pk)
 				
 				instance = form.save(commit=False)
-					
-
+				if instance.docfile1 !=  None:
+ 					instance.docfile1=request.FILES['docfile1']
+ 					
 				instance.establecimiento=establecimiento.objects.get(id=pk)
 					
 				instance.usuario=self.request.user
@@ -2716,7 +2717,39 @@ class modificar_duplicar_Actividad_plan(UpdateView):
 				url = reverse(('plan:ver_actividades'), kwargs={ 'pk': plancito.id })
 				return HttpResponseRedirect(url)
 				
+# Ver los planes de convivencia actual y de años anteriores 
+def PlanesConvivenciaVERListView(request,pk):
+#Registrar los logros de cada uno de las dimensiones de logros para cada diagnostico
 
+
+    try:
+        
+        x= datetime.date.today() 
+        annio=str(int(x.year))
+       	plan=Planes_convivencia.objects.get(id=pk)
+       	colegio=plan.establecimiento
+     	mensaje="Plan presente en la planificación de los establecimientos"
+        
+    except Planes_convivencia.DoesNotExist:
+        plan =None
+        colegio=None
+
+
+     
+        mensaje="Sin archivo adjunto"
+    
+    return render(
+        request,
+        'plan/ver_plan_convivencia.html',
+        context={
+                 
+                 'plan':plan,
+                 'colegio':colegio,
+                 'annio':annio,
+				 'mensaje':mensaje,
+
+                 }
+    ) 
 
 
 

@@ -74,6 +74,12 @@ PARTICIPANTES = (
             (12,'Directivos / Estudiantes'),
             (13,'Directivos / Apoderados'),
             (14,'Directivos / Docentes'),
+            (15,'Directivos '),
+            (16,'Docentes'),
+            (16,'Padres y/o Apoderados'),
+            (17,'Asistentes de la educación'),
+
+
              
             )
 ESTADO = (
@@ -513,6 +519,8 @@ class Planes_convivencia(models.Model):
     objetivo_general            = models.TextField()
     establecimiento             = models.ForeignKey(establecimiento)
     docfile1                    = models.FileField(upload_to='documents/%Y/%m/%d',blank=True, null=True)
+    
+    
 
 
     def docfile1_link(self):
