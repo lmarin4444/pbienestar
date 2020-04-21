@@ -49,11 +49,12 @@
 		
  	 	<a class="btn btn-info btn-xs" href="{% url 'plan:PlanesConvivenciaVERListView' escuela.id %}">Ver Plan</a>
 	</td>	
-	<td>
-		<button type="button" class="btn btn-success btn-xs">
- 			Modificar
- 	 	</button>
-	</td>
+	
+ 	 <td>
+		
+ 	 	<a class="btn btn-success btn-xs" href="{% url 'plan:modificar_planes_convivencia' escuela.id %}">Modificar</a>
+	</td>	
+	
 	<td>
 		
  		<a class="btn btn-danger btn-xs" href="{% url 'plan:eliminar_planes_convivencia' escuela.id %}">Eliminar</a>

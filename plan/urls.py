@@ -95,6 +95,12 @@ url(r'^justificar_hecho_actividades_fueradeplazo/(?P<agenda>\d+)/(?P<pk>\d+)/$',
 	# Ver actividades presente en la bitacora
     url(r'^ver_bitacora_actividad/(?P<pk>\d+)/$', login_required(views.ver_bitacora_actividad.as_view()), name='ver_bitacora_actividad'),
     url(r'^ver_actividades_bitacora/(?P<pk>\d+)/$', login_required(views.ver_actividades_bitacora.as_view()), name='ver_actividades_bitacora'),
+    #Modificar el plan de convivencia escolar
+    url(r'^modificar_planes_convivencia/(?P<pk>\d+)/', login_required(views.modificar_planes_convivencia), name='modificar_planes_convivencia'),
+
+
+
+
 
     # Ver planes externos 
 

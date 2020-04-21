@@ -20,6 +20,8 @@ from django.db.models import Q
 #Para el envio de mensaje
 from django.contrib import messages
 
+
+
 # Create your views here.
 class ingresar_plan(CreateView):
 	model = Plan	
@@ -2791,41 +2793,43 @@ def PlanesConvivenciaVERListView(request,pk):
     ) 
 
 #Modificar plan de convivencia escolar
-def modificar_plan(request,pk):
+def modificar_planes_convivencia(request,pk):
 # modificar un lo ingresao en un plan actual
 	
-	plan= get_object_or_404(Plan, pk=pk)
+	plan= Planes_convivencia.objects.get(pk=pk)
 	escuela=plan.establecimiento
 
 	
 	if request.method=='POST':
-		formulario = PlanForm(request.POST or None, instance=plan)
+		formulario = PlanFormConvivencia(request.POST, request.FILES,instance=plan)
+
+		
  		if formulario.is_valid():
 			instance = formulario.save(commit=False)
 			
-			instance.establecimiento=escuela
+			
 			instance.usuario = request.user
 				
 			instance.save()
 		
 				
-			url = reverse(('plan:PlanListView'), kwargs={ 'pk': escuela.id})
+			url = reverse(('plan:PlanListViewConvivencia'), kwargs={ 'pk': escuela.id})
 			return HttpResponseRedirect(url)
 				
 			
 				
-		formulario = PlanForm(request.POST or None, instance=plan)
+		formulario = PlanFormConvivencia(request.POST or None,instance=plan)
 	else:
 
 
 				
-		formulario = PlanForm(request.POST or None, instance=plan)
+		formulario = PlanFormConvivencia(request.POST or None, instance=plan)
 	context = {
 		"form": formulario,
 		"plan":plan,
 		"escuela":escuela,
 		 }
-	return render(request, 'plan/plan_form.html', context)	
+	return render(request, 'plan/plan_convivencia_form.html', context)	
 
 
 
