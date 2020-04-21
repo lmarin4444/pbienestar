@@ -1,0 +1,26 @@
+{% extends 'base/base_dupla.html' %}
+
+{% block content %}
+
+<ul class="breadcrumb">
+
+  <li><a href="{% url 'index' %}" data-toggle="tooltip" title="Ir pagina Principal!">Inicio</a></li>
+  <li><a href="{% url 'comienza:entrar_dupla' %}"data-toggle="tooltip" title="Ir menú inicial centro!">Menú </a></li>
+  
+
+ 
+    <li><a href="{% url 'plan:PlanListViewConvivencia' escuela.id %}"data-toggle="tooltip" title="Volver plan">Volver</a></li>
+</ul>    
+<h1 ALIGN="justify">Al eliminar el plan selecionado, se eliminará automáticamente 
+y no habrá forma alguna de revertir dicho proceso.  </h1>
+  <li class="active">Eliminar  {{plan.nombre|capfirst}}  {{escuela.nombre|capfirst}}</li> 
+</ul>
+
+<form method="post">
+	{% csrf_token %}
+	<h4 ALIGN="justify">¿Desea eliminar :  <strong>{{ plan.nombre|capfirst }}</strong> de su área de convivencia escolar <strong>{{base.dimension.nombre}}  </strong>?</h4>	
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-info" href="{% url 'plan:PlanListViewConvivencia' escuela.id %}">Cancelar</a>
+
+</form>
+{% endblock %}
