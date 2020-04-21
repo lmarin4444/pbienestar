@@ -178,6 +178,45 @@ class ingresar_plan_convivencia(CreateView):
 			else:
 				return self.render_to_response(self.get_context_data(form=form))
 
+#Eliminar plan de convivencia escolar
+class eliminar_planes_convivencia(DeleteView):
+	model = Planes_convivencia
+	template_name = 'plan/eliminar_planes_convivencia.html'
+
+	        
+
+	def get_context_data(self, **kwargs):
+        # Llamamos ala implementacion primero del  context
+		context = super(eliminar_planes_convivencia, self).get_context_data(**kwargs)
+		
+		#pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		b=self.kwargs.get('pk') # El mismo nombre que en tu URL
+		
+		plan=Planes_convivencia.objects.get(id=b)
+
+		
+		context['plan']=plan
+		context['escuela']=plan.establecimiento
+
+		return context
+
+	def post(self,request,*args,**kwargs):	        
+		self.object=self.get_object
+
+		object = super(eliminar_planes_convivencia, self).get_object()
+		pk = self.kwargs.get('pk') # El mismo nombre que en tu URL
+		
+		plan=Planes_convivencia.objects.get(id=pk)
+		escuela=plan.establecimiento
+	
+		object.delete()
+		
+        # Retornamos el objeto
+		url = reverse(('plan:PlanListViewConvivencia'), kwargs={ 'pk': escuela.id})
+		return HttpResponseRedirect(url)
+
+
+
 # Listado de planes mineduc de un establecimiento
 def PlanMineducListView(request,pk):
 #Registrar los bases para cada plan

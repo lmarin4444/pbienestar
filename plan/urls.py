@@ -63,6 +63,7 @@ url(r'^justificar_hecho_actividades_fueradeplazo/(?P<agenda>\d+)/(?P<pk>\d+)/$',
 	url(r'^ver_bases/(?P<pk>\d+)/$', login_required(views.ver_bases.as_view()), name='ver_bases'),
 	url(r'^modificar_base/(?P<pk>\d+)/$', login_required(views.modificar_base), name='modificar_base'),
 	url(r'^eliminar_base/(?P<pk>\d+)/$', login_required(views.eliminar_base.as_view()), name='eliminar_base'),
+	url(r'^eliminar_planes_convivencia/(?P<pk>\d+)/$', login_required(views.eliminar_planes_convivencia.as_view()), name='eliminar_planes_convivencia'),
 
 	url(r'^IndicadorListView/(?P<pk>\d+)/$', login_required(views.IndicadorListView), name='IndicadorListView'),
 	url(r'^PlanListView/(?P<pk>\d+)/$', login_required(views.PlanListView), name='PlanListView'),
