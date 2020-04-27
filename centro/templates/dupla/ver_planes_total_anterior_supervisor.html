@@ -20,6 +20,8 @@
     <dd><span class="glyphicon glyphicon-asterisk"></span><strong> Responsables :</strong> {{plan.responsable}}</dd>
     <dd><span class="glyphicon glyphicon-asterisk"></span> <strong> Objetivo general  :</strong>{{plan.objetivo_general}}</dd>
     <dd><span class="glyphicon glyphicon-cog"></span> <strong>Objetivo especifico  :</strong>{{plan.objetivo_especificos}}</dd>
+    <dd><span class="glyphicon glyphicon-cog"></span> <strong>Año :</strong>{{annio}}</dd>
+
 
    
   
@@ -128,14 +130,14 @@
                       {% endif %} 
               {% endfor %}  </td>    
 
-
+              <br>
               <td> {% for accion_activa in accion %}     
                      {% if accion_activa.base == sesion %}
                        {% for plancillo_activo in plancillo%}
                            {% if plancillo_activo.accion == accion_activa %}
                               {% for actividad_activa in actividades %}
                               {% if actividad_activa.plancillo == plancillo_activo %}
-                                
+                                  
                                    <p style="color:rgb(35,22,2);"><strong>{{actividad_activa.get_estado}}  </strong>
                                 
                                  </p>

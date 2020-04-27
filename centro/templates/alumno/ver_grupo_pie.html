@@ -38,7 +38,7 @@
 
   <li class="active">Ver Ficha del estudiante</li> 
 </ul>
-<title> Familia del estudiante </title>
+<title> Ficha derivación </title>
 <div class="row">
 
 
@@ -48,7 +48,7 @@
     <img class="media-object" src='{% static "img/logo.png" %}' alt="100x100" src="data:image/p" style="width: 110px; height: 110px;" alt="Centro Bienestar">
   </a>
   <div class="media-body">
-    <h2 class="media-heading">Ficha Familiar
+    <h2 class="media-heading">Ficha derivación
     <span class="label label-default">{{ estudiante.nombres|capfirst }} {{ estudiante.firs_name|capfirst }} {{ estudiante.last_name|capfirst }} </span></h2>
     
 
@@ -62,17 +62,17 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-        Antedecentes Personales {{ estudiante.nombres|capfirst }} {{ estudiante.firs_name |capfirst}} {{ estudiante.last_name|capfirst }}</a>
+        Antedecentes Personales {{ estudiante.nombres|capfirst }} {{ estudiante.firs_name|capfirst}} {{ estudiante.last_name|capfirst }}</a>
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse in">
       <div class="panel-body">
       <table id="example" class="table table-bordered" font-size=9>
         
-      <tr><td>Rut:{{estudiante.rut}}</td>
+      <tr><td>Rut : {{estudiante.rut}}</td>
       
-      <td>Domicilio: {{estudiante.domicilio_estudiante}}</td>
-      <td> Fecha Nacimiento: {{estudiante.fecha_nacimiento|date:"d-m-Y "}}</td>
+      <td>Domicilio : {{estudiante.domicilio_estudiante}}</td>
+      <td> Fecha Nac : {{estudiante.fecha_nacimiento|date:"d-m-Y "}}</td>
       <td> 
       <dd>Edad : {{estudiante.edad}} </dd>
       
@@ -81,7 +81,7 @@
       </tr>
      <tr>
        <td>
-          <dd>Establecimiento:{{ estudiante.curso.establecimiento.nombre}} </dd> 
+          <dd>Establecimiento : {{ estudiante.curso.establecimiento.nombre|capfirst}} </dd> 
           
 
        </td>

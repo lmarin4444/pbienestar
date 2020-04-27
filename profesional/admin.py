@@ -10,7 +10,7 @@ from .models import Acciones_profesional
 
 # Register your models here.
 class ProfesionalAdmin(admin.ModelAdmin):
-	list_display=('rut','adress','phone')
+	list_display=('rut','adress','email')
 	list_filter=('rut','adress')
 	search_fields=('rut',)
 

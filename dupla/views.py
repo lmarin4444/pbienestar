@@ -2836,6 +2836,7 @@ def PlanesAntiguoMostrarEscuelaListView_supervisor(request,pk,fecha):
         
         hecho_a=Hecho_Actividades.objects.filter(actividades__plancillo__accion__base__plan=plan).order_by('fecha')
         mensaje="Plan presente en la planificación de los establecimientos"
+
         
     except Actividades.DoesNotExist:
         plan =None
@@ -2846,7 +2847,7 @@ def PlanesAntiguoMostrarEscuelaListView_supervisor(request,pk,fecha):
         actividades=None
         hecho_a=None
         mensaje="Plan externo sin planificación"
-    
+    	annio="2090"
     return render(
         request,
         'dupla/ver_planes_total_anterior_supervisor.html',
@@ -2860,6 +2861,8 @@ def PlanesAntiguoMostrarEscuelaListView_supervisor(request,pk,fecha):
                  'actividades':actividades,
                  'hecho_a':hecho_a,
 				 'mensaje':mensaje,
+				 'annio':annio,
+
 
                  }
     ) 

@@ -1384,7 +1384,7 @@ def ActividadesListView(request,pk):
 								for tengo_actividad in actividades:
 									if tengo_actividad.plancillo == tengo_plan: 
 										actividad_plan=actividad_plan +1
-										print actividad_plan
+										
 
 										if tengo_actividad.estado == 0:	
 											act_creadas = act_creadas + 1
@@ -1413,7 +1413,7 @@ def ActividadesListView(request,pk):
 		accion=""
 		plancillo=""
 		actividades=""
-       
+    	indicadores=""   
 	
 	return render(
         request,
