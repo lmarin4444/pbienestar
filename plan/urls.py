@@ -87,6 +87,7 @@ url(r'^justificar_hecho_actividades_fueradeplazo/(?P<agenda>\d+)/(?P<pk>\d+)/$',
 
 	url(r'^PlanListViewMineduc/(?P<pk>\d+)/', login_required(views.PlanListViewMineduc), name='PlanListViewMineduc'),
 	url(r'^PlanListViewConvivencia/(?P<pk>\d+)/', login_required(views.PlanListViewConvivencia), name='PlanListViewConvivencia'),
+	url(r'^PlanListViewConvivenciaSupervisor/(?P<pk>\d+)/', login_required(views.PlanListViewConvivenciaSupervisor), name='PlanListViewConvivenciaSupervisor'),
 
 
 	

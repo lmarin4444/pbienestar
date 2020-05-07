@@ -2163,6 +2163,29 @@ def PlanListViewConvivencia(request,pk):
         		 }
     )
 
+#Ver los planes desde el supervisor
+# Ver todos los planes de gestion por establecimiento
+
+def PlanListViewConvivenciaSupervisor(request,pk):
+#Llistar todos los planes anteriores 
+
+	
+	colegio=establecimiento.objects.get(id=pk)
+	try:
+		planes=Planes_convivencia.objects.filter(establecimiento=colegio)
+		
+	except Planes_convivencia.DoesNotExist:
+		planes=None
+	
+		
+	return render(
+        request,
+        'plan/plan_todos_convivencia_supervisor.html',
+        context={'colegio':colegio,
+        		 'planes':planes,
+        		 
+        		 }
+    )
 
 
 # Listar los datos de un plan en particular
