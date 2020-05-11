@@ -2814,6 +2814,43 @@ def PlanesConvivenciaVERListView(request,pk):
 
                  }
     ) 
+#ver planes de los equipos el subido por parte del supervisor
+# Ver los planes de convivencia actual y de años anteriores 
+def PlanesConvivenciaVERListViewSupervisor(request,pk):
+#Registrar los logros de cada uno de las dimensiones de logros para cada diagnostico
+
+
+    try:
+        
+        x= datetime.date.today() 
+        annio=str(int(x.year))
+       	plan=Planes_convivencia.objects.get(id=pk)
+       	colegio=plan.establecimiento
+     	mensaje="Plan presente en la planificación de los establecimientos"
+        
+    except Planes_convivencia.DoesNotExist:
+        plan =None
+        colegio=None
+
+
+     
+        mensaje="Sin archivo adjunto"
+    
+    return render(
+        request,
+        'plan/ver_plan_convivencia.html',
+        context={
+                 
+                 'plan':plan,
+                 'colegio':colegio,
+                 'annio':annio,
+				 'mensaje':mensaje,
+
+                 }
+    ) 
+
+
+
 
 #Modificar plan de convivencia escolar
 def modificar_planes_convivencia(request,pk):

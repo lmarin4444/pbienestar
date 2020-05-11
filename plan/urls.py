@@ -13,9 +13,8 @@ urlpatterns = [
 	url(r'^ingresar_plan_mineduc/(?P<pk>\d+)/', login_required(views.ingresar_plan_mineduc.as_view()), name='ingresar_plan_mineduc'),
 	url(r'^ingresar_plan_convivencia/(?P<pk>\d+)/', login_required(views.ingresar_plan_convivencia.as_view()), name='ingresar_plan_convivencia'),
 #ver de gestion de convivencia escolar
-	url(r'^PlanesConvivenciaVERListView/(?P<pk>\d+)/', login_required(views.PlanesConvivenciaVERListView), name='PlanesConvivenciaVERListView'),
-
-
+	url(r'^PlanesConvivenciaVERListView/(?P<pk>\d+)/$', login_required(views.PlanesConvivenciaVERListView), name='PlanesConvivenciaVERListView'),
+	url(r'^PlanesConvivenciaVERListViewSupervisor/(?P<pk>\d+)/$', login_required(views.PlanesConvivenciaVERListViewSupervisor), name='PlanesConvivenciaVERListViewSupervisor'),
 
 	url(r'^modificar_plan/(?P<pk>\d+)/$', login_required(views.modificar_plan), name='modificar_plan'),
 	url(r'^ActividadesListView/(?P<pk>\d+)/$', login_required(views.ActividadesListView), name='ActividadesListView'),
@@ -86,8 +85,8 @@ url(r'^justificar_hecho_actividades_fueradeplazo/(?P<agenda>\d+)/(?P<pk>\d+)/$',
 	url(r'^PlanListViewTodos_supervisor/(?P<pk>\d+)/', login_required(views.PlanListViewTodos_supervisor), name='PlanListViewTodos_supervisor'),
 
 	url(r'^PlanListViewMineduc/(?P<pk>\d+)/', login_required(views.PlanListViewMineduc), name='PlanListViewMineduc'),
-	url(r'^PlanListViewConvivencia/(?P<pk>\d+)/', login_required(views.PlanListViewConvivencia), name='PlanListViewConvivencia'),
-	url(r'^PlanListViewConvivenciaSupervisor/(?P<pk>\d+)/', login_required(views.PlanListViewConvivenciaSupervisor), name='PlanListViewConvivenciaSupervisor'),
+	url(r'^PlanListViewConvivencia/(?P<pk>\d+)/$', login_required(views.PlanListViewConvivencia), name='PlanListViewConvivencia'),
+	url(r'^PlanListViewConvivenciaSupervisor/(?P<pk>\d+)/$', login_required(views.PlanListViewConvivenciaSupervisor), name='PlanListViewConvivenciaSupervisor'),
 
 
 	
